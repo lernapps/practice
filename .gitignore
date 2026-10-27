@@ -1,0 +1,8 @@
+node_modules/
+# the work folders of the actions (actions/*/), created in the workspace of a run or of a local test
+/_intake/
+/_out/
+/_templates/
+/_site/
+/_pages/
+/_work/

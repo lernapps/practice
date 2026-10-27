@@ -1,0 +1,40 @@
+name: Aufräumen
+
+# Previews end: after 14 days (unless the issue has a 👍 from a person), and at once when the issue is closed.
+# actions/expire and docs/lebensdauer.md hold the rules. A daily run, a run when an issue is closed, and a manual run
+# with a dry run (it only prints what it would delete).
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  issues:
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "true: only print what would be deleted"
+        type: boolean
+        default: true
+      issue:
+        description: "Only this issue's folder (empty: all)"
+        required: false
+        type: string
+
+permissions: {}
+
+jobs:
+  expire:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./actions/expire
+        with:
+          issue: ${{ github.event.issue.number || inputs.issue }}
+          dry-run: ${{ inputs.dry-run || 'false' }}

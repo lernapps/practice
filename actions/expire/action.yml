@@ -1,0 +1,32 @@
+name: practice expire
+description: >-
+  Deletes the previews on gh-pages (folders i/<n>/) that are over, as one new commit without parents. A preview is over
+  when its issue is closed (at once, no comment), or when the day in its i/<n>/practice.json has come and the issue has
+  no 👍 reaction from an account that is not a bot (then a short note goes into the issue). A folder without a readable
+  practice.json for its own issue is deleted at once; entries of i/ whose name is not a number and everything outside
+  i/ stay. The date is the one in practice.json, not the time of a commit. With dry-run it only prints what it would
+  do. The job needs contents: write, issues: write. Use it in the job "expire" of aufraeumen.yml, after a checkout of
+  this repo, in the concurrency group that serialises the writes to gh-pages. The logic is actions/expire/expire.ts,
+  tested by test/expire.test.ts; docs/lebensdauer.md describes the rules for people.
+inputs:
+  issue:
+    description: "Only this issue's folder (empty: all)"
+    default: ""
+  dry-run:
+    description: "true: change and comment nothing"
+    default: "false"
+  token:
+    description: The token that pushes to gh-pages and writes the notes
+    default: ${{ github.token }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: 22
+    - shell: bash
+      run: node "$GITHUB_ACTION_PATH/expire.ts"
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        ISSUE_NUMBER: ${{ inputs.issue }}
+        DRY_RUN: ${{ inputs.dry-run }}

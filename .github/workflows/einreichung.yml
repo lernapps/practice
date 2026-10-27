@@ -1,0 +1,80 @@
+name: Einreichung
+
+# A submission: an issue from the form .github/ISSUE_TEMPLATE/einreichen.yml with a ZIP file attached. Three jobs with
+# the least rights each:
+#   intake   (issues: read)               reads the issue, downloads and checks the ZIP file, unpacks it (nothing runs)
+#   build    (contents: read, no secret)  builds the preview with app-templates; checks the bundle; noindex
+#   publish  (contents: write, issues: write) writes the site to gh-pages below i/<n>/ and comments; runs only code of
+#                                         this repo, the artifacts are data
+# The logic is in actions/ (tested by check.yml). workflow_dispatch repeats the run for an existing issue without
+# attaching again; only people with write access can start it. Issues that do not come from the form are skipped.
+on:
+  issues:
+    types: [opened, edited]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: Number of the issue to process again
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: einreichung-${{ github.event.issue.number || inputs.issue }}
+  cancel-in-progress: true
+
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    # an issue, not a pull request
+    if: github.event_name == 'workflow_dispatch' || github.event.issue.pull_request == null
+    permissions:
+      issues: read
+      contents: read
+    outputs:
+      relevant: ${{ steps.intake.outputs.relevant }}
+      ok: ${{ steps.intake.outputs.ok }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: intake
+        uses: ./actions/validate
+        with:
+          issue: ${{ github.event.issue.number || inputs.issue }}
+          force: ${{ github.event_name == 'workflow_dispatch' }}
+
+  build:
+    needs: intake
+    if: needs.intake.outputs.relevant == 'true' && needs.intake.outputs.ok == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./actions/build
+
+  publish:
+    needs: [intake, build]
+    # also after a failed build: the comment says what failed
+    if: always() && needs.intake.outputs.relevant == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pages: read
+    # one writer of gh-pages at a time (expire writes there too); the push also retries when it lost
+    concurrency:
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./actions/publish
+        with:
+          issue: ${{ github.event.issue.number || inputs.issue }}
+          build-result: ${{ needs.build.result }}

@@ -1,0 +1,54 @@
+name: practice validate
+description: >-
+  Checks a submission without running anything from it: reads the issue (issues: read is enough), finds the ZIP
+  address (only https://github.com/user-attachments/files/<number>/<name>.zip), downloads the file with limits,
+  checks the directory and the files of the ZIP file (paths, kinds, endings, sizes) and unpacks it into a throwaway
+  folder, and checks the form's fields. A ZIP file with src/ at its root is the normal case; a GitHub "Download ZIP"
+  (one folder around everything) is accepted too: only <folder>/src/ is looked at, everything else is ignored and
+  never unpacked. When the ZIP address and the fields are the same as in the last run that got a comment, it stops
+  (unchanged), so an edit of something else does not build again; force repeats anyway. It writes nothing to GitHub. The result is the artifact "intake": result.json
+  always (what the next jobs read, and the problems in plain German for the comment), and for a valid submission
+  meta.json and tree/src/. The outputs say whether the issue is a submission and whether it is valid. The logic is
+  actions/validate/validate.ts, tested by test/validate.test.ts. Use it in the job "intake" of einreichung.yml, after
+  a checkout of this repo.
+inputs:
+  issue:
+    description: The number of the issue
+    required: true
+  token:
+    description: "The token that reads the issue (issues: read)"
+    default: ${{ github.token }}
+  force:
+    description: "true: run again although the ZIP address and the fields are the same as in the last run (workflow_dispatch)"
+    default: "false"
+outputs:
+  unchanged:
+    description: "true when the ZIP address and the fields are the same as in the last run: nothing to do"
+    value: ${{ steps.intake.outputs.unchanged }}
+  relevant:
+    description: "true when the issue came from the form and is open"
+    value: ${{ steps.intake.outputs.relevant }}
+  ok:
+    description: "true when the submission is valid and unpacked"
+    value: ${{ steps.intake.outputs.ok }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: 22
+    - id: intake
+      shell: bash
+      run: node "$GITHUB_ACTION_PATH/validate.ts"
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        ISSUE_NUMBER: ${{ inputs.issue }}
+        FORCE: ${{ inputs.force }}
+        OUT_DIR: ${{ github.workspace }}/_intake
+    - if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      with:
+        name: intake
+        path: _intake
+        if-no-files-found: warn
+        retention-days: 3

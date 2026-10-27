@@ -1,0 +1,25 @@
+{
+  "name": "lernapps-practice",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Temporary previews of learning apps that families submit as a ZIP file in an issue; documentation at https://lernapps.net/practice/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lernapps/practice.git"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-reporter=spec \"test/*.test.ts\""
+  },
+  "engines": {
+    "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
+  },
+  "appTemplates": {
+    "repository": "https://github.com/lernapps/app-templates.git",
+    "commit": "a0d58d8922872083b30344a11ce055182f13d370",
+    "archetypes": [
+      "explainer"
+    ]
+  }
+}

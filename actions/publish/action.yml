@@ -1,0 +1,55 @@
+name: practice publish
+description: >-
+  Ends a submission, with one comment on the issue (updated in place). It runs code of this repo only and treats the
+  artifacts as data. When the submission was not valid (the artifact "intake", result.json), the comment lists in
+  plain German what to change. When the build or the check failed, the comment shows the end of the log. When the
+  site is there (the artifact "site"), it checks the site again (number and size of files, names, endings, noindex on
+  every page) and writes it to the branch gh-pages below i/<issue>/ with i/<issue>/practice.json (metadata, day made,
+  day it ends), as one new commit without parents (pages.ts says why), repeated when another push came in between;
+  .nojekyll sits at the root. It waits until the address serves the new build, and then comments the link. The address
+  is the one of the Pages settings (https://lernapps.net/practice/ expected). The job needs contents: write,
+  issues: write, pages: read. Use it in the job "publish" of einreichung.yml, after a checkout of this repo, in a
+  concurrency group that serialises the writes to gh-pages. The logic is actions/publish/publish.ts, tested by
+  test/publish.test.ts.
+inputs:
+  issue:
+    description: The number of the issue
+    required: true
+  build-result:
+    description: The result of the job build (success, failure, skipped, cancelled)
+    required: true
+  token:
+    description: "The token that pushes to gh-pages and writes the comment"
+    default: ${{ github.token }}
+  timeout:
+    description: Seconds to wait until the preview's address serves the new build, before the comment links it
+    default: "300"
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: 22
+    - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+      with:
+        name: intake
+        path: _intake
+    - if: inputs.build-result != 'skipped'
+      continue-on-error: true # the build may have stopped before it wrote its log
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+      with:
+        name: build
+        path: _buildinfo
+    - if: inputs.build-result == 'success'
+      uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+      with:
+        name: site
+        path: _site
+    - shell: bash
+      run: node "$GITHUB_ACTION_PATH/publish.ts"
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        ISSUE_NUMBER: ${{ inputs.issue }}
+        BUILD_RESULT: ${{ inputs.build-result }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        LERNAPPS_PUBLISH_TIMEOUT: ${{ inputs.timeout }}
