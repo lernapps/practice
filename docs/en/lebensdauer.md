@@ -9,7 +9,7 @@ A preview lives **two weeks** (14 days). After that it is deleted automatically,
 | The issue is **closed** | The preview is deleted **at once**. There is no comment, because someone closed the issue on purpose. |
 | The expiry day has not come | The preview stays. |
 | The expiry day has come, and the **first field of the issue** has at least one 👍 from a **person** (not from a bot) | The preview **stays** until the issue is closed. We check whether the content fits into the catalogue. |
-| The expiry day has come, no 👍 | The preview is deleted, and a short comment in the issue says so. |
+| The expiry day has come, no 👍 | The preview is deleted. A comment in the issue says so, mentions you (`@your-name`) and asks whether the preview helped. |
 
 The expiry day is in `i/<number>/practice.json` (field `laeuftAb`). This date counts, **not** the time of a commit.
 

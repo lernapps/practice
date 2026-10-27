@@ -9,7 +9,7 @@ Eine Vorschau lebt **zwei Wochen** (14 Tage). Danach wird sie automatisch gelös
 | Das Issue ist **geschlossen** | Die Vorschau wird **sofort** gelöscht. Es gibt keinen Kommentar, denn jemand hat das Issue mit Absicht geschlossen. |
 | Der Ablauftag ist noch nicht erreicht | Die Vorschau bleibt. |
 | Der Ablauftag ist erreicht, und auf dem **ersten Feld des Issues** liegt mindestens ein 👍 von einem **Menschen** (nicht von einem Bot) | Die Vorschau **bleibt**, bis das Issue geschlossen wird. Wir prüfen, ob der Inhalt in den Katalog passt. |
-| Der Ablauftag ist erreicht, kein 👍 | Die Vorschau wird gelöscht, und ein kurzer Kommentar im Issue sagt es. |
+| Der Ablauftag ist erreicht, kein 👍 | Die Vorschau wird gelöscht. Ein Kommentar im Issue sagt es, nennt Dich (`@Dein-Name`) und fragt, ob die Vorschau geholfen hat. |
 
 Der Ablauftag steht in `i/<Nummer>/practice.json` (Feld `laeuftAb`). Maßgeblich ist dieses Datum, **nicht** die Zeit eines Commits.
 

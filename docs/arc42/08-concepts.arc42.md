@@ -41,7 +41,7 @@ category: security
 | The issue is closed | The preview is removed at once, without a note |
 | The day has not come | The preview stays |
 | The day has come and a person has given a thumbs-up (`term-keep-reaction`) | The preview stays until the issue is closed |
-| The day has come and there is no thumbs-up | The preview is removed, with a short note in the issue |
+| The day has come and there is no thumbs-up | The preview is removed; the note in the issue mentions the issue's author (login from the API, only letters, digits and hyphens) and asks for feedback |
 | The issue no longer exists | The preview stays until the day, then it is removed without a note |
 | The folder has no readable `practice.json` for its own issue | The folder is removed at once |
 
