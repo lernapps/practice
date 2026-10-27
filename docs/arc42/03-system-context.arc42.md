@@ -19,9 +19,9 @@ notation: mermaid
 
 ```mermaid
 flowchart LR
-    actor-adopting-adult["Adopting adult (parent)"]
+    actor-creator["Creator"]
     actor-student["Student"]
-    actor-family-assistant["Family's AI assistant"]
+    actor-ai-assistant["Creator's AI assistant"]
     actor-github["GitHub"]
     actor-practice-maintainer["Maintainer of practice"]
     subgraph practice["Practice"]
@@ -30,9 +30,9 @@ flowchart LR
         bb-previews["Previews on gh-pages"]
         bb-guidance["Guidance"]
     end
-    actor-adopting-adult -->|"if-practice-form: submits the content; if-practice-guidance: reads the steps"| practice
+    actor-creator -->|"if-practice-form: submits the content; if-practice-guidance: reads the steps"| practice
     actor-student -->|"if-practice-previews: opens the preview"| practice
-    actor-family-assistant -->|"if-practice-guidance: reads llms.txt"| practice
+    actor-ai-assistant -->|"if-practice-guidance: reads llms.txt"| practice
     actor-github -->|"if-workflows, if-gh-pages-branch: runs the workflows, serves the branch"| practice
     actor-practice-maintainer -->|"if-workflows, if-gh-pages-branch: repeats runs, tries the cleanup"| practice
 ```
@@ -48,45 +48,45 @@ The interface is the one the system uses.
 | Website (lernapps.github.io) | The site frame: header, footer, language switch and the check of the site rules | `if-site-frame` |
 | Catalog (lernapps/apps) | The first place the guide sends the assistant to; nothing is read from it | `if-catalog-pages` |
 
-## Adopting adult
+## Creator
 
-The parent of a child with a test coming up. They submit the content with the form and give the address to the child.
+The person who submits (chapter 1). They submit the content with the form and give the address to the student.
 
 ```arc42
 :::actor
-id: actor-adopting-adult
-title: Adopting adult
+id: actor-creator
+title: Creator
 type: person
-description: A parent who submits the content their assistant wrote and passes the address on to the child
+description: The person who submits the content their assistant wrote and passes the address on to the student
 requires: if-practice-form, if-practice-guidance
 :::
 ```
 
 ## Student
 
-The child. It opens the preview and practises.
+The learner. It opens the preview and practises.
 
 ```arc42
 :::actor
 id: actor-student
 title: Student
 type: person
-description: The child who practises with the preview
+description: The learner who practises with the preview
 requires: if-practice-previews
 :::
 ```
 
-## Family's AI assistant
+## Creator's AI assistant
 
-The assistant the family already has. It reads the guide, writes the content and gives the parent a ZIP file and the
+The assistant the creator already has. It reads the guide, writes the content and gives the creator a ZIP file and the
 link to the form. The photos of the material go to the assistant's provider only, never to the system.
 
 ```arc42
 :::actor
-id: actor-family-assistant
-title: Family's AI assistant
+id: actor-ai-assistant
+title: Creator's AI assistant
 type: system
-description: Any assistant that reads llms.txt; prepares the content and hands it to the parent
+description: Any assistant that reads llms.txt; prepares the content and hands it to the creator
 requires: if-practice-guidance
 :::
 ```

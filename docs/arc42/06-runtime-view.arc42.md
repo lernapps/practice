@@ -1,18 +1,18 @@
 # Runtime View
 
 The scenarios show which job holds which rights and what passes between jobs as an artifact. The
-[architecture of the whole system](https://lernapps.net/docs/architecture/) shows the same flow from the family's
+[architecture of the whole system](https://lernapps.net/docs/architecture/) shows the same flow from the creator's
 point of view.
 
 ## A submission becomes a preview
 
-The parent submits the form. `intake` loads and checks the attachment, `build` makes the app, `publish` checks the site again, writes it to `gh-pages` and comments the address. The rights of each job are in `concept-rights-split`.
+The creator submits the form. `intake` loads and checks the attachment, `build` makes the app, `publish` checks the site again, writes it to `gh-pages` and comments the address. The rights of each job are in `concept-rights-split`.
 
 ```arc42
 :::runtime-scenario
 id: rs-submission
 title: A submission becomes a preview
-trigger: A parent submits the form with the ZIP file
+trigger: A creator submits the form with the ZIP file
 involves: bb-form, bb-workflows, bb-workflow-submission, bb-action-validate, bb-action-build, bb-action-publish, bb-lib, bb-previews, bb-app-templates, bb-tooling
 :::
 ```
@@ -22,13 +22,13 @@ involves: bb-form, bb-workflows, bb-workflow-submission, bb-action-validate, bb-
 id: rs-submission-sequence
 scenario: rs-submission
 notation: mermaid-sequence
-aliases: parent=actor-adopting-adult, github=actor-github, form=bb-form, flow=bb-workflow-submission, intake=bb-action-validate, build=bb-action-build, publish=bb-action-publish, lib=bb-lib, previews=bb-previews, templates=bb-app-templates, tooling=bb-tooling
+aliases: creator=actor-creator, github=actor-github, form=bb-form, flow=bb-workflow-submission, intake=bb-action-validate, build=bb-action-build, publish=bb-action-publish, lib=bb-lib, previews=bb-previews, templates=bb-app-templates, tooling=bb-tooling
 :::
 ```
 
 ```mermaid
 sequenceDiagram
-    participant parent as Parent
+    participant creator as Creator
     participant github as GitHub
     participant form as Form
     participant flow as Submission workflow
@@ -39,7 +39,7 @@ sequenceDiagram
     participant previews as Previews on gh-pages
     participant templates as App templates
     participant tooling as Tooling
-    parent->>form: fill in the form, attach the ZIP file
+    creator->>form: fill in the form, attach the ZIP file
     form->>github: issue with the fields and the attachment link
     github->>flow: event issue opened
     flow->>intake: job with issues read, contents read
@@ -55,12 +55,12 @@ sequenceDiagram
     publish->>lib: check the site again
     publish->>previews: write i/n/ and practice.json
     publish->>github: wait for the address, update the comment with the link
-    github-->>parent: the address of the preview
+    github-->>creator: the address of the preview
 ```
 
 ## A rejected submission, with a message
 
-A problem found by the intake, or a failed build or check, ends in a comment that the parent hands to the assistant; nothing is written to `gh-pages`.
+A problem found by the intake, or a failed build or check, ends in a comment that the creator hands to the assistant; nothing is written to `gh-pages`.
 
 ```arc42
 :::runtime-scenario
@@ -76,14 +76,14 @@ involves: bb-workflow-submission, bb-action-validate, bb-action-build, bb-action
 id: rs-rejection-sequence
 scenario: rs-rejection
 notation: mermaid-sequence
-aliases: parent=actor-adopting-adult, assistant=actor-family-assistant, github=actor-github, intake=bb-action-validate, build=bb-action-build, publish=bb-action-publish
+aliases: creator=actor-creator, assistant=actor-ai-assistant, github=actor-github, intake=bb-action-validate, build=bb-action-build, publish=bb-action-publish
 :::
 ```
 
 ```mermaid
 sequenceDiagram
-    participant parent as Parent
-    participant assistant as Family's assistant
+    participant creator as Creator
+    participant assistant as Creator's assistant
     participant github as GitHub
     participant intake as Validate (job intake)
     participant build as Build (job build)
@@ -98,9 +98,9 @@ sequenceDiagram
         build-->>publish: artifact build with the head of the log, no site
         publish->>github: comment with the messages, nothing written to gh-pages
     end
-    github-->>parent: the comment
-    parent->>assistant: hand over the message
-    assistant->>parent: corrected ZIP file
+    github-->>creator: the comment
+    creator->>assistant: hand over the message
+    assistant->>creator: corrected ZIP file
 ```
 
 ## A run is repeated
@@ -121,13 +121,13 @@ involves: bb-workflow-submission, bb-action-validate, bb-action-build, bb-action
 id: rs-run-again-sequence
 scenario: rs-run-again
 notation: mermaid-sequence
-aliases: parent=actor-adopting-adult, maintainer=actor-practice-maintainer, github=actor-github, flow=bb-workflow-submission, intake=bb-action-validate, build=bb-action-build, publish=bb-action-publish, previews=bb-previews
+aliases: creator=actor-creator, maintainer=actor-practice-maintainer, github=actor-github, flow=bb-workflow-submission, intake=bb-action-validate, build=bb-action-build, publish=bb-action-publish, previews=bb-previews
 :::
 ```
 
 ```mermaid
 sequenceDiagram
-    participant parent as Parent
+    participant creator as Creator
     participant maintainer as Maintainer
     participant github as GitHub
     participant flow as Submission workflow
@@ -135,8 +135,8 @@ sequenceDiagram
     participant build as Build (job build)
     participant publish as Publish (job publish)
     participant previews as Previews on gh-pages
-    alt the parent edits the issue
-        parent->>github: new ZIP file in the first field
+    alt the creator edits the issue
+        creator->>github: new ZIP file in the first field
         github->>flow: event issue edited
     else a maintainer repeats the run
         maintainer->>github: Run workflow with the issue number
@@ -199,13 +199,13 @@ sequenceDiagram
 
 ## The assistant prepares the content
 
-The assistant reads the guide, looks in the catalog first and otherwise agrees the scope with the parent, writes the content and hands over the ZIP file and the link to the form. The steps are in the skills (`bb-assistant-skills`).
+The assistant reads the guide, looks in the catalog first and otherwise agrees the scope with the creator, writes the content and hands over the ZIP file and the link to the form. The steps are in the skills (`bb-assistant-skills`).
 
 ```arc42
 :::runtime-scenario
 id: rs-preparation
 title: The assistant prepares the content
-trigger: A parent tells their assistant to read the guide and to prepare their child for a test
+trigger: A creator tells their assistant to read the guide and to prepare a practice app for an acute occasion
 involves: bb-guidance, bb-assistant-guide, bb-assistant-skills, bb-catalog, bb-app-templates
 :::
 ```
@@ -215,31 +215,31 @@ involves: bb-guidance, bb-assistant-guide, bb-assistant-skills, bb-catalog, bb-a
 id: rs-preparation-sequence
 scenario: rs-preparation
 notation: mermaid-sequence
-aliases: parent=actor-adopting-adult, assistant=actor-family-assistant, guide=bb-assistant-guide, skills=bb-assistant-skills, catalog=bb-catalog, templates=bb-app-templates
+aliases: creator=actor-creator, assistant=actor-ai-assistant, guide=bb-assistant-guide, skills=bb-assistant-skills, catalog=bb-catalog, templates=bb-app-templates
 :::
 ```
 
 ```mermaid
 sequenceDiagram
-    participant parent as Parent
-    participant assistant as Family's assistant
+    participant creator as Creator
+    participant assistant as Creator's assistant
     participant guide as Guide for assistants
     participant skills as Skills for assistants
     participant catalog as Catalog
     participant templates as App templates
-    parent->>assistant: read llms.txt and prepare my child for the test
+    creator->>assistant: read llms.txt and prepare a practice app
     assistant->>guide: read the steps
     opt the assistant can install skills
         assistant->>skills: install the same steps as skills
     end
-    assistant->>parent: subject, grade, federal state, day of the test
+    assistant->>creator: subject, grade, federal state, day of the occasion
     assistant->>catalog: look for an app that fits
     alt an app fits
         catalog-->>assistant: the link, and the work is done
     else none fits
-        assistant->>parent: hints on photos and copyright, then the scope to agree
+        assistant->>creator: hints on photos and copyright, then the scope to agree
         assistant->>templates: read what the explainer can do and its schemas
-        assistant->>parent: the ZIP file and the link to the form
+        assistant->>creator: the ZIP file and the link to the form
     end
 ```
 

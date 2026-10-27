@@ -120,14 +120,14 @@ definition: A 👍 reaction on the first field of the issue by an account that i
 :::
 ```
 
-## Family's assistant
+## Creator's assistant
 
-Not the creator's assistant.
+Not the platform's assistant.
 
 ```arc42
 :::glossary-term
-id: term-family-assistant
-title: Family's assistant
-definition: The AI assistant of a family, which writes the content from the family's school material; it reads `llms.txt`.
+id: term-ai-assistant
+title: Creator's assistant
+definition: The AI assistant of a creator, which writes the content from the school material; it reads `llms.txt`.
 :::
 ```

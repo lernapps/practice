@@ -87,7 +87,7 @@ source: ORGANIZATION.md "Rules across repos"; test/repo.test.ts; docs/betrieb.md
 
 ## Languages and licence
 
-Texts for families are German in plain language (ISO 24495-1). The pages are German and English; identifiers, code and
+Texts for creators and students are German in plain language (ISO 24495-1). The pages are German and English; identifiers, code and
 this model are English. The code is MIT licensed; content that enters the catalog is published under CC BY 4.0, with the
 person who submitted it as its author.
 

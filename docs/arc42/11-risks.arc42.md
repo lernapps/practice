@@ -33,7 +33,7 @@ mitigation: concept-bounded-input and dec-rights-split; maintainers close or loc
 
 ## The content is checked in form, not in substance
 
-The checks do not judge whether the facts are right, whether the text suits the grade or whether it is the family's own
+The checks do not judge whether the facts are right, whether the text suits the grade or whether it is the creator's own
 work.
 
 ```arc42
@@ -41,13 +41,13 @@ work.
 id: risk-content-unchecked
 title: The content is checked in form, not in substance
 severity: medium
-mitigation: The guide tells the assistant to say what the parents should verify; the submitter's declarations (con-public-by-default); a person looks at the content before it can enter the catalog.
+mitigation: The guide tells the assistant to say what the creator should verify; the submitter's declarations (con-public-by-default); a person looks at the content before it can enter the catalog.
 :::
 ```
 
 ## Copyright of the material
 
-Parents make the content from school material. Facts are free, wording and pictures are not.
+Creators make the content from school material. Facts are free, wording and pictures are not.
 
 ```arc42
 :::risk
@@ -95,6 +95,6 @@ someone deletes them.
 id: risk-history-kept-by-github
 title: GitHub may keep removed commits
 severity: low
-mitigation: The pages for families say so (docs/datenschutz.md); the submitter deletes the issue and the attachment, or asks a maintainer to.
+mitigation: docs/datenschutz.md says so; the submitter deletes the issue and the attachment, or asks a maintainer to.
 :::
 ```

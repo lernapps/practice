@@ -426,7 +426,7 @@ path: actions/lib/pages.ts
 
 ## Guidance
 
-The pages for families and maintainers, the guide for assistants and the build that turns them into the site.
+The pages for creators and maintainers, the guide for assistants and the build that turns them into the site.
 
 ```arc42
 :::building-block
@@ -439,7 +439,7 @@ path: docs
 
 ### Guidance interface
 
-What the family's assistant and the parent read.
+What the creator's assistant and the creator read.
 
 ```arc42
 :::interface
