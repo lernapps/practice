@@ -1,8 +1,11 @@
 # Eine Lern-App nach Maß
 
-Nächste Woche ist die Arbeit, und im Katalog passt keine App. Oder eine Lehrkraft fehlt, und die Klasse braucht Übungen, die zum Stoff passen. Dann macht Dein KI-Assistent in Minuten eine kleine Lern-App nach Maß. Sie ist vorübergehend und kostenlos. Die Lernenden brauchen kein Konto.
+Du brauchst schnell passende Übungen für einen bestimmten Anlass? Mit Deinem KI-Assistenten, unserer Anleitung und wenig Aufwand erstellst Du eine Lern-App nach Maß, um
 
-Die Anleitung für den Assistenten (llms.txt, Skills) ist bisher für Eltern geschrieben. Sie führt Dich und Dein Kind durch die Vorbereitung auf eine Arbeit.
+- Dein Kind auf eine Arbeit vorzubereiten,
+- einer Klasse Übungen für eine Vertretungsstunde zu geben,
+- als Vertretung zu sehen, wo eine Klasse steht,
+- verpassten Stoff nachzuholen.
 
 ## So läuft es {#schritte}
 
@@ -14,8 +17,8 @@ Die Anleitung für den Assistenten (llms.txt, Skills) ist bisher für Eltern ges
   </li>
   <li class="flow-step" data-who="assistant">
     <span class="flow-who">Dein Assistent</span>
-    <h3>Dein Assistent führt Dich</h3>
-    <p>Er liest die Fotos vom Material und schreibt eigene Übungen. Du bestätigst mit Deinem Kind den Umfang.</p>
+    <h3>Dein Assistent macht Deine App</h3>
+    <p>Aus Deinem Material wird eine Lern-App, die genau zu Deinem Stoff passt.</p>
   </li>
   <li class="flow-step" data-who="you">
     <span class="flow-who">Du</span>
@@ -28,14 +31,14 @@ Die Anleitung für den Assistenten (llms.txt, Skills) ist bisher für Eltern ges
     <p>Sie baut die App und schreibt die Adresse in einen Kommentar. Fehlt etwas, sagt sie es, und Dein Assistent bessert nach.</p>
   </li>
   <li class="flow-step" data-who="you">
-    <span class="flow-who">Du & Dein Kind</span>
+    <span class="flow-who">Du und Dein Kind</span>
     <h3>Du öffnest die Adresse und übst</h3>
     <p>Gib sie Deinem Kind oder der Klasse. Es braucht kein Konto und keine Installation.</p>
   </li>
-  <li class="flow-step" data-who="you">
-    <span class="flow-who">Du</span>
+  <li class="flow-step" data-who="both">
+    <span class="flow-who">Du und die Plattform</span>
     <h3>Was geholfen hat, hält ein 👍</h3>
-    <p>Setze es auf das erste Feld des Issues. Dann bleibt die App, und wir prüfen, ob sie in den Katalog passt.</p>
+    <p>Hat sie geholfen, hilft sie vielleicht auch anderen. Setze ein 👍 auf Dein Issue: Dann bleibt die App, und wir prüfen, ob sie in den Katalog passt.</p>
   </li>
 </ol>
 
@@ -49,7 +52,7 @@ Kopiere diesen Satz in das Gespräch mit Deinem KI-Assistenten und ersetze `<Fac
 Lies https://lernapps.net/practice/llms.txt und hilf mir, mein Kind auf die Arbeit in <Fach> vorzubereiten.
 ```
 
-Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich nach Fach, Klassenstufe und Bundesland.
+Die Anleitung für den Assistenten steht in [llms.txt](llms.txt).
 
 ## Gut zu wissen {#wissen}
 

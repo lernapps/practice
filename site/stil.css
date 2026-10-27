@@ -71,3 +71,6 @@ img { max-width: 100%; height: auto; }
   .flow-step:not(:last-child)::after { left: 2rem; right: -1rem; top: calc(1rem - 1px); bottom: auto; width: auto; height: 2px; }
   .flow-step:nth-child(3n)::after { display: none; }
 }
+.flow-step[data-who="both"] { --flow: #1d4ed8; --flow-fg: #1e293b; }
+.flow-step[data-who="both"]::before { border-color: #1d4ed8 #047857 #047857 #1d4ed8; }
+.flow-step[data-who="both"] .flow-who { background: linear-gradient(90deg, #dbeafe, #d1fae5); }

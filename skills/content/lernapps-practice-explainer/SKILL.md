@@ -28,7 +28,7 @@ Du schreibst den Quelltext eines Explainers. Lies vorher:
 
 Ein bis zwei Kapitel mit je drei bis fünf Seiten, Deutsch, in eigenen Worten, für die Stufe.
 1. Seite „Selbsteinschätzung“: zehn Fragen quer durch den Stoff und eine Auswertung (0 bis 4 richtig: von vorn; 5 bis 8: gezielt; 9 bis 10: wiederholen). Das Kind zählt selbst.
-2. Seite „Trainingsplan“: Tabelle für die Tage bis zur Arbeit (Tag, Thema, Übung), mit Links auf die Seiten. Auch sie braucht eine Aufgabe.
+2. Seite „Übungsplan“: Tabelle mit Etappen ohne Tage und Daten (Etappe, Thema, Übung), mit Links auf die Seiten. Die letzte Etappe wiederholt die Selbsteinschätzung. Auch diese Seite braucht eine Aufgabe.
 3. Je Thema eine Seite: erklären, Beispiel, Übung. Jede Seite hat mindestens eine Frage.
 
 ## Fragen
@@ -93,8 +93,8 @@ Fakten, die Du nicht sicher weißt (Zahlen, Daten, Namen, Zählweisen), schreibs
 - Zeichnung, Diagramm, Plan: Tabelle, Liste oder `ordering`. `drawing` kann nur `hundred-grid` und `bar` (Prozent).
 - Selbsteinschätzung: eine normale Seite mit einem Abschnitt „Übung“. Die Auswertung steht als `note`
   („0 bis 4 richtig …“). Die Seite zählt nicht mit, das Kind zählt selbst.
-- Trainingsplan: `table` (Tag, Thema, Übung) mit Links `/<kapitel>/<seite>/`, dazu eine Aufgabe (zum Beispiel
-  `matching` Tag zu Thema).
+- Übungsplan: `table` (Etappe, Thema, Übung) mit Links `/<kapitel>/<seite>/`, ohne Tage und Daten, dazu eine Aufgabe
+  (zum Beispiel `ordering` der Themen in der Reihenfolge der Etappen).
 
 ## Weiterlesen
 
