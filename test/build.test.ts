@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { messages, noindex, noindexAll, prepare } from "../actions/build/build.ts";
+import { installedTooling, messages, noindex, noindexAll, prepare, readPin, useTooling, type Fetcher } from "../actions/build/build.ts";
 import { tmp } from "./support.ts";
 
 const page = (head = "") => `<!doctype html>\n<html lang="de">\n  <head>\n    <meta charset="utf-8">${head}\n  </head>\n  <body></body>\n</html>\n`;
@@ -94,5 +94,107 @@ describe("prepare", () => {
     const linked = tree({ "src/app.yaml": "x" });
     symlinkSync("/etc/passwd", join(linked, "src/l.yaml"));
     assert.throws(() => prepare(linked, template()), /link/);
+  });
+});
+
+describe("prepare with components and images", () => {
+  const files = (entries: Record<string, string>) => {
+    const dir = tmp();
+    for (const [name, data] of Object.entries(entries)) {
+      mkdirSync(join(dir, name, ".."), { recursive: true });
+      writeFileSync(join(dir, name), data);
+    }
+    return dir;
+  };
+  const template = () => {
+    const src = join(tmp(), "src");
+    mkdirSync(join(src, "components"), { recursive: true });
+    writeFileSync(join(src, "main.ts"), "// template");
+    writeFileSync(join(src, "components/ProzentFeld.vue"), "<template/>");
+    return src;
+  };
+  it("takes the submitted components and drawings instead of the template's example", () => {
+    const src = template();
+    prepare(files({ "src/app.yaml": "x", "src/components/Zahl.vue": "<template/>", "src/components/Zahl.test.ts": "t", "src/images/kreis.svg": "<svg/>", "src/data/werte.yaml": "- a: 1" }), src);
+    assert.ok(existsSync(join(src, "components/Zahl.vue")));
+    assert.ok(!existsSync(join(src, "components/ProzentFeld.vue")));
+    assert.ok(existsSync(join(src, "images/kreis.svg")));
+    assert.ok(existsSync(join(src, "data/werte.yaml")));
+  });
+  it("checks the drawings again", () => {
+    assert.throws(() => prepare(files({ "src/app.yaml": "x", "src/images/a.svg": "<svg onload=x>" }), template()), /svg-event/);
+  });
+});
+
+describe("the pin of app-templates", () => {
+  const COMMIT = "a0d58d8922872083b30344a11ce055182f13d370";
+  const MAIN = "44d82e538b0f7a72f9af1fbb997e4270352fa32e";
+  const main = () => MAIN;
+  const serve = (status: number, body: string): Fetcher & { asked: string[] } => {
+    const asked: string[] = [];
+    const fetcher = async (url: string) => {
+      asked.push(url);
+      return { ok: status === 200, status, text: async () => body };
+    };
+    return Object.assign(fetcher, { asked });
+  };
+  const manifest = (appTemplates: unknown) => JSON.stringify({ name: "@lernapps/tooling", appTemplates });
+  const good = () => serve(200, manifest({ repository: "https://github.com/lernapps/app-templates.git", commit: COMMIT }));
+
+  it("is read from the package.json of lernapps/tooling at the commit main is at, which is also the tooling to check with", async () => {
+    const fetcher = good();
+    assert.deepEqual(await readPin(fetcher, undefined, main), {
+      repository: "lernapps/app-templates",
+      commit: COMMIT,
+      url: "https://github.com/lernapps/app-templates.git",
+      tooling: MAIN,
+    });
+    assert.deepEqual(fetcher.asked, [`https://raw.githubusercontent.com/lernapps/tooling/${MAIN}/package.json`]);
+  });
+  it("takes a commit of app-templates given instead of the one read, and keeps the tooling of main", async () => {
+    const other = "1".repeat(40);
+    const pin = await readPin(good(), other, main);
+    assert.equal(pin.commit, other);
+    assert.equal(pin.tooling, MAIN);
+    await assert.rejects(readPin(serve(200, "{}"), "main", main), /not a commit/);
+  });
+  it("stops with a clear message when main cannot be found", async () => {
+    await assert.rejects(readPin(good(), undefined, () => { throw new Error("could not resolve host"); }), /cannot find the commit of main of lernapps\/tooling \(could not resolve host\)/);
+    await assert.rejects(readPin(good(), undefined, () => "main"), /cannot find the commit of main/);
+  });
+  it("stops with a clear message when the address does not answer, or answers no pin", async () => {
+    await assert.rejects(readPin(serve(404, ""), undefined, main), new RegExp(`cannot read the pin of app-templates from https://raw\\.githubusercontent\\.com/lernapps/tooling/${MAIN}/package\\.json \\(HTTP 404\\)`));
+    await assert.rejects(readPin(serve(200, "not json"), undefined, main), /cannot read the pin/);
+    await assert.rejects(readPin(async () => { throw new Error("getaddrinfo ENOTFOUND"); }, undefined, main), /ENOTFOUND/);
+    await assert.rejects(readPin(serve(200, manifest({ repository: "https://github.com/lernapps/app-templates.git", commit: "main" })), undefined, main), /appTemplates\.commit is not a commit/);
+    await assert.rejects(readPin(serve(200, manifest({ repository: "https://evil.example/app-templates.git", commit: COMMIT })), undefined, main), /not a repository of lernapps/);
+    await assert.rejects(readPin(serve(200, manifest(undefined)), undefined, main), /appTemplates\.repository/);
+  });
+});
+
+describe("the tooling of the build", () => {
+  const MAIN = "44d82e538b0f7a72f9af1fbb997e4270352fa32e";
+  const app = (resolved?: string) => {
+    const dir = tmp();
+    if (resolved !== undefined) {
+      mkdirSync(join(dir, "node_modules"), { recursive: true });
+      writeFileSync(join(dir, "node_modules/.package-lock.json"), JSON.stringify({ packages: { "node_modules/@lernapps/tooling": { resolved } } }));
+    }
+    return dir;
+  };
+  it("is installed at the commit of main the pin was read at, as create gives it to an app", () => {
+    const calls: string[][] = [];
+    const installed = useTooling(app("git+ssh://git@github.com/lernapps/tooling.git#73b90426ed503aa73e9e4f5f909724fd137b121c"), MAIN, (args) => (calls.push(args), { status: 0, output: "", seconds: 1 }));
+    assert.equal(installed, true);
+    assert.deepEqual(calls, [["install", "--no-audit", "--no-fund", "--save-dev", `@lernapps/tooling@github:lernapps/tooling#${MAIN}`]]);
+  });
+  it("is left alone when it is at that commit already", () => {
+    const dir = app(`git+ssh://git@github.com/lernapps/tooling.git#${MAIN}`);
+    assert.equal(installedTooling(dir), MAIN);
+    assert.equal(useTooling(dir, MAIN, () => { throw new Error("must not install"); }), false);
+  });
+  it("stops when the install fails or the commit is not one", () => {
+    assert.throws(() => useTooling(app(), MAIN, () => ({ status: 1, output: "npm error 404", seconds: 1 })), /npm install of @lernapps\/tooling/);
+    assert.throws(() => useTooling(app(), "main"), /not a commit/);
   });
 });

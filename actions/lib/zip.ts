@@ -6,11 +6,19 @@
 // other endings than the allowed ones, links and other special files, encrypted files, ZIP64, too many or too large
 // files, a directory that lies about sizes, entries that overlap (the "quine" kind of zip bomb), names that differ
 // between the directory and the file header, names that differ only in case.
+// Besides the content files it lets through what an explainer knows: its components in src/components/ (<Name>.vue,
+// <Name>.ts, <Name>.test.ts; the build checks their code) and SVG images in src/images/, whose content svg.ts checks
+// when they are unpacked. src/main.ts, the template's start, is ignored and never unpacked: the build uses the
+// template's own.
 import { crc32, inflateRawSync } from "node:zlib";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { svgProblems } from "./svg.ts";
 import {
   ALLOWED_EXTENSIONS,
+  COMPONENT_FILE,
+  SVG_FILE,
+  TEMPLATE_FILES,
   MAX_DEPTH,
   MAX_ENTRIES,
   MAX_FILE_BYTES,
@@ -59,6 +67,9 @@ export function show(name: string): string {
 
 const problem = (code: string, text: string): Problem => ({ code, text });
 
+const EXTENSION_HELP = (shown: string) =>
+  `Die Datei \`${shown}\` hat eine nicht erlaubte Endung. Erlaubt sind: ${ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(", ")}; dazu \`.svg\` im Ordner \`src/images/\` und Komponenten (\`.vue\`, \`.ts\`) im Ordner \`src/components/\`. Anderer Programmcode (zum Beispiel \`.js\`, \`.html\`, \`.json\`) gehört nicht in eine Einreichung.`;
+
 const HELP_ZIP =
   "Lege in Deinem Ordner alles unter einen Ordner `src` und packe dann den Ordner `src` selbst ein, nicht den Ordner darüber.";
 
@@ -89,6 +100,31 @@ export function pathProblem(name: string, file: boolean): Problem | undefined {
   if (parts.length > MAX_DEPTH + 1) {
     return problem("path-deep", `Der Pfad \`${shown}\` ist mehr als ${MAX_DEPTH} Ordner tief.`);
   }
+  if (TEMPLATE_FILES.includes(name)) {
+    return problem("path-template", `\`${shown}\` ist Teil der Vorlage und gehört nicht in die entpackten Dateien.`);
+  }
+  if (parts[1] === "components" && (parts.length > 2 || file)) {
+    if (!file || parts.length > 3) {
+      return problem("component-folder", `\`${shown}\`: Im Ordner \`src/components/\` gibt es keine Unterordner.`);
+    }
+    if (parts.some((part) => part.length > MAX_NAME_LENGTH)) {
+      return problem("name-length", `Ein Name in \`${shown}\` ist länger als ${MAX_NAME_LENGTH} Zeichen.`);
+    }
+    if (!COMPONENT_FILE.test(name)) {
+      return problem(
+        "component-name",
+        `\`${shown}\` ist keine Datei einer Komponente. Im Ordner \`src/components/\` liegen nur \`<Name>.vue\`, \`<Name>.ts\` und \`<Name>.test.ts\`; der Name beginnt mit einem Großbuchstaben und hat nur Buchstaben und Ziffern (zum Beispiel \`Zahlenstrahl.vue\`).`,
+      );
+    }
+    return undefined;
+  }
+  if (file && /\.svg$/i.test(name) && !SVG_FILE.test(name)) {
+    return problem(
+      "svg-place",
+      `Das SVG-Bild \`${shown}\` liegt nicht im Ordner \`src/images/\` oder hat einen anderen Namen als Kleinbuchstaben, Ziffern und Bindestriche. SVG-Bilder gehören nach \`src/images/<name>.svg\`.`,
+    );
+  }
+  if (SVG_FILE.test(name)) return undefined;
   const last = parts.length - 1;
   for (const [i, part] of parts.entries()) {
     if (part.length > MAX_NAME_LENGTH) {
@@ -110,7 +146,7 @@ export function pathProblem(name: string, file: boolean): Problem | undefined {
     if (dots >= 1 && !ALLOWED_EXTENSIONS.includes(lastEnding)) {
       return problem(
         "extension",
-        `Die Datei \`${shown}\` hat eine nicht erlaubte Endung. Erlaubt sind: ${ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(", ")}. Programmcode, SVG-Bilder und Komponenten (.vue, .ts, .js, .svg) gehören nicht in eine Einreichung.`,
+        EXTENSION_HELP(shown),
       );
     }
     if (dots !== 1) {
@@ -131,12 +167,9 @@ export function pathProblem(name: string, file: boolean): Problem | undefined {
     if (!ALLOWED_EXTENSIONS.includes(extension.toLowerCase())) {
       return problem(
         "extension",
-        `Die Datei \`${shown}\` hat eine nicht erlaubte Endung. Erlaubt sind: ${ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(", ")}. Programmcode, SVG-Bilder und Komponenten (.vue, .ts, .js, .svg) gehören nicht in eine Einreichung.`,
+        EXTENSION_HELP(shown),
       );
     }
-  }
-  if (name === "src/main.ts" || name.startsWith("src/components/")) {
-    return problem("path-template", `\`${shown}\` ist Teil der Vorlage und gehört nicht in eine Einreichung.`);
   }
   return undefined;
 }
@@ -290,6 +323,11 @@ export function inspectZip(buffer: Buffer): Inspection {
       ignored++;
       continue;
     }
+    if (TEMPLATE_FILES.includes(inside)) {
+      // the template's start, written by create into every app: the build uses the template's own
+      ignored++;
+      continue;
+    }
     const { name: full, madeBy, flags, method, crc, compressedSize, size, externalAttributes, headerOffset } = row;
     const name = inside;
     const shown = show(name);
@@ -323,15 +361,6 @@ export function inspectZip(buffer: Buffer): Inspection {
     }
     if (method !== 0 && method !== 8) {
       problems.push(problem("method", `Die Datei \`${shown}\` ist auf eine nicht unterstützte Art gepackt.`));
-      continue;
-    }
-    if (name === "src/main.ts" || name === "src/components" || name.startsWith("src/components/")) {
-      problems.push(
-        problem(
-          "path-template",
-          `\`${shown}\` gehört zur Vorlage und nicht in eine Einreichung. Eigene Vue-Komponenten und Programmcode gibt es in einer Vorschau nicht: Lass \`src/components/\` und \`src/main.ts\` weg und nutze nur die Bausteine, die der Explainer in YAML kennt.`,
-        ),
-      );
       continue;
     }
     const bad = pathProblem(name, !isDirectory);
@@ -437,8 +466,9 @@ export function collapse(problems: readonly Problem[]): Problem[] {
 
 /**
  * Unpacks the files of an inspected ZIP file into `target`. Every file is inflated with a limit of its stated size,
- * and must come out with exactly that size and the stated checksum. Returns problems (a lying directory); on any
- * problem the caller discards `target`.
+ * and must come out with exactly that size and the stated checksum; an SVG image must pass the content check
+ * (svg.ts). Returns problems (a lying directory, an SVG that does more than draw); on any problem the caller discards
+ * `target`.
  */
 export function extractZip(buffer: Buffer, entries: readonly Entry[], target: string): Problem[] {
   const problems: Problem[] = [];
@@ -471,9 +501,18 @@ export function extractZip(buffer: Buffer, entries: readonly Entry[], target: st
       problems.push(problem("checksum", `Die Datei \`${show(entry.path)}\` ist beschädigt (Prüfsumme falsch).`));
       return problems;
     }
+    if (/\.svg$/i.test(entry.path)) {
+      // an image that would run or load something when opened is not unpacked; the others go on, so that the
+      // comment names every such image at once
+      const found = svgProblems(show(entry.path), data);
+      if (found.length > 0) {
+        problems.push(...found);
+        continue;
+      }
+    }
     const path = join(target, entry.path);
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, data, { flag: "wx" });
   }
-  return problems;
+  return collapse(problems);
 }

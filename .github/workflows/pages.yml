@@ -1,0 +1,64 @@
+name: Pages
+
+# Builds the site into _site/, checks it, and on main publishes it to the gh-pages branch, which GitHub Pages
+# serves at https://lernapps.net/practice/. The same for every lernapps.net site: the steps are the shared actions
+# in lernapps/tooling (npm ci, npm run build, npm run check; deploy to gh-pages without touching the previews).
+# Renovate bumps the pinned commits.
+#
+# gh-pages holds three things: the site (the root), the previews of the submissions (i/<number>/, written by
+# einreichung.yml and aufraeumen.yml) and the previews of pull requests (pr-preview/pr-<number>/, pr-preview.yml).
+# The deploy replaces the site and leaves the other two alone (keep: i/; the action always keeps pr-preview/).
+#
+# The change scope (lernapps/tooling changes.yml) gates the jobs: a change of only the plan (.vibe/**) runs nothing;
+# docs (docs/**/*.md) and anything else build, check and deploy the site. The job `site` always runs and reports the
+# result: the required check, which never stays "Pending".
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  changes:
+    uses: lernapps/tooling/.github/workflows/changes.yml@2fd0d0069bab34a4c647788212cae1e218676d27 # main
+    with:
+      tooling-ref: 2fd0d0069bab34a4c647788212cae1e218676d27 # the classifier of the same commit
+
+  build: # builds and checks the site
+    needs: changes
+    if: needs.changes.outputs.site == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lernapps/tooling/actions/site-check@2fd0d0069bab34a4c647788212cae1e218676d27 # main
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && needs.changes.outputs.site == 'true'
+    needs: [changes, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency: # one writer at a time on gh-pages, like einreichung.yml and aufraeumen.yml
+      group: gh-pages
+      cancel-in-progress: false
+    steps:
+      - uses: lernapps/tooling/actions/site-deploy@2fd0d0069bab34a4c647788212cae1e218676d27 # main
+        with:
+          keep: i/ # the previews of the submissions (einreichung.yml)
+
+  site: # required status check: always runs, fails when a job above failed or was cancelled
+    needs: [changes, build, deploy]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "the jobs ended: $RESULTS"
+          case " $RESULTS " in *" failure "* | *" cancelled "*) exit 1 ;; esac

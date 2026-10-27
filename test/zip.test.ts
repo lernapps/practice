@@ -134,10 +134,11 @@ describe("unicode tricks", () => {
 });
 
 describe("endings", () => {
-  it("refuses code, components and svg", () => {
-    for (const name of ["src/a.vue", "src/a.ts", "src/a.js", "src/a.svg", "src/a.html", "src/a.json", "src/a.sh", "src/a.exe"]) {
+  it("refuses code outside src/components/, and every other kind of code", () => {
+    for (const name of ["src/a.vue", "src/a.ts", "src/A.vue", "src/kap/B.ts", "src/a.js", "src/a.html", "src/a.json", "src/a.sh", "src/a.exe"]) {
       assert.ok(codes(withFile(name)).includes("extension"), name);
     }
+    assert.match(inspectZip(buildZip(withFile("src/a.js"))).problems[0]?.text ?? "", /src\/components\//);
   });
   it("refuses double endings, either way round", () => {
     assert.ok(codes(withFile("src/a.png.js")).includes("extension"));
@@ -150,16 +151,68 @@ describe("endings", () => {
     assert.ok(codes(withFile("src/Makefile")).includes("name-no-extension"));
     assert.ok(codes(withFile("src/.yaml")).includes("path-hidden"));
   });
-  it("refuses src/main.ts and src/components/ though they would fail the ending test anyway", () => {
-    assert.ok(codes(withFile("src/main.ts")).length > 0);
-    assert.equal(pathProblem("src/components/", false)?.code, "path-template");
-    assert.equal(pathProblem("src/components/a.yaml", true)?.code, "path-template");
+  it("ignores src/main.ts: it is never unpacked, the build takes the template's", () => {
+    const zip = buildZip(withFile("src/main.ts", "import 'evil';"));
+    const inspection = inspectZip(zip);
+    assert.deepEqual(inspection.problems, []);
+    assert.equal(inspection.ignored, 1);
+    const target = mkdtempSync(join(tmpdir(), "practice-test-"));
+    assert.deepEqual(extractZip(zip, inspection.entries, target), []);
+    assert.ok(!existsSync(join(target, "src/main.ts")));
+    assert.equal(pathProblem("src/main.ts", true)?.code, "path-template");
   });
-  it("tells a components folder once, whatever is in it", () => {
-    const many = Array.from({ length: 40 }, (_, i) => ({ name: `src/components/C${i}.test.ts`, data: "x" }));
+});
+
+describe("components", () => {
+  it("are accepted as the explainer knows them: <Name>.vue, <Name>.ts, <Name>.test.ts in src/components/", () => {
+    const specs = [
+      ...goodSpecs(),
+      { name: "src/components/" },
+      { name: "src/components/Zahlenstrahl.vue", data: "<template><p/></template>" },
+      { name: "src/components/Zahlenstrahl.ts", data: "export const x = 1;" },
+      { name: "src/components/Zahlenstrahl.test.ts", data: "test" },
+    ];
+    assert.deepEqual(inspectZip(buildZip(specs)).problems, []);
+  });
+  it("refuse other names, other files and subfolders", () => {
+    for (const name of ["src/components/zahl.vue", "src/components/Zahl.js", "src/components/Zahl.spec.ts", "src/components/Zahl-Strahl.vue", "src/components/Zahl.yaml", "src/components/Zahl.svg"]) {
+      assert.deepEqual(codes(withFile(name)), ["component-name"], name);
+    }
+    assert.deepEqual(codes(withFile("src/components/sub/Zahl.vue")), ["component-folder"]);
+    assert.deepEqual(codes([...goodSpecs(), { name: "src/components/sub/" }]), ["component-folder"]);
+  });
+  it("tell a long list of wrong files once", () => {
+    const many = Array.from({ length: 40 }, (_, i) => ({ name: `src/components/c${i}.vue`, data: "x" }));
     const problems = inspectZip(buildZip([...goodSpecs(), { name: "src/components/" }, ...many])).problems;
-    assert.deepEqual(problems.map((p) => p.code), ["path-template"]);
-    assert.match(problems[0]?.text ?? "", /40 weitere/);
+    assert.deepEqual(problems.map((p) => p.code), ["component-name"]);
+    assert.match(problems[0]?.text ?? "", /39 weitere/);
+  });
+});
+
+describe("data files and SVG images", () => {
+  it("accept data files in src/data/", () => {
+    assert.deepEqual(codes(withFile("src/data/elemente.yaml")), []);
+  });
+  it("accept an SVG directly in src/images/ with a lower-case name", () => {
+    assert.deepEqual(codes(withFile("src/images/kreis-1.svg", "<svg/>")), []);
+  });
+  it("refuse an SVG elsewhere or with another name", () => {
+    for (const name of ["src/a.svg", "src/kap/a.svg", "src/images/sub/a.svg", "src/images/Kreis.svg", "src/images/a.SVG"]) {
+      assert.deepEqual(codes(withFile(name, "<svg/>")), ["svg-place"], name);
+    }
+  });
+  it("unpack a drawing, and refuse an SVG with a script at unpacking", () => {
+    const drawing = '<svg xmlns="http://www.w3.org/2000/svg"><circle r="4"/></svg>';
+    const good = buildZip(withFile("src/images/kreis.svg", drawing));
+    const target = mkdtempSync(join(tmpdir(), "practice-test-"));
+    assert.deepEqual(extractZip(good, inspectZip(good).entries, target), []);
+    assert.equal(readFileSync(join(target, "src/images/kreis.svg"), "utf8"), drawing);
+    const bad = buildZip(withFile("src/images/boese.svg", "<svg><script>alert(1)</script></svg>"));
+    const other = mkdtempSync(join(tmpdir(), "practice-test-"));
+    const problems = extractZip(bad, inspectZip(bad).entries, other);
+    assert.deepEqual(problems.map((p) => p.code), ["svg-script"]);
+    assert.match(problems[0]?.text ?? "", /src\/images\/boese\.svg/);
+    assert.ok(!existsSync(join(other, "src/images/boese.svg")));
   });
   it("refuses a missing src/app.yaml", () => {
     assert.ok(codes([{ name: "src/x.yaml", data: "x" }]).includes("no-app-yaml"));

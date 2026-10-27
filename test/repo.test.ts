@@ -115,9 +115,6 @@ describe("the docs", () => {
     const text = read("docs/einreichen.md");
     for (const parameter of ["template", "title", "fach", "klassenstufe", "bundesland"]) assert.ok(text.includes(`\`${parameter}\``), parameter);
   });
-  it("have a llms.txt with the headings, ready for the draft", () => {
-    assert.match(read("docs/llms.txt"), /^# .+\n\n## /);
-  });
   it("name the checks of a bundle that really run", () => {
     const text = read("docs/pruefungen.md");
     for (const rule of ["accessible", "usable-at-360px", "no-tracking", "no-request-before-click", "own-data-only", "links-resolve", "pages-reachable", "explainer-readable-without-js"]) {
@@ -132,9 +129,8 @@ describe("the repo", () => {
     assert.equal(read("CLAUDE.md"), "@AGENTS.md\n");
     assert.match(read("AGENTS.md"), /^Reply as per ISO 24495/);
   });
-  it("pins app-templates at a commit", () => {
-    const pin = JSON.parse(read("package.json")).appTemplates;
-    assert.match(pin.commit, /^[0-9a-f]{40}$/);
-    assert.equal(pin.repository, "https://github.com/lernapps/app-templates.git");
+  it("pins no app-templates of its own: the build reads the pin of lernapps/tooling on main", () => {
+    assert.equal(JSON.parse(read("package.json")).appTemplates, undefined);
+    assert.match(read("actions/build/action.yml"), /node "\$GITHUB_ACTION_PATH\/build\.ts" pin\n/);
   });
 });

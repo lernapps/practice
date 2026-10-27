@@ -196,10 +196,22 @@ export function buildFailedComment(excerpt: string, runUrl: string): string {
   );
 }
 
-export function expiredComment(): string {
+/**
+ * The login of a person for an @-mention, or undefined: a GitHub login has only letters, digits and hyphens (at most
+ * 39); anything else, and every bot, gets no mention.
+ */
+export function mentionable(login: unknown, type: unknown): string | undefined {
+  if (type !== "User" || typeof login !== "string") return undefined;
+  return /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/.test(login) ? login : undefined;
+}
+
+/** The note when a preview has expired: it names the creator (when the login is safe) and asks for feedback. */
+export function expiredComment(login?: string): string {
+  const mention = login !== undefined && mentionable(login, "User") === login ? `@${login} ` : "";
   return (
-    "Die Vorschau war zwei Wochen erreichbar und ist jetzt gelöscht. " +
-    "Wenn Du sie noch einmal brauchst, hänge die ZIP-Datei erneut an: Issue bearbeiten, Datei in das Feld »ZIP-Datei« ziehen, speichern. " +
-    "Dann bauen wir die Vorschau neu."
+    `${mention}Deine Vorschau ist nach zwei Wochen gelöscht. Hat sie geholfen? ` +
+    "Setze ein 👍 auf das erste Feld dieses Issues oder schreib kurz, was gut war und was gefehlt hat. " +
+    "Das hilft uns und anderen.\n\n" +
+    "Wenn Du die Vorschau noch einmal brauchst, hänge die ZIP-Datei erneut an (Issue bearbeiten, speichern). Dann bauen wir sie neu."
   );
 }

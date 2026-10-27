@@ -1,0 +1,52 @@
+name: Preview
+
+# A preview of the site for every pull request, at https://lernapps.net/practice/pr-preview/pr-<number>/:
+# commented on the pull request, updated on every push, removed when the pull request is closed.
+# Banner and noindex; links stay inside the preview. Shared action in lernapps/tooling.
+# It lives on gh-pages next to the previews of the submissions (i/<number>/); the two never touch each other:
+# this action writes and removes only pr-preview/pr-<number>/.
+# The change scope (lernapps/tooling changes.yml) gates it: no preview for a change of only the plan (.vibe/**);
+# closing a pull request always removes its preview. The job `preview` always runs and reports the result, the
+# check that never stays "Pending".
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    uses: lernapps/tooling/.github/workflows/changes.yml@2fd0d0069bab34a4c647788212cae1e218676d27 # main
+    with:
+      tooling-ref: 2fd0d0069bab34a4c647788212cae1e218676d27 # the classifier of the same commit
+    permissions:
+      contents: read
+
+  build:
+    needs: changes
+    runs-on: ubuntu-latest
+    # Pull requests from forks get a read-only token and cannot push to gh-pages.
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event.action == 'closed' || needs.changes.outputs.site == 'true')
+    steps:
+      - uses: lernapps/tooling/actions/site-preview@2fd0d0069bab34a4c647788212cae1e218676d27 # main
+        with:
+          site: /practice/
+
+  preview: # always runs, fails when a job above failed or was cancelled
+    needs: [changes, build]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "the jobs ended: $RESULTS"
+          case " $RESULTS " in *" failure "* | *" cancelled "*) exit 1 ;; esac

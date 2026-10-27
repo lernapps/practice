@@ -1,18 +1,18 @@
 # Einreichen: Schritt für Schritt
 
-## Vorher
+## Vorher {#vorher}
 
-1. Dein Assistent hat die Lern-App vom Archetyp `explainer` erstellt. Du hast den Ordner `src` mit den Inhalten (YAML-Dateien und Bilder).
-2. Der Inhalt erfüllt die [Regeln](regeln.md). Das wichtigste: keine Namen, keine abgeschriebenen Texte, kein Programmcode.
+1. Dein Assistent hat die Lern-App vom Archetyp `explainer` auf Deinem Rechner gebaut und geprüft. Er gibt Dir die ZIP-Datei mit dem Ordner `src` (Seiten, Bilder, Komponenten).
+2. Der Inhalt erfüllt die [Regeln](regeln.md). Das wichtigste: keine Namen, keine abgeschriebenen Texte, keine Fotos des Materials.
 3. Du hast ein GitHub-Konto.
 
-## So packst Du die ZIP-Datei
+## So packst Du die ZIP-Datei {#zip-packen}
 
 Packe den **Ordner `src` selbst** ein. Oben in der ZIP-Datei steht dann `src/app.yaml`. Die ZIP-Datei darf höchstens 10 MB groß sein.
 
 Es geht auch, wenn Du das ganze Projekt als ZIP von GitHub lädst („Download ZIP“). Dann liegt alles in einem Ordner wie `mein-projekt-main/`. Wir lesen daraus nur `mein-projekt-main/src/`. Alles andere ignorieren wir und entpacken es nie.
 
-## So reichst Du ein
+## So reichst Du ein {#einreichen}
 
 1. Öffne das Formular: <https://github.com/lernapps/practice/issues/new?template=einreichen.yml>
 2. Fülle **Fach**, **Klassenstufe** und **Bundesland** aus.
@@ -26,13 +26,13 @@ Nach etwa einer bis drei Minuten schreibt GitHub einen Kommentar:
 - **Etwas fehlt oder ist falsch:** Der Kommentar sagt in einfachen Worten, was. Gib ihn Deinem Assistenten.
 - **Fehler beim Bauen:** Der Kommentar zeigt die Meldungen des Baus (Datei, Zeile, Regel). Gib sie Deinem Assistenten, er korrigiert den Inhalt.
 
-## Nach einer Korrektur
+## Nach einer Korrektur {#korrektur}
 
 Öffne Dein Issue und klicke am ersten Feld auf die drei Punkte und dann auf **Edit**. Ziehe die neue ZIP-Datei in das Feld **ZIP-Datei** und speichere. GitHub prüft und baut dann neu. Der alte Kommentar wird ersetzt.
 
 Wenn Du nur etwas anderes änderst (zum Beispiel den Titel) und die ZIP-Adresse und die drei Angaben gleich bleiben, baut GitHub nicht neu. Der Kommentar bleibt, wie er ist.
 
-## Das Formular vorausfüllen
+## Das Formular vorausfüllen {#vorausfuellen}
 
 Das Formular lässt sich über Parameter in der Adresse vorausfüllen. Das hilft Assistenten, die Dir einen fertigen Link geben. Die Namen der Parameter sind die Kennungen (ids) der Felder:
 
@@ -52,7 +52,7 @@ https://github.com/lernapps/practice/issues/new?template=einreichen.yml&title=Vo
 
 Sonderzeichen müssen in der Adresse umgeschrieben werden: Leerzeichen als `%20`, ü als `%C3%BC` (zum Beispiel `Baden-W%C3%BCrttemberg`). Die ZIP-Datei und die Erklärungen kannst Du nicht vorausfüllen. Die Erklärungen musst Du selbst ankreuzen.
 
-## Wenn etwas nicht klappt
+## Wenn etwas nicht klappt {#probleme}
 
 - **Kein Kommentar nach fünf Minuten:** Öffne den Reiter „Actions“ des Repos und suche den Lauf „Einreichung“. Schreibe uns einen Kommentar ins Issue.
 - **„Kein ZIP gefunden“:** Die ZIP-Datei ist nicht im Feld „ZIP-Datei“ angekommen. Ziehe sie noch einmal hinein und warte auf den Link.

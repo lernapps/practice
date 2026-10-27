@@ -10,16 +10,17 @@
   },
   "type": "module",
   "scripts": {
-    "test": "node --test --test-reporter=spec \"test/*.test.ts\""
+    "build": "./scripts/build.sh",
+    "check": "site-check --site /practice/",
+    "test": "node --test --test-reporter=spec \"test/*.test.ts\"",
+    "try": "node scripts/try.ts"
   },
   "engines": {
     "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
   },
-  "appTemplates": {
-    "repository": "https://github.com/lernapps/app-templates.git",
-    "commit": "a0d58d8922872083b30344a11ce055182f13d370",
-    "archetypes": [
-      "explainer"
-    ]
+  "devDependencies": {
+    "@doctc/arc42": "0.38.0",
+    "@lernapps/site": "github:lernapps/lernapps.github.io#d63583334c69d15235ef9b276af3507ca899cfa2",
+    "marked": "18.1.1"
   }
 }

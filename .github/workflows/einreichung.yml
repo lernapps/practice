@@ -7,7 +7,9 @@ name: Einreichung
 #   publish  (contents: write, issues: write) writes the site to gh-pages below i/<n>/ and comments; runs only code of
 #                                         this repo, the artifacts are data
 # The logic is in actions/ (tested by check.yml). workflow_dispatch repeats the run for an existing issue without
-# attaching again; only people with write access can start it. Issues that do not come from the form are skipped.
+# attaching again; only people with write access can start it. Its input zip_url, for a maintainer's test without a
+# browser, takes the ZIP file from a fixed list of addresses instead of the issue (actions/lib/limits.ts). Issues that
+# do not come from the form are skipped.
 on:
   issues:
     types: [opened, edited]
@@ -16,6 +18,11 @@ on:
       issue:
         description: Number of the issue to process again
         required: true
+        type: string
+      zip_url:
+        description: "Test run only: the ZIP file from this address instead of the issue (raw.githubusercontent.com/lernapps/… or …/mrsimpson/test-lernkontrolle/…)"
+        required: false
+        default: ""
         type: string
 
 permissions: {}
@@ -44,6 +51,7 @@ jobs:
         with:
           issue: ${{ github.event.issue.number || inputs.issue }}
           force: ${{ github.event_name == 'workflow_dispatch' }}
+          zip-url: ${{ inputs.zip_url }}
 
   build:
     needs: intake
