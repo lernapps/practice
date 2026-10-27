@@ -51,3 +51,4 @@ The guide for the assistant is [llms.txt](llms.txt). It is written in German, an
 
 - [Operations](betrieb.md): what the repository is for, how it runs and how to find faults.
 - [Checks](pruefungen.md): what is checked in a submission.
+- [Architecture](architecture/): how the repository is built (arc42).

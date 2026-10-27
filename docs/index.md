@@ -51,3 +51,4 @@ Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich 
 
 - [Betrieb](betrieb.md): wozu das Repo da ist, wie es läuft und wie man Fehler sucht.
 - [Prüfungen](pruefungen.md): was bei einer Einreichung geprüft wird.
+- [Architektur](architecture/): wie das Repo gebaut ist (arc42). Diese Seite gibt es nur auf Englisch.

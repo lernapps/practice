@@ -19,6 +19,7 @@ A build in the browser is not possible, because the build tools need native prog
 | `.github/workflows/pages.yml` | Builds and checks this site and publishes it to `gh-pages` (see [The site](#seite)). The required check is called `site`. |
 | `.github/workflows/pr-preview.yml` | A preview of this site for every pull request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | The texts (German and English), the build script and the style of this site. |
+| `docs/arc42/` | The architecture of this repository as an arc42 model, in English only. The build script validates it with `arc42 validate --strict` and publishes it as [Architecture](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Local composite actions with the logic. Each has an `action.yml` and a script in TypeScript without dependencies. |
 | `actions/lib/` | Shared code: read and check the ZIP file, read the form, GitHub calls, the branch `gh-pages`. |
 | `package.json` | Contains `appTemplates.commit`, the state of the templates. It is the same as in the tooling (`lernapps/tooling`, `package.json`). |

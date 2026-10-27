@@ -6,7 +6,7 @@
 // Rules for the Markdown:
 //   - A heading may end with {#anchor}. German and English pages use the same anchors.
 //   - A link to another page is written as the file name (regeln.md, einreichen.md#formular); it becomes the address
-//     of the page in the same language, with the prefix of the build (SITE_PATH_PREFIX). llms.txt is the guide for assistants.
+//     of the page in the same language, with the prefix of the build (SITE_PATH_PREFIX). llms.txt is the guide for assistants, architecture/ the architecture (English only).
 //   - The first # heading is the title, the first paragraph the description.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -42,6 +42,7 @@ function render(markdown, lang) {
         const page = /^([a-z0-9-]+)\.md(#[a-z0-9-]+)?$/.exec(href);
         if (page) href = `${prefix}${root}${page[1] === "index" ? "" : `${page[1]}/`}${page[2] ?? ""}`;
         else if (href === "llms.txt") href = `${prefix}llms.txt`;
+        else if (href === "architecture/") href = `${prefix}architecture/`;
         const t = title ? ` title="${escapeHtml(title)}"` : "";
         return `<a href="${escapeHtml(href)}"${t}>${this.parser.parseInline(tokens)}</a>`;
       },

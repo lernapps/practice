@@ -14,6 +14,7 @@ Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lerna
 ## Was im Repo liegt
 
 - `docs/`: Dokumentation für Menschen (Deutsch in `docs/*.md`, Englisch in `docs/en/*.md`) und `llms.txt`.
+- `docs/arc42/`: die Architektur des Repos als arc42-Modell (nur Englisch), veröffentlicht unter <https://lernapps.net/practice/architecture/>.
 - `scripts/` und `site/`: Bauskript und Stil der Seite.
 - `.github/ISSUE_TEMPLATE/einreichen.yml`: das Formular.
 - `.github/workflows/`: dünne Workflows `einreichung.yml`, `aufraeumen.yml`, `check.yml`, `pages.yml` (Seite bauen, prüfen, veröffentlichen) und `pr-preview.yml` (Vorschau je Pull Request).

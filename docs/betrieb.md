@@ -19,6 +19,7 @@ Ein Build im Browser ist nicht möglich, weil die Bau-Werkzeuge native Programme
 | `.github/workflows/pages.yml` | Baut und prüft diese Seite und veröffentlicht sie auf `gh-pages` (siehe [Die Seite](#seite)). Die Pflichtprüfung heißt `site`. |
 | `.github/workflows/pr-preview.yml` | Eine Vorschau dieser Seite je Pull Request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | Die Texte (Deutsch und Englisch), das Bauskript und der Stil dieser Seite. |
+| `docs/arc42/` | Die Architektur dieses Repos als arc42-Modell, nur auf Englisch. Das Bauskript prüft sie mit `arc42 validate --strict` und veröffentlicht sie unter [Architektur](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Lokale Composite-Actions mit der Logik. Jede hat eine `action.yml` und ein Skript in TypeScript ohne Abhängigkeiten. |
 | `actions/lib/` | Gemeinsamer Code: ZIP lesen und prüfen, Formular lesen, GitHub-Aufrufe, der Branch `gh-pages`. |
 | `package.json` | Enthält `appTemplates.commit`, den Stand der Vorlagen. Es ist derselbe wie im Tooling (`lernapps/tooling`, `package.json`). |
