@@ -14,7 +14,21 @@ template may store.
 id: risk-shared-origin
 title: Previews share the origin with lernapps.net
 severity: medium
-mitigation: dec-content-is-data, so no submitted code runs on the origin; the bundle rule own-data-only (qs-preview-collects-nothing).
+mitigation: dec-content-and-components, so component code passes the build's checks and an SVG image only draws (concept-svg-only-draws); the bundle rule own-data-only (qs-preview-collects-nothing).
+:::
+```
+
+## Submitted code shares the origin without review
+
+A component is code from any GitHub account. It runs in the build job and, once published, in the browsers of the
+students on the shared origin. Nobody reviews it before the preview goes online; only the build's checks stand between.
+
+```arc42
+:::risk
+id: risk-submitted-code
+title: Submitted code shares the origin without review
+severity: high
+mitigation: The build's checks of component code (no network, no eval or innerHTML, allowed imports, browser globals only after mounting, size) and the bundle rules own-data-only, no-tracking and no-request-before-click; the build job holds no right and no secret (dec-rights-split); maintainers close an issue to remove its preview at once.
 :::
 ```
 
@@ -54,7 +68,7 @@ Creators make the content from school material. Facts are free, wording and pict
 id: risk-material-copyright
 title: Copyright of the school material
 severity: medium
-mitigation: The content is written anew and holds no photos of material; the guide says so before the photos are read; the submitter's declarations (con-public-by-default).
+mitigation: The content is written anew and holds no photos of material; the skill lernapps-practice-photos has figures rebuilt with the same content, never copied; the submitter's declarations (con-public-by-default).
 :::
 ```
 
@@ -72,16 +86,17 @@ mitigation: The address of an attachment is accepted in one exact form, so a cha
 :::
 ```
 
-## The pin of the template is moved by hand
+## The pin of the template follows the tooling's main
 
-If the pin of the template and the tooling's diverge, the build uses a template whose rules the tooling does not match.
+The build takes whatever commit the tooling's main pins at the time of the run. A broken pin there breaks every build
+here, and a submission made before a move is built with the new template.
 
 ```arc42
 :::risk
 id: risk-template-pin
-title: The pin of the template is moved by hand
+title: The pin of the template follows the tooling's main
 severity: low
-mitigation: dec-pinned-template-and-rules; the smoke build of the check workflow builds a fixture at the pin on a runner.
+mitigation: dec-pin-from-tooling-main; the tooling's own tests build the template at its pin; the smoke build of the check workflow builds a fixture at the pin on a runner; a failed read stops the build with a clear message.
 :::
 ```
 

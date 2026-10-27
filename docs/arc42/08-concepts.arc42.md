@@ -21,7 +21,8 @@ category: security
 ## Bounded input
 
 Everything from outside is checked by form and size, in two places: the intake reads the directory of the ZIP file
-before it unpacks anything, and `publish` checks the built site again. The limits live in one file
+before it unpacks anything, the content of an SVG image when it unpacks it (`concept-svg-only-draws`), and `publish`
+checks the built site again. The limits live in one file
 (`actions/lib/limits.ts`), and a test compares them with the rules in [docs/regeln.md](../regeln.md).
 
 ```arc42
@@ -58,15 +59,35 @@ category: operations
 :::
 ```
 
-## One source for the guide
+## SVG images only draw
 
-The guide for assistants exists once, as the skills in `skills/`; `docs/llms.txt` is their assembly, and a test says
-the checked-in file equals the output of the guide build.
+An SVG image is a document that the browser runs when someone opens it on its own, on the shared origin. The intake
+unpacks an SVG only in `src/images/` and only when its text, raw and with character references decoded, holds no
+script, no event attribute, no embedded document (`foreignObject`, `iframe`, `embed`, `object`), no `javascript:`, no
+entity definition and no reference outside the file (`href` and `url()` only to `#…`, no `@import`, no address in an
+attribute). The build checks the tree again. The rules for people are in [docs/regeln.md](../regeln.md).
 
 ```arc42
 :::concept
-id: concept-one-guide-source
-title: One source for the guide
+id: concept-svg-only-draws
+title: SVG images only draw
+category: security
+:::
+```
+
+## A plan and skills per phase
+
+The assistant starts once from `docs/llms.txt` and then follows one plan, made from the plan template in the phases
+of the tooling (Explore, Plan, Code, Commit), with its front matter. The skills of this repository carry what is
+particular to practice: the occasion and the concept (Explore), the material and its figures (Explore and Code), the
+submission (Commit). Everything else comes from the tooling: `create`, the app's own content guide and the content
+skills. The plan installs exactly these skills, and the assistant waits for the creator only at the checkpoints; a
+test holds the list and the addresses.
+
+```arc42
+:::concept
+id: concept-plan-and-phase-skills
+title: A plan and skills per phase
 category: documentation
 :::
 ```

@@ -47,8 +47,9 @@ sequenceDiagram
     intake->>lib: check the directory, unpack into a throwaway folder
     intake-->>build: artifact intake (data)
     flow->>build: job with contents read, no secret
-    build->>templates: take the explainer template at the pinned commit
-    build->>build: build the app from the template and the submitted files
+    build->>tooling: read the pin of the template on main
+    build->>templates: take the explainer template at that commit
+    build->>build: test the components, build the app from the template and the submitted files
     build->>tooling: lernapps check on the bundle
     build-->>publish: artifact site (data)
     flow->>publish: job with contents write, issues write, pages read
@@ -199,14 +200,14 @@ sequenceDiagram
 
 ## The assistant prepares the content
 
-The assistant reads the guide, looks in the catalog first and otherwise agrees the scope with the creator, writes the content and hands over the ZIP file and the link to the form. The steps are in the skills (`bb-assistant-skills`).
+The assistant reads the guide and starts its plan from the plan template, which leads it through the phases with the skills of each (`concept-plan-and-phase-skills`). It waits for the creator only at the checkpoints.
 
 ```arc42
 :::runtime-scenario
 id: rs-preparation
 title: The assistant prepares the content
 trigger: A creator tells their assistant to read the guide and to prepare a practice app for an acute occasion
-involves: bb-guidance, bb-assistant-guide, bb-assistant-skills, bb-catalog, bb-app-templates
+involves: bb-guidance, bb-assistant-guide, bb-plan-template, bb-assistant-skills, bb-catalog, bb-tooling
 :::
 ```
 
@@ -215,7 +216,7 @@ involves: bb-guidance, bb-assistant-guide, bb-assistant-skills, bb-catalog, bb-a
 id: rs-preparation-sequence
 scenario: rs-preparation
 notation: mermaid-sequence
-aliases: creator=actor-creator, assistant=actor-ai-assistant, guide=bb-assistant-guide, skills=bb-assistant-skills, catalog=bb-catalog, templates=bb-app-templates
+aliases: creator=actor-creator, assistant=actor-ai-assistant, guide=bb-assistant-guide, plan=bb-plan-template, skills=bb-assistant-skills, catalog=bb-catalog, tooling=bb-tooling
 :::
 ```
 
@@ -224,22 +225,24 @@ sequenceDiagram
     participant creator as Creator
     participant assistant as Creator's assistant
     participant guide as Guide for assistants
+    participant plan as Plan template
     participant skills as Skills for assistants
     participant catalog as Catalog
-    participant templates as App templates
-    creator->>assistant: read llms.txt and prepare a practice app
-    assistant->>guide: read the steps
-    opt the assistant can install skills
-        assistant->>skills: install the same steps as skills
-    end
-    assistant->>creator: subject, grade, federal state, day of the occasion
+    participant tooling as Tooling
+    creator->>assistant: read llms.txt and make an app for the occasion
+    assistant->>guide: read how to start
+    assistant->>plan: download it as the plan, read it in full
+    assistant->>skills: install the skills of practice
+    assistant->>tooling: install the content skills
+    assistant->>creator: the occasion, subject, grade, federal state
     assistant->>catalog: look for an app that fits
     alt an app fits
-        catalog-->>assistant: the link, and the work is done
+        catalog-->>assistant: the link, and the plan ends
     else none fits
-        assistant->>creator: hints on photos and copyright, then the scope to agree
-        assistant->>templates: read what the explainer can do and its schemas
-        assistant->>creator: the ZIP file and the link to the form
+        assistant->>creator: checkpoint concept: scope and weighting from the material
+        assistant->>creator: checkpoint plan: pages, exercises, figures
+        assistant->>tooling: create the explainer, build and check it
+        assistant->>creator: checkpoint submit: the ZIP file of src/ and the link to the form
     end
 ```
 

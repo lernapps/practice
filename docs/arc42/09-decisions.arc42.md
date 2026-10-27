@@ -37,26 +37,31 @@ addresses: con-github, con-explainer-only, risk-github-dependence
 :::
 ```
 
-## Content is data, not code
+## Content and components, checked by the build
 
-**Context:** A preview serves what any GitHub account sent, from the shared origin (`con-shared-origin`).
-**Decision:** Only the built-in blocks of the explainer: the build runs the template's tools over the data and never
-runs the content as a program. **Rejected:** code in submissions. **Consequences:** Content has less freedom, and every
-preview looks like the template. The checks look at endings and names, not at meaning (`risk-content-unchecked`).
+**Context:** A preview serves what any GitHub account sent, from the shared origin (`con-shared-origin`). The
+creator's assistant builds the explainer with `create` and may write components and figures, as any explainer has.
+**Decision:** A submission is the explainer's `src/`: data, images and components. The explainer's build checks the
+content and each component's code (no network, no `eval` or `innerHTML`, allowed imports, size, a test, the exercise
+contract), and the build job runs the components' tests; an SVG image passes only when it only draws
+(`concept-svg-only-draws`); the template's `main.ts` stays. **Rejected:** content as data only, without components and
+figures; code in other places than `src/components/`. **Consequences:** The build job runs submitted code without
+review (`risk-submitted-code`), which is why it holds nothing (`dec-rights-split`). The checks look at form and code,
+not at meaning (`risk-content-unchecked`).
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
 :::decision
-id: dec-content-is-data
-title: Content is data, not code
+id: dec-content-and-components
+title: Content and components, checked by the build
 status: accepted
-addresses: qg-safe-input, con-explainer-only, con-shared-origin, risk-shared-origin, risk-content-unchecked
+addresses: qg-safe-input, con-explainer-only, con-shared-origin, risk-shared-origin, risk-submitted-code, risk-content-unchecked
 :::
 ```
 
 ## Rights apart
 
-**Context:** The build runs the template's tools on files from outside. **Decision:** The jobs are split as
+**Context:** The build runs the template's tools and the submitted components' code on files from outside. **Decision:** The jobs are split as
 `concept-rights-split` says. **Rejected:** one job that reads, builds and writes. **Consequences:** More plumbing:
 artifacts to pass on, a second check in `publish`, and a comment for the case that `build` fails.
 
@@ -105,19 +110,39 @@ addresses: qg-nothing-collected, con-public-by-default, risk-material-copyright,
 :::
 ```
 
-## The template and the rules are taken and pinned
+## The template at the tooling's pin, read from its main
 
 **Context:** The explainer template and the rules of `lernapps check` (`docs/pruefungen.md`) belong to other
-repositories. **Decision:** This block takes both at the commit that `appTemplates.commit` pins, the tooling's.
-**Rejected:** a copy of the template or of the rules here. **Consequences:** A new commit is tried with a test issue
-(`risk-template-pin`). The rules cannot be loosened here.
+repositories, and the assistant creates the app with `create` from `tooling#main`. **Decision:** The build reads
+`appTemplates.commit` from the package.json of lernapps/tooling on main at every run, without a token, and stops when
+it cannot; this repository keeps no pin of its own. **Rejected:** a pin here, moved by hand; a copy of the template or
+of the rules. **Consequences:** GitHub builds with the template state the creator's app was made from, and a move of
+the pin in the tooling reaches the next build at once (`risk-template-pin`). The rules cannot be loosened here.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
 :::decision
-id: dec-pinned-template-and-rules
-title: The template and the rules are taken and pinned
+id: dec-pin-from-tooling-main
+title: The template at the tooling's pin, read from its main
 status: accepted
 addresses: con-pinned-sources, con-explainer-only, risk-template-pin
+:::
+```
+
+## A plan and skills per phase for the assistant
+
+**Context:** The assistant has a shell, and the tooling leads its assistants through a plan in phases. **Decision:**
+The guide is a short start, the plan template and three skills of this repository (`concept-plan-and-phase-skills`);
+the content skills and `create` are the tooling's. **Rejected:** a chat flow in one document; own copies of the
+tooling's skills. **Consequences:** The assistant needs Node, git and the network on the creator's computer. A change
+of the tooling's skills reaches practice apps at once.
+
+```arc42
+:::ignore W008 the day of the owner's decision is not recorded :::
+:::decision
+id: dec-plan-and-phase-skills
+title: A plan and skills per phase for the assistant
+status: accepted
+addresses: qg-understandable, con-explainer-only, risk-content-unchecked
 :::
 ```

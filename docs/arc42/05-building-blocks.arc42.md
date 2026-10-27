@@ -37,8 +37,8 @@ flowchart LR
     bb-previews["Previews on gh-pages"]
     subgraph bb-guidance["Guidance"]
         bb-assistant-guide["Guide for assistants"]
+        bb-plan-template["Plan template"]
         bb-assistant-skills["Skills for assistants"]
-        bb-guide-build["Guide build"]
         bb-trial-run["Trial run"]
         bb-documentation["Pages for people"]
         bb-site-build["Site build"]
@@ -67,11 +67,14 @@ flowchart LR
     bb-lib -->|"if-gh-pages-branch"| bb-previews
     bb-action-build -->|"if-archetypes"| bb-app-templates
     bb-action-build -->|"if-tooling-cli"| bb-tooling
-    bb-guide-build -->|"if-practice-skills"| bb-assistant-skills
+    bb-assistant-guide -->|"if-practice-plan"| bb-plan-template
+    bb-plan-template -->|"if-practice-skills"| bb-assistant-skills
+    bb-plan-template -->|"if-tooling-guidance"| bb-tooling
+    bb-action-build -->|"if-tooling-pin"| bb-tooling
+    bb-trial-run -->|"if-tooling-pin"| bb-tooling
     bb-trial-run -->|"if-lib"| bb-lib
     bb-trial-run -->|"if-archetypes"| bb-app-templates
-    bb-assistant-guide -->|"if-archetypes"| bb-app-templates
-    bb-assistant-guide -->|"if-catalog-pages"| bb-catalog
+    bb-assistant-skills -->|"if-catalog-pages"| bb-catalog
     bb-site-build -->|"if-site-frame"| bb-website
 ```
 
@@ -255,7 +258,7 @@ path: actions/validate/validate.ts
 
 ## Build
 
-Builds the app from the template at the pin and the submitted tree, and checks the bundle with `lernapps check`. Has no secret and no right to write; runs the template's tools on the data (`dec-content-is-data`).
+Builds the app from the template at the tooling's pin and the submitted tree, runs the components' tests and the explainer's build, which checks content and component code, and checks the bundle with `lernapps check`. It runs submitted code, so it has no secret and no right to write (`dec-content-and-components`).
 
 ```arc42
 :::building-block
@@ -263,7 +266,7 @@ id: bb-action-build
 title: Build
 technology: Composite action, TypeScript (actions/build), npm, Playwright via lernapps check
 path: actions/build
-requires: if-lib, if-artifact-intake, if-archetypes, if-tooling-cli
+requires: if-lib, if-artifact-intake, if-archetypes, if-tooling-cli, if-tooling-pin
 :::
 ```
 
@@ -276,7 +279,7 @@ How a workflow calls the build.
 id: if-action-build
 title: Build action
 provider: bb-action-build
-protocol: Composite action; reads the artifact intake and the pin in package.json
+protocol: Composite action; reads the artifact intake and the pin of lernapps/tooling on main
 path: actions/build/action.yml
 :::
 ```
@@ -453,7 +456,7 @@ path: docs/llms.txt
 
 ### Guide for assistants
 
-`docs/llms.txt`, German, in one piece. It leads the assistant from the question to the hand-over; it is the assembly of the skills (`concept-one-guide-source`).
+`docs/llms.txt`, German and short: what it is for, the prerequisite, and how to start the plan from the plan template.
 
 ```arc42
 :::building-block
@@ -462,14 +465,46 @@ title: Guide for assistants
 technology: Plain text
 parent: bb-guidance
 path: docs/llms.txt
-requires: if-catalog-pages, if-archetypes, if-practice-skills
-implements: concept-one-guide-source
+requires: if-practice-plan
+implements: concept-plan-and-phase-skills
+:::
+```
+
+### Plan template
+
+`guidance/plan-template.md`: the plan of a practice app in the phases of the tooling, with the front matter of the
+tooling's plans; it installs the skills, names those of each phase and holds the creator's checkpoints.
+
+```arc42
+:::building-block
+id: bb-plan-template
+title: Plan template
+technology: Markdown
+parent: bb-guidance
+path: guidance
+requires: if-practice-skills, if-tooling-guidance
+implements: concept-plan-and-phase-skills
+:::
+```
+
+#### Plan template interface
+
+What the assistant downloads as its plan.
+
+```arc42
+:::interface
+id: if-practice-plan
+title: Practice plan template
+provider: bb-plan-template
+protocol: Markdown file at raw.githubusercontent.com/lernapps/practice/main/guidance/plan-template.md
+path: guidance/plan-template.md
 :::
 ```
 
 ### Skills for assistants
 
-The three installable skills `lernapps-practice`, `lernapps-practice-photos` and `lernapps-practice-explainer`; each says in its `SKILL.md` when to use it.
+The installable skills `lernapps-practice-explore` (Explore), `lernapps-practice-photos` (Explore and Code) and
+`lernapps-practice-submit` (Commit); each says in its `SKILL.md` when to use it.
 
 ```arc42
 :::building-block
@@ -478,7 +513,8 @@ title: Skills for assistants
 technology: Markdown (agent skills)
 parent: bb-guidance
 path: skills
-implements: concept-one-guide-source
+requires: if-catalog-pages
+implements: concept-plan-and-phase-skills, concept-svg-only-draws
 :::
 ```
 
@@ -496,23 +532,6 @@ path: skills
 :::
 ```
 
-### Guide build
-
-`scripts/llms.mjs`, run with `npm run llms`. Assembles `docs/llms.txt` from the skills.
-
-```arc42
-:::ignore W018 the guide build is one script in the folder scripts, which the site build covers; the two do different jobs :::
-:::building-block
-id: bb-guide-build
-title: Guide build
-technology: Node.js
-parent: bb-guidance
-path: scripts/llms.mjs
-requires: if-practice-skills
-implements: concept-one-guide-source
-:::
-```
-
 ### Trial run
 
 `scripts/try.ts`, run with `npm run try -- <zip>`. Sends a ZIP file through the intake checks and the build on the maintainer's machine and prints the comment ([docs/anleitung-testen.md](https://github.com/lernapps/practice/blob/main/docs/anleitung-testen.md)).
@@ -525,7 +544,7 @@ title: Trial run
 technology: Node.js, TypeScript
 parent: bb-guidance
 path: scripts/try.ts
-requires: if-lib, if-archetypes
+requires: if-lib, if-archetypes, if-tooling-pin
 :::
 ```
 
@@ -597,13 +616,13 @@ What the build takes: the folder `explainer/` of the template.
 id: if-archetypes
 title: Archetypes
 provider: bb-app-templates
-protocol: git repository at the commit that appTemplates.commit pins
+protocol: git repository at the commit that lernapps/tooling pins on main
 :::
 ```
 
 ## Tooling
 
-The `lernapps check` command and the shared site actions ([its architecture](https://github.com/lernapps/tooling/blob/main/docs/arc42/05-building-blocks.arc42.md)).
+The `lernapps check` command, the pin of the template, `create` and the content skills, and the shared site actions ([its architecture](https://github.com/lernapps/tooling/blob/main/docs/arc42/05-building-blocks.arc42.md)).
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/tooling: https://github.com/lernapps/tooling :::
@@ -626,6 +645,35 @@ id: if-tooling-cli
 title: Tooling CLI
 provider: bb-tooling
 protocol: lernapps check <folder> from the package that the template's lock file pins
+:::
+```
+
+### Pin of the template
+
+What the build and the trial run read at every run: the commit of app-templates that `create` from tooling's main
+copies.
+
+```arc42
+:::ignore H014 implemented in another repository, lernapps/tooling: https://github.com/lernapps/tooling :::
+:::interface
+id: if-tooling-pin
+title: Pin of the template
+provider: bb-tooling
+protocol: appTemplates.repository and appTemplates.commit in package.json on main, over HTTPS from raw.githubusercontent.com
+:::
+```
+
+### Tooling guidance
+
+What the plan template has the assistant use.
+
+```arc42
+:::ignore H014 implemented in another repository, lernapps/tooling: https://github.com/lernapps/tooling :::
+:::interface
+id: if-tooling-guidance
+title: Tooling guidance
+provider: bb-tooling
+protocol: npx github:lernapps/tooling#main create; agent skills of lernapps/tooling installed with the skills installer
 :::
 ```
 

@@ -8,7 +8,7 @@ ones that shape this block.
 ## Only the explainer, only its data
 
 A preview is an app of the archetype `explainer`, made from the template of lernapps/app-templates. The template stays
-as it is; the content is the data its schema describes.
+as it is; the content is what the explainer knows in `src/`: its data, images and components.
 
 ```arc42
 :::constraint
@@ -74,7 +74,8 @@ source: docs/datenschutz.md; docs/regeln.md "Die drei Erklärungen"
 
 ## Sources are pinned
 
-Actions of others and the explainer template are taken at a commit, as the organisation's rules say.
+Actions of others and the explainer template are taken at a commit, as the organisation's rules say; the template's
+commit is the one lernapps/tooling pins.
 
 ```arc42
 :::constraint

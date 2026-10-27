@@ -110,14 +110,14 @@ metric: The tests of the ZIP reader cover hostile paths, name tricks, endings, k
 
 ### A build cannot write
 
-The build runs the template's tools on files from outside.
+The build runs the template's tools and the submitted components' code.
 
 ```arc42
 :::quality-scenario
 id: qs-build-cannot-write
 title: A build cannot write
 quality: qg-safe-input
-stimulus: The build runs tools of the template on submitted data
+stimulus: The build runs tools of the template and the code of submitted components
 response: The job can change neither issues nor branches and uses no secret
 metric: A test of the repository fails when the workflow gives the job build more than the rights of concept-rights-split
 :::

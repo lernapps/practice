@@ -68,7 +68,7 @@ Data between jobs.
 :::glossary-term
 id: term-artifact
 title: Artifact
-definition: A file set that one job of a workflow hands to the next. The receiving job never runs anything from it.
+definition: A file set that one job of a workflow hands to the next. Only the build runs code from it, the submitted components, without rights; the other jobs treat it as data.
 :::
 ```
 
@@ -128,6 +128,6 @@ Not the platform's assistant.
 :::glossary-term
 id: term-ai-assistant
 title: Creator's assistant
-definition: The AI assistant of a creator, which writes the content from the school material; it reads `llms.txt`.
+definition: The AI assistant of a creator, with a shell, which builds the app from the school material; it reads `llms.txt` and follows the plan template.
 :::
 ```

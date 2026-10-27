@@ -33,9 +33,9 @@ How a kept preparation becomes an entry of the catalog is outside this block: it
 
 | Role | Contact | Expectations |
 |---|---|---|
-| Creator | any GitHub account | A preview within minutes; no repository, no code; messages they can pass on to the assistant |
+| Creator | any GitHub account | A preview within minutes; no repository of their own; messages they can pass on to the assistant |
 | Student | indirectly | An app that starts at once and needs no account |
-| Creator's AI assistant | any assistant that reads `llms.txt` | A clear order of steps and error messages it can fix |
+| Creator's AI assistant | any assistant with a shell that reads `llms.txt` | A plan to follow, skills per phase, and error messages it can fix |
 | Maintainers of practice | lernapps/practice | Little to operate; runs that can be repeated; a cleanup that can be tried first |
 | Platform owner | Oliver Jägle ([@mrsimpson](https://github.com/mrsimpson)) | Content from outside is safe for the platform and leaves no trace (`qg-safe-input`, `dec-temporary-preview`) |
-| Maintainers of the template and the checks | lernapps/app-templates, lernapps/tooling | One pinned version of both (`dec-pinned-template-and-rules`) |
+| Maintainers of the template and the checks | lernapps/app-templates, lernapps/tooling | One pin of the template, theirs (`dec-pin-from-tooling-main`) |

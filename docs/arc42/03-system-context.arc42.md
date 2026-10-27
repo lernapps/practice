@@ -43,8 +43,8 @@ The interface is the one the system uses.
 
 | Neighbour | What the system takes | Interface |
 |---|---|---|
-| App templates (lernapps/app-templates) | The explainer template and its runtime, at the commit that `appTemplates.commit` pins; the schema and README the guide links to | `if-archetypes` |
-| Tooling (lernapps/tooling) | `lernapps check` for the bundle, through the template's lock file; the shared site actions and the change classifier for the site | `if-tooling-cli`, `if-site-actions` |
+| App templates (lernapps/app-templates) | The explainer template and its runtime, at the commit that lernapps/tooling pins on main | `if-archetypes` |
+| Tooling (lernapps/tooling) | `lernapps check` for the bundle, through the template's lock file; the pin of the template; `create` and the content skills the plan template names; the shared site actions and the change classifier for the site | `if-tooling-cli`, `if-tooling-pin`, `if-tooling-guidance`, `if-site-actions` |
 | Website (lernapps.github.io) | The site frame: header, footer, language switch and the check of the site rules | `if-site-frame` |
 | Catalog (lernapps/apps) | The first place the guide sends the assistant to; nothing is read from it | `if-catalog-pages` |
 
@@ -78,15 +78,16 @@ requires: if-practice-previews
 
 ## Creator's AI assistant
 
-The assistant the creator already has. It reads the guide, writes the content and gives the creator a ZIP file and the
-link to the form. The photos of the material go to the assistant's provider only, never to the system.
+The assistant the creator already has, with a shell (Node, git, network). It follows the plan template, creates and
+checks the explainer on the creator's computer, and gives the creator a ZIP file of its `src/` and the link to the
+form. The photos of the material go to the assistant's provider only, never to the system.
 
 ```arc42
 :::actor
 id: actor-ai-assistant
 title: Creator's AI assistant
 type: system
-description: Any assistant that reads llms.txt; prepares the content and hands it to the creator
+description: Any assistant with a shell that reads llms.txt; builds the app locally and hands its src/ to the creator
 requires: if-practice-guidance
 :::
 ```
