@@ -1,0 +1,17 @@
+# Paths the architecture does not claim (arc42 H021), relative to the root of lernapps/practice.
+# Settings and licence of the repository, and the files of the assistants that work on it.
+.claude
+.gitignore
+AGENTS.md
+CLAUDE.md
+LICENSE
+README.md
+package.json
+package-lock.json
+renovate.json
+# The style and the error page of the site: the output of the block Site build, not a part of their own.
+site
+# The tests of the scripts: evidence for the rules in chapters 8 and 10, not a building block.
+test
+.github
+actions
