@@ -132,9 +132,8 @@ describe("the repo", () => {
     assert.equal(read("CLAUDE.md"), "@AGENTS.md\n");
     assert.match(read("AGENTS.md"), /^Reply as per ISO 24495/);
   });
-  it("pins app-templates at a commit", () => {
-    const pin = JSON.parse(read("package.json")).appTemplates;
-    assert.match(pin.commit, /^[0-9a-f]{40}$/);
-    assert.equal(pin.repository, "https://github.com/lernapps/app-templates.git");
+  it("pins no app-templates of its own: the build reads the pin of lernapps/tooling on main", () => {
+    assert.equal(JSON.parse(read("package.json")).appTemplates, undefined);
+    assert.match(read("actions/build/action.yml"), /node "\$GITHUB_ACTION_PATH\/build\.ts" pin\n/);
   });
 });

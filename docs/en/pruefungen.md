@@ -9,7 +9,8 @@ The job only reads. It runs nothing that is in the ZIP file.
 1. The issue comes from the form (all five headings are there) and is open. Otherwise nothing happens.
 2. The details match the lists, and the three declarations are ticked.
 3. The ZIP address has exactly the form `https://github.com/user-attachments/files/<number>/<name>.zip`. The file is downloaded with `curl -L` (only `https`, at most 5 redirects, 10 MB, 60 seconds). The final address must be at GitHub.
-4. The directory of the ZIP file is checked (paths, kinds, endings, sizes, number), then every file is unpacked with a hard size limit and compared with the checksum. The [rules](regeln.md) name the limits.
+4. The directory of the ZIP file is checked (paths, kinds, endings, sizes, number), then every file is unpacked with a hard size limit and compared with the checksum. The [rules](regeln.md) name the limits. `src/main.ts` is never unpacked.
+5. The content of every SVG image is checked: it may only draw ([SVG images](regeln.md#svg)).
 
 If there is an error, no build starts. Instead the job `publish` writes a comment in plain language.
 
@@ -17,13 +18,15 @@ If there is an error, no build starts. Instead the job `publish` writes a commen
 
 The job has read rights only and no secrets. It builds like this:
 
-1. It fetches `lernapps/app-templates` in exactly the state (commit) that `appTemplates.commit` in `package.json` sets. It is the same state as in the tooling.
+1. It fetches `lernapps/app-templates` in exactly the state (commit) with which your assistant created the app: `appTemplates.commit` from the `package.json` of `lernapps/tooling` on `main`, read at build time. If it cannot be read, the build stops with a clear message.
 2. It takes the folder `explainer/` as the app and replaces `src/` with your content. The `main.ts` of the template stays. Example components and example chapters are dropped.
-3. It installs with `npm ci` and builds with `npm run build`. The template depends on `file:..` (the parent folder with the runtime). So it installs first in the root folder of `app-templates` (this builds the runtime), then in the folder `explainer/`. Both lock files fix the versions.
+3. It installs with `npm ci`, runs the tests of your components (`vp test`, only if there are components) and builds with `npm run build`. The template depends on `file:..` (the parent folder with the runtime). So it installs first in the root folder of `app-templates` (this builds the runtime), then in the folder `explainer/`. Both lock files fix the versions.
 4. It checks the built bundle with `lernapps check _site` (see below).
 5. It puts `<meta name="robots" content="noindex">` into every HTML page, so that search engines do not index the preview.
 
-The job runs the build tools of the template on your data files. It does not run your content as a program.
+The build of the explainer checks the content and the code of every component: no network (`fetch` and the like), no `eval`, no `innerHTML` and no `v-html`, only allowed imports, browser objects only from `onMounted`, at most 20 kB of own code, a test per component, and for an exercise component the contract with 50 fixed tasks. A violation is in the comment with file, line and rule.
+
+The job runs code of your components (their tests and their logic while building). That is why it has read rights only and no secret. The type check of the components (`vue-tsc`) does not run here; it runs at your assistant with `npm run check`.
 
 ## The check of the bundle {#bundle}
 

@@ -26,7 +26,7 @@ The guide has one source: three skills in the folder `skills/`.
    npm run try -- result.zip
    ```
 
-   The command checks the ZIP with the rules of the submission, builds it with the template at the pinned state (`appTemplates.commit`) and checks the bundle with `lernapps check`. It prints the messages the way the bot comments them on the issue. The first run fetches the template into `_templates/` and takes a few minutes; later runs are faster. The built bundle is in `_out/site`.
+   The command checks the ZIP with the rules of the submission, builds it with the template at the state the tooling pins on `main` (`appTemplates.commit`; another one with `--commit <sha>`) and checks the bundle with `lernapps check`. It prints the messages the way the bot comments them on the issue. The first run fetches the template into `_templates/` and takes a few minutes; later runs are faster. The built bundle is in `_out/site`.
 5. **The error cycle.** Give the messages unchanged to the assistant, let it correct the ZIP and build again. Count the runs and the messages per run.
 6. **Learn from the errors.** Every message the assistant could not solve alone belongs in the skill, as a stumbling block or a row in `references/build-meldungen.md`. Then `npm run llms` and a new test.
 

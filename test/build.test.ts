@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { messages, noindex, noindexAll, prepare } from "../actions/build/build.ts";
+import { messages, noindex, noindexAll, prepare, readPin, TOOLING_PACKAGE, type Fetcher } from "../actions/build/build.ts";
 import { tmp } from "./support.ts";
 
 const page = (head = "") => `<!doctype html>\n<html lang="de">\n  <head>\n    <meta charset="utf-8">${head}\n  </head>\n  <body></body>\n</html>\n`;
@@ -94,5 +94,68 @@ describe("prepare", () => {
     const linked = tree({ "src/app.yaml": "x" });
     symlinkSync("/etc/passwd", join(linked, "src/l.yaml"));
     assert.throws(() => prepare(linked, template()), /link/);
+  });
+});
+
+describe("prepare with components and images", () => {
+  const files = (entries: Record<string, string>) => {
+    const dir = tmp();
+    for (const [name, data] of Object.entries(entries)) {
+      mkdirSync(join(dir, name, ".."), { recursive: true });
+      writeFileSync(join(dir, name), data);
+    }
+    return dir;
+  };
+  const template = () => {
+    const src = join(tmp(), "src");
+    mkdirSync(join(src, "components"), { recursive: true });
+    writeFileSync(join(src, "main.ts"), "// template");
+    writeFileSync(join(src, "components/ProzentFeld.vue"), "<template/>");
+    return src;
+  };
+  it("takes the submitted components and drawings instead of the template's example", () => {
+    const src = template();
+    prepare(files({ "src/app.yaml": "x", "src/components/Zahl.vue": "<template/>", "src/components/Zahl.test.ts": "t", "src/images/kreis.svg": "<svg/>", "src/data/werte.yaml": "- a: 1" }), src);
+    assert.ok(existsSync(join(src, "components/Zahl.vue")));
+    assert.ok(!existsSync(join(src, "components/ProzentFeld.vue")));
+    assert.ok(existsSync(join(src, "images/kreis.svg")));
+    assert.ok(existsSync(join(src, "data/werte.yaml")));
+  });
+  it("checks the drawings again", () => {
+    assert.throws(() => prepare(files({ "src/app.yaml": "x", "src/images/a.svg": "<svg onload=x>" }), template()), /svg-event/);
+  });
+});
+
+describe("the pin of app-templates", () => {
+  const COMMIT = "a0d58d8922872083b30344a11ce055182f13d370";
+  const serve = (status: number, body: string): Fetcher & { asked: string[] } => {
+    const asked: string[] = [];
+    const fetcher = async (url: string) => {
+      asked.push(url);
+      return { ok: status === 200, status, text: async () => body };
+    };
+    return Object.assign(fetcher, { asked });
+  };
+  const manifest = (appTemplates: unknown) => JSON.stringify({ name: "@lernapps/tooling", appTemplates });
+
+  it("is read from the package.json of lernapps/tooling on main", async () => {
+    const fetcher = serve(200, manifest({ repository: "https://github.com/lernapps/app-templates.git", commit: COMMIT }));
+    assert.deepEqual(await readPin(fetcher), { repository: "lernapps/app-templates", commit: COMMIT, url: "https://github.com/lernapps/app-templates.git" });
+    assert.deepEqual(fetcher.asked, ["https://raw.githubusercontent.com/lernapps/tooling/main/package.json"]);
+    assert.equal(TOOLING_PACKAGE, fetcher.asked[0]);
+  });
+  it("takes a commit given instead of the one read", async () => {
+    const other = "1".repeat(40);
+    const pin = await readPin(serve(200, manifest({ repository: "https://github.com/lernapps/app-templates.git", commit: COMMIT })), other);
+    assert.equal(pin.commit, other);
+    await assert.rejects(readPin(serve(200, "{}"), "main"), /not a commit/);
+  });
+  it("stops with a clear message when the address does not answer, or answers no pin", async () => {
+    await assert.rejects(readPin(serve(404, "")), /cannot read the pin of app-templates from https:\/\/raw\.githubusercontent\.com\/lernapps\/tooling\/main\/package\.json \(HTTP 404\)/);
+    await assert.rejects(readPin(serve(200, "not json")), /cannot read the pin/);
+    await assert.rejects(readPin(async () => { throw new Error("getaddrinfo ENOTFOUND"); }), /ENOTFOUND/);
+    await assert.rejects(readPin(serve(200, manifest({ repository: "https://github.com/lernapps/app-templates.git", commit: "main" }))), /appTemplates\.commit is not a commit/);
+    await assert.rejects(readPin(serve(200, manifest({ repository: "https://evil.example/app-templates.git", commit: COMMIT }))), /not a repository of lernapps/);
+    await assert.rejects(readPin(serve(200, manifest(undefined))), /appTemplates\.repository/);
   });
 });

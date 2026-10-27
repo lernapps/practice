@@ -2,13 +2,17 @@
 // The build of a submission (action `build`, job `build`: contents: read, no secrets, no issues: write). Three
 // commands; the action calls them in this order, with `npm ci` between the first two:
 //
-//   pin                        outputs repository and commit of app-templates from package.json (appTemplates)
+//   pin [<commit>]             outputs repository and commit of app-templates: the pin appTemplates of the package.json
+//                              of lernapps/tooling on main, read now, the same that `create` from tooling#main takes;
+//                              a commit given replaces the commit read
 //   prepare <tree> <app-src>   replaces the template's src/ by the submitted tree, keeping the template's main.ts
-//   run <app-dir> <out-dir>    npm run build, `lernapps check` on the bundle, noindex on every page; writes
-//                              <out-dir>/site/ and <out-dir>/build.json (ok, stage, log tail, seconds)
+//   run <app-dir> <out-dir>    the components' tests (when there are any), npm run build, `lernapps check` on the
+//                              bundle, noindex on every page; writes <out-dir>/site/ and <out-dir>/build.json (ok,
+//                              stage, log tail, seconds)
 //
 // What the submission may contain was checked by validate; `prepare` checks the tree again, because a tree travels
-// between jobs as an artifact. Only Node's own modules.
+// between jobs as an artifact. The build runs code of the submission: the components' logic and tests, which the
+// explainer's build and `vp test` execute, in this job without rights. Only Node's own modules.
 import { spawnSync } from "node:child_process";
 import {
   appendFileSync,
@@ -23,7 +27,50 @@ import {
 } from "node:fs";
 import { join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { svgProblems } from "../lib/svg.ts";
 import { pathProblem } from "../lib/zip.ts";
+
+/** Where the pin of app-templates is read: the package.json of lernapps/tooling on main. */
+export const TOOLING_PACKAGE = "https://raw.githubusercontent.com/lernapps/tooling/main/package.json";
+
+export interface Pin {
+  /** owner/name on GitHub */
+  repository: string;
+  commit: string;
+  /** git URL of the repository */
+  url: string;
+}
+
+/** Fetches a text from an address; the default is Node's fetch. */
+export type Fetcher = (url: string) => Promise<{ ok: boolean; status: number; text: () => Promise<string> }>;
+
+const COMMIT = /^[0-9a-f]{40}$/;
+
+/**
+ * The pin of app-templates that lernapps/tooling holds on main (appTemplates in its package.json), the one that
+ * `npx github:lernapps/tooling#main create` takes; `commit`, when given, replaces the commit read (a trial of
+ * another state). Throws with a message that says what failed.
+ */
+export async function readPin(fetcher: Fetcher = fetch, commit?: string): Promise<Pin> {
+  if (commit !== undefined && !COMMIT.test(commit)) throw new Error(`${commit} is not a commit (40 hex digits)`);
+  let manifest: { appTemplates?: { repository?: unknown; commit?: unknown } };
+  try {
+    const response = await fetcher(TOOLING_PACKAGE);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    manifest = JSON.parse(await response.text()) as typeof manifest;
+  } catch (error) {
+    throw new Error(
+      `cannot read the pin of app-templates from ${TOOLING_PACKAGE} (${error instanceof Error ? error.message : String(error)}); the build stops, run it again later`,
+    );
+  }
+  const pin = manifest.appTemplates;
+  const url = typeof pin?.repository === "string" ? pin.repository : "";
+  const repository = /^https:\/\/github\.com\/(lernapps\/[\w.-]+?)(\.git)?$/.exec(url)?.[1];
+  if (!repository) throw new Error(`${TOOLING_PACKAGE}: appTemplates.repository is not a repository of lernapps on GitHub`);
+  const pinned = typeof pin?.commit === "string" ? pin.commit : "";
+  if (!COMMIT.test(pinned)) throw new Error(`${TOOLING_PACKAGE}: appTemplates.commit is not a commit`);
+  return { repository, commit: commit ?? pinned, url };
+}
 
 export const NOINDEX = '<meta name="robots" content="noindex">';
 
@@ -66,7 +113,7 @@ export function prepare(tree: string, appSrc: string): number {
   const entries = walk(tree, tree);
   for (const path of entries) {
     const isDirectory = path.endsWith("/");
-    const bad = pathProblem(path, !isDirectory);
+    const bad = pathProblem(path, !isDirectory) ?? (path.endsWith(".svg") ? svgProblems(path, readFileSync(join(tree, path)))[0] : undefined);
     if (bad) throw new Error(`the tree is not valid: ${bad.code}: ${path}`);
   }
   if (!existsSync(join(appSrc, "main.ts"))) throw new Error(`${appSrc}/main.ts of the template is missing`);
@@ -102,10 +149,10 @@ export function messages(log: string, workspace = "", lines = 59): string {
 
 export interface BuildResult {
   ok: boolean;
-  /** build, check, mark or done */
+  /** test, build, check, mark or done */
   stage: string;
   log: string;
-  seconds: { build: number; check: number };
+  seconds: { test?: number; build: number; check: number };
   pages?: number;
 }
 
@@ -134,6 +181,20 @@ export function run(appDir: string, out: string): BuildResult {
     writeFileSync(join(out, "build.json"), `${JSON.stringify(result, null, 2)}\n`);
     return result;
   };
+  // The tests of the components (src/components/<Name>.test.ts), as `lernapps check` runs them in an app: the
+  // explainer's build only checks that each component has one.
+  const components = join(appDir, "src", "components");
+  if (existsSync(components) && readdirSync(components).some((name) => name.endsWith(".test.ts"))) {
+    result.stage = "test";
+    const tested = command(appDir, "npx", ["--no", "--", "vp", "test", "--run"]);
+    result.seconds.test = tested.seconds;
+    console.log(tested.output);
+    if (tested.status !== 0) {
+      result.log = messages(tested.output, appDir);
+      return finish();
+    }
+    result.stage = "build";
+  }
   const built = command(appDir, "npm", ["run", "build"]);
   result.seconds.build = built.seconds;
   console.log(built.output);
@@ -185,20 +246,14 @@ function output(name: string, value: string): void {
   if (file) appendFileSync(file, `${name}=${value}\n`);
 }
 
-function main(args: string[]): number {
+async function main(args: string[]): Promise<number> {
   try {
     const [command, ...rest] = args;
-    if (command === "pin") {
-      const manifest = JSON.parse(readFileSync("package.json", "utf8")) as {
-        appTemplates?: { repository?: string; commit?: string };
-      };
-      const pin = manifest.appTemplates;
-      if (!pin?.commit || !/^[0-9a-f]{40}$/.test(pin.commit)) throw new Error("package.json: appTemplates.commit is not a commit");
-      const repository = /^https:\/\/github\.com\/([\w.-]+\/[\w.-]+?)(\.git)?$/.exec(pin.repository ?? "")?.[1];
-      if (!repository) throw new Error("package.json: appTemplates.repository is not a GitHub address");
-      output("repository", repository);
+    if (command === "pin" && rest.length <= 1) {
+      const pin = await readPin(fetch, rest[0] || undefined);
+      output("repository", pin.repository);
       output("commit", pin.commit);
-      console.log(`app-templates ${repository} at ${pin.commit}`);
+      console.log(`app-templates ${pin.repository} at ${pin.commit}${rest[0] ? " (given)" : ` (the pin of ${TOOLING_PACKAGE})`}`);
       return 0;
     }
     if (command === "prepare" && rest.length === 2) {
@@ -212,7 +267,7 @@ function main(args: string[]): number {
       console.log(`build: ${result.ok ? "ok" : `failed at ${result.stage}`} (build ${result.seconds.build} s, check ${result.seconds.check} s)`);
       return result.ok ? 0 : 1;
     }
-    console.error("Usage: build.ts pin | prepare <tree> <app-src> | run <app-dir> <out-dir>");
+    console.error("Usage: build.ts pin [<commit>] | prepare <tree> <app-src> | run <app-dir> <out-dir>");
     return 2;
   } catch (error) {
     console.error(`::error::build: ${error instanceof Error ? error.message : String(error)}`);
@@ -221,5 +276,5 @@ function main(args: string[]): number {
 }
 
 if (process.argv[1] !== undefined && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  process.exitCode = main(process.argv.slice(2));
+  process.exitCode = await main(process.argv.slice(2));
 }

@@ -19,13 +19,6 @@
   "engines": {
     "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
   },
-  "appTemplates": {
-    "repository": "https://github.com/lernapps/app-templates.git",
-    "commit": "a0d58d8922872083b30344a11ce055182f13d370",
-    "archetypes": [
-      "explainer"
-    ]
-  },
   "devDependencies": {
     "@doctc/arc42": "0.38.0",
     "@lernapps/site": "github:lernapps/lernapps.github.io#e350ca369a216eb1404d48505e1a9466a375c7c5",

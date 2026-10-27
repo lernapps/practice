@@ -1,16 +1,19 @@
 name: practice build
 description: >-
   Builds a valid submission (the artifact "intake" of the action validate) into a static site. It takes app-templates
-  at the commit that package.json pins (appTemplates.commit, the commit the tooling pins), uses the folder
-  explainer/ as the app, replaces its src/ by the submitted tree (the template's main.ts stays; the example
-  components and chapter go), installs with npm ci (first the root of app-templates, whose build the template's
-  dependency file:.. needs; then the template, whose lock file pins the tooling), builds with npm run build, and runs
-  `lernapps check` on the bundle (docs/pruefungen.md says which rules that is and which do not apply to a
+  at the commit that lernapps/tooling pins on main (appTemplates.commit in its package.json, read at the start of the
+  job from raw.githubusercontent.com without a token; the job stops with a clear error when that fails), the same
+  state that `npx github:lernapps/tooling#main create` copies into an app. It uses the folder explainer/ as the app,
+  replaces its src/ by the submitted tree (the template's main.ts stays; the example components and chapter go),
+  installs with npm ci (first the root of app-templates, whose build the template's dependency file:.. needs; then
+  the template, whose lock file pins the tooling), runs the components' tests (vp test, when the submission has
+  components), builds with npm run build (the explainer's build checks the content and the components' code), and
+  runs `lernapps check` on the bundle (docs/pruefungen.md says which rules that is and which do not apply to a
   preview). Then every page gets <meta name="robots" content="noindex">. The result is the artifact "site" (only when
   the build passed) and the artifact "build" (build.json with the end of the log, always). The job needs
-  contents: read and no secret; it runs the template's build tools on the submitted data files, nothing of the
-  submission is executed. The logic is actions/build/build.ts, tested by test/build.test.ts. Use it in the job
-  "build" of einreichung.yml, after a checkout of this repo.
+  contents: read and no secret: it runs the submitted components' code, so it must hold nothing worth taking. The
+  logic is actions/build/build.ts, tested by test/build.test.ts. Use it in the job "build" of einreichung.yml, after
+  a checkout of this repo.
 runs:
   using: composite
   steps:

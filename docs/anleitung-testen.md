@@ -26,7 +26,7 @@ Die Anleitung hat eine Quelle: drei Skills im Ordner `skills/`.
    npm run try -- ergebnis.zip
    ```
 
-   Der Befehl prüft das ZIP mit den Regeln der Einreichung, baut es mit der Vorlage im festgelegten Stand (`appTemplates.commit`) und prüft das Bundle mit `lernapps check`. Er schreibt die Meldungen so, wie der Bot sie in das Issue kommentiert. Der erste Lauf lädt die Vorlage nach `_templates/` und braucht einige Minuten; spätere Läufe sind schneller. Das gebaute Bundle liegt in `_out/site`.
+   Der Befehl prüft das ZIP mit den Regeln der Einreichung, baut es mit der Vorlage in dem Stand, den das Tooling auf `main` festlegt (`appTemplates.commit`; mit `--commit <sha>` ein anderer) und prüft das Bundle mit `lernapps check`. Er schreibt die Meldungen so, wie der Bot sie in das Issue kommentiert. Der erste Lauf lädt die Vorlage nach `_templates/` und braucht einige Minuten; spätere Läufe sind schneller. Das gebaute Bundle liegt in `_out/site`.
 5. **Fehlerkreislauf.** Gib die Meldungen unverändert dem Assistenten, lass ihn das ZIP korrigieren und baue neu. Zähle die Läufe und die Meldungen je Lauf.
 6. **Aus Fehlern lernen.** Jede Meldung, die der Assistent nicht allein lösen konnte, gehört als Stolperstein oder als Zeile in `references/build-meldungen.md` des Skills. Danach `npm run llms` und einen neuen Durchlauf.
 

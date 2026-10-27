@@ -25,7 +25,7 @@ A build in the browser is not possible, because the build tools need native prog
 | `docs/arc42/` | The architecture of this repository as an arc42 model, in English only. The build script validates it with `arc42 validate --strict` and publishes it as [Architecture](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Local composite actions with the logic. Each has an `action.yml` and a script in TypeScript without dependencies. |
 | `actions/lib/` | Shared code: read and check the ZIP file, read the form, GitHub calls, the branch `gh-pages`. |
-| `package.json` | Contains `appTemplates.commit`, the state of the templates. It is the same as in the tooling (`lernapps/tooling`, `package.json`). |
+| `package.json` | The tools of the site and the commands (`npm test`, `npm run build`, `npm run try`). It holds no state of the templates: the build reads it from the tooling (see [Updates](#updates)). |
 
 ## The site {#seite}
 
@@ -74,7 +74,7 @@ A repetition always builds again, even if the ZIP address and details are the sa
 ## Updates {#updates}
 
 - Renovate (preset from `lernapps/tooling`) raises the pinned commits of the actions, also those of the shared actions for the site (`site-check`, `site-deploy`, `site-preview`), the frame `@lernapps/site` and `marked`.
-- `appTemplates.commit` in `package.json` is raised by hand, together with the tooling: take the commit from `lernapps/tooling/package.json`, then check a run for a test issue.
+- Nobody raises the state of the templates here. At every run the build reads `appTemplates.commit` from the `package.json` of `lernapps/tooling` on `main`. So GitHub builds with the same template with which `create` made the app at the assistant. `npm run try -- <zip> --commit <sha>` tries another state locally.
 
 ## Abuse and limits {#missbrauch}
 
@@ -87,4 +87,5 @@ Any GitHub account can create an issue and so start a run. Only the set of limit
 | No comment, run "Einreichung" green | The issue does not come from the form (a heading is missing), or the ZIP address and details are the same as at the last run. The log of `intake` says so. |
 | `publish` red: "cannot push gh-pages" | Several runs at the same time. Repeat. |
 | Comment "Falls die Seite noch nicht lädt" (if the page does not load yet) | Pages has not delivered the state yet. Usually there after a few minutes. Check the Pages setting. |
-| `build` red at `npm ci` | The lock file of the template does not match the state. Check `appTemplates.commit`. |
+| `build` red at `pin` | `https://raw.githubusercontent.com/lernapps/tooling/main/package.json` could not be read or holds no valid `appTemplates.commit`. Repeat; otherwise check the tooling. |
+| `build` red at `npm ci` | The lock file of the template does not match the state. Check `appTemplates.commit` in the tooling. |

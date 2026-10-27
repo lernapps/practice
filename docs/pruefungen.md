@@ -9,7 +9,8 @@ Der Job liest nur. Er führt nichts aus, was in der ZIP-Datei steht.
 1. Das Issue stammt aus dem Formular (alle fünf Überschriften sind da) und ist offen. Sonst passiert nichts.
 2. Die Angaben stimmen mit den Listen überein, und die drei Erklärungen sind angekreuzt.
 3. Die ZIP-Adresse hat genau die Form `https://github.com/user-attachments/files/<Zahl>/<Name>.zip`. Die Datei wird mit `curl -L` geladen (nur `https`, höchstens 5 Weiterleitungen, 10 MB, 60 Sekunden). Die Endadresse muss bei GitHub liegen.
-4. Das Verzeichnis der ZIP-Datei wird geprüft (Pfade, Arten, Endungen, Größen, Anzahl), dann wird jede Datei mit hartem Größenlimit entpackt und gegen die Prüfsumme gelegt. Die [Regeln](regeln.md) nennen die Grenzen.
+4. Das Verzeichnis der ZIP-Datei wird geprüft (Pfade, Arten, Endungen, Größen, Anzahl), dann wird jede Datei mit hartem Größenlimit entpackt und gegen die Prüfsumme gelegt. Die [Regeln](regeln.md) nennen die Grenzen. `src/main.ts` wird nie entpackt.
+5. Jedes SVG-Bild wird auf seinen Inhalt geprüft: Es darf nur zeichnen ([SVG-Bilder](regeln.md#svg)).
 
 Bei einem Fehler startet kein Bau. Stattdessen schreibt der Job `publish` einen Kommentar in einfacher Sprache.
 
@@ -17,13 +18,15 @@ Bei einem Fehler startet kein Bau. Stattdessen schreibt der Job `publish` einen 
 
 Der Job hat nur Leserechte und keine Geheimnisse. Er baut so:
 
-1. Er holt `lernapps/app-templates` in genau dem Stand (Commit), den `appTemplates.commit` in der `package.json` festlegt. Es ist derselbe Stand wie im Tooling.
+1. Er holt `lernapps/app-templates` in genau dem Stand (Commit), mit dem Dein Assistent die App angelegt hat: `appTemplates.commit` aus der `package.json` von `lernapps/tooling` auf `main`, gelesen beim Bauen. Ist sie nicht lesbar, bricht der Bau mit einer klaren Meldung ab.
 2. Er nimmt den Ordner `explainer/` als App und ersetzt `src/` durch Deinen Inhalt. Die `main.ts` der Vorlage bleibt. Beispielkomponenten und Beispielkapitel entfallen.
-3. Er installiert mit `npm ci` und baut mit `npm run build`. Die Vorlage hängt von `file:..` ab (dem Elternordner mit der Laufzeit). Darum wird erst im Wurzelordner von `app-templates` installiert (das baut die Laufzeit), dann im Ordner `explainer/`. Beide Lock-Dateien legen die Versionen fest.
+3. Er installiert mit `npm ci`, führt die Tests Deiner Komponenten aus (`vp test`, nur wenn es Komponenten gibt) und baut mit `npm run build`. Die Vorlage hängt von `file:..` ab (dem Elternordner mit der Laufzeit). Darum wird erst im Wurzelordner von `app-templates` installiert (das baut die Laufzeit), dann im Ordner `explainer/`. Beide Lock-Dateien legen die Versionen fest.
 4. Er prüft das gebaute Bundle mit `lernapps check _site` (siehe unten).
 5. Er setzt in jede HTML-Seite `<meta name="robots" content="noindex">`, damit Suchmaschinen die Vorschau nicht aufnehmen.
 
-Der Job führt die Bau-Werkzeuge der Vorlage auf Deinen Datendateien aus. Deinen Inhalt führt er nicht als Programm aus.
+Der Bau des Explainers prüft dabei den Inhalt und den Code jeder Komponente: kein Netz (`fetch` und Co.), kein `eval`, kein `innerHTML` und kein `v-html`, nur erlaubte Imports, Browser-Objekte erst in `onMounted`, höchstens 20 kB eigener Code, je Komponente ein Test, und für eine Übungs-Komponente der Vertrag mit 50 festen Aufgaben. Ein Verstoß steht mit Datei, Zeile und Regel im Kommentar.
+
+Der Job führt dabei Code Deiner Komponenten aus (ihre Tests und ihre Logik beim Bauen). Er hat deshalb nur Leserechte und kein Geheimnis. Die Typprüfung der Komponenten (`vue-tsc`) läuft hier nicht; sie läuft bei Deinem Assistenten mit `npm run check`.
 
 ## Die Prüfung des Bundles {#bundle}
 

@@ -25,7 +25,7 @@ Ein Build im Browser ist nicht möglich, weil die Bau-Werkzeuge native Programme
 | `docs/arc42/` | Die Architektur dieses Repos als arc42-Modell, nur auf Englisch. Das Bauskript prüft sie mit `arc42 validate --strict` und veröffentlicht sie unter [Architektur](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Lokale Composite-Actions mit der Logik. Jede hat eine `action.yml` und ein Skript in TypeScript ohne Abhängigkeiten. |
 | `actions/lib/` | Gemeinsamer Code: ZIP lesen und prüfen, Formular lesen, GitHub-Aufrufe, der Branch `gh-pages`. |
-| `package.json` | Enthält `appTemplates.commit`, den Stand der Vorlagen. Es ist derselbe wie im Tooling (`lernapps/tooling`, `package.json`). |
+| `package.json` | Die Werkzeuge der Seite und die Befehle (`npm test`, `npm run build`, `npm run try`). Den Stand der Vorlagen hält sie nicht: Der Bau liest ihn aus dem Tooling (siehe [Updates](#updates)). |
 
 ## Die Seite {#seite}
 
@@ -74,7 +74,7 @@ Eine Wiederholung baut immer neu, auch wenn ZIP-Adresse und Angaben gleich sind.
 ## Updates {#updates}
 
 - Renovate (Voreinstellung aus `lernapps/tooling`) hebt die festgelegten Commits der Actions an, auch die der gemeinsamen Aktionen für die Seite (`site-check`, `site-deploy`, `site-preview`), den Rahmen `@lernapps/site` und `marked`.
-- `appTemplates.commit` in der `package.json` hebt man von Hand an, gemeinsam mit dem Tooling: Commit aus `lernapps/tooling/package.json` übernehmen, dann einen Lauf für ein Test-Issue prüfen.
+- Den Stand der Vorlagen hebt niemand hier an. Der Bau liest bei jedem Lauf `appTemplates.commit` aus der `package.json` von `lernapps/tooling` auf `main`. So baut GitHub mit derselben Vorlage, mit der `create` die App beim Assistenten angelegt hat. `npm run try -- <zip> --commit <sha>` probiert einen anderen Stand lokal aus.
 
 ## Missbrauch und Grenzen {#missbrauch}
 
@@ -87,4 +87,5 @@ Jedes GitHub-Konto kann ein Issue anlegen und damit einen Lauf starten. Das sch�
 | Kein Kommentar, Lauf „Einreichung“ grün | Das Issue stammt nicht aus dem Formular (eine Überschrift fehlt), oder ZIP-Adresse und Angaben sind gleich wie beim letzten Lauf. Das Protokoll von `intake` sagt es. |
 | `publish` rot: „cannot push gh-pages“ | Mehrere Läufe gleichzeitig. Wiederholen. |
 | Kommentar „Falls die Seite noch nicht lädt“ | Pages hat den Stand noch nicht ausgeliefert. Meist nach wenigen Minuten da. Prüfe die Pages-Einstellung. |
-| `build` rot bei `npm ci` | Die Lock-Datei der Vorlage passt nicht zum Stand. Prüfe `appTemplates.commit`. |
+| `build` rot bei `pin` | `https://raw.githubusercontent.com/lernapps/tooling/main/package.json` war nicht lesbar oder enthält keinen gültigen `appTemplates.commit`. Wiederholen; sonst das Tooling prüfen. |
+| `build` rot bei `npm ci` | Die Lock-Datei der Vorlage passt nicht zum Stand. Prüfe `appTemplates.commit` im Tooling. |

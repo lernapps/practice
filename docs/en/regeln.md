@@ -2,21 +2,25 @@
 
 ## What you submit {#inhalt}
 
-The content of a learning app of the archetype **`explainer`**: chapters with pages, explanations and exercises as YAML files, plus images. The files are described in the [schema of the explainer](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) and in the [guide to the archetype](https://github.com/lernapps/app-templates/tree/main/explainer). There is no textbook for it: you submit your own content.
+The content of a learning app of the archetype **`explainer`**: chapters with pages, explanations and exercises as YAML files, plus data files, images and components. The files are described in the [schema of the explainer](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) and in the [guide to the archetype](https://github.com/lernapps/app-templates/tree/main/explainer). There is no textbook for it: you submit your own content.
 
 ## Structure of the ZIP file {#aufbau}
 
 - The folder `src` is at the top of the ZIP file. The file `src/app.yaml` must be there.
 - A folder around everything also works (GitHub "Download ZIP"). Then only `<folder>/src/` counts.
 - What lies outside `src` we ignore and never unpack.
-- We change nothing in the template. `src/main.ts` and `src/components/` belong to the template and must not be in the ZIP file. There are no custom components in a preview.
+- We change nothing in the template. `src/main.ts` belongs to it: if the file is in the ZIP file, we ignore it, and the build takes the template's.
+- Your own components are in `src/components/`, as the explainer knows them: `<Name>.vue`, `<Name>.ts` and `<Name>.test.ts`, without subfolders. The build checks their code (see [Checks](pruefungen.md#bau)).
+- Data files are in `src/data/`, images in `src/images/`.
 
 ## Allowed files {#dateien}
 
 | Rule | Value |
 | --- | --- |
 | Endings | `.yaml`, `.yml`, `.md`, `.png`, `.jpg`, `.webp` |
-| Not allowed | everything else, for example `.vue`, `.ts`, `.js`, `.svg`, `.html`, `.json` |
+| Components | `.vue` and `.ts` only in `src/components/`; names like `NumberLine.vue`, `NumberLine.ts`, `NumberLine.test.ts` |
+| SVG images | `.svg` only in `src/images/`, names of lower-case letters, digits and hyphens (see [SVG images](#svg)) |
+| Not allowed | everything else, for example `.js`, `.html`, `.json` |
 | Names | only `a-z`, `A-Z`, `0-9`, `-` and `_`; exactly one dot before the ending (no `image.png.js`) |
 | Hidden files | not allowed (names that start with a dot, for example `.DS_Store`) |
 | Paths | only folders below `src/`, at most 6 folders deep; no `..`, no absolute path, no backslash |

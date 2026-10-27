@@ -2,21 +2,25 @@
 
 ## Was Du einreichst {#inhalt}
 
-Den Inhalt einer Lern-App vom Archetyp **`explainer`**: Kapitel mit Seiten, Erklärungen und Aufgaben als YAML-Dateien, dazu Bilder. Die Beschreibung der Dateien steht im [Schema des Explainers](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) und in der [Anleitung zum Archetyp](https://github.com/lernapps/app-templates/tree/main/explainer). Es gibt kein Lehrwerk dazu: Du reichst eigene Inhalte ein.
+Den Inhalt einer Lern-App vom Archetyp **`explainer`**: Kapitel mit Seiten, Erklärungen und Aufgaben als YAML-Dateien, dazu Datendateien, Bilder und Komponenten. Die Beschreibung der Dateien steht im [Schema des Explainers](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) und in der [Anleitung zum Archetyp](https://github.com/lernapps/app-templates/tree/main/explainer). Es gibt kein Lehrwerk dazu: Du reichst eigene Inhalte ein.
 
 ## Aufbau der ZIP-Datei {#aufbau}
 
 - Oben in der ZIP-Datei steht der Ordner `src`. Die Datei `src/app.yaml` muss da sein.
 - Es geht auch mit einem Ordner um alles herum (GitHub „Download ZIP“). Dann zählt nur `<Ordner>/src/`.
 - Was außerhalb von `src` liegt, ignorieren wir und entpacken es nie.
-- Wir ändern nichts an der Vorlage. `src/main.ts` und `src/components/` gehören der Vorlage und dürfen nicht in der ZIP-Datei stehen. Eigene Komponenten gibt es in einer Vorschau nicht.
+- Wir ändern nichts an der Vorlage. `src/main.ts` gehört ihr: Steht die Datei in der ZIP-Datei, ignorieren wir sie, und der Bau nimmt die der Vorlage.
+- Eigene Komponenten liegen in `src/components/`, so wie der Explainer sie kennt: `<Name>.vue`, `<Name>.ts` und `<Name>.test.ts`, ohne Unterordner. Ihren Code prüft der Bau (siehe [Prüfungen](pruefungen.md#bau)).
+- Datendateien liegen in `src/data/`, Bilder in `src/images/`.
 
 ## Erlaubte Dateien {#dateien}
 
 | Regel | Wert |
 | --- | --- |
 | Endungen | `.yaml`, `.yml`, `.md`, `.png`, `.jpg`, `.webp` |
-| Nicht erlaubt | alles andere, zum Beispiel `.vue`, `.ts`, `.js`, `.svg`, `.html`, `.json` |
+| Komponenten | `.vue` und `.ts` nur in `src/components/`; Namen wie `Zahlenstrahl.vue`, `Zahlenstrahl.ts`, `Zahlenstrahl.test.ts` |
+| SVG-Bilder | `.svg` nur in `src/images/`, Namen aus Kleinbuchstaben, Ziffern und Bindestrichen (siehe [SVG-Bilder](#svg)) |
+| Nicht erlaubt | alles andere, zum Beispiel `.js`, `.html`, `.json` |
 | Namen | nur `a-z`, `A-Z`, `0-9`, `-` und `_`; genau ein Punkt vor der Endung (kein `bild.png.js`) |
 | Versteckte Dateien | nicht erlaubt (Namen mit Punkt am Anfang, zum Beispiel `.DS_Store`) |
 | Pfade | nur Ordner unter `src/`, höchstens 6 Ordner tief; kein `..`, kein absoluter Pfad, kein Rückwärtsstrich |
@@ -27,6 +31,18 @@ Den Inhalt einer Lern-App vom Archetyp **`explainer`**: Kapitel mit Seiten, Erkl
 | Zeitlimit beim Laden | 60 Sekunden |
 
 Die Größen prüfen wir im Verzeichnis der ZIP-Datei **und** beim Entpacken. Eine ZIP-Datei, die falsche Größen angibt, wird abgelehnt. Umlaute in Dateinamen sind nicht erlaubt; im Text der YAML-Dateien sind sie selbstverständlich erlaubt.
+
+## SVG-Bilder {#svg}
+
+Ein SVG-Bild darf nur zeichnen. Denn öffnet jemand das Bild für sich, führt der Browser aus, was darin steht. Wir entpacken ein SVG-Bild deshalb nicht, wenn es eines davon enthält:
+
+- ein Skript (`<script>`) oder ein Ereignis-Attribut wie `onload=` oder `onclick=`,
+- eingebettetes HTML oder ein eingebettetes Dokument (`<foreignObject>`, `<iframe>`, `<embed>`, `<object>`),
+- einen Verweis auf JavaScript (`javascript:`),
+- einen Verweis nach außen: `href`, `xlink:href` oder `url(…)` auf etwas anderes als `#…` in derselben Datei, `@import`, eine Adresse in einem Attribut,
+- eine Entity-Definition (`<!ENTITY`).
+
+Der Kommentar nennt das Bild und was darin stört.
 
 ## Die Angaben im Formular {#angaben}
 
