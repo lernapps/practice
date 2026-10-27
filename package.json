@@ -12,6 +12,7 @@
   "scripts": {
     "build": "./scripts/build.sh",
     "check": "./scripts/frame.sh check --site /practice/",
+    "llms": "node scripts/llms.mjs",
     "test": "node --test --test-reporter=spec \"test/*.test.ts\""
   },
   "engines": {

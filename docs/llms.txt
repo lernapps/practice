@@ -19,10 +19,24 @@ Sage den Eltern:
 
 ## 3. Fotos lesen
 
+### Reihenfolge
+
 - Die Reihenfolge ist die der Dateinamen oder der Aufnahmezeit, nicht die der Nachricht. Lies erst alle Fotos, dann schreibe die Seitenliste.
+
+### Seiten gliedern
+
 - Gliedere jede Seite: Titel, Spalten, Text, Abbildungen, Aufgaben. Kennzeichne hervorgehobene Kästen (Info, Merke, nummerierte Kurztexte), damit sie in der App wieder als Kasten erscheinen.
+
+### Ränder
+
 - Am Rand hereinragende Nachbarseiten sind abgeschnitten. Nimm nur die Hauptseite.
+
+### Handschrift des Kindes
+
 - Kreuze, Durchstreichungen, Zahlen und ausgefüllte Felder stammen vom Kind und können falsch sein. Leite Lösungen aus den Fakten ab.
+
+### Zeichnungen
+
 - Zeichnungen, Diagramme und Pläne bildest Du nicht ab. Ersetze sie durch Tabellen oder Listen.
 
 ## 4. Umfang bestätigen (hier warten)
@@ -31,18 +45,24 @@ Lege eine kurze Liste vor: Kapitel, Themen, Aufgabentypen je Seite. Bitte die El
 
 ## 5. Inhalt schreiben
 
+### Vorher lesen
+
 Du schreibst den Quelltext eines Explainers. Lies vorher:
 - Was er kann: https://github.com/lernapps/app-templates/blob/main/explainer/README.md
 - Das Schema der Seiten: https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json
 - Das Schema der Fragen: https://github.com/lernapps/app-templates/blob/main/runtime/shared/questions/question.v1.schema.json
 - Eine fertige App: https://github.com/lernapps/app-templates/tree/main/explainer/src
 
-Aufbau: ein bis zwei Kapitel mit je drei bis fünf Seiten, Deutsch, in eigenen Worten, für die Stufe.
+### Aufbau
+
+Ein bis zwei Kapitel mit je drei bis fünf Seiten, Deutsch, in eigenen Worten, für die Stufe.
 1. Seite „Selbsteinschätzung“: zehn Fragen quer durch den Stoff und eine Auswertung (0 bis 4 richtig: von vorn; 5 bis 8: gezielt; 9 bis 10: wiederholen). Das Kind zählt selbst.
 2. Seite „Trainingsplan“: Tabelle für die Tage bis zur Arbeit (Tag, Thema, Übung), mit Links auf die Seiten. Auch sie braucht eine Aufgabe.
 3. Je Thema eine Seite: erklären, Beispiel, Übung. Jede Seite hat mindestens eine Frage.
 
-Fragen (Pflicht: `id` aus a-z, 0-9 und Bindestrichen; `type`; `text`; `explanation`; `links` mit `title` und einer https-`url`; `hint` ist freiwillig):
+### Fragen
+
+Pflicht: `id` aus a-z, 0-9 und Bindestrichen; `type`; `text`; `explanation`; `links` mit `title` und einer https-`url`; `hint` ist freiwillig.
 ```yaml
 - { type: single-choice, id: berg, text: "Welcher Berg?", explanation: "…", links: [{ title: "Titel", url: "https://…" }],
     options: [{ text: "A", correct: true, info: "Warum richtig" }, { text: "B", correct: false, info: "Warum falsch" }] }
@@ -52,14 +72,20 @@ Fragen (Pflicht: `id` aus a-z, 0-9 und Bindestrichen; `type`; `text`; `explanati
 # ordering:       items: ["erstes", "zweites", "drittes"]   (in richtiger Reihenfolge, 2 bis 8)
 # matching:       pairs: [{ left: "Fest", right: "Bedeutung" }]   (2 bis 8)
 ```
-Andere Blöcke: `table` (Zellen immer in Anführungszeichen, Kopfzellen nicht leer), `timeline`, `definition` (kommt ins Glossar), `note` für Info-Kasten, `example` für Beispiel.
 
-Stolpersteine, die der Bau meldet:
+### Andere Blöcke
+
+`table` (Zellen immer in Anführungszeichen, Kopfzellen nicht leer), `timeline`, `definition` (kommt ins Glossar), `note` für Info-Kasten, `example` für Beispiel.
+
+### Stolpersteine, die der Bau meldet
+
 - Text mit „: “ (Doppelpunkt und Leerzeichen) in Anführungszeichen setzen.
 - Ein Kasten (`note`, `example`) enthält keinen weiteren Kasten und keinen Abschnitt. Setze `note` neben `example`, nicht hinein.
 - Links auf Seiten der App: `/<kapitel>/<seite>/`, nicht relativ. Ein Anker (`#<id>`) braucht einen Abschnitt mit genau dieser `id` auf der Zielseite.
 - Offene Aufgaben („Beschreibe …“) gibt es als Frage nicht. Nimm einen `example` „Offene Aufgabe: …“ und daneben einen `note` „Musterlösung“. Die Lösung ist sofort sichtbar. Sage das den Eltern.
 - Der Bau meldet nur den ersten YAML-Fehler je Lauf. Lies Deine Dateien deshalb vorher auf „: “ in unquotierten Texten durch.
+
+### Fakten prüfen
 
 Fakten, die Du nicht sicher weißt (Zahlen, Daten, Namen, Zählweisen), schreibst Du nicht ungeprüft in eine Lösung. Verweise nur auf Seiten, die Du geöffnet hast. Kannst Du das nicht, nimm nur diese Quellen: https://de.wikipedia.org/ oder die der Beispiel-App. Sage den Eltern, was sie prüfen sollten.
 
