@@ -5,7 +5,7 @@
 # The tools (marked, the shared site frame) are pinned in package.json: run `npm ci` first.
 #
 #   npm run build && npm run check      the site, built and checked (the job `build` in pages.yml)
-#   python3 -m http.server -d _site 8000   a local look; links assume the /practice/ prefix (see README)
+#   SITE_PATH_PREFIX=/ npm run build        a local look with python3 -m http.server -d _site 8000 (then without the prefix)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PATH="$PWD/node_modules/.bin:$PATH"

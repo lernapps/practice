@@ -1,17 +1,17 @@
 # Regeln für Inhalt und Angaben
 
-## Was Du einreichst
+## Was Du einreichst {#inhalt}
 
 Den Inhalt einer Lern-App vom Archetyp **`explainer`**: Kapitel mit Seiten, Erklärungen und Aufgaben als YAML-Dateien, dazu Bilder. Die Beschreibung der Dateien steht im [Schema des Explainers](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) und in der [Anleitung zum Archetyp](https://github.com/lernapps/app-templates/tree/main/explainer). Es gibt kein Lehrwerk dazu: Du reichst eigene Inhalte ein.
 
-## Aufbau der ZIP-Datei
+## Aufbau der ZIP-Datei {#aufbau}
 
 - Oben in der ZIP-Datei steht der Ordner `src`. Die Datei `src/app.yaml` muss da sein.
 - Es geht auch mit einem Ordner um alles herum (GitHub „Download ZIP“). Dann zählt nur `<Ordner>/src/`.
 - Was außerhalb von `src` liegt, ignorieren wir und entpacken es nie.
 - Wir ändern nichts an der Vorlage. `src/main.ts` und `src/components/` gehören der Vorlage und dürfen nicht in der ZIP-Datei stehen. Eigene Komponenten gibt es in einer Vorschau nicht.
 
-## Erlaubte Dateien
+## Erlaubte Dateien {#dateien}
 
 | Regel | Wert |
 | --- | --- |
@@ -28,7 +28,7 @@ Den Inhalt einer Lern-App vom Archetyp **`explainer`**: Kapitel mit Seiten, Erkl
 
 Die Größen prüfen wir im Verzeichnis der ZIP-Datei **und** beim Entpacken. Eine ZIP-Datei, die falsche Größen angibt, wird abgelehnt. Umlaute in Dateinamen sind nicht erlaubt; im Text der YAML-Dateien sind sie selbstverständlich erlaubt.
 
-## Die Angaben im Formular
+## Die Angaben im Formular {#angaben}
 
 | Feld | Regel |
 | --- | --- |
@@ -38,7 +38,7 @@ Die Größen prüfen wir im Verzeichnis der ZIP-Datei **und** beim Entpacken. Ei
 | ZIP-Datei | ein Link `https://github.com/user-attachments/files/<Zahl>/<Name>.zip`, den GitHub beim Hineinziehen schreibt. Andere Adressen laden wir nicht. |
 | Erklärungen | alle drei angekreuzt |
 
-## Die drei Erklärungen
+## Die drei Erklärungen {#erklaerungen}
 
 1. Der Inhalt ist selbst erstellt (auch mit KI-Hilfe). Es ist nichts aus Büchern oder Arbeitsblättern abgeschrieben, und er enthält keine Fotos von Material.
 2. Der Inhalt enthält keine persönlichen Daten (Namen, Schule, Klasse, Lehrkraft).
@@ -46,7 +46,7 @@ Die Größen prüfen wir im Verzeichnis der ZIP-Datei **und** beim Entpacken. Ei
 
 Mehr dazu: [Datenschutz und Urheberrecht](datenschutz.md).
 
-## Inhalt, der immer gilt
+## Inhalt, der immer gilt {#immer}
 
 - Texte für Lernende sind auf Deutsch und in einfacher Sprache.
 - Beispiele nutzen erfundene Namen, nie echte.

@@ -1,8 +1,8 @@
-# Was geprüft wird
+# Prüfungen
 
 Eine Einreichung geht durch drei Stufen. Eine Stufe beginnt erst, wenn die davor ohne Fehler war.
 
-## Stufe 1: Annahme (Job `intake`)
+## Stufe 1: Annahme (Job `intake`) {#annahme}
 
 Der Job liest nur. Er führt nichts aus, was in der ZIP-Datei steht.
 
@@ -13,7 +13,7 @@ Der Job liest nur. Er führt nichts aus, was in der ZIP-Datei steht.
 
 Bei einem Fehler startet kein Bau. Stattdessen schreibt der Job `publish` einen Kommentar in einfacher Sprache.
 
-## Stufe 2: Bau (Job `build`)
+## Stufe 2: Bau (Job `build`) {#bau}
 
 Der Job hat nur Leserechte und keine Geheimnisse. Er baut so:
 
@@ -25,7 +25,7 @@ Der Job hat nur Leserechte und keine Geheimnisse. Er baut so:
 
 Der Job führt die Bau-Werkzeuge der Vorlage auf Deinen Datendateien aus. Deinen Inhalt führt er nicht als Programm aus.
 
-## Die Prüfung des Bundles
+## Die Prüfung des Bundles {#bundle}
 
 `lernapps check <Ordner>` prüft ein gebautes Bundle ohne Katalogeintrag. Dafür öffnet es jede Seite in einem Browser, wie ein Lernender es täte, und prüft diese acht Regeln der Plattform:
 
@@ -42,7 +42,7 @@ Der Job führt die Bau-Werkzeuge der Vorlage auf Deinen Datendateien aus. Deinen
 
 **Jede dieser Regeln muss bestehen.** Wir lockern keine, denn sie schützen Kinder (keine Verfolgung) und den gemeinsamen Browser-Speicher der Plattform (`own-data-only`). Die Prüfung dauert etwa 10 Sekunden.
 
-## Was bei einer Vorschau nicht gilt
+## Was bei einer Vorschau nicht gilt {#nicht-geprueft}
 
 Diese Regeln der Plattform gelten für den Katalog, nicht für eine Vorschau auf Zeit. Wir prüfen sie hier nicht:
 
@@ -55,7 +55,7 @@ Diese Regeln der Plattform gelten für den Katalog, nicht für eine Vorschau auf
 | Formatierung und Stil der Dateien | Eine Vorschau scheitert nie an der Schreibweise (Einrückung, Leerzeilen). Wir führen keine Formatprüfung aus und formatieren Deinen Inhalt nicht um. Nur die Regeln des Explainers für den Inhalt zählen. |
 | Eintrag in Suchmaschinen | Die Vorschau soll nicht gefunden werden. Darum steht `noindex` auf jeder Seite. |
 
-## Stufe 3: Veröffentlichung (Job `publish`)
+## Stufe 3: Veröffentlichung (Job `publish`) {#veroeffentlichung}
 
 Der Job führt nur Code aus diesem Repo aus. Das Ergebnis des Baus behandelt er als Daten.
 
