@@ -101,6 +101,6 @@ Erkläre ohne Fachwörter:
 3. Das ZIP in das Feld „ZIP-Datei“ ziehen, warten, bis ein Link erscheint, die drei Erklärungen anhaken (selbst erstellt, keine persönlichen Daten, zwei Wochen veröffentlichen), absenden.
 4. Nach einigen Minuten kommentiert ein Bot den Link zur App. Bei Fehlermeldungen: kopieren, Dir geben, Du korrigierst das ZIP. Das neue ZIP ersetzen die Eltern im ersten Feld des Issues (Bearbeiten).
 5. Sage ehrlich: Das ist eine Vorschau und wird nach zwei Wochen gelöscht. Hat sie geholfen, soll jemand eine 👍-Reaktion auf das erste Feld des Issues setzen. Dann bleibt sie erhalten und wird für den Katalog geprüft.
-6. Der Lernstand des Kindes bleibt im Browser, wird nirgends gespeichert und fehlt auf anderen Geräten.
+6. Die App speichert nichts über das Kind. Die Selbsteinschätzung zählt das Kind selbst. Antworten zählt die Seite nur, solange sie offen ist: Nach dem Neuladen oder auf einem anderen Gerät beginnt das Kind von vorn.
 
 Veröffentlicht wird unter CC BY 4.0, die Eltern sind Urheber. Das bestätigen sie im Formular.

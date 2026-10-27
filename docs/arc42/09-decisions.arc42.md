@@ -72,17 +72,18 @@ addresses: qg-safe-input, con-github, risk-any-account-starts-runs
 :::
 ```
 
-## The learning state stays in the browser
+## Nothing about the child is stored
 
-**Context:** The child's progress is private, and the preview is public. **Decision:** The learning state stays in the
-browser, never in the content and never in the repository. **Rejected:** a state kept by the platform, which would need a
-server (`con-static-pages`). **Consequences:** The state is missing on another device, and the preview needs no sign-up.
+**Context:** The child's progress is private, and the preview is public. **Decision:** The app stores nothing about the
+child; the page counts answers in memory while it is open. A state that a later learning control keeps stays on the
+child's device. **Rejected:** a state kept by the platform, which would need a server (`con-static-pages`).
+**Consequences:** A reload or another device starts again, and the preview needs no sign-up.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
 :::decision
-id: dec-learning-state-local
-title: The learning state stays in the browser
+id: dec-nothing-stored
+title: Nothing about the child is stored
 status: accepted
 addresses: qg-nothing-collected, con-static-pages, con-public-by-default
 :::

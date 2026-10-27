@@ -18,9 +18,9 @@ The content contains no names, no school, no class, no teacher and no photos of 
 
 The issue itself is public too. Write nothing personal in it. The comments of the program do not repeat details from the form.
 
-## The learning progress stays in the browser {#lernstand}
+## The app stores nothing about the child {#lernstand}
 
-The preview sends nothing to a server and sets no cookies. The build checks this with the rules `no-tracking` and `no-request-before-click` ([Checks](pruefungen.md)). What a child sets in the app is kept in the memory of the browser on the child's device. It never becomes part of the content and is never stored in this repository.
+The preview sends nothing to a server and sets no cookies. The build checks this with the rules `no-tracking` and `no-request-before-click` ([Checks](pruefungen.md)). The app stores nothing about the child: no answers, no learning progress, no points. The page counts answers only in working memory while it is open; after a reload, or on another device, the child starts again. The child counts the self-check alone. The template's tests check this: after practising, nothing is in the browser's storage (the build of a single preview does not run these tests). The template can remember only two choices on the device, and only when a content offers them: an AI tutor and “always load videos directly”. The guide for assistants leaves both out.
 
 The preview is on the same domain as other apps of the platform. So the rule `own-data-only` allows each app access only to its own keys in the browser memory.
 

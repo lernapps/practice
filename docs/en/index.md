@@ -8,7 +8,7 @@ Parents and pupils can have the content of a learning app they made themselves t
 - You submit the content as a **ZIP file** with a **form**. You need a GitHub account for this.
 - GitHub **checks** the content, **builds** the app and writes the **address** in a comment for you.
 - The preview **disappears after two weeks**, unless someone puts a 👍 on the first field of the issue. Then we check whether the content fits into the catalogue.
-- Your child's **learning progress** stays in your child's browser. It is never part of the content.
+- The app **stores nothing about your child**. The page counts answers only while it is open. The child counts the self-check alone.
 
 ## Five steps {#schritte}
 

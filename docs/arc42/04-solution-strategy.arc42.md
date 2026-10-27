@@ -14,7 +14,7 @@ addresses: qg-nothing-collected, qg-safe-input, qg-quick, qg-understandable
 
 | Quality goal | Approach |
 |---|---|
-| `qg-nothing-collected` | The built app is checked by the platform's rules for tracking, requests before a click and own data only; the learning state is never part of the content or of the repository; the issue's comments repeat no field of the form. |
+| `qg-nothing-collected` | The built app is checked by the platform's rules for tracking, requests before a click and own data only; the app stores nothing about the child; the issue's comments repeat no field of the form. |
 | `qg-safe-input` | The ZIP file is read by the library without trust: allowed address, allowed endings, names, depth and sizes checked in the directory and again while unpacking; the explainer's built-in blocks are the only code; intake and build can only read; publish runs only code of the repository (`concept-content-is-data`, `concept-rights-split`, `concept-bounded-input`). |
 | `qg-quick` | The flow is a chain of jobs with no queue of its own; the check of the bundle takes seconds; publish waits only until the address serves the build, and at most five minutes. |
 | `qg-understandable` | Every rejection and every failed build ends in one comment in plain German with what to change; the comment is updated in place; an edit of the issue starts the check again. |
@@ -45,7 +45,7 @@ The template and the bundle rules come from lernapps/app-templates and lernapps/
 A preview lasts two weeks. A thumbs-up from a person keeps it, closing the issue ends it, a daily cleanup removes what
 is over, and `gh-pages` is rewritten as one commit so that removed content is in no history (`dec-temporary-preview`).
 
-## The learning state stays with the child
+## Nothing about the child is stored
 
-The content is data for the explainer. What the app remembers lives in the browser of the child's device
-(`dec-learning-state-local`).
+The content is data for the explainer. The app stores nothing about the child; the page counts answers in memory while
+it is open (`dec-nothing-stored`).

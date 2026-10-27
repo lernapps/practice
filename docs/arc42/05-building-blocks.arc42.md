@@ -418,7 +418,7 @@ part only. Every change of `i/` is one new commit without a parent.
 id: bb-previews
 title: Previews on gh-pages
 technology: Git branch, GitHub Pages
-implements: concept-temporary-preview, concept-learning-state-local
+implements: concept-temporary-preview, concept-nothing-stored
 :::
 ```
 

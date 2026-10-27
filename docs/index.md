@@ -8,7 +8,7 @@ Hier können Eltern und Schüler den Inhalt einer selbst erstellten Lern-App aus
 - Du reichst den Inhalt als **ZIP-Datei** über ein **Formular** ein. Du brauchst dafür ein GitHub-Konto.
 - GitHub **prüft** den Inhalt, **baut** die App und schreibt Dir die **Adresse** in einen Kommentar.
 - Die Vorschau **verschwindet nach zwei Wochen**, außer jemand setzt ein 👍 auf das erste Feld des Issues. Dann prüfen wir, ob der Inhalt in den Katalog passt.
-- Der **Lernstand** Deines Kindes bleibt im Browser des Kindes. Er ist nie Teil des Inhalts.
+- Die App **speichert nichts über Dein Kind**. Antworten zählt die Seite nur, solange sie offen ist. Das Kind zählt die Selbsteinschätzung selbst.
 
 ## In fünf Schritten {#schritte}
 

@@ -69,8 +69,8 @@ requires: if-practice-form, if-practice-guidance
 
 ## Student
 
-The child. It opens the preview and practises; it signs up for nothing and installs nothing. What the app remembers
-stays in its browser.
+The child. It opens the preview and practises; it signs up for nothing and installs nothing. The app stores nothing
+about it.
 
 ```arc42
 :::actor

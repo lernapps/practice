@@ -66,18 +66,21 @@ category: operations
 :::
 ```
 
-## The learning state stays local
+## Nothing about the child is stored
 
-What a child enters or chooses in the app stays in the browser of the child's device. It is never part of the content
-and never stored in the repository; the platform sees the content as data and never photos, names or learning state.
+The app stores nothing about the child. The page counts answers in memory only, while it is open; the self-check is
+counted by the child. The explainer template can remember two choices on the device, and only when a content offers
+them: an AI tutor and loading videos directly; the content of a preparation offers neither. No answer, name or learning
+state is part of the content or stored in the repository, and the platform sees the content as data and never photos.
+A learning state that a later learning control keeps stays in the browser of the child's device (platform goal).
 The built app is checked for cookies and sending (`no-tracking`), for requests before a click
 (`no-request-before-click`) and for touching only its own data (`own-data-only`), and a failing rule stops the
 publication. The comments of the workflows repeat no field of the form.
 
 ```arc42
 :::concept
-id: concept-learning-state-local
-title: The learning state stays in the child's browser
+id: concept-nothing-stored
+title: Nothing about the child is stored
 category: privacy
 :::
 ```

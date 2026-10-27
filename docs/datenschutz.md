@@ -18,9 +18,9 @@ Der Inhalt enthält keine Namen, keine Schule, keine Klasse, keine Lehrkraft und
 
 Auch das Issue selbst ist öffentlich. Schreibe dort nichts Persönliches hinein. Die Kommentare des Programms wiederholen keine Angaben aus dem Formular.
 
-## Der Lernstand bleibt im Browser {#lernstand}
+## Die App speichert nichts über das Kind {#lernstand}
 
-Die Vorschau sendet nichts an einen Server und setzt keine Cookies. Das prüft der Bau mit den Regeln `no-tracking` und `no-request-before-click` ([Prüfungen](pruefungen.md)). Was ein Kind in der App einstellt, liegt im Speicher des Browsers auf dem Gerät des Kindes. Es wird nie Teil des Inhalts und nie in diesem Repo gespeichert.
+Die Vorschau sendet nichts an einen Server und setzt keine Cookies. Das prüft der Bau mit den Regeln `no-tracking` und `no-request-before-click` ([Prüfungen](pruefungen.md)). Die App speichert nichts über das Kind: keine Antworten, keinen Lernstand, keine Punkte. Antworten zählt die Seite nur im Arbeitsspeicher, solange sie offen ist; nach dem Neuladen oder auf einem anderen Gerät beginnt das Kind von vorn. Die Selbsteinschätzung zählt das Kind selbst. Die Tests der Vorlage prüfen das: nach dem Üben liegt nichts im Speicher des Browsers (nicht der Bau einer einzelnen Vorschau). Die Vorlage kann nur zwei Wahlen auf dem Gerät merken, die ein Inhalt erst anbietet: einen KI-Tutor und „Videos immer direkt laden“. Die Anleitung für Assistenten lässt beides weg.
 
 Die Vorschau liegt auf derselben Domain wie andere Apps der Plattform. Darum erlaubt die Regel `own-data-only` jeder App nur den Zugriff auf ihre eigenen Schlüssel im Browser-Speicher.
 

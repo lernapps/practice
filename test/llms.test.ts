@@ -28,6 +28,10 @@ describe("docs/llms.txt", () => {
     const steps = [...read("docs/llms.txt").matchAll(/^## (\d)\. /gm)].map((m) => m[1]);
     assert.deepEqual(steps, ["1", "2", "3", "4", "5", "6", "7"]);
   });
+  it("says that the app stores nothing about the child", () => {
+    assert.match(read("docs/llms.txt"), /speichert nichts über das Kind/);
+    assert.ok(!/im Browser/.test(read("docs/llms.txt")));
+  });
 });
 
 describe("the skills", () => {

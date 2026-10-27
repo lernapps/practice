@@ -58,7 +58,7 @@ browser's local storage is therefore shared with all of them.
 id: con-shared-origin
 title: The origin is shared with the platform
 category: technical
-source: docs/datenschutz.md "Der Lernstand bleibt im Browser"
+source: docs/datenschutz.md "Die App speichert nichts über das Kind"
 :::
 ```
 

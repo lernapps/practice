@@ -26,8 +26,8 @@ How a kept preparation becomes an entry of the catalog is outside this block: it
 
 ## 1.2 Quality Goals
 
-- `qg-nothing-collected`: a preview sends nothing before a click and sets no cookie; the learning state stays in the
-  child's browser.
+- `qg-nothing-collected`: a preview sends nothing before a click and sets no cookie; the app stores nothing about the
+  child.
 - `qg-safe-input`: content from any GitHub account runs no code under lernapps.net and cannot harm the runner that
   reads it.
 - `qg-quick`: the parent gets the address a few minutes after submitting.

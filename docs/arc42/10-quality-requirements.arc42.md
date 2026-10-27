@@ -7,7 +7,7 @@ The goals are the ones this block must meet beyond the platform's own (see the
 
 | Goal | Priority | In short |
 |---|---|---|
-| `qg-nothing-collected` | high | A preview collects nothing; the learning state stays in the browser |
+| `qg-nothing-collected` | high | A preview collects nothing; the app stores nothing about the child |
 | `qg-safe-input` | high | Foreign files neither run code nor harm the runner |
 | `qg-understandable` | high | A rejection says in plain language what to change |
 | `qg-quick` | medium | The address arrives a few minutes after the submission |
@@ -76,7 +76,7 @@ id: qs-preview-collects-nothing
 title: A preview collects nothing
 quality: qg-nothing-collected
 stimulus: A child opens a preview and practises
-response: The preview sends nothing to other servers before a click, sets no cookie and touches only its own data in the browser
+response: The preview sends nothing to other servers before a click, sets no cookie and touches only its own data in the browser (the template stores nothing but a tutor choice and a video choice, which these previews do not offer)
 metric: The bundle passes no-tracking, no-request-before-click and own-data-only in the build that made it; a build that fails any rule is not published
 :::
 ```
