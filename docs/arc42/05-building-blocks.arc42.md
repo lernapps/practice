@@ -43,6 +43,9 @@ flowchart LR
     bb-previews["Previews on gh-pages"]
     subgraph bb-guidance["Guidance"]
         bb-assistant-guide["Guide for assistants"]
+        bb-assistant-skills["Skills for assistants"]
+        bb-guide-build["Guide build"]
+        bb-trial-run["Trial run"]
         bb-documentation["Pages for people"]
         bb-site-build["Site build"]
     end
@@ -70,6 +73,9 @@ flowchart LR
     bb-lib -->|"if-gh-pages-branch"| bb-previews
     bb-action-build -->|"if-archetypes"| bb-app-templates
     bb-action-build -->|"if-tooling-cli"| bb-tooling
+    bb-guide-build -->|"if-practice-skills"| bb-assistant-skills
+    bb-trial-run -->|"if-lib"| bb-lib
+    bb-trial-run -->|"if-archetypes"| bb-app-templates
     bb-assistant-guide -->|"if-archetypes"| bb-app-templates
     bb-assistant-guide -->|"if-catalog-pages"| bb-catalog
     bb-site-build -->|"if-site-frame"| bb-website
@@ -481,9 +487,10 @@ path: docs/llms.txt
 
 ### Guide for assistants
 
-`docs/llms.txt`, in German. It leads the family's assistant through the preparation: ask, look in the catalog, warn
-the parents, read the photos, agree the scope, write the content, zip it and hand it over. It names the limits of a
-ZIP file and the stumbling blocks of the explainer's YAML.
+`docs/llms.txt`, in German and in one piece, so that an assistant loads a single file. It leads the family's assistant
+through the preparation: ask, look in the catalog, warn the parents, read the photos, agree the scope, write the
+content, zip it and hand it over. It names the limits of a ZIP file and the stumbling blocks of the explainer's YAML.
+It is not written by hand: the guide build assembles it from the skills (`concept-one-guide-source`).
 
 ```arc42
 :::building-block
@@ -492,7 +499,79 @@ title: Guide for assistants
 technology: Plain text
 parent: bb-guidance
 path: docs/llms.txt
-requires: if-catalog-pages, if-archetypes
+requires: if-catalog-pages, if-archetypes, if-practice-skills
+implements: concept-one-guide-source
+:::
+```
+
+### Skills for assistants
+
+The source of the guide, installable one by one with `npx --yes skills add lernapps/practice -y -s <name>`: the skill
+`lernapps-practice` holds the flow from the question to the submission and the steps at which the assistant waits for
+the parents; `lernapps-practice-photos` how to read photos of school material; `lernapps-practice-explainer` how to write
+the explainer's content from worksheets, with the table of blocks per task type and the messages of the build in its
+`references/`. Each has a front matter with `name`, a `description` that starts with when to use it, and the licence.
+
+```arc42
+:::building-block
+id: bb-assistant-skills
+title: Skills for assistants
+technology: Markdown (agent skills)
+parent: bb-guidance
+path: skills
+implements: concept-one-guide-source
+:::
+```
+
+#### Skills interface
+
+What an assistant or a skill installer reads.
+
+```arc42
+:::interface
+id: if-practice-skills
+title: Practice skills
+provider: bb-assistant-skills
+protocol: Agent skills in skills/<group>/<name>/SKILL.md, installed with the skills installer
+path: skills
+:::
+```
+
+### Guide build
+
+`scripts/llms.mjs`, run with `npm run llms`. It takes the order of the steps from the skill `lernapps-practice` and
+copies the sections that its steps name from the other two skills; sections marked for the skill alone stay out. It
+writes `docs/llms.txt`. A test compares the checked-in file with its output, so the guide is never out of date.
+
+```arc42
+:::ignore W018 the guide build is one script in the folder scripts, which the site build covers; the two do different jobs :::
+:::building-block
+id: bb-guide-build
+title: Guide build
+technology: Node.js
+parent: bb-guidance
+path: scripts/llms.mjs
+requires: if-practice-skills
+implements: concept-one-guide-source
+:::
+```
+
+### Trial run
+
+`scripts/try.ts`, run with `npm run try -- <zip>`. It sends a ZIP file through the intake checks and the build of the
+actions on the maintainer's machine, with the template at the pinned commit, and prints the messages as the bot
+comments them. It is how a maintainer tests the guide with a result of an assistant (see
+[docs/anleitung-testen.md](https://github.com/lernapps/practice/blob/main/docs/anleitung-testen.md)).
+
+```arc42
+:::ignore W018 the trial run is one script in the folder scripts, which the site build covers; the two do different jobs :::
+:::building-block
+id: bb-trial-run
+title: Trial run
+technology: Node.js, TypeScript
+parent: bb-guidance
+path: scripts/try.ts
+requires: if-lib, if-archetypes
 :::
 ```
 

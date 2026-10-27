@@ -52,4 +52,5 @@ The guide for the assistant is [llms.txt](llms.txt). It is written in German, an
 - [Operations](betrieb.md): what the repository is for, how it runs and how to find faults.
 - [Checks](pruefungen.md): what is checked in a submission.
 - [Testing the guide](anleitung-testen.md): how to test the guide for assistants and build locally.
+- **Installing the skills**: The guide is made of three skills in `skills/`. A skill installer reads them from the repo: `npx --yes skills add lernapps/practice -y -s lernapps-practice` (likewise `-s lernapps-practice-photos` and `-s lernapps-practice-explainer`). The entry point for every assistant stays [llms.txt](llms.txt); it holds all three skills in one document and is made with `npm run llms`.
 - [Architecture](architecture/): how the repository is built (arc42).

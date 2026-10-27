@@ -85,6 +85,22 @@ category: privacy
 :::
 ```
 
+## One source for the guide
+
+The guide for assistants exists once, as the skills in `skills/`, and exists as `docs/llms.txt` only as their assembly.
+An assistant loads one file and needs no other, so the assembly copies what the flow names into one document; a skill
+installer gives the same text to assistants that install the skills. The checked-in `docs/llms.txt` must equal what the
+guide build produces, and a test says so. What belongs in the installed skill alone (when to use it, references, tables)
+is marked and stays out of the guide.
+
+```arc42
+:::concept
+id: concept-one-guide-source
+title: One source for the guide
+category: documentation
+:::
+```
+
 ## Bounded input
 
 Everything that comes from outside is checked in two places and by size. The attachment address must have the form

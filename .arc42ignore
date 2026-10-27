@@ -1,5 +1,6 @@
 # Paths the architecture does not claim (arc42 H021), relative to the root of lernapps/practice.
 # Settings and licence of the repository, and the files of the assistants that work on it.
+.arc42ignore
 .claude
 .gitignore
 AGENTS.md

@@ -52,4 +52,5 @@ Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich 
 - [Betrieb](betrieb.md): wozu das Repo da ist, wie es läuft und wie man Fehler sucht.
 - [Prüfungen](pruefungen.md): was bei einer Einreichung geprüft wird.
 - [Die Anleitung testen](anleitung-testen.md): wie man die Anleitung für Assistenten prüft und lokal baut.
+- **Skills installieren**: Die Anleitung besteht aus drei Skills in `skills/`. Ein Skill-Installer liest sie aus dem Repo: `npx --yes skills add lernapps/practice -y -s lernapps-practice` (ebenso `-s lernapps-practice-photos` und `-s lernapps-practice-explainer`). Der Einstieg für jeden Assistenten bleibt die [llms.txt](llms.txt); sie enthält alle drei Skills in einem Dokument und entsteht mit `npm run llms`.
 - [Architektur](architecture/): wie das Repo gebaut ist (arc42). Diese Seite gibt es nur auf Englisch.

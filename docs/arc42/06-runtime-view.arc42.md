@@ -228,7 +228,7 @@ photos go to the assistant's provider and never into the system.
 id: rs-preparation
 title: The assistant prepares the content
 trigger: A parent tells their assistant to read the guide and to prepare their child for a test
-involves: bb-guidance, bb-assistant-guide, bb-catalog, bb-app-templates
+involves: bb-guidance, bb-assistant-guide, bb-assistant-skills, bb-catalog, bb-app-templates
 :::
 ```
 
@@ -237,7 +237,7 @@ involves: bb-guidance, bb-assistant-guide, bb-catalog, bb-app-templates
 id: rs-preparation-sequence
 scenario: rs-preparation
 notation: mermaid-sequence
-aliases: parent=actor-adopting-adult, assistant=actor-family-assistant, guide=bb-assistant-guide, catalog=bb-catalog, templates=bb-app-templates
+aliases: parent=actor-adopting-adult, assistant=actor-family-assistant, guide=bb-assistant-guide, skills=bb-assistant-skills, catalog=bb-catalog, templates=bb-app-templates
 :::
 ```
 
@@ -246,10 +246,14 @@ sequenceDiagram
     participant parent as Parent
     participant assistant as Family's assistant
     participant guide as Guide for assistants
+    participant skills as Skills for assistants
     participant catalog as Catalog
     participant templates as App templates
     parent->>assistant: read llms.txt and prepare my child for the test
     assistant->>guide: read the steps
+    opt the assistant can install skills
+        assistant->>skills: install the same steps as skills
+    end
     assistant->>parent: subject, grade, federal state, day of the test
     assistant->>catalog: look for an app that fits
     alt an app fits

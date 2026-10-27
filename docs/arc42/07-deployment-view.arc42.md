@@ -76,7 +76,7 @@ id: dn-repository
 title: Repository lernapps/practice
 type: server
 parent: env-github
-hosts: bb-workflow-submission, bb-workflow-cleanup, bb-workflow-pages, bb-workflow-pr-preview, bb-workflow-check
+hosts: bb-workflow-submission, bb-workflow-cleanup, bb-workflow-pages, bb-workflow-pr-preview, bb-workflow-check, bb-assistant-skills
 :::
 ```
 
@@ -92,7 +92,7 @@ id: dn-runner
 title: GitHub-hosted runner
 type: container
 parent: env-github
-hosts: bb-action-validate, bb-action-build, bb-action-publish, bb-action-expire, bb-lib, bb-site-build
+hosts: bb-action-validate, bb-action-build, bb-action-publish, bb-action-expire, bb-lib, bb-site-build, bb-guide-build, bb-trial-run
 :::
 ```
 
