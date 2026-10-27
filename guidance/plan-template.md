@@ -79,9 +79,12 @@ open questions. Never the material itself, never a name. -->
       counting): a source you opened, under "Notes". No source → mark it for the creator to check.
 - [ ] Load skills `lernapps-exercise-patterns` and `lernapps-explainer-design`. Draft the concept as skill
       `lernapps-practice-explore` says: scope and weighting for the occasion, pages, exercises, figures.
+- [ ] Fill "Goal" and "Key decisions": the occasion and what learners can do afterwards; each decision with its
+      reason, your own choices marked "(guess)".
 - [ ] **Checkpoint:** concept. Show in plain words: occasion, topics, scope and weighting, what learners do on each
       page, which figures you redraw, every "(guess)", the facts the creator should check. Stop and wait. Changes →
       change, ask again.
+- [ ] Write the answers under "Answers" and update "Notes": a fact the creator settled is no longer to check.
 - [ ] Set `archetype: explainer` and `phase: plan`: change the value lines (`grep -E '^(archetype|phase):'` prints
       `archetype: explainer` and `phase: plan`).
 
