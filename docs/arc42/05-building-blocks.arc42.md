@@ -1,20 +1,14 @@
 # Building Blocks
 
 The repository holds the form, the workflows that run a submission and a cleanup, the actions with the logic, the
-documentation with the guide for assistants, and the site the previews live below. It holds no app and no runtime.
-Neighbours supply what it does not hold: the explainer template, the checks, the site frame and the catalog.
-They are black boxes here; the [architecture of the whole system](https://lernapps.net/docs/architecture/) names them
-and their interfaces.
-
-Together the blocks below refine the building block "Practice" of the system architecture. The interfaces that the
-system architecture shows keep their names: `if-practice-form`, `if-practice-previews` and `if-practice-guidance`.
-
-Paths are relative to the root of `lernapps/practice`.
+guidance and the site the previews live below. Neighbours supply the rest; they are black boxes here, and the
+[architecture of the whole system](https://lernapps.net/docs/architecture/) names them. The blocks refine its building
+block "Practice" and keep the interface names `if-practice-form`, `if-practice-previews` and `if-practice-guidance`.
+Paths are relative to the root of `lernapps/practice`; the source of each block is the reference for its details.
 
 ## Level 1
 
-The flow runs from the form through the workflows and actions to the branch `gh-pages`. Artifacts pass between the
-actions as data; the library reads and writes everything that comes from outside. The neighbours are at the edge.
+The flow runs from the form through the workflows and actions to the branch `gh-pages`; artifacts pass between the actions as data.
 
 ```arc42
 :::ignore H018 one picture shows the flow from the form to the branch, with the groups drawn around their parts :::
@@ -83,10 +77,7 @@ flowchart LR
 
 ## Submission form
 
-The GitHub issue form with the fields subject, grade, federal state, the ZIP file and the declarations. Its field ids
-and lists are fixed; `actions/lib/limits.ts` holds the same lists and a test compares them. GitHub writes each field
-as a heading with its value into the issue, and that text is all the intake reads. Blank issues are switched off, so
-every issue is a submission or is ignored.
+The GitHub issue form with subject, grade, federal state, the ZIP file and the declarations. Its field ids and lists are fixed and checked by a test.
 
 ```arc42
 :::building-block
@@ -99,7 +90,7 @@ path: .github/ISSUE_TEMPLATE
 
 ### Form interface
 
-The contract with the parent: the fields of the form and the attachment, and the comments that answer in the same issue.
+The fields of the form and the attachment; the comments that answer in the same issue.
 
 ```arc42
 :::interface
@@ -113,9 +104,7 @@ path: .github/ISSUE_TEMPLATE/einreichen.yml
 
 ## Workflows
 
-The files GitHub reads to start work. They are thin: each one names a trigger, the rights of its jobs and the actions
-to call. Text from an issue never stands in a `run:` step; it reaches scripts only as files and environment
-variables.
+The files GitHub reads to start work. Each names a trigger, the rights of its jobs and the actions to call.
 
 ```arc42
 :::building-block
@@ -142,9 +131,7 @@ path: .github/workflows
 
 ### Submission workflow
 
-`einreichung.yml`. On an issue that was opened or edited, or by hand for an issue number, it runs the jobs `intake`,
-`build` and `publish` one after the other. Every job has the least rights it needs (concept `concept-rights-split`).
-Runs for one issue cancel each other; the writing job joins the group that serialises writes to `gh-pages`.
+`einreichung.yml`. Runs the jobs `intake`, `build` and `publish` one after the other for an issue that was opened or edited, or by hand for an issue number (`concept-rights-split`).
 
 ```arc42
 :::building-block
@@ -160,8 +147,7 @@ implements: concept-rights-split
 
 ### Cleanup workflow
 
-`aufraeumen.yml`. A daily run, a run when an issue is closed and a manual run, by default a dry run that only
-prints what it would delete.
+`aufraeumen.yml`. Runs the cleanup daily, when an issue is closed and by hand (`concept-temporary-preview`).
 
 ```arc42
 :::building-block
@@ -177,8 +163,7 @@ implements: concept-temporary-preview
 
 ### Pages workflow
 
-`pages.yml`. Builds and checks the site of this repository and, on the main line, publishes it to the root of
-`gh-pages`, leaving `i/` and `pr-preview/` alone. It uses the shared site actions of the tooling.
+`pages.yml`. Builds and checks the site and, on the main line, publishes it to the root of `gh-pages` with the shared site actions.
 
 ```arc42
 :::building-block
@@ -193,8 +178,7 @@ requires: if-site-actions, if-site-build, if-gh-pages-branch
 
 ### Pull request preview workflow
 
-`pr-preview.yml`. A preview of the site for each pull request from the same repository, below `pr-preview/` on
-`gh-pages`, with the shared site action of the tooling. A pull request from a fork gets none.
+`pr-preview.yml`. A preview of the site for each pull request from the same repository, below `pr-preview/`.
 
 ```arc42
 :::building-block
@@ -209,8 +193,7 @@ requires: if-site-actions, if-gh-pages-branch
 
 ### Check workflow
 
-`check.yml`. Runs the tests, builds a minimal fixture the way a submission is built, and lints the workflows. The job
-`check` always reports and is the one check to require.
+`check.yml`. Runs the tests, a smoke build of a fixture and the lint of the workflows; its job `check` is the one to require.
 
 ```arc42
 :::building-block
@@ -225,14 +208,11 @@ requires: if-action-build
 
 ## Actions
 
-Local composite actions that hold the logic of a submission. Each has an `action.yml` and one script in TypeScript; they share the library. Each runs in the job the workflow gives it and has only the rights of that job.
+Local composite actions that hold the logic of a submission. Each has an `action.yml` and one TypeScript script, and shares the library.
 
 ## Validate
 
-The intake. It reads the issue, accepts only an attachment address of the form
-`github.com/user-attachments/files/<number>/<name>.zip`, downloads it with limits, checks the directory of the ZIP
-file and unpacks it into a throwaway folder. It writes nothing to GitHub. It stops when the ZIP address and the fields
-equal those of the last run that got a comment, unless the run is forced.
+The intake. Reads the issue, downloads the attachment and checks and unpacks it into a throwaway folder (`concept-bounded-input`). Writes nothing to GitHub.
 
 ```arc42
 :::building-block
@@ -241,7 +221,7 @@ title: Validate
 technology: Composite action, TypeScript (actions/validate)
 path: actions/validate
 requires: if-lib
-implements: concept-bounded-input, concept-content-is-data
+implements: concept-bounded-input
 :::
 ```
 
@@ -254,31 +234,28 @@ How a workflow calls the intake.
 id: if-action-validate
 title: Validate action
 provider: bb-action-validate
-protocol: Composite action; input issue number, force; outputs relevant, ok, unchanged
+protocol: Composite action; inputs and outputs in action.yml
 path: actions/validate/action.yml
 :::
 ```
 
 ### Intake artifact
 
-What the intake hands on: the verdict and, for a valid submission, the unpacked files. The jobs after it read these as data.
+What the intake hands on: the verdict and, for a valid submission, the unpacked files.
 
 ```arc42
 :::interface
 id: if-artifact-intake
 title: Intake artifact
 provider: bb-action-validate
-protocol: Workflow artifact intake: result.json always, meta.json and tree/src/ for a valid submission
+protocol: Workflow artifact intake: the verdict always, the unpacked files for a valid submission
 path: actions/validate/validate.ts
 :::
 ```
 
 ## Build
 
-Takes the template at the pinned commit, replaces its `src/` with the submitted tree and keeps the template's
-`main.ts`. It installs with `npm ci`, builds, runs `lernapps check` on the bundle and marks every page `noindex`
-after the check. It has no secret and no right to write. It runs the template's tools on the data files; the content is
-not run as a program.
+Builds the app from the template at the pin and the submitted tree, and checks the bundle with `lernapps check`. Has no secret and no right to write; runs the template's tools on the data (`dec-content-is-data`).
 
 ```arc42
 :::building-block
@@ -287,7 +264,6 @@ title: Build
 technology: Composite action, TypeScript (actions/build), npm, Playwright via lernapps check
 path: actions/build
 requires: if-lib, if-artifact-intake, if-archetypes, if-tooling-cli
-implements: concept-content-is-data
 :::
 ```
 
@@ -300,31 +276,28 @@ How a workflow calls the build.
 id: if-action-build
 title: Build action
 provider: bb-action-build
-protocol: Composite action; reads the artifact intake; no input but the pin in package.json
+protocol: Composite action; reads the artifact intake and the pin in package.json
 path: actions/build/action.yml
 :::
 ```
 
 ### Site artifact
 
-What the build hands on: the bundle only when the build and the check passed, and the head of its log always.
+What the build hands on: the bundle when the build passed, and the head of its log always.
 
 ```arc42
 :::interface
 id: if-artifact-site
 title: Site artifact
 provider: bb-action-build
-protocol: Workflow artifacts site (the bundle, only when the build passed) and build (build.json with the log)
+protocol: Workflow artifacts site (the bundle, only when the build passed) and build (the log)
 path: actions/build/build.ts
 :::
 ```
 
 ## Publish
 
-The last job. It runs code of this repository only and treats the artifacts as data. It turns a rejection or a failed
-build into a comment. For a built site it checks again the number and size of the files, the names, the endings and
-`noindex` on every page, writes `i/<issue>/` and `practice.json` to `gh-pages`, waits until the address serves the
-build and comments the link. One comment per issue is updated in place.
+The last job. Treats the artifacts as data, checks the site again, writes `i/<issue>/` and `practice.json` to `gh-pages` and updates the one comment of the issue. Turns a rejection or a failed build into that comment.
 
 ```arc42
 :::building-block
@@ -346,15 +319,14 @@ How a workflow calls the last job.
 id: if-action-publish
 title: Publish action
 provider: bb-action-publish
-protocol: Composite action; input issue number and result of the job build; writes gh-pages and the comment
+protocol: Composite action; reads the artifacts; writes gh-pages and the comment
 path: actions/publish/action.yml
 :::
 ```
 
 ## Expire
 
-Decides for each folder `i/<n>/` whether the preview is over and removes the ones that are. The rules are in
-concept `concept-temporary-preview`. It reads the day from `practice.json`, never from the time of a commit.
+Decides for each folder `i/<n>/` by `concept-temporary-preview` and removes what is over.
 
 ```arc42
 :::building-block
@@ -376,16 +348,14 @@ How the cleanup workflow calls the expiry.
 id: if-action-expire
 title: Expire action
 provider: bb-action-expire
-protocol: Composite action; input optional issue number and dry-run; writes gh-pages and notes in issues
+protocol: Composite action; writes gh-pages and notes in issues; dry run by default when started by hand
 path: actions/expire/action.yml
 :::
 ```
 
 ## Library
 
-The code the actions share: reading a ZIP file without trusting it, reading the text of an issue from the form, the
-few calls of the GitHub API with the texts of the comments, the limits in one file and the writing of `gh-pages` as a
-single commit. It uses only Node's own modules and the git command line.
+The code the actions share: the ZIP reader, the reader of the form text, the GitHub calls with the texts of the comments, the limits and the writing of `gh-pages`.
 
 ```arc42
 :::building-block
@@ -414,9 +384,7 @@ path: actions/lib
 
 ## Previews on gh-pages
 
-The branch `gh-pages`, which GitHub Pages serves. It holds the site at its root, the previews of submissions below
-`i/<issue number>/` and the previews of pull requests below `pr-preview/pr-<number>/`. Each writer touches its own
-part only. Every change of `i/` is one new commit without a parent.
+The branch that GitHub Pages serves, in three parts with one writer each (chapter 7).
 
 ```arc42
 :::ignore H014 served by GitHub Pages from the branch gh-pages; no file of this repository implements it :::
@@ -424,14 +392,13 @@ part only. Every change of `i/` is one new commit without a parent.
 id: bb-previews
 title: Previews on gh-pages
 technology: Git branch, GitHub Pages
-implements: concept-temporary-preview, concept-nothing-stored
+implements: concept-temporary-preview
 :::
 ```
 
 ### Preview pages
 
-The temporary app of each submission below its issue number, with `practice.json` beside it. A preview ends after two
-weeks or when its issue is closed, unless a person has reacted to the issue with a thumbs-up.
+The temporary app of each submission below its issue number, with its practice record (`term-practice-record`).
 
 ```arc42
 :::ignore H014 served by GitHub Pages from the branch gh-pages; no file of this repository implements it :::
@@ -445,22 +412,21 @@ protocol: HTTPS pages under lernapps.net/practice/i/<issue number>/
 
 ### Pages branch
 
-How the branch is written: a fresh copy, one change, one commit without a parent, a push with a lease against the state the copy started from.
+How the branch is written (`concept-temporary-preview`).
 
 ```arc42
 :::interface
 id: if-gh-pages-branch
 title: Pages branch
 provider: bb-previews
-protocol: git branch gh-pages; the root for the site, i/ for submissions, pr-preview/ for pull requests
+protocol: git branch gh-pages; the root for the site, i/ for submissions, pr-preview/ for pull requests, one writer each
 path: actions/lib/pages.ts
 :::
 ```
 
 ## Guidance
 
-The pages for families and maintainers in German and English, the guide for assistants and the build that turns them
-into the site.
+The pages for families and maintainers, the guide for assistants and the build that turns them into the site.
 
 ```arc42
 :::building-block
@@ -487,10 +453,7 @@ path: docs/llms.txt
 
 ### Guide for assistants
 
-`docs/llms.txt`, in German and in one piece, so that an assistant loads a single file. It leads the family's assistant
-through the preparation: ask, look in the catalog, warn the parents, read the photos, agree the scope, write the
-content, zip it and hand it over. It names the limits of a ZIP file and the stumbling blocks of the explainer's YAML.
-It is not written by hand: the guide build assembles it from the skills (`concept-one-guide-source`).
+`docs/llms.txt`, German, in one piece. It leads the assistant from the question to the hand-over; it is the assembly of the skills (`concept-one-guide-source`).
 
 ```arc42
 :::building-block
@@ -506,11 +469,7 @@ implements: concept-one-guide-source
 
 ### Skills for assistants
 
-The source of the guide, installable one by one with `npx --yes skills add lernapps/practice -y -s <name>`: the skill
-`lernapps-practice` holds the flow from the question to the submission and the steps at which the assistant waits for
-the parents; `lernapps-practice-photos` how to read photos of school material; `lernapps-practice-explainer` how to write
-the explainer's content from worksheets, with the table of blocks per task type and the messages of the build in its
-`references/`. Each has a front matter with `name`, a `description` that starts with when to use it, and the licence.
+The three installable skills `lernapps-practice`, `lernapps-practice-photos` and `lernapps-practice-explainer`; each says in its `SKILL.md` when to use it.
 
 ```arc42
 :::building-block
@@ -539,9 +498,7 @@ path: skills
 
 ### Guide build
 
-`scripts/llms.mjs`, run with `npm run llms`. It takes the order of the steps from the skill `lernapps-practice` and
-copies the sections that its steps name from the other two skills; sections marked for the skill alone stay out. It
-writes `docs/llms.txt`. A test compares the checked-in file with its output, so the guide is never out of date.
+`scripts/llms.mjs`, run with `npm run llms`. Assembles `docs/llms.txt` from the skills.
 
 ```arc42
 :::ignore W018 the guide build is one script in the folder scripts, which the site build covers; the two do different jobs :::
@@ -558,10 +515,7 @@ implements: concept-one-guide-source
 
 ### Trial run
 
-`scripts/try.ts`, run with `npm run try -- <zip>`. It sends a ZIP file through the intake checks and the build of the
-actions on the maintainer's machine, with the template at the pinned commit, and prints the messages as the bot
-comments them. It is how a maintainer tests the guide with a result of an assistant (see
-[docs/anleitung-testen.md](https://github.com/lernapps/practice/blob/main/docs/anleitung-testen.md)).
+`scripts/try.ts`, run with `npm run try -- <zip>`. Sends a ZIP file through the intake checks and the build on the maintainer's machine and prints the comment ([docs/anleitung-testen.md](https://github.com/lernapps/practice/blob/main/docs/anleitung-testen.md)).
 
 ```arc42
 :::ignore W018 the trial run is one script in the folder scripts, which the site build covers; the two do different jobs :::
@@ -577,9 +531,7 @@ requires: if-lib, if-archetypes
 
 ### Pages for people
 
-The Markdown pages: the overview, the steps, the rules for content, the checks, the lifetime of a preview, privacy and
-copyright, and operations for maintainers. The German pages are at the root and the English pages below `en/`, with
-the same file names and anchors.
+The Markdown pages in German at the root of `docs/` and in English below `en/`.
 
 ```arc42
 :::ignore H014 its files are the Markdown files in docs/ and docs/en/, which the path of the block Guidance covers :::
@@ -594,9 +546,7 @@ parent: bb-guidance
 
 ### Site build
 
-`scripts/build.sh` renders the pages (`scripts/pages.mjs`), builds the architecture from `docs/arc42/` into
-`architecture/`, and lets the shared frame add header, footer and language switch. `scripts/frame.sh` runs the frame's
-commands with this site added to the frame's list of sites. The result is the folder `_site/`.
+`scripts/build.sh` renders the pages, builds the architecture into `architecture/` and lets the shared frame add header, footer and language switch. The result is `_site/`.
 
 ```arc42
 :::building-block
@@ -611,7 +561,7 @@ requires: if-site-frame
 
 #### Site build interface
 
-How the site is built and checked, by a person and by the shared site actions.
+How a person and the shared site actions build and check the site.
 
 ```arc42
 :::interface
@@ -625,8 +575,7 @@ path: scripts/build.sh
 
 ## App templates
 
-The explainer template and its runtime, from which every preview is built. Its own architecture refines this block:
-[app-templates, chapter 5](https://github.com/lernapps/app-templates/blob/main/docs/arc42/05-building-blocks.arc42.md).
+The explainer template and its runtime, from which every preview is built ([its architecture](https://github.com/lernapps/app-templates/blob/main/docs/arc42/05-building-blocks.arc42.md)).
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/app-templates: https://github.com/lernapps/app-templates :::
@@ -640,7 +589,7 @@ x-repo: lernapps/app-templates
 
 ### Archetypes
 
-What the build takes: the folder `explainer/` of the template, and the root that its dependency `file:..` needs.
+What the build takes: the folder `explainer/` of the template.
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/app-templates: https://github.com/lernapps/app-templates :::
@@ -654,9 +603,7 @@ protocol: git repository at the commit that appTemplates.commit pins
 
 ## Tooling
 
-The `lernapps check` command, which checks a built bundle against the rules of the platform, and the shared actions
-for the site. Its own architecture refines this block:
-[tooling, chapter 5](https://github.com/lernapps/tooling/blob/main/docs/arc42/05-building-blocks.arc42.md).
+The `lernapps check` command and the shared site actions ([its architecture](https://github.com/lernapps/tooling/blob/main/docs/arc42/05-building-blocks.arc42.md)).
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/tooling: https://github.com/lernapps/tooling :::
@@ -698,7 +645,7 @@ protocol: GitHub actions and a reusable workflow, pinned to a commit
 
 ## Website
 
-The shared site frame that gives every page its header, footer and language switch, and its check of the site rules.
+The shared site frame and its check of the site rules.
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/lernapps.github.io: https://github.com/lernapps/lernapps.github.io :::
@@ -712,7 +659,7 @@ x-repo: lernapps/lernapps.github.io
 
 ### Site frame
 
-What the site build calls to give each page its header, footer and language switch.
+What the site build calls to give each page its frame.
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/lernapps.github.io: https://github.com/lernapps/lernapps.github.io :::
@@ -726,7 +673,7 @@ protocol: npm package @lernapps/site from git, pinned to a commit
 
 ## Catalog
 
-The pages where adults find an app for a topic and grade. The guide for assistants sends the assistant there first.
+The pages where adults find an app for a topic and grade; the guide sends the assistant there first.
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/apps: https://github.com/lernapps/apps :::

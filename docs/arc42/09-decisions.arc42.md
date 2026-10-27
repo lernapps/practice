@@ -4,11 +4,11 @@ The decisions are the owner's. Each one gives its context, the decision, what wa
 
 ## Issue instead of pull request
 
-**Context:** A pull request from a fork gets a token without write rights, so it gets no preview. Parents should not
-have to fork a repository. The attachment of an issue can be loaded by a workflow without a login (measured).
+**Context:** A pull request from a fork gets a token without write rights, so it gets no preview, and parents should
+not have to fork a repository. A workflow can load the attachment of an issue without a login (measured).
 **Decision:** A submission is a GitHub issue from a form, with the content attached as a ZIP file. **Rejected:** a pull
 request from a fork. **Consequences:** Any GitHub account can start a run (`risk-any-account-starts-runs`). The
-workflow loads from `github.com/user-attachments/files/` only. The submitter edits the issue to correct the content.
+submitter corrects the content by editing the issue.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
@@ -24,8 +24,8 @@ addresses: con-github, qg-quick, qg-understandable, risk-any-account-starts-runs
 
 **Context:** The tools that build the template need native programs, which the browser cannot load: WebContainers do
 not load the `.node` file that `vite-plus` needs (measured). **Decision:** GitHub Actions build the app on a runner.
-**Rejected:** a build in the browser. **Consequences:** The block depends on Actions and its runners
-(`risk-github-dependence`). A run takes minutes, not seconds.
+**Rejected:** a build in the browser. **Consequences:** The block depends on Actions (`risk-github-dependence`). A run
+takes minutes, not seconds.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
@@ -39,11 +39,10 @@ addresses: con-github, con-explainer-only, risk-github-dependence
 
 ## Content is data, not code
 
-**Context:** What a preview serves comes from any GitHub account and is served from the origin of lernapps.net
-(`con-shared-origin`). **Decision:** Only the built-in blocks of the explainer: no `src/components`, no `main.ts`, no
-`.vue`, `.ts`, `.js` or `.svg` file. **Rejected:** code in submissions. **Consequences:** The content has less
-freedom, and every preview looks like the template. Checks look at endings and names, not at what the text says
-(`risk-content-unchecked`).
+**Context:** A preview serves what any GitHub account sent, from the shared origin (`con-shared-origin`).
+**Decision:** Only the built-in blocks of the explainer: the build runs the template's tools over the data and never
+runs the content as a program. **Rejected:** code in submissions. **Consequences:** Content has less freedom, and every
+preview looks like the template. The checks look at endings and names, not at meaning (`risk-content-unchecked`).
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
@@ -57,10 +56,9 @@ addresses: qg-safe-input, con-explainer-only, con-shared-origin, risk-shared-ori
 
 ## Rights apart
 
-**Context:** The build runs the template's tools on files from outside. **Decision:** `intake` and `build` can only
-read; `publish` writes and runs only code of this repository; between them are artifacts, which count as data.
-**Rejected:** one job that reads, builds and writes. **Consequences:** More plumbing in the workflow: artifacts to pass
-on, a second check of the built site in `publish`, and a comment for the case that `build` fails.
+**Context:** The build runs the template's tools on files from outside. **Decision:** The jobs are split as
+`concept-rights-split` says. **Rejected:** one job that reads, builds and writes. **Consequences:** More plumbing:
+artifacts to pass on, a second check in `publish`, and a comment for the case that `build` fails.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
@@ -75,9 +73,10 @@ addresses: qg-safe-input, con-github, risk-any-account-starts-runs
 ## Nothing about the child is stored
 
 **Context:** The child's progress is private, and the preview is public. **Decision:** The app stores nothing about the
-child; the page counts answers in memory while it is open. A state that a later learning control keeps stays on the
-child's device. **Rejected:** a state kept by the platform, which would need a server (`con-static-pages`).
-**Consequences:** A reload or another device starts again, and the preview needs no sign-up.
+child; the page counts answers in memory while it is open, and a state that a later learning control keeps stays on the
+child's device. The rules of the platform for a bundle check it at every build (`qs-preview-collects-nothing`).
+**Rejected:** a state kept by the platform, which would need a server (`con-static-pages`). **Consequences:** A reload
+or another device starts again, and the preview needs no sign-up.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
@@ -91,12 +90,10 @@ addresses: qg-nothing-collected, con-static-pages, con-public-by-default
 
 ## Previews are temporary
 
-**Context:** A preparation is for one test, and its content comes from a family. **Decision:** A preview lives two
-weeks; a thumbs-up on the issue keeps it; closing the issue ends it; a daily cleanup removes what is over. The writes of
-`i/` on `gh-pages` are one commit without a parent, pushed with a lease. **Rejected:** permanent previews.
-**Consequences:** Removed content is in no history of the branch after the next write of `i/`. The deployment of the
-site and the pull request previews add ordinary commits that keep `i/` as it is. GitHub may keep unreachable commits
-for a while (`risk-history-kept-by-github`). A run that loses the lease is repeated.
+**Context:** A preparation is for one test, and its content comes from a family. **Decision:** A preview has an end
+that a person can lift (`concept-temporary-preview`). **Rejected:** permanent previews. **Consequences:** Removed
+content is in no history of the branch. GitHub may keep unreachable commits for a while
+(`risk-history-kept-by-github`).
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
@@ -110,11 +107,10 @@ addresses: qg-nothing-collected, con-public-by-default, risk-material-copyright,
 
 ## The template and the rules are taken and pinned
 
-**Context:** The explainer template and the rules of `lernapps check` for a bundle (`docs/pruefungen.md`) are
-owned by other repositories. **Decision:** This block takes both from lernapps/app-templates and lernapps/tooling and
-pins them by commit: `appTemplates.commit` in `package.json`, the same one as the tooling's. **Rejected:** a copy of the
-template or of the rules in this repository. **Consequences:** A new commit of the template is taken together with the
-tooling's and tried with a test issue (`risk-template-pin`). The rules cannot be loosened here.
+**Context:** The explainer template and the rules of `lernapps check` (`docs/pruefungen.md`) belong to other
+repositories. **Decision:** This block takes both at the commit that `appTemplates.commit` pins, the tooling's.
+**Rejected:** a copy of the template or of the rules here. **Consequences:** A new commit is tried with a test issue
+(`risk-template-pin`). The rules cannot be loosened here.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::

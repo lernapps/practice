@@ -8,7 +8,7 @@ Not a pull request: the issue itself.
 :::glossary-term
 id: term-submission
 title: Submission
-definition: A GitHub issue made from the form, with the content attached as a ZIP file. It is the unit that is checked, built, published and removed, and its number names the preview.
+definition: A GitHub issue made from the form, with the content attached as a ZIP file. Its number names the preview.
 :::
 ```
 
@@ -20,7 +20,7 @@ Not an app in the catalog: it ends.
 :::glossary-term
 id: term-preview
 title: Preview
-definition: The temporary app built from a submission, served at `lernapps.net/practice/i/<issue number>/`. It lives two weeks unless a person keeps it.
+definition: The temporary app built from a submission, served at `lernapps.net/practice/i/<issue number>/`.
 :::
 ```
 
@@ -32,7 +32,7 @@ Data for the explainer, never code.
 :::glossary-term
 id: term-content
 title: Content
-definition: The YAML, Markdown and image files below `src/` of a submission: the chapters, pages, explanations and tasks of an explainer.
+definition: The YAML, Markdown and image files below `src/` of a submission.
 :::
 ```
 
@@ -44,19 +44,7 @@ One archetype of the app templates.
 :::glossary-term
 id: term-explainer
 title: Explainer
-definition: The archetype that builds pages of content with an exercise on each page from content files. Every preview is an explainer.
-:::
-```
-
-## Intake
-
-The first job of a submission.
-
-```arc42
-:::glossary-term
-id: term-intake
-title: Intake
-definition: The job that reads the issue, loads and checks the ZIP file and unpacks it as data. It can only read.
+definition: The archetype that builds pages of content with an exercise on each page. Every preview is an explainer.
 :::
 ```
 
@@ -92,7 +80,7 @@ definition: A file set that one job of a workflow hands to the next. The receivi
 :::glossary-term
 id: term-practice-record
 title: Practice record
-definition: The file beside a preview that holds the issue number, the subject, grade and federal state, the day it was made, the day it ends and the id of the build. The cleanup reads the day from it, never from the time of a commit.
+definition: The file beside a preview that tells the cleanup when the preview ends. The cleanup reads the day from it, never from the time of a commit.
 :::
 ```
 
@@ -104,7 +92,7 @@ The branch Pages serves.
 :::glossary-term
 id: term-gh-pages
 title: gh-pages
-definition: The branch that GitHub Pages serves at `lernapps.net/practice/`. It holds the site at its root, the previews of submissions below `i/` and the previews of pull requests below `pr-preview/`.
+definition: The branch that GitHub Pages serves at `lernapps.net/practice/`, in three parts (chapter 7).
 :::
 ```
 
@@ -117,30 +105,6 @@ Why an edit may build nothing.
 id: term-fingerprint
 title: Fingerprint
 definition: A hash of the ZIP address and the fields, kept in the comment of the last run. The intake stops when the fingerprint is unchanged, unless the run is forced.
-:::
-```
-
-## Einreichung
-
-German for submission.
-
-```arc42
-:::glossary-term
-id: term-einreichung
-title: Einreichung
-definition: The name of the submission workflow, `einreichung.yml`, and of its file in `.github/workflows`.
-:::
-```
-
-## Aufräumen
-
-German for cleanup.
-
-```arc42
-:::glossary-term
-id: term-aufraeumen
-title: Aufräumen
-definition: The name of the cleanup workflow, `aufraeumen.yml`, which removes previews that are over.
 :::
 ```
 
@@ -164,6 +128,6 @@ Not the creator's assistant.
 :::glossary-term
 id: term-family-assistant
 title: Family's assistant
-definition: The AI assistant of a family, which writes the content from the family's school material and gives the parent the ZIP file; it reads `llms.txt`.
+definition: The AI assistant of a family, which writes the content from the family's school material; it reads `llms.txt`.
 :::
 ```

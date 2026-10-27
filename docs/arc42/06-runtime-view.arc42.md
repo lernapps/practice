@@ -1,18 +1,12 @@
 # Runtime View
 
-The scenarios show a submission from form to address, a rejection with its message, a repeated run, the end of a
-preview, the preparation by the family's assistant and the publication of the site. In each, the sequence shows which
-job holds which rights and what passes between jobs as an artifact. The
-[architecture of the whole system](https://lernapps.net/docs/architecture/) shows the same flow from the family's point
-of view; here the parts of the block take its place.
+The scenarios show which job holds which rights and what passes between jobs as an artifact. The
+[architecture of the whole system](https://lernapps.net/docs/architecture/) shows the same flow from the family's
+point of view.
 
 ## A submission becomes a preview
 
-The parent drags the ZIP file into the form and submits. GitHub starts the submission workflow. The job `intake`
-(read rights only) loads the attachment, checks it and unpacks it as data. The job `build` (read rights, no secret)
-takes the explainer template at the pinned commit, puts the submitted files in its `src/`, builds, checks the bundle
-and marks the pages `noindex`. The job `publish` (write rights, only code of this repository) checks the bundle again,
-writes `i/<issue>/` to `gh-pages` as one commit, waits until the address serves the build and comments the link.
+The parent submits the form. `intake` loads and checks the attachment, `build` makes the app, `publish` checks the site again, writes it to `gh-pages` and comments the address. The rights of each job are in `concept-rights-split`.
 
 ```arc42
 :::runtime-scenario
@@ -54,24 +48,19 @@ sequenceDiagram
     intake-->>build: artifact intake (data)
     flow->>build: job with contents read, no secret
     build->>templates: take the explainer template at the pinned commit
-    build->>build: replace src/, npm ci, npm run build
+    build->>build: build the app from the template and the submitted files
     build->>tooling: lernapps check on the bundle
-    build->>build: mark every page noindex
     build-->>publish: artifact site (data)
     flow->>publish: job with contents write, issues write, pages read
     publish->>lib: check the site again
-    publish->>previews: one commit without a parent with i/n/ and practice.json
+    publish->>previews: write i/n/ and practice.json
     publish->>github: wait for the address, update the comment with the link
     github-->>parent: the address of the preview
 ```
 
 ## A rejected submission, with a message
 
-Two things can go wrong, and both end in a comment that the parent hands to the assistant. If the intake finds
-problems (a missing declaration, an address that is not an attachment, a path outside `src/`, a file that is too
-large), no build starts and publish writes the list of what to change. If the build or the check fails, publish writes
-the first lines of the log (file, line, rule) and writes nothing to `gh-pages`. The comment of a failed build carries a
-fingerprint of the input, so that an edit that changes neither the ZIP address nor the fields does not build again.
+A problem found by the intake, or a failed build or check, ends in a comment that the parent hands to the assistant; nothing is written to `gh-pages`.
 
 ```arc42
 :::runtime-scenario
@@ -116,10 +105,7 @@ sequenceDiagram
 
 ## A run is repeated
 
-The parent edits the issue and attaches a corrected ZIP file; GitHub starts the workflow again. The intake compares the
-ZIP address and the fields with the fingerprint in the last comment and stops when they are equal, so a changed title
-builds nothing. A maintainer can start the workflow by hand with the issue number; that run is forced and builds again
-even with an equal input. A new preview replaces the old folder and starts the two weeks again.
+An edited issue starts the workflow again; a maintainer can start it by hand with the issue number, which forces a build. The intake stops when the fingerprint is unchanged (`term-fingerprint`). A new preview replaces the old folder and starts its days again.
 
 ```arc42
 :::runtime-scenario
@@ -154,7 +140,7 @@ sequenceDiagram
         github->>flow: event issue edited
     else a maintainer repeats the run
         maintainer->>github: Run workflow with the issue number
-        github->>flow: workflow_dispatch, forced
+        github->>flow: manual start, forced
     end
     flow->>intake: job intake
     intake->>github: read the issue and the fingerprint of the last comment
@@ -163,19 +149,14 @@ sequenceDiagram
     else
         intake-->>build: artifact intake (data)
         build-->>publish: artifact site (data)
-        publish->>previews: replace i/n/, the two weeks begin again
+        publish->>previews: replace i/n/
         publish->>github: update the comment
     end
 ```
 
 ## A preview ends
 
-The cleanup runs every day, when an issue is closed, and by hand. It starts from a fresh copy of `gh-pages`, reads
-`practice.json` of each folder `i/<n>/`, asks GitHub for the state of the issue and for thumbs-up reactions from
-accounts that are not bots, and removes what is over. When the issue is closed the preview is removed at once and
-without a note; after the day in `practice.json` it is removed unless a person gave a thumbs-up, with a short note in the
-issue. The result is one new commit without a parent, pushed with a lease; if another writer was faster, the cleanup
-starts again on the new state.
+The cleanup reads `practice.json` of each folder `i/<n>/`, asks GitHub for the issue and the thumbs-up, and removes what is over by `concept-temporary-preview`. If another writer was faster, it starts again on the new state.
 
 ```arc42
 :::runtime-scenario
@@ -204,24 +185,21 @@ sequenceDiagram
     participant previews as Previews on gh-pages
     github->>cleanup: schedule, issue closed or manual start
     cleanup->>expire: job with contents write, issues write
-    expire->>lib: fresh copy of gh-pages
-    lib->>previews: fetch the branch at depth one
+    expire->>lib: copy of gh-pages
+    lib->>previews: fetch the branch
     loop each folder i/n/
         expire->>previews: read practice.json
         expire->>github: state of the issue, thumbs-up of persons
         expire->>expire: keep or delete
     end
-    expire->>lib: one commit without a parent
-    lib->>previews: push with a lease against the state it started from
+    expire->>lib: write the change
+    lib->>previews: push
     expire->>github: short note in the issue of each expired preview
 ```
 
 ## The assistant prepares the content
 
-The family's assistant reads the guide and first looks in the catalog for an app that fits. If none does, it asks for
-the subject, the grade, the federal state and the day of the test, reads the photos, agrees the scope with the parent,
-reads what the explainer can do, writes the content and gives the parent the ZIP file and the link to the form. The
-photos go to the assistant's provider and never into the system.
+The assistant reads the guide, looks in the catalog first and otherwise agrees the scope with the parent, writes the content and hands over the ZIP file and the link to the form. The steps are in the skills (`bb-assistant-skills`).
 
 ```arc42
 :::runtime-scenario
@@ -267,9 +245,7 @@ sequenceDiagram
 
 ## The site is published
 
-A change of the documentation or the build goes through the pages workflow. The shared site action builds the site with
-`npm run build` and checks it with `npm run check`; on the main line the site is deployed to the root of `gh-pages`,
-and `i/` and `pr-preview/` stay. A pull request from the same repository gets a preview below `pr-preview/`.
+A change of the pages, the guide or the build goes through the pages workflow; a pull request from the same repository gets a preview. The writers of `gh-pages` are in chapter 7.
 
 ```arc42
 :::runtime-scenario

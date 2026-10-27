@@ -1,34 +1,14 @@
 # Cross-cutting Concepts
 
-The concepts that hold for several blocks. The platform-wide ones (one domain, privacy by construction, checked rather
-than declared, pinned sources) are in the [architecture of the whole system](https://lernapps.net/docs/architecture/);
-these are the ones that decide how this block is built.
-
-## Content is data, not code
-
-A submission is content for the explainer: YAML, Markdown and images below `src/`. Only the explainer's built-in blocks
-exist for it. `src/main.ts` and `src/components/` belong to the template and are not part of a submission, and
-scripts, SVG, HTML, JSON and Vue or TypeScript files are refused by ending. The build runs the template's tools over
-the data and never runs the content as a program. So content from any GitHub account runs no code under lernapps.net:
-the built app consists of the template's code and the content's data.
-
-```arc42
-:::concept
-id: concept-content-is-data
-title: Content is data, not code
-category: security
-:::
-```
+The platform-wide concepts are in the [architecture of the whole system](https://lernapps.net/docs/architecture/);
+these are the ones that decide how this block is built. Why they hold is in chapter 9.
 
 ## Rights apart
 
-A submission passes through jobs, and each holds only what it needs. `intake` reads the issue and loads the ZIP file;
-it can write nothing to GitHub. `build` has read access to the repository and no secret; it can neither change issues
-nor branches. `publish` can write `gh-pages` and the comment, and runs only code of this repository. Between them lie
-artifacts, which the next job treats as data: `publish` checks the built site again before it writes. Text from the
-issue never stands in a `run:` step; it reaches scripts through files and environment variables, and the scripts check
-it strictly (the issue number against `^[1-9][0-9]{0,8}$`, the attachment address against its one allowed form).
-Actions of others are pinned to commits.
+A submission passes through jobs, and each holds only the rights it needs: `intake` reads, `build` reads and has no
+secret, `publish` writes `gh-pages` and the comment and runs only code of this repository. Between them lie artifacts,
+which the next job treats as data. Text from an issue never stands in a `run:` step and is checked strictly where it is
+used. Tests of the repository hold the rights and the pins (`test/repo.test.ts`).
 
 ```arc42
 :::concept
@@ -38,25 +18,37 @@ category: security
 :::
 ```
 
+## Bounded input
+
+Everything from outside is checked by form and size, in two places: the intake reads the directory of the ZIP file
+before it unpacks anything, and `publish` checks the built site again. The limits live in one file
+(`actions/lib/limits.ts`), and a test compares them with the rules in [docs/regeln.md](../regeln.md).
+
+```arc42
+:::concept
+id: concept-bounded-input
+title: Bounded input
+category: security
+:::
+```
+
 ## Temporary preview
 
-A preview has an end. `practice.json` beside it holds the day, 14 days after the build. The rules, applied by the
-cleanup:
+`practice.json` beside a preview holds the day it ends. The cleanup decides by these rules:
 
 | Situation | Result |
 |---|---|
-| The issue is closed | The preview is removed at once, without a note, even with a thumbs-up |
+| The issue is closed | The preview is removed at once, without a note |
 | The day has not come | The preview stays |
-| The day has come and a person (not a bot) has reacted with a thumbs-up to the first field of the issue | The preview stays until the issue is closed |
-| The day has come and there is no such reaction | The preview is removed, with a short note in the issue |
+| The day has come and a person has given a thumbs-up (`term-keep-reaction`) | The preview stays until the issue is closed |
+| The day has come and there is no thumbs-up | The preview is removed, with a short note in the issue |
 | The issue no longer exists | The preview stays until the day, then it is removed without a note |
 | The folder has no readable `practice.json` for its own issue | The folder is removed at once |
 
-The cleanup runs daily, when an issue is closed and by hand (by default as a dry run). A new submission for the same
-issue replaces the folder and starts the days again. Every write of `i/` is one new commit without a parent, pushed
-with a lease against the state it started from, so that a removed preview is in no history of the branch; if the lease
-fails, the change is made again on the new state. The deployment of the site and the pull request previews add
-ordinary commits above and leave `i/` as it is; the next write of `i/` makes one commit of the branch again.
+Every write of `i/` on `gh-pages` is one new commit without a parent, pushed with a lease against the state it started
+from, so that a removed preview is in no history of the branch; a lost lease repeats the change. The deployment of the
+site and the pull request previews add ordinary commits and leave `i/` as it is. The length of a preview, the
+schedule and the dry run are in [docs/lebensdauer.md](../lebensdauer.md).
 
 ```arc42
 :::concept
@@ -66,59 +58,15 @@ category: operations
 :::
 ```
 
-## Nothing about the child is stored
-
-The app stores nothing about the child. The page counts answers in memory only, while it is open; the self-check is
-counted by the child. The explainer template can remember two choices on the device, and only when a content offers
-them: an AI tutor and loading videos directly; the content of a preparation offers neither. No answer, name or learning
-state is part of the content or stored in the repository, and the platform sees the content as data and never photos.
-A learning state that a later learning control keeps stays in the browser of the child's device (platform goal).
-The built app is checked for cookies and sending (`no-tracking`), for requests before a click
-(`no-request-before-click`) and for touching only its own data (`own-data-only`), and a failing rule stops the
-publication. The comments of the workflows repeat no field of the form.
-
-```arc42
-:::concept
-id: concept-nothing-stored
-title: Nothing about the child is stored
-category: privacy
-:::
-```
-
 ## One source for the guide
 
-The guide for assistants exists once, as the skills in `skills/`, and exists as `docs/llms.txt` only as their assembly.
-An assistant loads one file and needs no other, so the assembly copies what the flow names into one document; a skill
-installer gives the same text to assistants that install the skills. The checked-in `docs/llms.txt` must equal what the
-guide build produces, and a test says so. What belongs in the installed skill alone (when to use it, references, tables)
-is marked and stays out of the guide.
+The guide for assistants exists once, as the skills in `skills/`; `docs/llms.txt` is their assembly, and a test says
+the checked-in file equals the output of the guide build.
 
 ```arc42
 :::concept
 id: concept-one-guide-source
 title: One source for the guide
 category: documentation
-:::
-```
-
-## Bounded input
-
-Everything that comes from outside is checked in two places and by size. The attachment address must have the form
-`https://github.com/user-attachments/files/<number>/<name>.zip`; it is loaded with `curl` over https only, at most five
-redirects, 10 MB and 60 seconds, and the final address must lie at GitHub. The library reads the directory of the ZIP
-file before it unpacks anything and refuses what is not allowed: the folder `src/` is the only root (one folder around
-everything is accepted), names use `a-z A-Z 0-9 - _` and exactly one dot before the ending, no hidden file, no `..`, no
-absolute path, no backslash, no link or special file, no encrypted entry, at most six folders deep, only the endings
-`yaml`, `yml`, `md`, `png`, `jpg` and `webp`, at most 300 files, 25 MB unpacked, 10 MB per file. Sizes are checked in
-the directory and again while unpacking, with a hard limit on the output, so a directory that lies about sizes and
-overlapping entries are refused. Fields of the form have fixed lists and lengths. The limits live in one file
-(`actions/lib/limits.ts`) and a test compares them with the numbers in the documentation. `publish` repeats a check of
-the built site: number and size of files, names, endings, `noindex` on every page.
-
-```arc42
-:::concept
-id: concept-bounded-input
-title: Bounded input
-category: security
 :::
 ```
