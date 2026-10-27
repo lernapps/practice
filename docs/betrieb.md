@@ -19,6 +19,9 @@ Ein Build im Browser ist nicht möglich, weil die Bau-Werkzeuge native Programme
 | `.github/workflows/pages.yml` | Baut und prüft diese Seite und veröffentlicht sie auf `gh-pages` (siehe [Die Seite](#seite)). Die Pflichtprüfung heißt `site`. |
 | `.github/workflows/pr-preview.yml` | Eine Vorschau dieser Seite je Pull Request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | Die Texte (Deutsch und Englisch), das Bauskript und der Stil dieser Seite. |
+| `skills/` | Die drei Skills, aus denen die Anleitung für Assistenten besteht (siehe [Die Anleitung testen](anleitung-testen.md)). |
+| `scripts/llms.mjs` | Setzt `docs/llms.txt` aus den Skills zusammen (`npm run llms`). |
+| `scripts/try.ts` | Der lokale Probelauf: schickt ein ZIP durch Prüfung und Bau der Actions (`npm run try -- <zip>`). |
 | `docs/arc42/` | Die Architektur dieses Repos als arc42-Modell, nur auf Englisch. Das Bauskript prüft sie mit `arc42 validate --strict` und veröffentlicht sie unter [Architektur](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Lokale Composite-Actions mit der Logik. Jede hat eine `action.yml` und ein Skript in TypeScript ohne Abhängigkeiten. |
 | `actions/lib/` | Gemeinsamer Code: ZIP lesen und prüfen, Formular lesen, GitHub-Aufrufe, der Branch `gh-pages`. |
@@ -26,7 +29,7 @@ Ein Build im Browser ist nicht möglich, weil die Bau-Werkzeuge native Programme
 
 ## Die Seite {#seite}
 
-Diese Seite (`https://lernapps.net/practice/`) entsteht aus `docs/*.md` (Deutsch) und `docs/en/*.md` (Englisch, gleiche Dateinamen und gleiche Überschriften-Anker). `npm ci && npm run build && npm run check` baut sie in `_site/` und prüft sie, wie bei den anderen Seiten von lernapps.net. Die Überschrift einer Seite darf mit `{#anker}` enden. Ein Link auf eine andere Seite steht als Dateiname im Text (`regeln.md#angaben`) und wird zur Adresse in derselben Sprache. `docs/llms.txt` ist die Anleitung für Assistenten und wird unverändert als `llms.txt` ausgeliefert.
+Diese Seite (`https://lernapps.net/practice/`) entsteht aus `docs/*.md` (Deutsch) und `docs/en/*.md` (Englisch, gleiche Dateinamen und gleiche Überschriften-Anker). `npm ci && npm run build && npm run check` baut sie in `_site/` und prüft sie, wie bei den anderen Seiten von lernapps.net. Die Überschrift einer Seite darf mit `{#anker}` enden. Ein Link auf eine andere Seite steht als Dateiname im Text (`regeln.md#angaben`) und wird zur Adresse in derselben Sprache. `docs/llms.txt` ist die Anleitung für Assistenten. Sie entsteht aus `skills/` (`npm run llms`) und wird unverändert als `llms.txt` ausgeliefert.
 
 Auf dem Branch `gh-pages` liegen drei Dinge nebeneinander:
 

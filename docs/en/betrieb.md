@@ -19,6 +19,9 @@ A build in the browser is not possible, because the build tools need native prog
 | `.github/workflows/pages.yml` | Builds and checks this site and publishes it to `gh-pages` (see [The site](#seite)). The required check is called `site`. |
 | `.github/workflows/pr-preview.yml` | A preview of this site for every pull request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | The texts (German and English), the build script and the style of this site. |
+| `skills/` | The three skills the guide for assistants is made of (see [Testing the guide](anleitung-testen.md)). |
+| `scripts/llms.mjs` | Assembles `docs/llms.txt` from the skills (`npm run llms`). |
+| `scripts/try.ts` | The local trial run: sends a ZIP file through the checks and the build of the actions (`npm run try -- <zip>`). |
 | `docs/arc42/` | The architecture of this repository as an arc42 model, in English only. The build script validates it with `arc42 validate --strict` and publishes it as [Architecture](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Local composite actions with the logic. Each has an `action.yml` and a script in TypeScript without dependencies. |
 | `actions/lib/` | Shared code: read and check the ZIP file, read the form, GitHub calls, the branch `gh-pages`. |
@@ -26,7 +29,7 @@ A build in the browser is not possible, because the build tools need native prog
 
 ## The site {#seite}
 
-This site (`https://lernapps.net/practice/`) is built from `docs/*.md` (German) and `docs/en/*.md` (English, same file names and same heading anchors). `npm ci && npm run build && npm run check` builds it into `_site/` and checks it, as for the other sites of lernapps.net. A heading of a page may end with `{#anchor}`. A link to another page is written as the file name in the text (`regeln.md#angaben`) and becomes the address in the same language. `docs/llms.txt` is the guide for assistants and is delivered unchanged as `llms.txt`.
+This site (`https://lernapps.net/practice/`) is built from `docs/*.md` (German) and `docs/en/*.md` (English, same file names and same heading anchors). `npm ci && npm run build && npm run check` builds it into `_site/` and checks it, as for the other sites of lernapps.net. A heading of a page may end with `{#anchor}`. A link to another page is written as the file name in the text (`regeln.md#angaben`) and becomes the address in the same language. `docs/llms.txt` is the guide for assistants. It is made from `skills/` (`npm run llms`) and is delivered unchanged as `llms.txt`.
 
 Three things lie side by side on the branch `gh-pages`:
 

@@ -13,7 +13,8 @@
     "build": "./scripts/build.sh",
     "check": "./scripts/frame.sh check --site /practice/",
     "llms": "node scripts/llms.mjs",
-    "test": "node --test --test-reporter=spec \"test/*.test.ts\""
+    "test": "node --test --test-reporter=spec \"test/*.test.ts\"",
+    "try": "node scripts/try.ts"
   },
   "engines": {
     "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
