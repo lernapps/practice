@@ -4,8 +4,8 @@
 // stays small. If someone else pushed in between, the lease fails and the change is made again on the new state.
 // Only Node's own modules and the git command line.
 import { spawnSync } from "node:child_process";
-import { mkdirSync, rmSync } from "node:fs";
-import { dirname } from "node:path";
+import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 export const BRANCH = "gh-pages";
 
@@ -96,4 +96,28 @@ export async function changeBranch(
     await new Promise((done) => setTimeout(done, (options.backoff ?? 3000) * attempt));
   }
   throw new Error("unreachable");
+}
+
+/** The root of gh-pages: .nojekyll (so Pages serves files that start with _) and a page that says what this is. */
+const ROOT_PAGE = `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Vorübergehende Vorschauen</title>
+  </head>
+  <body>
+    <main>
+      <h1>Vorübergehende Vorschauen</h1>
+      <p>Hier liegen Vorschauen von Lern-Apps, die Familien eingereicht haben. Sie werden nach zwei Wochen gelöscht.</p>
+      <p><a href="https://github.com/lernapps/practice">Mehr dazu im Repo lernapps/practice</a></p>
+    </main>
+  </body>
+</html>
+`;
+
+export function ensureRoot(dir: string): void {
+  if (!existsSync(join(dir, ".nojekyll"))) writeFileSync(join(dir, ".nojekyll"), "");
+  if (!existsSync(join(dir, "index.html"))) writeFileSync(join(dir, "index.html"), ROOT_PAGE);
 }

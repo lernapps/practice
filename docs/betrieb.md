@@ -38,7 +38,7 @@ Eine Wiederholung baut immer neu, auch wenn ZIP-Adresse und Angaben gleich sind.
 ## Einstellungen im Repo (nur Verwaltende)
 
 - **Issues** eingeschaltet.
-- **Pages**: Quelle „Deploy from a branch“, Branch `gh-pages`, Ordner `/ (root)`. Den Branch legt die erste Veröffentlichung an. Erst danach ist die Auswahl möglich.
+- **Pages**: Quelle „Deploy from a branch“, Branch `gh-pages`, Ordner `/ (root)`. Den Branch legt der erste Lauf von „Aufräumen“ an (ohne `dry-run`) oder die erste Veröffentlichung. Erst danach ist die Auswahl möglich.
 - **Adresse**: Für ein Repo der Organisation `lernapps` liefert Pages `https://lernapps.net/practice/`. Das hängt an der Domain der Organisation (`lernapps.github.io`), nicht an diesem Repo.
 - **Actions**: erlaubt; „Workflow permissions“ müssen nicht auf „Read and write“ stehen, die Workflows setzen ihre Rechte selbst.
 - **Reaktionen**: Die Regel „👍 hält die Vorschau“ gilt für Reaktionen auf das Issue (das erste Feld), nicht auf Kommentare.

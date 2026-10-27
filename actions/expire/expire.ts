@@ -8,7 +8,8 @@
 //   - The issue does not exist (any more)           -> as above, after the day, without a note.
 //   - No readable practice.json, or one for another issue -> delete now: the writer (publish) puts the record in with
 //                                                      the files in one commit, so such a folder was never ours.
-//   - Entries of i/ whose name is not a number, and everything outside i/ -> never touched.
+//   - Entries of i/ whose name is not a number, and everything outside i/ -> never touched, except that .nojekyll and
+//     the root page are made if they are missing (the first run creates the branch).
 // The date comes from practice.json, never from the time of a commit (the branch is rewritten with every change).
 //
 //   node actions/expire/expire.ts
@@ -19,7 +20,7 @@ import { appendFileSync, existsSync, readdirSync, readFileSync, rmSync } from "n
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { apiFromEnv, expiredComment, EXPIRED_MARKER, forgetFingerprint, paginate, upsertComment, type Api } from "../lib/github.ts";
-import { changeBranch } from "../lib/pages.ts";
+import { changeBranch, ensureRoot } from "../lib/pages.ts";
 
 export type Decision =
   | { action: "keep"; reason: "not-yet" | "thumbs-up" }
@@ -113,7 +114,8 @@ export async function expire(env: NodeJS.ProcessEnv, api: Api & { repo: string }
     },
     async (dir) => {
       outcomes = await sweep(dir, api, api.repo, now, only);
-      return outcomes.some((o) => o.decision.action === "delete");
+      ensureRoot(dir); // also creates gh-pages before the first submission, so Pages can be switched on
+      return true;
     },
   );
   const lines = outcomes.map((o) => `#${o.folder}: ${o.decision.action} (${o.decision.reason})`);

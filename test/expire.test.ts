@@ -119,10 +119,13 @@ describe("expire on a branch", () => {
     assert.deepEqual([...folders].sort(), ["1", "2", "3", "5", "abc"]);
   });
 
-  it("is quiet when gh-pages does not exist yet", async () => {
+  it("creates gh-pages with only the root files when it does not exist yet, but not in a dry run", async () => {
     const remote = bareRemote();
-    assert.deepEqual(await expire(env(remote), api()), []);
+    assert.deepEqual(await expire(env(remote, { DRY_RUN: "true" }), api()), []);
     assert.equal(pagesFiles(remote), undefined);
+    assert.deepEqual(await expire(env(remote), api()), []);
+    assert.deepEqual(pagesFiles(remote), [".nojekyll", "index.html"]);
+    assert.deepEqual(await expire(env(remote), api()), []); // nothing more to do the second time
   });
 
   it("refuses a bad issue number", async () => {

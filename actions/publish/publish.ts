@@ -26,7 +26,7 @@ import {
   type Api,
 } from "../lib/github.ts";
 import { LIFETIME_DAYS, MAX_SITE_BYTES, MAX_SITE_FILES, SITE_EXTENSIONS } from "../lib/limits.ts";
-import { changeBranch } from "../lib/pages.ts";
+import { changeBranch, ensureRoot } from "../lib/pages.ts";
 import type { Result } from "../validate/validate.ts";
 
 export interface SiteReport {
@@ -98,24 +98,6 @@ export function practiceRecord(meta: NonNullable<Result["meta"]>, built: string,
   };
 }
 
-const ROOT_PAGE = `<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noindex">
-    <title>Vorübergehende Vorschauen</title>
-  </head>
-  <body>
-    <main>
-      <h1>Vorübergehende Vorschauen</h1>
-      <p>Hier liegen Vorschauen von Lern-Apps, die Familien eingereicht haben. Sie werden nach zwei Wochen gelöscht.</p>
-      <p><a href="https://github.com/lernapps/practice">Mehr dazu im Repo lernapps/practice</a></p>
-    </main>
-  </body>
-</html>
-`;
-
 /** Writes the preview into the checkout of gh-pages: replaces i/<issue>/, keeps .nojekyll and a root page. */
 export function writePreview(pagesDir: string, siteDir: string, issue: number, record: Practice): void {
   const target = join(pagesDir, "i", String(issue));
@@ -123,8 +105,7 @@ export function writePreview(pagesDir: string, siteDir: string, issue: number, r
   mkdirSync(join(pagesDir, "i"), { recursive: true });
   cpSync(siteDir, target, { recursive: true });
   writeFileSync(join(target, "practice.json"), `${JSON.stringify(record, null, 2)}\n`);
-  if (!existsSync(join(pagesDir, ".nojekyll"))) writeFileSync(join(pagesDir, ".nojekyll"), "");
-  if (!existsSync(join(pagesDir, "index.html"))) writeFileSync(join(pagesDir, "index.html"), ROOT_PAGE);
+  ensureRoot(pagesDir);
 }
 
 /** Whether the preview's address serves this build, within the timeout. */
