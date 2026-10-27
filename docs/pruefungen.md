@@ -52,6 +52,7 @@ Diese Regeln der Plattform gelten für den Katalog, nicht für eine Vorschau auf
 | `dependency-licence`, `app-content-guide` | Beide brauchen das Repo einer App. Die Abhängigkeiten stehen in der Lock-Datei der Vorlage. Eine Vorschau hat keinen eigenen Inhalts-Leitfaden. |
 | Inhaltliche Prüfung (`learners-act`, `learner-text-german`, `third-party-licence`, `no-learner-data-in-texts`) | Das beurteilt ein Mensch bei der Aufnahme in den Katalog. Bis dahin gelten Deine drei Erklärungen. |
 | Impressum und Datenschutz der App | Die Seiten der Vorlage verlinken sie schon auf `lernapps.net`. Eine eigene Prüfung entfällt. |
+| Formatierung und Stil der Dateien | Eine Vorschau scheitert nie an der Schreibweise (Einrückung, Leerzeilen). Wir führen keine Formatprüfung aus und formatieren Deinen Inhalt nicht um. Nur die Regeln des Explainers für den Inhalt zählen. |
 | Eintrag in Suchmaschinen | Die Vorschau soll nicht gefunden werden. Darum steht `noindex` auf jeder Seite. |
 
 ## Stufe 3: Veröffentlichung (Job `publish`)

@@ -140,9 +140,11 @@ describe("endings", () => {
     }
   });
   it("refuses double endings, either way round", () => {
-    assert.ok(codes(withFile("src/a.png.js")).includes("name-double-extension"));
+    assert.ok(codes(withFile("src/a.png.js")).includes("extension"));
+    assert.ok(codes(withFile("src/a.test.ts")).includes("extension"));
     assert.ok(codes(withFile("src/a.js.png")).includes("name-double-extension"));
-    assert.ok(codes(withFile("src/a.yaml.vue")).includes("name-double-extension"));
+    assert.ok(codes(withFile("src/a.yaml.vue")).includes("extension"));
+    assert.ok(codes(withFile("src/a.yaml.yaml")).includes("name-double-extension"));
   });
   it("refuses no ending, and a name that is only an ending", () => {
     assert.ok(codes(withFile("src/Makefile")).includes("name-no-extension"));
@@ -152,6 +154,12 @@ describe("endings", () => {
     assert.ok(codes(withFile("src/main.ts")).length > 0);
     assert.equal(pathProblem("src/components/", false)?.code, "path-template");
     assert.equal(pathProblem("src/components/a.yaml", true)?.code, "path-template");
+  });
+  it("tells a components folder once, whatever is in it", () => {
+    const many = Array.from({ length: 40 }, (_, i) => ({ name: `src/components/C${i}.test.ts`, data: "x" }));
+    const problems = inspectZip(buildZip([...goodSpecs(), { name: "src/components/" }, ...many])).problems;
+    assert.deepEqual(problems.map((p) => p.code), ["path-template"]);
+    assert.match(problems[0]?.text ?? "", /40 weitere/);
   });
   it("refuses a missing src/app.yaml", () => {
     assert.ok(codes([{ name: "src/x.yaml", data: "x" }]).includes("no-app-yaml"));

@@ -1,7 +1,7 @@
 name: Check
 
-# The tests of the scripts in actions/ (node:test, no dependencies), the workflows (actionlint) and the files that
-# people read. The job `check` always runs and reports the result: the one check to require.
+# The tests of the scripts in actions/ (node:test, no dependencies), the build step on a runner with a minimal
+# fixture, and the workflows (actionlint). The job `check` always runs and reports the result: the one check to require.
 on:
   push:
     branches: [main]
@@ -25,6 +25,25 @@ jobs:
           node-version: 22
       - run: npm test
 
+  # The build step on a real runner, with a minimal fixture instead of an issue: install app-templates at the pinned
+  # commit, build, check the bundle, mark the pages, check the site as publish does. Only this repo's code and the
+  # fixture run here; nothing is written to any branch.
+  build-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: node test/fixtures/make-intake.ts _intake
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: intake
+          path: _intake
+          retention-days: 1
+      - uses: ./actions/build
+      - run: node test/fixtures/check-site.ts _out/site
+
   actionlint:
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +51,7 @@ jobs:
       - run: go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.7 -color
 
   check: # required status check: always runs, fails when a job above failed or was cancelled
-    needs: [test, actionlint]
+    needs: [test, build-smoke, actionlint]
     if: always()
     runs-on: ubuntu-latest
     steps:

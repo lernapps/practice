@@ -1,0 +1,22 @@
+title: Seite
+description: Eine Seite mit Text und einer Übung.
+blocks:
+  - type: section
+    id: text
+    title: Text
+    blocks:
+      - type: text
+        text: Ein Hund ist ein Tier. Eine Rose ist eine Pflanze.
+  - type: section
+    id: uebung
+    title: Übung
+    blocks:
+      - type: matching
+        id: zuordnen
+        text: Ordne jedem Wort seine Gruppe zu.
+        pairs:
+          - { left: Hund, right: Tier }
+          - { left: Rose, right: Pflanze }
+        explanation: Ein Hund gehört zu den Tieren, eine Rose zu den Pflanzen.
+        links:
+          - { title: Tiere (Wikipedia), url: "https://de.wikipedia.org/wiki/Tiere" }

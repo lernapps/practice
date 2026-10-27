@@ -105,6 +105,14 @@ export function pathProblem(name: string, file: boolean): Problem | undefined {
       continue;
     }
     const dots = part.split(".").length - 1;
+    const lastEnding = part.slice(part.lastIndexOf(".") + 1).toLowerCase();
+    // a name that ends in a forbidden ending is told as that (BinomBild.test.ts is code), before the count of dots
+    if (dots >= 1 && !ALLOWED_EXTENSIONS.includes(lastEnding)) {
+      return problem(
+        "extension",
+        `Die Datei \`${shown}\` hat eine nicht erlaubte Endung. Erlaubt sind: ${ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(", ")}. Programmcode, SVG-Bilder und Komponenten (.vue, .ts, .js, .svg) gehören nicht in eine Einreichung.`,
+      );
+    }
     if (dots !== 1) {
       return problem(
         dots === 0 ? "name-no-extension" : "name-double-extension",
@@ -315,6 +323,15 @@ export function inspectZip(buffer: Buffer): Inspection {
     }
     if (method !== 0 && method !== 8) {
       problems.push(problem("method", `Die Datei \`${shown}\` ist auf eine nicht unterstützte Art gepackt.`));
+      continue;
+    }
+    if (name === "src/main.ts" || name === "src/components" || name.startsWith("src/components/")) {
+      problems.push(
+        problem(
+          "path-template",
+          `\`${shown}\` gehört zur Vorlage und nicht in eine Einreichung. Eigene Vue-Komponenten und Programmcode gibt es in einer Vorschau nicht: Lass \`src/components/\` und \`src/main.ts\` weg und nutze nur die Bausteine, die der Explainer in YAML kennt.`,
+        ),
+      );
       continue;
     }
     const bad = pathProblem(name, !isDirectory);
