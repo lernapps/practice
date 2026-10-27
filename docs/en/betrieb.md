@@ -60,7 +60,7 @@ Whoever has write access can repeat the run for an existing issue without attach
 1. In the repository open "Actions" and choose "Einreichung".
 2. Click "Run workflow" and enter the number of the issue (`issue`).
 
-A repetition always builds again, even if the ZIP address and details are the same. The clean-up can be started by hand in the same way. By default it is a dry run: it shows in the summary what it would delete and changes nothing. With `dry-run` off it really deletes; with `issue` it affects only one issue.
+A repetition always builds again, even if the ZIP address and details are the same. For a test without a browser, the input `zip_url` takes the ZIP file from an address instead of the issue, with the same limits and checks; only addresses that start with `https://raw.githubusercontent.com/lernapps/` or `https://raw.githubusercontent.com/mrsimpson/test-lernkontrolle/` (`MAINTAINER_ZIP_PREFIXES` in `actions/lib/limits.ts`) and GitHub attachments are allowed. The clean-up can be started by hand in the same way. By default it is a dry run: it shows in the summary what it would delete and changes nothing. With `dry-run` off it really deletes; with `issue` it affects only one issue.
 
 ## Settings in the repository (administrators only) {#einstellungen}
 

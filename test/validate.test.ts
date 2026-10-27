@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { curlDownload, intake, type Download } from "../actions/validate/validate.ts";
+import { curlDownload, intake, maintainerZipUrl, type Download } from "../actions/validate/validate.ts";
 import { buildZip, goodSpecs } from "./zip-builder.ts";
 import { issueBody, tmp } from "./support.ts";
 
@@ -95,5 +95,64 @@ describe("the download", () => {
     for (const bad of ["http://github.com/user-attachments/files/1/a.zip", "https://example.com/a.zip", "file:///etc/passwd", "https://github.com/user-attachments/files/1/a.zip?x=1", "-o/etc/x", "https://github.com/user-attachments/files/1/a.zip\nx"]) {
       assert.equal(curlDownload(bad).problem?.code, "zip-url", bad);
     }
+  });
+});
+
+describe("a maintainer's test run with zip_url", () => {
+  const RAW = "https://raw.githubusercontent.com/lernapps/practice/main/test/fixtures/probe.zip";
+  it("loads the ZIP file from the address given instead of the issue, and checks it the same way", () => {
+    const asked: string[] = [];
+    const result = run(issueBody(), (url) => (asked.push(url), { buffer: buildZip(goodSpecs()) }), { zipUrl: RAW, force: true });
+    assert.equal(result.ok, true);
+    assert.deepEqual(asked, [RAW]);
+    assert.equal(result.zip?.url, RAW);
+    const bad = run(issueBody(), () => ({ buffer: buildZip([{ name: "src/app.yaml", data: "x" }, { name: "src/a.js", data: "x" }]) }), { zipUrl: RAW });
+    assert.ok(bad.problems.some((p) => p.code === "extension"));
+  });
+  it("needs no ZIP in the issue then", () => {
+    const result = run(issueBody({ "ZIP-Datei": "_No response_" }), () => ({ buffer: buildZip(goodSpecs()) }), { zipUrl: RAW });
+    assert.equal(result.ok, true);
+  });
+  it("leaves the issue's address when zip_url is empty", () => {
+    const asked: string[] = [];
+    run(issueBody(), (url) => (asked.push(url), { buffer: buildZip(goodSpecs()) }), { zipUrl: "" });
+    assert.deepEqual(asked, ["https://github.com/user-attachments/files/34026717/vorbereitung.zip"]);
+  });
+  it("accepts only the fixed prefixes and attachment addresses", () => {
+    for (const url of [
+      RAW,
+      "https://raw.githubusercontent.com/lernapps/tooling/abc123/x/probe.zip",
+      "https://raw.githubusercontent.com/mrsimpson/test-lernkontrolle/main/zips/probe-1.zip",
+      "https://github.com/user-attachments/files/34026717/vorbereitung.zip",
+    ]) {
+      assert.equal(maintainerZipUrl(url), true, url);
+    }
+    for (const url of [
+      "https://raw.githubusercontent.com/lernapps-evil/x/main/a.zip",
+      "https://raw.githubusercontent.com/mrsimpson/other/main/a.zip",
+      "https://raw.githubusercontent.com/mrsimpson/test-lernkontrolle-x/main/a.zip",
+      "https://raw.githubusercontent.com/lernapps/../evil/main/a.zip",
+      "https://raw.githubusercontent.com/lernapps/x/main/a.zip?x=1",
+      "https://raw.githubusercontent.com/lernapps/x/main/a.zip#x",
+      "https://raw.githubusercontent.com/lernapps/x/main/a.txt",
+      "http://raw.githubusercontent.com/lernapps/x/main/a.zip",
+      "https://example.org/lernapps/a.zip",
+      "https://raw.githubusercontent.com/lernapps/",
+      "https://raw.githubusercontent.com/lernapps/x/main/a b.zip",
+    ]) {
+      assert.equal(maintainerZipUrl(url), false, url);
+    }
+  });
+  it("refuses another address without a download", () => {
+    const result = run(issueBody(), never, { zipUrl: "https://example.org/a.zip" });
+    assert.equal(result.ok, false);
+    assert.deepEqual(result.problems.map((p) => p.code), ["zip-url"]);
+  });
+  it("is set only through env in the workflow, never in a run: step", () => {
+    const workflow = readFileSync(new URL("../.github/workflows/einreichung.yml", import.meta.url), "utf8");
+    assert.match(workflow, /zip_url:\n\s+description: [^\n]+\n\s+required: false/);
+    assert.match(workflow, /zip-url: \$\{\{ inputs\.zip_url \}\}/);
+    const action = readFileSync(new URL("../actions/validate/action.yml", import.meta.url), "utf8");
+    assert.match(action, /ZIP_URL: \$\{\{ inputs\.zip-url \}\}/);
   });
 });

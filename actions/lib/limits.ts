@@ -32,6 +32,15 @@ export const SVG_FILE = /^src\/images\/[a-z0-9]+(-[a-z0-9]+)*\.svg$/;
 /** Files of the template that create writes into every app: ignored in a ZIP file, never unpacked. */
 export const TEMPLATE_FILES: readonly string[] = ["src/main.ts"];
 
+/**
+ * Where a maintainer's test run may take a ZIP file from instead of the issue (workflow_dispatch, input zip_url): these
+ * prefixes only, besides the attachment addresses. A fixed list, no pattern for other hosts.
+ */
+export const MAINTAINER_ZIP_PREFIXES: readonly string[] = [
+  "https://raw.githubusercontent.com/lernapps/",
+  "https://raw.githubusercontent.com/mrsimpson/test-lernkontrolle/",
+];
+
 /** The preview is served for this long. */
 export const LIFETIME_DAYS = 14;
 

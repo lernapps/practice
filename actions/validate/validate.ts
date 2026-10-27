@@ -5,7 +5,8 @@
 // comment.
 //
 //   node actions/validate/validate.ts            environment: GITHUB_TOKEN, GITHUB_REPOSITORY, ISSUE_NUMBER, FORCE,
-//                                                 OUT_DIR (default _intake), GITHUB_OUTPUT
+//                                                 ZIP_URL (a maintainer's test run: the ZIP file from there instead
+//                                                 of the issue), OUT_DIR (default _intake), GITHUB_OUTPUT
 //
 // Output folder: result.json (always), and for a valid submission meta.json and tree/src/… (the unpacked files).
 import { spawnSync } from "node:child_process";
@@ -15,7 +16,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { apiFromEnv, COMMENT_MARKER, fingerprintIn, paginate, type Api } from "../lib/github.ts";
 import { isSubmission, readDeclarations, readMeta, readZipUrl, sections } from "../lib/form.ts";
-import { DOWNLOAD_TIMEOUT_SECONDS, MAX_DOWNLOAD_BYTES } from "../lib/limits.ts";
+import { DOWNLOAD_TIMEOUT_SECONDS, MAINTAINER_ZIP_PREFIXES, MAX_DOWNLOAD_BYTES } from "../lib/limits.ts";
 import { extractZip, inspectZip, type Problem } from "../lib/zip.ts";
 
 export interface Result {
@@ -40,11 +41,22 @@ const ATTACHMENTS = /^https:\/\/github\.com\/user-attachments\/files\/\d{1,20}\/
 const FINAL_HOST = /^https:\/\/([a-z0-9-]+\.)*(githubusercontent\.com|github\.com)\//;
 
 /**
+ * Whether a maintainer's test run may load a ZIP file from `url`: an attachment address, or a .zip below one of
+ * MAINTAINER_ZIP_PREFIXES, in plain characters, without "..", a query or a fragment.
+ */
+export function maintainerZipUrl(url: string): boolean {
+  if (ATTACHMENTS.test(url)) return true;
+  if (!/^[A-Za-z0-9:/._%+~-]{1,400}\.zip$/.test(url) || url.split("/").some((part) => part === ".." || part === ".")) return false;
+  return MAINTAINER_ZIP_PREFIXES.some((prefix) => url.startsWith(prefix) && url.length > prefix.length);
+}
+
+/**
  * curl -L with limits: https only (also after a redirect), at most 5 redirects, 10 MB, a time limit; no shell, the
- * address was checked against ATTACHMENTS before. The final address must still be on GitHub.
+ * address was checked before (ATTACHMENTS from the form, maintainerZipUrl for a test run). The final address must
+ * still be on GitHub.
  */
 export const curlDownload: Download = (url) => {
-  if (!ATTACHMENTS.test(url)) return { problem: { code: "zip-url", text: "Die Adresse der ZIP-Datei ist nicht erlaubt." } };
+  if (!maintainerZipUrl(url)) return { problem: { code: "zip-url", text: "Die Adresse der ZIP-Datei ist nicht erlaubt." } };
   const folder = join(process.env["RUNNER_TEMP"] || "/tmp", `zip-${process.pid}`);
   mkdirSync(folder, { recursive: true });
   const file = join(folder, "download.zip");
@@ -110,6 +122,8 @@ interface Options {
   previous?: string | undefined;
   /** Run again even when nothing changed (workflow_dispatch). */
   force?: boolean;
+  /** A maintainer's test run (workflow_dispatch, zip_url): the ZIP file from here instead of the issue's field. */
+  zipUrl?: string;
 }
 
 /** The whole intake for an issue whose text is known. Writes `outDir`. */
@@ -128,8 +142,12 @@ export function intake(options: Options): Result {
   const problems: Problem[] = [];
   const { meta, problems: metaProblems } = readMeta(found);
   problems.push(...metaProblems, ...readDeclarations(found));
-  const { url, problems: zipProblems } = readZipUrl(found);
+  const given = options.zipUrl === undefined || options.zipUrl === "" ? undefined : options.zipUrl;
+  const { url, problems: zipProblems } = given === undefined ? readZipUrl(found) : { url: given, problems: [] };
   problems.push(...zipProblems);
+  if (given !== undefined && !maintainerZipUrl(given)) {
+    problems.push({ code: "zip-url", text: "Die Adresse der ZIP-Datei des Testlaufs ist nicht erlaubt." });
+  }
   const fail = (extra: Problem[] = []): Result =>
     write({ version: 1, issue, relevant: true, ok: false, problems: [...problems, ...extra] });
 
@@ -207,6 +225,7 @@ async function main(): Promise<number> {
       download: curlDownload,
       previous,
       force: process.env["FORCE"] === "true",
+      zipUrl: process.env["ZIP_URL"] ?? "",
     });
     output("relevant", String(result.relevant));
     output("ok", String(result.ok));

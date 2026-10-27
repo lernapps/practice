@@ -60,7 +60,7 @@ Wer Schreibrechte hat, kann den Lauf für ein bestehendes Issue wiederholen, ohn
 1. Öffne im Repo „Actions“ und wähle „Einreichung“.
 2. Klicke auf „Run workflow“ und trage die Nummer des Issues ein (`issue`).
 
-Eine Wiederholung baut immer neu, auch wenn ZIP-Adresse und Angaben gleich sind. Das Aufräumen lässt sich genauso von Hand starten. Es ist standardmäßig ein Trockenlauf: er zeigt in der Zusammenfassung, was er löschen würde, und ändert nichts. Mit `dry-run` aus löscht er wirklich; mit `issue` betrifft es nur ein Issue.
+Eine Wiederholung baut immer neu, auch wenn ZIP-Adresse und Angaben gleich sind. Für einen Test ohne Browser nimmt die Eingabe `zip_url` die ZIP-Datei von einer Adresse statt aus dem Issue, mit denselben Grenzen und Prüfungen; erlaubt sind nur Adressen, die mit `https://raw.githubusercontent.com/lernapps/` oder `https://raw.githubusercontent.com/mrsimpson/test-lernkontrolle/` beginnen (`MAINTAINER_ZIP_PREFIXES` in `actions/lib/limits.ts`), und Anhänge von GitHub. Das Aufräumen lässt sich genauso von Hand starten. Es ist standardmäßig ein Trockenlauf: er zeigt in der Zusammenfassung, was er löschen würde, und ändert nichts. Mit `dry-run` aus löscht er wirklich; mit `issue` betrifft es nur ein Issue.
 
 ## Einstellungen im Repo (nur Verwaltende) {#einstellungen}
 

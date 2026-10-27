@@ -22,6 +22,9 @@ inputs:
   force:
     description: "true: run again although the ZIP address and the fields are the same as in the last run (workflow_dispatch)"
     default: "false"
+  zip-url:
+    description: "A maintainer's test run (workflow_dispatch): load the ZIP file from this address instead of the issue; only the prefixes of MAINTAINER_ZIP_PREFIXES in actions/lib/limits.ts and attachment addresses"
+    default: ""
 outputs:
   unchanged:
     description: "true when the ZIP address and the fields are the same as in the last run: nothing to do"
@@ -45,6 +48,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.token }}
         ISSUE_NUMBER: ${{ inputs.issue }}
         FORCE: ${{ inputs.force }}
+        ZIP_URL: ${{ inputs.zip-url }}
         OUT_DIR: ${{ github.workspace }}/_intake
     - if: always()
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
