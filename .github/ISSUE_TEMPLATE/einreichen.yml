@@ -1,0 +1,79 @@
+name: Vorbereitung einreichen
+description: Reiche den Inhalt einer Lern-App als ZIP ein. Daraus entsteht eine Vorschau, die nach zwei Wochen gelöscht wird.
+title: "Vorbereitung: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hier reichst Du den Inhalt einer Lern-App ein, die Dein Assistent für eine Klassenarbeit erstellt hat.
+        Daraus baut GitHub eine Vorschau, die Du und Dein Kind zum Üben öffnen können.
+        Die Vorschau wird nach zwei Wochen automatisch gelöscht.
+        Der Lernstand bleibt im Browser Deines Kindes. Er wird nirgends gespeichert.
+  - type: input
+    id: fach
+    attributes:
+      label: Fach
+      description: Zum Beispiel Mathematik, Religion oder Biologie.
+    validations:
+      required: true
+  - type: dropdown
+    id: klassenstufe
+    attributes:
+      label: Klassenstufe
+      options:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+        - "6"
+        - "7"
+        - "8"
+        - "9"
+        - "10"
+        - "11"
+        - "12"
+        - "13"
+    validations:
+      required: true
+  - type: dropdown
+    id: bundesland
+    attributes:
+      label: Bundesland
+      options:
+        - Baden-Württemberg
+        - Bayern
+        - Berlin
+        - Brandenburg
+        - Bremen
+        - Hamburg
+        - Hessen
+        - Mecklenburg-Vorpommern
+        - Niedersachsen
+        - Nordrhein-Westfalen
+        - Rheinland-Pfalz
+        - Saarland
+        - Sachsen
+        - Sachsen-Anhalt
+        - Schleswig-Holstein
+        - Thüringen
+    validations:
+      required: true
+  - type: textarea
+    id: zip
+    attributes:
+      label: ZIP-Datei
+      description: Ziehe die ZIP-Datei Deines Assistenten in dieses Feld und warte, bis ein Link erscheint.
+    validations:
+      required: true
+  - type: checkboxes
+    id: erklaerungen
+    attributes:
+      label: Erklärungen
+      options:
+        - label: Der Inhalt ist selbst erstellt (auch mit KI-Hilfe). Es ist nichts aus Büchern oder Arbeitsblättern abgeschrieben, und er enthält keine Fotos von Material.
+          required: true
+        - label: Der Inhalt enthält keine persönlichen Daten (Namen, Schule, Klasse, Lehrkraft).
+          required: true
+        - label: Ich erlaube, dass der Inhalt zwei Wochen lang veröffentlicht wird. Bei einer späteren Aufnahme in den Katalog gilt CC BY 4.0, und ich bin Urheberin oder Urheber.
+          required: true
