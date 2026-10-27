@@ -10,6 +10,8 @@
   },
   "type": "module",
   "scripts": {
+    "build": "./scripts/build.sh",
+    "check": "./scripts/frame.sh check --site /practice/",
     "test": "node --test --test-reporter=spec \"test/*.test.ts\""
   },
   "engines": {
@@ -21,5 +23,9 @@
     "archetypes": [
       "explainer"
     ]
+  },
+  "devDependencies": {
+    "@lernapps/site": "github:lernapps/lernapps.github.io#e350ca369a216eb1404d48505e1a9466a375c7c5",
+    "marked": "18.1.1"
   }
 }

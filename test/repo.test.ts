@@ -116,7 +116,7 @@ describe("the docs", () => {
     for (const parameter of ["template", "title", "fach", "klassenstufe", "bundesland"]) assert.ok(text.includes(`\`${parameter}\``), parameter);
   });
   it("have a llms.txt with the headings, ready for the draft", () => {
-    assert.match(read("docs/llms.txt"), /^# .+\n\n## /);
+    assert.match(read("docs/llms.txt"), /^# .+\n\n[\s\S]*?\n## 1\. /); // the title, a short intro, then the numbered steps
   });
   it("name the checks of a bundle that really run", () => {
     const text = read("docs/pruefungen.md");
