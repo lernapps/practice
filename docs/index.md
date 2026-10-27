@@ -1,25 +1,45 @@
-# Eine Lern-App nach Maß für einen akuten Anlass
+# Eine Lern-App nach Maß
 
 Nächste Woche ist die Arbeit, und im Katalog passt keine App. Oder eine Lehrkraft fehlt, und die Klasse braucht Übungen, die zum Stoff passen. Dann macht Dein KI-Assistent in Minuten eine kleine Lern-App nach Maß. Sie ist vorübergehend und kostenlos. Die Lernenden brauchen kein Konto.
 
 Die Anleitung für den Assistenten (llms.txt, Skills) ist bisher für Eltern geschrieben. Sie führt Dich und Dein Kind durch die Vorbereitung auf eine Arbeit.
 
-## Was die Plattform für Dich tut {#kurz}
-
-- **Eine passende Lösung statt langer Suche.** Zuerst schaut Dein Assistent im Katalog nach. Passt dort eine App, ist die Sache erledigt. Nur wenn nichts passt, entsteht eine eigene.
-- **Dein Assistent führt Dich.** Er fragt nach Fach, Klassenstufe und Tag der Arbeit. Aus Fotos vom Material schreibt er eigene Übungen. Du bestätigst den Umfang mit Deinem Kind.
-- **Geprüft und gebaut.** Die Plattform prüft den Inhalt und baut daraus die App. Fehler meldet sie so, dass Dein Assistent sie beheben kann.
-- **Dein Kind übt sofort.** Es öffnet die Adresse, ohne Konto und ohne Installation. Die App speichert nichts über Dein Kind.
-- **Nach zwei Wochen ist sie weg.** Es sei denn, sie hat geholfen und jemand sagt es.
-
 ## So läuft es {#schritte}
 
-1. **Zuerst im Katalog suchen.** *Du:* Dir fällt auf, dass keine App zum Stoff passt. *Die Plattform:* Dein Assistent sucht im [Katalog](https://lernapps.net/apps/) nach Fach, Stufe und Thema. Findet er eine passende App, bekommst Du den Link und musst nichts bauen.
-2. **Dein Assistent führt Dich durch.** *Du:* Du nennst Fach, Klassenstufe, Bundesland und den Tag der Arbeit. Du gibst ihm Fotos vom Material und prüfst mit Deinem Kind die Liste der Themen. *Die Plattform:* Die Anleitung sagt Deinem Assistenten, was er fragt, was er ohne Abschreiben schreibt und wann er auf Dich wartet. Die Fotos gehen nur an Deinen Assistenten.
-3. **Einreichen und prüfen lassen.** *Du:* Du reichst den Inhalt als ZIP-Datei über ein Formular ein. *Die Plattform:* GitHub prüft den Inhalt und baut die App. Fehlt etwas, schreibt sie es in einen Kommentar, und Dein Assistent korrigiert. Jeden Handgriff erklärt [Einreichen: Schritt für Schritt](einreichen.md).
-4. **Die App übergeben.** *Du:* Du gibst die Adresse an Dein Kind oder die Klasse. *Die Plattform:* Sie schreibt die Adresse in einen Kommentar.
-5. **Üben.** *Dein Kind:* Es macht die Selbsteinschätzung, löst die Übungen und folgt dem Trainingsplan. Die Selbsteinschätzung zählt das Kind selbst. *Die Plattform:* Sie merkt sich nichts über das Kind.
-6. **Was sich bewährt.** *Du:* Hat die App geholfen, setzt Du ein 👍 auf das erste Feld des Issues. *Die Plattform:* Dann bleibt die App erhalten, und wir prüfen, ob der Inhalt in den Katalog passt. Ohne 👍 wird sie gelöscht ([Lebensdauer](lebensdauer.md)).
+<ol class="flow">
+  <li class="flow-step" data-who="assistant">
+    <span class="flow-who">Dein Assistent</span>
+    <h3>Dein Assistent durchsucht den Katalog</h3>
+    <p>Vielleicht hat schon jemand anderes etwas Passendes gebaut? Dann nutzt Du die App einfach. Kostenlos, ohne Anmeldung. Wie immer.</p>
+  </li>
+  <li class="flow-step" data-who="assistant">
+    <span class="flow-who">Dein Assistent</span>
+    <h3>Dein Assistent führt Dich</h3>
+    <p>Er liest die Fotos vom Material und schreibt eigene Übungen. Du bestätigst mit Deinem Kind den Umfang.</p>
+  </li>
+  <li class="flow-step" data-who="you">
+    <span class="flow-who">Du</span>
+    <h3>Du reichst den Inhalt ein</h3>
+    <p>Du schickst ihn mit einem Formular ab. Das legt ein Issue an, eine öffentliche Meldung in unserem Repository auf GitHub.</p>
+  </li>
+  <li class="flow-step" data-who="platform">
+    <span class="flow-who">Die Plattform</span>
+    <h3>Die Plattform prüft und baut</h3>
+    <p>Sie baut die App und schreibt die Adresse in einen Kommentar. Fehlt etwas, sagt sie es, und Dein Assistent bessert nach.</p>
+  </li>
+  <li class="flow-step" data-who="you">
+    <span class="flow-who">Du & Dein Kind</span>
+    <h3>Du öffnest die Adresse und übst</h3>
+    <p>Gib sie Deinem Kind oder der Klasse. Es braucht kein Konto und keine Installation.</p>
+  </li>
+  <li class="flow-step" data-who="you">
+    <span class="flow-who">Du</span>
+    <h3>Was geholfen hat, hält ein 👍</h3>
+    <p>Setze es auf das erste Feld des Issues. Dann bleibt die App, und wir prüfen, ob sie in den Katalog passt.</p>
+  </li>
+</ol>
+
+Die App speichert nichts über Dein Kind. Die Selbsteinschätzung zählt das Kind selbst. Nach zwei Wochen ist die App weg, außer ein 👍 hält sie ([Lebensdauer](lebensdauer.md)). Jeden Handgriff beim Einreichen erklärt [Einreichen: Schritt für Schritt](einreichen.md). Die Journey im Plattformdesign steht unter [A tailor-made app for an acute occasion](https://lernapps.net/docs/#x-tailor-made-app-h) (auf Englisch).
 
 ## Mit dem Assistenten starten {#assistent}
 
@@ -29,7 +49,7 @@ Kopiere diesen Satz in das Gespräch mit Deinem KI-Assistenten und ersetze `<Fac
 Lies https://lernapps.net/practice/llms.txt und hilf mir, mein Kind auf die Arbeit in <Fach> vorzubereiten.
 ```
 
-Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich nach Fach, Klassenstufe, Bundesland und dem Tag der Arbeit.
+Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich nach Fach, Klassenstufe und Bundesland.
 
 ## Gut zu wissen {#wissen}
 

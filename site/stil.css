@@ -53,3 +53,21 @@ img { max-width: 100%; height: auto; }
   /* the tokens of the frame decide the colours; the grey lines stay readable on both */
   th, td, blockquote { border-color: #4b5563; }
 }
+
+/* The journey on the start page: vertical on a phone, rows of three from 48rem; the colour says who acts. */
+.flow { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: 1.25rem; counter-reset: flow; }
+.flow-step { position: relative; padding-left: 2.75rem; counter-increment: flow; overflow-wrap: anywhere; --flow: #475569; --flow-bg: #f1f5f9; --flow-fg: #334155; }
+.flow-step[data-who="you"] { --flow: #1d4ed8; --flow-bg: #dbeafe; --flow-fg: #1e3a8a; }
+.flow-step[data-who="assistant"] { --flow: #6d28d9; --flow-bg: #ede9fe; --flow-fg: #4c1d95; }
+.flow-step[data-who="platform"] { --flow: #047857; --flow-bg: #d1fae5; --flow-fg: #065f46; }
+.flow-step::before { content: counter(flow); position: absolute; left: 0; top: 0; z-index: 1; width: 2rem; height: 2rem; border-radius: 999px; display: grid; place-items: center; font-weight: 700; background: #fff; color: var(--flow); border: 2px solid var(--flow); box-sizing: border-box; }
+.flow-step:not(:last-child)::after { content: ""; position: absolute; left: calc(1rem - 1px); top: 2rem; bottom: -1.25rem; width: 2px; background: #94a3b8; }
+.flow-who { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--flow-bg); color: var(--flow-fg); }
+.flow-step h3 { margin: 0.25rem 0 0; font-size: 1rem; line-height: 1.3; }
+.flow-step p { margin: 0.25rem 0 0; font-size: 0.9rem; }
+@media (min-width: 48rem) {
+  .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 1rem; }
+  .flow-step { padding-left: 0; padding-top: 2.75rem; }
+  .flow-step:not(:last-child)::after { left: 2rem; right: -1rem; top: calc(1rem - 1px); bottom: auto; width: auto; height: 2px; }
+  .flow-step:nth-child(3n)::after { display: none; }
+}
