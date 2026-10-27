@@ -1,6 +1,6 @@
 # practice
 
-Vorübergehende Vorschauen für Lern-Apps: Eltern oder Schüler reichen den Quelltext einer Lern-App (Archetyp `explainer`) als ZIP-Datei über ein Issue-Formular ein. Ein Workflow baut daraus auf GitHub eine Vorschau unter `https://lernapps.net/practice/i/<Issue-Nummer>/`, schreibt den Link in einen Kommentar und räumt die Vorschau nach 14 Tagen ab. Die App speichert nichts über das Kind.
+Eine Arbeit steht an, und keine App im Katalog passt? Dann macht der KI-Assistent der Eltern aus Fotos von Schulmaterial in Minuten eine kleine Lern-App nach Maß, die zwei Wochen lang vorübergehend erreichbar ist. Technisch reichen Eltern oder Schüler den Quelltext einer Lern-App (Archetyp `explainer`) als ZIP-Datei über ein Issue-Formular ein; ein Workflow baut daraus auf GitHub eine Vorschau unter `https://lernapps.net/practice/i/<Issue-Nummer>/`, schreibt den Link in einen Kommentar und räumt die Vorschau nach 14 Tagen ab. Die App speichert nichts über das Kind.
 
 Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lernapps.net](https://lernapps.net/); die Vorlagen kommen aus [lernapps/app-templates](https://github.com/lernapps/app-templates), die Regeln und Prüfungen aus [lernapps/tooling](https://github.com/lernapps/tooling).
 

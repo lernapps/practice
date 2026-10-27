@@ -1,24 +1,25 @@
-# Practise for a test: temporary previews
+# A learning app made to measure for an acute occasion
 
-Parents and pupils can have the content of a learning app they made themselves tried out here, for example for a class test. GitHub builds a preview with its own address from the content. The preview stays for two weeks and is then deleted.
+The test is next week, and no app in the catalogue fits. Or a teacher is absent, and the class needs exercises that match the material. Then your AI assistant makes a small learning app to measure in minutes. It is temporary and free. The learners need no account.
 
-## The key points {#kurz}
+The guide for the assistant (llms.txt, skills) is so far written for parents. It leads you and your child through the preparation for a test. The guide and the content of the apps are in German.
 
-- An AI assistant turns photos of school material into the **content** of a small learning app: a self-check, exercises and a training plan.
-- You submit the content as a **ZIP file** with a **form**. You need a GitHub account for this.
-- GitHub **checks** the content, **builds** the app and writes the **address** in a comment for you.
-- The preview **disappears after two weeks**, unless someone puts a 👍 on the first field of the issue. Then we check whether the content fits into the catalogue.
-- The app **stores nothing about your child**. The page counts answers only while it is open. The child counts the self-check alone.
+## What the platform does for you {#kurz}
 
-## Five steps {#schritte}
+- **A fitting solution instead of a long search.** Your assistant first looks in the catalogue. If an app fits there, you are done. Only if nothing fits, a new one is made.
+- **Your assistant leads you.** It asks for the subject, the school year and the day of the test. From photos of the material it writes exercises of its own. You confirm the scope with your child.
+- **Checked and built.** The platform checks the content and builds the app from it. It reports errors in a way your assistant can fix.
+- **Your child practises at once.** It opens the address, without an account and without installation. The app stores nothing about your child.
+- **After two weeks it is gone.** Unless it helped and someone says so.
 
-1. Tell your assistant which subject and which test you practise for (box below).
-2. Give it photos of the material and check the list of topics with your child.
-3. The assistant creates the ZIP file with the content.
-4. Open the [form](https://github.com/lernapps/practice/issues/new?template=einreichen.yml), drag the ZIP file into it and send it.
-5. After a few minutes the address of the preview appears in a comment. Open it with your child.
+## How it works {#schritte}
 
-Every step is explained in [Submit: step by step](einreichen.md).
+1. **Search the catalogue first.** *You:* You notice that no app fits the material. *The platform:* Your assistant searches the [catalogue](https://lernapps.net/apps/) by subject, school year and topic. If an app fits, you get the link and build nothing.
+2. **Your assistant leads you through.** *You:* You name the subject, the school year, the federal state and the day of the test. You give it photos of the material and check the list of topics with your child. *The platform:* The guide tells your assistant what to ask, what to write without copying and when to wait for you. The photos go to your assistant only.
+3. **Submit and have it checked.** *You:* You submit the content as a ZIP file with a form. *The platform:* GitHub checks the content and builds the app. If something is missing, it says so in a comment, and your assistant corrects it. [Submit: step by step](einreichen.md) explains every move.
+4. **Hand over the app.** *You:* You give the address to your child or the class. *The platform:* It writes the address in a comment.
+5. **Practise.** *Your child:* It does the self-check, solves the exercises and follows the training plan. The child counts the self-check alone. *The platform:* It remembers nothing about the child.
+6. **What proves itself.** *You:* If the app helped, you put a 👍 on the first field of the issue. *The platform:* Then the app stays, and we check whether the content fits into the catalogue. Without a 👍 it is deleted ([Lifetime](lebensdauer.md)).
 
 ## Start with the assistant {#assistent}
 
@@ -32,10 +33,9 @@ The guide for the assistant is [llms.txt](llms.txt). It is written in German, an
 
 ## Good to know {#wissen}
 
-- **GitHub account:** The account is free and needs only an email address. Children under 13 do not create it themselves, their parents do. What GitHub is and how to get an account is explained in [GitHub, explained](https://lernapps.net/tooling/en/github/).
-- **Privacy:** The form, the ZIP file and the preview are public. So the content contains no names, no school and no photos. More in [Privacy and copyright](datenschutz.md).
-- **Two weeks:** After that the preview is deleted. How to keep it longer is described in [Lifetime](lebensdauer.md).
-- **Form:** [Go to the form](https://github.com/lernapps/practice/issues/new?template=einreichen.yml)
+- **GitHub account:** To submit, you need a GitHub account. It is free and needs only an email address. Children under 13 do not create it themselves, their parents do. What GitHub is and how to get an account is explained in [GitHub, explained](https://lernapps.net/tooling/en/github/). The child itself needs no account.
+- **Privacy:** The form, the ZIP file and the app are public. So the content contains no names, no school and no photos. More in [Privacy and copyright](datenschutz.md).
+- **Two weeks:** After that the app is deleted. How to keep it longer is described in [Lifetime](lebensdauer.md).
 
 ## Where next? {#weiter}
 
@@ -44,7 +44,7 @@ The guide for the assistant is [llms.txt](llms.txt). It is written in German, an
 | submit a preparation | [Submit: step by step](einreichen.md) |
 | know what the ZIP file may contain | [Rules for content and details](regeln.md) |
 | know what happens to the data and who owns the content | [Privacy and copyright](datenschutz.md) |
-| know how long a preview stays | [Lifetime](lebensdauer.md) |
+| know how long an app stays | [Lifetime](lebensdauer.md) |
 | prepare a submission as an AI assistant | [llms.txt](llms.txt) |
 
 ## For maintainers {#maintainer}

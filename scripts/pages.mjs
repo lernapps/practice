@@ -20,8 +20,8 @@ if (!docs || !out) {
 const prefix = process.env.SITE_PATH_PREFIX ?? "/practice/";
 
 const LANGUAGES = {
-  de: { dir: docs, root: "", home: "Vorbereitung üben", back: "Zur Startseite", suffix: "Vorbereitung üben – lernapps.net" },
-  en: { dir: join(docs, "en"), root: "en/", home: "Practise for a test", back: "To the start page", suffix: "Practise for a test – lernapps.net" },
+  de: { dir: docs, root: "", home: "Lern-App nach Maß", back: "Zur Startseite", suffix: "Lern-App nach Maß – lernapps.net" },
+  en: { dir: join(docs, "en"), root: "en/", home: "App made to measure", back: "To the start page", suffix: "App made to measure – lernapps.net" },
 };
 
 const escapeHtml = (text) => text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
@@ -69,7 +69,7 @@ for (const [lang, { dir, root, home, back, suffix }] of Object.entries(LANGUAGES
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="${escapeHtml(description)}">
-  <title>${escapeHtml(isHome ? suffix : `${plain(title)} – ${suffix}`)}</title>
+  <title>${escapeHtml(isHome ? `${plain(title)} – lernapps.net` : `${plain(title)} – ${suffix}`)}</title>
   <link rel="stylesheet" href="${prefix}stil.css">
 </head>
 <body>

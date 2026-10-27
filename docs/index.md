@@ -1,24 +1,25 @@
-# Vorbereitung üben: vorübergehende Vorschauen
+# Eine Lern-App nach Maß für einen akuten Anlass
 
-Hier können Eltern und Schüler den Inhalt einer selbst erstellten Lern-App ausprobieren lassen, zum Beispiel für eine Klassenarbeit. GitHub baut aus dem Inhalt eine Vorschau mit eigener Adresse. Die Vorschau bleibt zwei Wochen und wird dann gelöscht.
+Nächste Woche ist die Arbeit, und im Katalog passt keine App. Oder eine Lehrkraft fehlt, und die Klasse braucht Übungen, die zum Stoff passen. Dann macht Dein KI-Assistent in Minuten eine kleine Lern-App nach Maß. Sie ist vorübergehend und kostenlos. Die Lernenden brauchen kein Konto.
 
-## Das Wichtigste in Kürze {#kurz}
+Die Anleitung für den Assistenten (llms.txt, Skills) ist bisher für Eltern geschrieben. Sie führt Dich und Dein Kind durch die Vorbereitung auf eine Arbeit.
 
-- Ein KI-Assistent erstellt aus Fotos von Schulmaterial den **Inhalt** einer kleinen Lern-App: Selbsteinschätzung, Übungen und Trainingsplan.
-- Du reichst den Inhalt als **ZIP-Datei** über ein **Formular** ein. Du brauchst dafür ein GitHub-Konto.
-- GitHub **prüft** den Inhalt, **baut** die App und schreibt Dir die **Adresse** in einen Kommentar.
-- Die Vorschau **verschwindet nach zwei Wochen**, außer jemand setzt ein 👍 auf das erste Feld des Issues. Dann prüfen wir, ob der Inhalt in den Katalog passt.
-- Die App **speichert nichts über Dein Kind**. Antworten zählt die Seite nur, solange sie offen ist. Das Kind zählt die Selbsteinschätzung selbst.
+## Was die Plattform für Dich tut {#kurz}
 
-## In fünf Schritten {#schritte}
+- **Eine passende Lösung statt langer Suche.** Zuerst schaut Dein Assistent im Katalog nach. Passt dort eine App, ist die Sache erledigt. Nur wenn nichts passt, entsteht eine eigene.
+- **Dein Assistent führt Dich.** Er fragt nach Fach, Klassenstufe und Tag der Arbeit. Aus Fotos vom Material schreibt er eigene Übungen. Du bestätigst den Umfang mit Deinem Kind.
+- **Geprüft und gebaut.** Die Plattform prüft den Inhalt und baut daraus die App. Fehler meldet sie so, dass Dein Assistent sie beheben kann.
+- **Dein Kind übt sofort.** Es öffnet die Adresse, ohne Konto und ohne Installation. Die App speichert nichts über Dein Kind.
+- **Nach zwei Wochen ist sie weg.** Es sei denn, sie hat geholfen und jemand sagt es.
 
-1. Sage Deinem Assistenten, für welches Fach und welche Arbeit Ihr übt (Kasten unten).
-2. Gib ihm Fotos vom Material und prüfe mit Deinem Kind die Liste der Themen.
-3. Der Assistent erzeugt die ZIP-Datei mit dem Inhalt.
-4. Öffne das [Formular](https://github.com/lernapps/practice/issues/new?template=einreichen.yml), ziehe die ZIP-Datei hinein und sende es ab.
-5. Nach wenigen Minuten steht die Adresse der Vorschau in einem Kommentar. Öffne sie mit Deinem Kind.
+## So läuft es {#schritte}
 
-Jeder Schritt ist erklärt unter [Einreichen: Schritt für Schritt](einreichen.md).
+1. **Zuerst im Katalog suchen.** *Du:* Dir fällt auf, dass keine App zum Stoff passt. *Die Plattform:* Dein Assistent sucht im [Katalog](https://lernapps.net/apps/) nach Fach, Stufe und Thema. Findet er eine passende App, bekommst Du den Link und musst nichts bauen.
+2. **Dein Assistent führt Dich durch.** *Du:* Du nennst Fach, Klassenstufe, Bundesland und den Tag der Arbeit. Du gibst ihm Fotos vom Material und prüfst mit Deinem Kind die Liste der Themen. *Die Plattform:* Die Anleitung sagt Deinem Assistenten, was er fragt, was er ohne Abschreiben schreibt und wann er auf Dich wartet. Die Fotos gehen nur an Deinen Assistenten.
+3. **Einreichen und prüfen lassen.** *Du:* Du reichst den Inhalt als ZIP-Datei über ein Formular ein. *Die Plattform:* GitHub prüft den Inhalt und baut die App. Fehlt etwas, schreibt sie es in einen Kommentar, und Dein Assistent korrigiert. Jeden Handgriff erklärt [Einreichen: Schritt für Schritt](einreichen.md).
+4. **Die App übergeben.** *Du:* Du gibst die Adresse an Dein Kind oder die Klasse. *Die Plattform:* Sie schreibt die Adresse in einen Kommentar.
+5. **Üben.** *Dein Kind:* Es macht die Selbsteinschätzung, löst die Übungen und folgt dem Trainingsplan. Die Selbsteinschätzung zählt das Kind selbst. *Die Plattform:* Sie merkt sich nichts über das Kind.
+6. **Was sich bewährt.** *Du:* Hat die App geholfen, setzt Du ein 👍 auf das erste Feld des Issues. *Die Plattform:* Dann bleibt die App erhalten, und wir prüfen, ob der Inhalt in den Katalog passt. Ohne 👍 wird sie gelöscht ([Lebensdauer](lebensdauer.md)).
 
 ## Mit dem Assistenten starten {#assistent}
 
@@ -32,10 +33,9 @@ Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich 
 
 ## Gut zu wissen {#wissen}
 
-- **GitHub-Konto:** Das Konto ist kostenlos und braucht nur eine E-Mail-Adresse. Kinder unter 13 Jahren legen es nicht selbst an, das tun die Eltern. Was GitHub ist und wie das Konto geht, steht unter [GitHub, erklärt](https://lernapps.net/tooling/github/).
-- **Datenschutz:** Das Formular, die ZIP-Datei und die Vorschau sind öffentlich. Der Inhalt enthält deshalb keine Namen, keine Schule und keine Fotos. Mehr unter [Datenschutz und Urheberrecht](datenschutz.md).
-- **Zwei Wochen:** Danach wird die Vorschau gelöscht. Wie Du sie länger erhältst, steht unter [Lebensdauer](lebensdauer.md).
-- **Formular:** [Zum Formular](https://github.com/lernapps/practice/issues/new?template=einreichen.yml)
+- **GitHub-Konto:** Zum Einreichen brauchst Du ein GitHub-Konto. Es ist kostenlos und braucht nur eine E-Mail-Adresse. Kinder unter 13 Jahren legen es nicht selbst an, das tun die Eltern. Was GitHub ist und wie das Konto geht, steht unter [GitHub, erklärt](https://lernapps.net/tooling/github/). Das Kind selbst braucht kein Konto.
+- **Datenschutz:** Das Formular, die ZIP-Datei und die App sind öffentlich. Der Inhalt enthält deshalb keine Namen, keine Schule und keine Fotos. Mehr unter [Datenschutz und Urheberrecht](datenschutz.md).
+- **Zwei Wochen:** Danach wird die App gelöscht. Wie Du sie länger erhältst, steht unter [Lebensdauer](lebensdauer.md).
 
 ## Wohin als Nächstes? {#weiter}
 
@@ -44,7 +44,7 @@ Die Anleitung für den Assistenten steht in [llms.txt](llms.txt). Er fragt Dich 
 | eine Vorbereitung einreichen | [Einreichen: Schritt für Schritt](einreichen.md) |
 | wissen, was in der ZIP-Datei stehen darf | [Regeln für Inhalt und Angaben](regeln.md) |
 | wissen, was mit den Daten geschieht und wem der Inhalt gehört | [Datenschutz und Urheberrecht](datenschutz.md) |
-| wissen, wie lange eine Vorschau bleibt | [Lebensdauer](lebensdauer.md) |
+| wissen, wie lange eine App bleibt | [Lebensdauer](lebensdauer.md) |
 | als KI-Assistent die Einreichung vorbereiten | [llms.txt](llms.txt) |
 
 ## Für Maintainer {#maintainer}
