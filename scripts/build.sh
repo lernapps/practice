@@ -29,7 +29,7 @@ arc42 --dir docs/arc42 build --out _site/architecture --base "${PREFIX}architect
 sed -i 's|</head>|<link rel="stylesheet" href="../spa.css">\n</head>|' _site/architecture/index.html
 
 # Header, footer and language switch of all lernapps.net sites; noindex and the banner in a preview.
-./scripts/frame.sh inject --site /practice/ --source https://github.com/lernapps/practice --out _site
+lernapps-frame --site /practice/ --source https://github.com/lernapps/practice --out _site
 # 404.html acts only at the root of the origin; the frame must not leave a copy below en/.
 rm -f _site/en/404.html
 # No usage counter: this site is not one of the platform sites that count their visits (site-check forbids it).

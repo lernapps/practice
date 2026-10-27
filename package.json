@@ -11,7 +11,7 @@
   "type": "module",
   "scripts": {
     "build": "./scripts/build.sh",
-    "check": "./scripts/frame.sh check --site /practice/",
+    "check": "site-check --site /practice/",
     "test": "node --test --test-reporter=spec \"test/*.test.ts\"",
     "try": "node scripts/try.ts"
   },
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@doctc/arc42": "0.38.0",
-    "@lernapps/site": "github:lernapps/lernapps.github.io#e350ca369a216eb1404d48505e1a9466a375c7c5",
+    "@lernapps/site": "github:lernapps/lernapps.github.io#d63583334c69d15235ef9b276af3507ca899cfa2",
     "marked": "18.1.1"
   }
 }
