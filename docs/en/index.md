@@ -1,64 +1,68 @@
 # A learning app made to measure
 
-You need fitting exercises for a particular occasion, and quickly? With your AI assistant, our guide and little effort, you create a learning app made to measure, to
+Your child has a test next week, and you want to practise exactly what will come up. Or you are covering a class for an absent teacher and need exercises on what they are working on right now. For occasions like these, there is rarely a ready-made app that fits.
+
+This is where it comes into being. With your AI assistant and our guide, you turn the material you already have into a learning app made to measure, with little effort. You can use it, for example, to
 
 - prepare your child for a test,
 - give a class exercises for a cover lesson,
-- see where a class stands when you cover for a teacher,
-- catch up on missed material.
+- find out where a class stands when you cover for a teacher,
+- catch up on missed lessons.
+
+The app is free and runs in the browser. Whoever practises with it needs neither an account nor an installation.
 
 ## How it works {#schritte}
 
 <ol class="flow">
   <li class="flow-step" data-who="assistant">
     <span class="flow-who">Your assistant</span>
-    <h3>Your assistant searches the catalogue</h3>
-    <p>Maybe someone else has already built something that fits? Then you just use the app. Free, no sign-up. As always.</p>
+    <h3>Maybe it already exists</h3>
+    <p>Maybe someone has already built an app that fits your occasion. Your assistant searches the catalogue for it. If there is one, you simply use it: free and without signing up, like every app on lernapps.net.</p>
   </li>
   <li class="flow-step" data-who="assistant">
     <span class="flow-who">Your assistant</span>
-    <h3>Your assistant makes your app</h3>
-    <p>Your material becomes a learning app that fits exactly what you are learning.</p>
+    <h3>Your material becomes your app</h3>
+    <p>You give it photos of textbook pages or worksheets. From them it puts together explanations, exercises and a self-check, made for exactly your material. You decide together what is covered.</p>
   </li>
   <li class="flow-step" data-who="you">
     <span class="flow-who">You</span>
-    <h3>You submit the content</h3>
-    <p>You send it with a form. That creates an issue, a public report in our repository on GitHub.</p>
+    <h3>A form is all it takes</h3>
+    <p>You send us the content with a short form. This creates an issue: a public message in our project on GitHub, where we answer you.</p>
   </li>
   <li class="flow-step" data-who="platform">
-    <span class="flow-who">The platform</span>
-    <h3>The platform checks and builds</h3>
-    <p>It builds the app and writes the address in a comment. If something is missing, it says so, and your assistant corrects it.</p>
+    <span class="flow-who">We</span>
+    <h3>Ready in minutes</h3>
+    <p>We check the content and build the app from it. After a few minutes, its address appears in the issue. If something is not right yet, the issue says what is missing, and your assistant fixes it.</p>
   </li>
   <li class="flow-step" data-who="you">
-    <span class="flow-who">You and your child</span>
-    <h3>You open the address and practise</h3>
-    <p>Give it to your child or the class. They need no account and no installation.</p>
+    <span class="flow-who">You and the learners</span>
+    <h3>Start right away</h3>
+    <p>A link is all it takes: your child or the class practises on any device with a browser, without an account or an installation.</p>
   </li>
   <li class="flow-step" data-who="both">
-    <span class="flow-who">You and the platform</span>
-    <h3>What helped is kept by a 👍</h3>
-    <p>If it helped, it may help others too. Put a 👍 on your issue: then the app stays, and we check whether it fits into the catalogue.</p>
+    <span class="flow-who">You and us</span>
+    <h3>What is good stays for everyone</h3>
+    <p>If the app helped, it will probably help others who face the same material. A 👍 on your issue tells us so, and we check whether it fits into the catalogue. Step by step, more and more knowledge comes together that people really need.</p>
   </li>
 </ol>
 
-The app stores nothing about your child. The child counts the self-check alone. After two weeks the app is gone, unless a 👍 keeps it ([Lifetime](lebensdauer.md)). [Submit: step by step](einreichen.md) explains every move of the submission. The journey in the platform design is [A tailor-made app for an acute occasion](https://lernapps.net/docs/en/#x-tailor-made-app-h).
+The app stores nothing about the learners. The self-check shows them how far they have got, and they keep the result to themselves. After two weeks the app is deleted, unless it helped; see [Lifetime](lebensdauer.md). [Submit: step by step](einreichen.md) explains every move of the submission. How it all fits into the platform is shown by the journey [A tailor-made app for an acute occasion](https://lernapps.net/docs/en/#x-tailor-made-app-h) in the platform design.
 
 ## Start with the assistant {#assistent}
 
-Copy this sentence into the conversation with your AI assistant and replace `<subject>`:
+Copy this sentence into the conversation with your AI assistant and describe your occasion:
 
 ```text
-Read https://lernapps.net/practice/llms.txt and help me prepare my child for the test in <subject>.
+Read https://lernapps.net/practice/llms.txt and help me make a learning app for <occasion>.
 ```
 
-The guide for the assistant is [llms.txt](llms.txt). It is written in German, and so is the content of the apps.
+For example: "for my daughter's maths test next week" or "for a cover lesson in English, year 7". The guide for the assistant is [llms.txt](llms.txt). It is written in German, and so is the content of the apps.
 
 ## Good to know {#wissen}
 
-- **GitHub account:** To submit, you need a GitHub account. It is free and needs only an email address. Children under 13 do not create it themselves, their parents do. What GitHub is and how to get an account is explained in [GitHub, explained](https://lernapps.net/tooling/en/github/). The child itself needs no account.
-- **Privacy:** The form, the ZIP file and the app are public. So the content contains no names, no school and no photos. More in [Privacy and copyright](datenschutz.md).
-- **Two weeks:** After that the app is deleted. How to keep it longer is described in [Lifetime](lebensdauer.md).
+- **GitHub account:** To submit, you need a free GitHub account; an email address is enough. Children under 13 may not have an account of their own, so an adult submits for them. What GitHub is and how to create an account is explained in [GitHub, explained](https://lernapps.net/tooling/en/github/). Whoever practises with the app needs no account.
+- **Privacy:** The form, the ZIP file and the app are public. So no names, no school and no photos belong in the content. More in [Privacy and copyright](datenschutz.md).
+- **Two weeks:** That is how long the app stays online. How it can stay longer is explained in [Lifetime](lebensdauer.md).
 
 ## Where next? {#weiter}
 
