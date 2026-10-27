@@ -74,7 +74,7 @@ A repetition always builds again, even if the ZIP address and details are the sa
 ## Updates {#updates}
 
 - Renovate (preset from `lernapps/tooling`) raises the pinned commits of the actions, also those of the shared actions for the site (`site-check`, `site-deploy`, `site-preview`), the frame `@lernapps/site` and `marked`.
-- Nobody raises the state of the templates here. At every run the build reads `appTemplates.commit` from the `package.json` of `lernapps/tooling` on `main`. So GitHub builds with the same template with which `create` made the app at the assistant. `npm run try -- <zip> --commit <sha>` tries another state locally.
+- Nobody raises the state of the templates here. At every run the build reads `appTemplates.commit` from the `package.json` of `lernapps/tooling` on `main`. So GitHub builds with the same template with which `create` made the app at the assistant. It also takes `@lernapps/tooling` at that commit of `main`. `npm run try -- <zip> --commit <sha>` tries another state of the template locally.
 
 ## Abuse and limits {#missbrauch}
 

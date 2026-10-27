@@ -113,9 +113,10 @@ addresses: qg-nothing-collected, con-public-by-default, risk-material-copyright,
 ## The template at the tooling's pin, read from its main
 
 **Context:** The explainer template and the rules of `lernapps check` (`docs/pruefungen.md`) belong to other
-repositories, and the assistant creates the app with `create` from `tooling#main`. **Decision:** The build reads
-`appTemplates.commit` from the package.json of lernapps/tooling on main at every run, without a token, and stops when
-it cannot; this repository keeps no pin of its own. **Rejected:** a pin here, moved by hand; a copy of the template or
+repositories, and the assistant creates the app with `create` from `tooling#main`. **Decision:** At every run the build finds
+the commit of the tooling's main (`git ls-remote`, without a token), reads `appTemplates.commit` from its package.json,
+and checks with `@lernapps/tooling` of that same commit; it stops when it cannot. This repository keeps no pin of its
+own. **Rejected:** a pin here, moved by hand; a copy of the template or
 of the rules. **Consequences:** GitHub builds with the template state the creator's app was made from, and a move of
 the pin in the tooling reaches the next build at once (`risk-template-pin`). The rules cannot be loosened here.
 

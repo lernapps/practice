@@ -20,7 +20,7 @@ The job has read rights only and no secrets. It builds like this:
 
 1. It fetches `lernapps/app-templates` in exactly the state (commit) with which your assistant created the app: `appTemplates.commit` from the `package.json` of `lernapps/tooling` on `main`, read at build time. If it cannot be read, the build stops with a clear message.
 2. It takes the folder `explainer/` as the app and replaces `src/` with your content. The `main.ts` of the template stays. Example components and example chapters are dropped.
-3. It installs with `npm ci`, runs the tests of your components (`vp test`, only if there are components) and builds with `npm run build`. The template depends on `file:..` (the parent folder with the runtime). So it installs first in the root folder of `app-templates` (this builds the runtime), then in the folder `explainer/`. Both lock files fix the versions.
+3. It installs with `npm ci`, runs the tests of your components (`vp test`, only if there are components) and builds with `npm run build`. The template depends on `file:..` (the parent folder with the runtime). So it installs first in the root folder of `app-templates` (this builds the runtime), then in the folder `explainer/`. Both lock files fix the versions. Then it installs `@lernapps/tooling` at the commit of `main` from which it read the state of the template: the same tooling with which your assistant created and checked the app.
 4. It checks the built bundle with `lernapps check _site` (see below).
 5. It puts `<meta name="robots" content="noindex">` into every HTML page, so that search engines do not index the preview.
 

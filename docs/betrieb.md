@@ -74,7 +74,7 @@ Eine Wiederholung baut immer neu, auch wenn ZIP-Adresse und Angaben gleich sind.
 ## Updates {#updates}
 
 - Renovate (Voreinstellung aus `lernapps/tooling`) hebt die festgelegten Commits der Actions an, auch die der gemeinsamen Aktionen für die Seite (`site-check`, `site-deploy`, `site-preview`), den Rahmen `@lernapps/site` und `marked`.
-- Den Stand der Vorlagen hebt niemand hier an. Der Bau liest bei jedem Lauf `appTemplates.commit` aus der `package.json` von `lernapps/tooling` auf `main`. So baut GitHub mit derselben Vorlage, mit der `create` die App beim Assistenten angelegt hat. `npm run try -- <zip> --commit <sha>` probiert einen anderen Stand lokal aus.
+- Den Stand der Vorlagen hebt niemand hier an. Der Bau liest bei jedem Lauf `appTemplates.commit` aus der `package.json` von `lernapps/tooling` auf `main`. So baut GitHub mit derselben Vorlage, mit der `create` die App beim Assistenten angelegt hat. Ebenso nimmt er `@lernapps/tooling` in diesem Commit von `main`. `npm run try -- <zip> --commit <sha>` probiert einen anderen Stand der Vorlage lokal aus.
 
 ## Missbrauch und Grenzen {#missbrauch}
 

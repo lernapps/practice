@@ -20,7 +20,7 @@ Der Job hat nur Leserechte und keine Geheimnisse. Er baut so:
 
 1. Er holt `lernapps/app-templates` in genau dem Stand (Commit), mit dem Dein Assistent die App angelegt hat: `appTemplates.commit` aus der `package.json` von `lernapps/tooling` auf `main`, gelesen beim Bauen. Ist sie nicht lesbar, bricht der Bau mit einer klaren Meldung ab.
 2. Er nimmt den Ordner `explainer/` als App und ersetzt `src/` durch Deinen Inhalt. Die `main.ts` der Vorlage bleibt. Beispielkomponenten und Beispielkapitel entfallen.
-3. Er installiert mit `npm ci`, führt die Tests Deiner Komponenten aus (`vp test`, nur wenn es Komponenten gibt) und baut mit `npm run build`. Die Vorlage hängt von `file:..` ab (dem Elternordner mit der Laufzeit). Darum wird erst im Wurzelordner von `app-templates` installiert (das baut die Laufzeit), dann im Ordner `explainer/`. Beide Lock-Dateien legen die Versionen fest.
+3. Er installiert mit `npm ci`, führt die Tests Deiner Komponenten aus (`vp test`, nur wenn es Komponenten gibt) und baut mit `npm run build`. Die Vorlage hängt von `file:..` ab (dem Elternordner mit der Laufzeit). Darum wird erst im Wurzelordner von `app-templates` installiert (das baut die Laufzeit), dann im Ordner `explainer/`. Beide Lock-Dateien legen die Versionen fest. Danach installiert er `@lernapps/tooling` in dem Commit von `main`, aus dem er den Stand der Vorlage gelesen hat: dasselbe Tooling, mit dem Dein Assistent die App angelegt und geprüft hat.
 4. Er prüft das gebaute Bundle mit `lernapps check _site` (siehe unten).
 5. Er setzt in jede HTML-Seite `<meta name="robots" content="noindex">`, damit Suchmaschinen die Vorschau nicht aufnehmen.
 

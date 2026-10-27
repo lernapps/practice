@@ -644,7 +644,7 @@ What the build calls on the bundle.
 id: if-tooling-cli
 title: Tooling CLI
 provider: bb-tooling
-protocol: lernapps check <folder> from the package that the template's lock file pins
+protocol: lernapps check <folder> of @lernapps/tooling at the commit of main the pin was read at
 :::
 ```
 
@@ -659,7 +659,7 @@ copies.
 id: if-tooling-pin
 title: Pin of the template
 provider: bb-tooling
-protocol: appTemplates.repository and appTemplates.commit in package.json on main, over HTTPS from raw.githubusercontent.com
+protocol: the commit of main (git ls-remote), and appTemplates.repository and appTemplates.commit in package.json at that commit, over HTTPS from raw.githubusercontent.com
 :::
 ```
 

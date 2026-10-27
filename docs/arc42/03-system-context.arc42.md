@@ -44,7 +44,7 @@ The interface is the one the system uses.
 | Neighbour | What the system takes | Interface |
 |---|---|---|
 | App templates (lernapps/app-templates) | The explainer template and its runtime, at the commit that lernapps/tooling pins on main | `if-archetypes` |
-| Tooling (lernapps/tooling) | `lernapps check` for the bundle, through the template's lock file; the pin of the template; `create` and the content skills the plan template names; the shared site actions and the change classifier for the site | `if-tooling-cli`, `if-tooling-pin`, `if-tooling-guidance`, `if-site-actions` |
+| Tooling (lernapps/tooling) | `lernapps check` for the bundle, at the commit of main the pin is read at; the pin of the template; `create` and the content skills the plan template names; the shared site actions and the change classifier for the site | `if-tooling-cli`, `if-tooling-pin`, `if-tooling-guidance`, `if-site-actions` |
 | Website (lernapps.github.io) | The site frame: header, footer, language switch and the check of the site rules | `if-site-frame` |
 | Catalog (lernapps/apps) | The first place the guide sends the assistant to; nothing is read from it | `if-catalog-pages` |
 

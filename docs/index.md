@@ -60,6 +60,7 @@ Zum Beispiel: „für die Mathearbeit meiner Tochter nächste Woche" oder „fü
 
 ## Gut zu wissen {#wissen}
 
+- **KI-Assistent mit Kommandozeile:** Dein Assistent baut die App selbst und prüft sie, bevor Du einreichst. So kommt sie meist beim ersten Mal durch. Dafür braucht er eine Kommandozeile, zum Beispiel Claude Code oder Codex; viele Web-Assistenten haben dafür inzwischen eine eigene Umgebung.
 - **GitHub-Konto:** Zum Einreichen brauchst Du ein kostenloses GitHub-Konto, für das eine E-Mail-Adresse genügt. Kinder unter 13 Jahren dürfen kein eigenes Konto haben; dann reicht ein Erwachsener ein. Was GitHub ist und wie Du ein Konto anlegst, steht unter [GitHub, erklärt](https://lernapps.net/tooling/github/). Wer mit der App übt, braucht kein Konto.
 - **Datenschutz:** Das Formular, die ZIP-Datei und die App sind öffentlich. Deshalb gehören keine Namen, keine Schule und keine Fotos in den Inhalt. Mehr unter [Datenschutz und Urheberrecht](datenschutz.md).
 - **Zwei Wochen:** So lange bleibt die App erreichbar. Wie sie länger bleibt, steht unter [Lebensdauer](lebensdauer.md).

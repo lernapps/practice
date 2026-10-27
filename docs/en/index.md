@@ -60,6 +60,7 @@ For example: "for my daughter's maths test next week" or "for a cover lesson in 
 
 ## Good to know {#wissen}
 
+- **AI assistant with a command line:** Your assistant builds the app itself and checks it before you submit. So it usually gets through the first time. For this it needs a command line, for example Claude Code or Codex; many web assistants now have an environment of their own for it.
 - **GitHub account:** To submit, you need a free GitHub account; an email address is enough. Children under 13 may not have an account of their own, so an adult submits for them. What GitHub is and how to create an account is explained in [GitHub, explained](https://lernapps.net/tooling/en/github/). Whoever practises with the app needs no account.
 - **Privacy:** The form, the ZIP file and the app are public. So no names, no school and no photos belong in the content. More in [Privacy and copyright](datenschutz.md).
 - **Two weeks:** That is how long the app stays online. How it can stay longer is explained in [Lifetime](lebensdauer.md).

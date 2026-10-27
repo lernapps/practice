@@ -16,7 +16,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildFailedComment, problemsComment, previewComment } from "../actions/lib/github.ts";
 import { extractZip, inspectZip } from "../actions/lib/zip.ts";
-import { prepare, readPin, run, type BuildResult, type Pin } from "../actions/build/build.ts";
+import { prepare, readPin, run, useTooling, type BuildResult, type Pin } from "../actions/build/build.ts";
 
 const root = resolve(fileURLToPath(import.meta.url), "../..");
 
@@ -42,6 +42,8 @@ export function ensureTemplates(pin: Pin, base = root): string {
   for (const where of [dir, join(dir, "explainer")]) {
     if (!existsSync(join(where, "node_modules"))) sh(where, "npm", ["ci", "--no-audit", "--no-fund"]);
   }
+  // the tooling of the commit the pin was read at, as the action build installs it
+  if (useTooling(join(dir, "explainer"), pin.tooling)) console.log(`@lernapps/tooling at ${pin.tooling}`);
   return join(dir, "explainer");
 }
 
@@ -95,7 +97,7 @@ if (process.argv[1] !== undefined && resolve(process.argv[1]) === fileURLToPath(
   } else {
     try {
       const pin = await readPin(fetch, commit);
-      console.log(`app-templates at ${pin.commit}${commit ? " (given)" : " (the pin of lernapps/tooling on main)"}`);
+      console.log(`app-templates at ${pin.commit}${commit ? " (given)" : " (the pin of lernapps/tooling on main)"}, tooling at ${pin.tooling}`);
       process.exitCode = tryZip(resolve(zip), (text) => console.log(`\n--- So kommentiert der Bot ---\n\n${text}\n`), buildAt(pin));
     } catch (error) {
       console.error(`try: ${error instanceof Error ? error.message : String(error)}`);
