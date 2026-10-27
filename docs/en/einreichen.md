@@ -2,8 +2,8 @@
 
 ## Before you start {#vorher}
 
-1. Your assistant has created the learning app of the archetype `explainer`. You have the folder `src` with the content (YAML files and images).
-2. The content meets the [rules](regeln.md). The most important: no names, no copied texts, no program code.
+1. Your assistant has built and checked the learning app of the archetype `explainer` on your computer. It gives you the ZIP file with the folder `src` (pages, images, components).
+2. The content meets the [rules](regeln.md). The most important: no names, no copied texts, no photos of the material.
 3. You have a GitHub account.
 
 ## How to pack the ZIP file {#zip-packen}

@@ -2,8 +2,8 @@
 
 ## Vorher {#vorher}
 
-1. Dein Assistent hat die Lern-App vom Archetyp `explainer` erstellt. Du hast den Ordner `src` mit den Inhalten (YAML-Dateien und Bilder).
-2. Der Inhalt erfüllt die [Regeln](regeln.md). Das wichtigste: keine Namen, keine abgeschriebenen Texte, kein Programmcode.
+1. Dein Assistent hat die Lern-App vom Archetyp `explainer` auf Deinem Rechner gebaut und geprüft. Er gibt Dir die ZIP-Datei mit dem Ordner `src` (Seiten, Bilder, Komponenten).
+2. Der Inhalt erfüllt die [Regeln](regeln.md). Das wichtigste: keine Namen, keine abgeschriebenen Texte, keine Fotos des Materials.
 3. Du hast ein GitHub-Konto.
 
 ## So packst Du die ZIP-Datei {#zip-packen}

@@ -1,38 +1,32 @@
 ---
 name: lernapps-practice-photos
-description: Use in Code or in a chat when you read photos of school material (worksheets, book pages, tests) to prepare a learning app for a class test. What to tell the parents before the photos, how to order and divide the pages, how to treat highlighted boxes, cut-off margins, the child's handwriting and drawings.
+description: Use in Explore of a lernapps practice plan when you read photos of school material (worksheets, book pages, self-tests), and in Code when you redraw its figures for the explainer. How to order and divide the pages, how to treat highlighted boxes, cut-off margins and the child's handwriting, which block a task of the material becomes, and how to rebuild a figure with the same content and labels as a generated image or an SVG drawing.
 license: MIT
 ---
 
-# Fotos von Schulmaterial lesen
+# Fotos von Schulmaterial lesen und Abbildungen nachbauen
 
 ## Wann benutzen
 
-<!-- skill-only -->
-
-- Du bekommst Fotos von Arbeitsblättern, Buchseiten oder Selbsttests und sollst daraus eine Seitenliste für einen
-  Explainer ableiten (Schritte 2 und 3 des Skills `lernapps-practice`).
-- Sage den Eltern zuerst die Hinweise, lies dann alle Fotos, schreibe erst danach die Seitenliste.
-- Schreibe keinen Text der Fotos ab und speichere nichts davon im Repo: weder Fotos noch Beschreibungen des Materials.
-  Das Material ist urheberrechtlich geschützt, die Schrift gehört dem Kind.
-
-## Hinweise vor den Fotos
-
-Sage den Eltern:
-- Die Fotos gehen an den Anbieter dieses Assistenten. Bei Kindern entscheiden die Eltern.
-- Du schreibst nichts ab. Du erzeugst eigene Texte und Aufgaben zu denselben Themen. Fakten sind frei, Formulierungen und Abbildungen nicht.
-- Namen, Schule, Klasse, Lehrkraft und die Handschrift des Kindes kommen nicht in die App.
-- Die Vorschau ist für zwei Wochen öffentlich unter einer Adresse mit Nummer.
+- In Explore: Du bekommst Fotos von Arbeitsblättern, Buchseiten oder Selbsttests und leitest daraus die Themen und eine
+  Seitenliste ab. Lies erst alle Fotos, schreibe erst danach die Seitenliste.
+- In Code: Du baust die Abbildungen des Materials für die App nach.
+- Schreibe keinen Text der Fotos ab. Du schreibst eigene Texte und Aufgaben zu denselben Themen.
+- Die Fotos kommen nie in die App, nie in das Repo und nie in die ZIP-Datei, auch keine Ausschnitte. Beschreibungen
+  des Materials kommen nicht in den Plan.
 
 ## Fotos lesen
 
 ### Reihenfolge
 
-- Die Reihenfolge ist die der Dateinamen oder der Aufnahmezeit, nicht die der Nachricht. Lies erst alle Fotos, dann schreibe die Seitenliste.
+- Die Reihenfolge ist die der Dateinamen oder der Aufnahmezeit, nicht die der Nachricht. Lies erst alle Fotos, dann
+  schreibe die Seitenliste.
 
 ### Seiten gliedern
 
-- Gliedere jede Seite: Titel, Spalten, Text, Abbildungen, Aufgaben. Kennzeichne hervorgehobene Kästen (Info, Merke, nummerierte Kurztexte), damit sie in der App wieder als Kasten erscheinen.
+- Gliedere jede Seite: Titel, Spalten, Text, Abbildungen, Aufgaben. Kennzeichne hervorgehobene Kästen (Info, Merke,
+  nummerierte Kurztexte), damit sie in der App wieder als Kasten erscheinen.
+- Notiere jede Abbildung mit ihrem Inhalt: was sie zeigt, ihre Beschriftungen, Zahlen und die Anordnung.
 
 ### Ränder
 
@@ -40,26 +34,45 @@ Sage den Eltern:
 
 ### Handschrift des Kindes
 
-- Kreuze, Durchstreichungen, Zahlen und ausgefüllte Felder stammen vom Kind und können falsch sein. Leite Lösungen aus den Fakten ab.
+- Kreuze, Durchstreichungen, Zahlen und ausgefüllte Felder stammen vom Kind und können falsch sein. Leite Lösungen aus
+  den Fakten ab.
 
-### Zeichnungen
+### Aufgaben des Materials
 
-- Zeichnungen, Diagramme und Pläne bildest Du nicht ab. Ersetze sie durch Tabellen oder Listen.
+- Welche Aufgabe des Materials welcher Block wird: [references/aufgabentypen.md](references/aufgabentypen.md).
+
+## Abbildungen nachbauen
+
+Eine Abbildung des Materials baust Du inhaltsgleich nach: dieselben Teile, dieselbe Anordnung, dieselben
+Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
+
+1. **Kannst Du Bilder erzeugen,** erzeuge die Abbildung neu, nach Deiner Beschreibung des Inhalts, nicht nach dem
+   Foto als Vorlage. Speichere sie als `.png`, `.jpg` oder `.webp`.
+2. **Sonst zeichne sie schematisch als SVG** von Hand: Formen, Linien, Pfeile, Text mit `<text>`. Ein SVG darf nur
+   zeichnen: kein `<script>`, kein `on…=`, kein `<foreignObject>`, kein `<iframe>`, `<embed>` oder `<object>`, kein
+   `javascript:`, kein Verweis nach außen (`href` und `url(…)` nur auf `#…` in derselben Datei), kein `@import`, kein
+   `<!ENTITY`. Sonst lehnt die Einreichung das Bild ab.
+3. **Ablage:** `src/images/<name>.svg` (oder `.png`, `.jpg`, `.webp`), der Name aus Kleinbuchstaben, Ziffern und
+   Bindestrichen.
+4. **Block:** `figure` mit `image`, `alt`, `caption`, `source` und `licence`; mit nummerierten Markern
+   `labelled-figure` (`labels` mit `x`, `y` in Prozent und `text`). Wie, sagt der Skill `lernapps-explainer`.
+   - `source`: `eigene Zeichnung` für ein SVG von Hand, `KI-generiert` für ein erzeugtes Bild.
+   - `licence`: `CC-BY-4.0`, die Lizenz der Einreichung.
+   - `alt` beschreibt den Inhalt so, dass er ohne Bild verständlich ist; die Beschriftungen gehören dazu.
+5. Prüfe am Ende: Stimmen alle Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil?
 
 ## Typische Stolpersteine
-
-<!-- skill-only -->
 
 - Ein Selbsttest sieht oft wie die Fortsetzung der Seite davor aus, ist aber ein eigenes Blatt. Darum erst alle Fotos
   lesen, dann gliedern.
 - Seiten liegen übereinander und Nachbarseiten schauen heraus: Randtext ist abgeschnitten und nicht verlässlich.
 - Kinderschrift steht mitten in der Vorlage (Kreuze im Selbsttest, Zahlen an Diagrammen, ausgefüllte Tabellen, Datum
-  am Rand). Übernimm nichts davon. Sind im Selbsttest mehrere Kreuze falsch oder durchgestrichen, lässt sich daraus
-  keine Lösung ablesen. Leite sie aus den Fakten ab.
+  am Rand). Übernimm nichts davon, auch nicht in eine Abbildung. Sind im Selbsttest mehrere Kreuze falsch oder
+  durchgestrichen, lässt sich daraus keine Lösung ablesen. Leite sie aus den Fakten ab.
 - Zählweisen unterscheiden sich (nach Konfession, Bundesland, Lehrwerk). Eine Zahl auf dem Foto ist eine Zählung, nicht
   das einzige richtige Ergebnis. Schreibe dann beide Zählungen mit dem Hinweis auf die Zählung.
-- Zeichnungen (Kreisdiagramm, Grundriss, Symbole) nicht nachzeichnen. Was zählt, ist der Inhalt: die Reihenfolge, die
-  Bezeichnung der Teile. Ersatz ist eine Tabelle, eine Liste oder eine Aufgabe zum Ordnen.
+- Eine Abbildung mit Beschriftungen zum Eintragen („Beschrifte A bis E“) wird eine `labelled-figure` mit den Buchstaben
+  als Marker und eine Aufgabe, die die Bezeichnungen zuordnet.
 - Hervorgehobene Kästen früh erkennen (Info-Kasten, nummerierte Kurztexte, Kästen mit Buchstaben). Jeder bekommt einen
   eigenen Block (`note`), damit er auf der Seite wieder sichtbar ist.
 - Die Bildanalyse und das Schreiben der Seitenliste dauern lange, wenn Seiten dicht sind. Plane Zeit ein.

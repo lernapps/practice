@@ -115,9 +115,6 @@ describe("the docs", () => {
     const text = read("docs/einreichen.md");
     for (const parameter of ["template", "title", "fach", "klassenstufe", "bundesland"]) assert.ok(text.includes(`\`${parameter}\``), parameter);
   });
-  it("have a llms.txt with the headings, ready for the draft", () => {
-    assert.match(read("docs/llms.txt"), /^# .+\n\n[\s\S]*?\n## 1\. /); // the title, a short intro, then the numbered steps
-  });
   it("name the checks of a bundle that really run", () => {
     const text = read("docs/pruefungen.md");
     for (const rule of ["accessible", "usable-at-360px", "no-tracking", "no-request-before-click", "own-data-only", "links-resolve", "pages-reachable", "explainer-readable-without-js"]) {

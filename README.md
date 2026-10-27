@@ -8,31 +8,29 @@ Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lerna
 
 - **Einreichen:** [Formular öffnen](https://github.com/lernapps/practice/issues/new?template=einreichen.yml), Anleitung in [docs/einreichen.md](docs/einreichen.md).
 - **Dokumentation:** <https://lernapps.net/practice/> (Deutsch) und <https://lernapps.net/practice/en/> (English). Die Quellen: [docs/index.md](docs/index.md) und [docs/en/index.md](docs/en/index.md).
-- **Für KI-Assistenten:** [docs/llms.txt](docs/llms.txt) ist der Einstieg für jeden Assistenten. Sie entsteht aus den Skills in [skills/](skills/) (siehe [Skills installieren](#skills-installieren)).
+- **Für KI-Assistenten:** [docs/llms.txt](docs/llms.txt) ist der Einstieg. Sie führt zur Plan-Vorlage [guidance/plan-template.md](guidance/plan-template.md), der der Assistent folgt (siehe [Skills](#skills)).
 - **Betrieb und Einstellungen:** [docs/betrieb.md](docs/betrieb.md).
 
 ## Was im Repo liegt
 
-- `skills/`: drei Skills für Assistenten (`lernapps-practice`, `lernapps-practice-photos`, `lernapps-practice-explainer`), aus denen `docs/llms.txt` entsteht.
+- `guidance/plan-template.md`: die Plan-Vorlage mit den Phasen Explore, Plan, Code und Commit.
+- `skills/`: drei Skills für Assistenten (`lernapps-practice-explore`, `lernapps-practice-photos`, `lernapps-practice-submit`).
 - `docs/`: Dokumentation für Menschen (Deutsch in `docs/*.md`, Englisch in `docs/en/*.md`) und `llms.txt`.
 - `docs/arc42/`: die Architektur des Repos als arc42-Modell (nur Englisch), veröffentlicht unter <https://lernapps.net/practice/architecture/>.
-- `scripts/` und `site/`: Bauskript und Stil der Seite, `scripts/llms.mjs` (setzt `docs/llms.txt` aus den Skills zusammen) und `scripts/try.ts` (Probelauf eines ZIP).
+- `scripts/` und `site/`: Bauskript und Stil der Seite und `scripts/try.ts` (Probelauf eines ZIP).
 - `.github/ISSUE_TEMPLATE/einreichen.yml`: das Formular.
 - `.github/workflows/`: dünne Workflows `einreichung.yml`, `aufraeumen.yml`, `check.yml`, `pages.yml` (Seite bauen, prüfen, veröffentlichen) und `pr-preview.yml` (Vorschau je Pull Request).
 - `actions/`: die Composite-Actions `validate` (prüfen), `build` (bauen), `publish` (veröffentlichen), `expire` (ablaufen lassen) und der gemeinsame Code in `actions/lib/`.
 - `test/`: Tests der Skripte mit `node:test`.
 
-## Skills installieren
+## Skills
 
-Die Skills liegen wie die des Tooling nach Aufgabe geordnet in `skills/process/` und `skills/content/`. Ein Skill-Installer liest sie direkt aus diesem Repo:
+Ein Assistent mit Shell (Node 22, git, Netz) baut die App beim Creator. Der Einstieg ist die [llms.txt](https://lernapps.net/practice/llms.txt): Sie lässt ihn die Plan-Vorlage herunterladen. Die Vorlage folgt den Phasen des Tooling und installiert genau diese Skills:
 
-```text
-npx --yes skills add lernapps/practice -y -s lernapps-practice
-npx --yes skills add lernapps/practice -y -s lernapps-practice-photos
-npx --yes skills add lernapps/practice -y -s lernapps-practice-explainer
-```
+- aus diesem Repo (`skills/process/` und `skills/content/`): `lernapps-practice-explore` (Explore), `lernapps-practice-photos` (Explore und Code), `lernapps-practice-submit` (Commit);
+- aus `lernapps/tooling`: `lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`.
 
-Der Einstieg für jeden Assistenten bleibt die [llms.txt](https://lernapps.net/practice/llms.txt): Sie enthält alle drei Skills in einem Dokument, ohne Verweis auf eine weitere Datei. Wer ein Skill ändert, führt `npm run llms` aus und committet `docs/llms.txt` mit. Wie man die Anleitung testet, steht in [docs/anleitung-testen.md](docs/anleitung-testen.md).
+Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie man die Anleitung testet, steht in [docs/anleitung-testen.md](docs/anleitung-testen.md).
 
 ## Mitarbeiten
 

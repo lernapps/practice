@@ -79,5 +79,5 @@ For example: "for my daughter's maths test next week" or "for a cover lesson in 
 - [Operations](betrieb.md): what the repository is for, how it runs and how to find faults.
 - [Checks](pruefungen.md): what is checked in a submission.
 - [Testing the guide](anleitung-testen.md): how to test the guide for assistants and build locally.
-- **Installing the skills**: The guide is made of three skills in `skills/`. A skill installer reads them from the repo: `npx --yes skills add lernapps/practice -y -s lernapps-practice` (likewise `-s lernapps-practice-photos` and `-s lernapps-practice-explainer`). The entry point for every assistant stays [llms.txt](llms.txt); it holds all three skills in one document and is made with `npm run llms`.
+- **Guide for assistants**: [llms.txt](llms.txt) leads to the plan template `guidance/plan-template.md`; it installs the three skills in `skills/` and the content skills of the tooling.
 - [Architecture](architecture/): how the repository is built (arc42).
