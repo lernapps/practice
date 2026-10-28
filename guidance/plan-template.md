@@ -76,7 +76,8 @@ open questions. Never the material itself, never a name. -->
 - [ ] Load skill `lernapps-practice-photos`. Read the material as it says. Under "Notes": the topics, page by page;
       each figure of the material and how you redraw it.
 - [ ] Load skill `lernapps-content-research`. Every fact you are not sure of (numbers, dates, names, ways of
-      counting): a source you opened, under "Notes". No source → mark it for the creator to check.
+      counting): a source you opened, under "Notes". Open it now, not later. Only what no source you opened settles
+      goes to the creator to check.
 - [ ] Load skills `lernapps-exercise-patterns` and `lernapps-explainer-design`. Draft the concept as skill
       `lernapps-practice-explore` says: scope and weighting for the occasion, pages, exercises, figures.
 - [ ] Fill "Goal" and "Key decisions": the occasion and what learners can do afterwards; each decision with its
