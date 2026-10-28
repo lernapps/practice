@@ -3,8 +3,9 @@
 ## Vorher {#before}
 
 1. Dein Assistent hat die Lern-App vom Archetyp `explainer` auf Deinem Rechner gebaut und geprüft. Er gibt Dir die ZIP-Datei mit dem Ordner `src` (Seiten, Bilder, Komponenten).
-2. Der Inhalt erfüllt die [Regeln](rules.md). Das wichtigste: keine Namen, keine abgeschriebenen Texte, keine Fotos des Materials.
-3. Du hast ein GitHub-Konto.
+2. Du weißt, was Du bestätigst: Dein Assistent hat Dir jede Seite der App gezeigt, bevor er Dir die ZIP-Datei gibt.
+3. Der Inhalt erfüllt die [Regeln](rules.md). Das wichtigste: keine Namen, keine abgeschriebenen Texte, keine Fotos des Materials.
+4. Du hast ein GitHub-Konto.
 
 ## So packst Du die ZIP-Datei {#pack-zip}
 

@@ -1,6 +1,6 @@
 ---
 name: lernapps-practice-submit
-description: Use in Commit of a lernapps practice plan when the explainer builds and checks locally and the creator should submit it - make the ZIP file of src/ (pages, data, images, components), give the link to the form of lernapps/practice, explain the declarations, read the bot's answer, correct and resubmit, and tell the creator about the two weeks and the thumbs-up.
+description: Use in Commit of a lernapps practice plan when the explainer builds and checks locally and the creator should submit it - show the creator every page and go through the declarations, make the ZIP file of src/ (pages, data, images, components), give the link to the form of lernapps/practice, explain the declarations, read the bot's answer, correct and resubmit, and tell the creator about the two weeks and the thumbs-up.
 license: MIT
 ---
 
@@ -11,6 +11,28 @@ license: MIT
 - Commit des Plans aus der Plan-Vorlage von lernapps practice. `npm run build` und `npm run check` sind grün.
 - Die App kommt nicht über ein eigenes Repo ins Netz: Der Creator reicht den Ordner `src/` als ZIP-Datei in einem Issue
   von `lernapps/practice` ein. GitHub prüft und baut ihn und kommentiert die Adresse. Kein Push, kein Listing.
+
+## Alle Seiten zeigen
+
+Der Creator bestätigt im Formular, dass der Inhalt selbst erstellt ist, keine persönlichen Daten enthält und zwei
+Wochen öffentlich sein darf. Das kann er nur, wenn er jede Seite gesehen hat. Zeige sie ihm vor der ZIP-Datei, nach
+`npm run build`, auf dem besten Weg, den Deine Umgebung erlaubt:
+
+1. Bilder aller Seiten: `npx lernapps screenshots` (lernapps/tooling) schreibt ein Bild je Seite und eine Übersicht
+   `screenshots/index.html`. Zeige die Übersicht, zum Beispiel als HTML-Artefakt, oder die Bilder der Reihe nach.
+2. Läufst Du auf dem Rechner des Creators: Starte die App mit `npm run dev` und gib ihm die Adresse.
+3. Kennt Deine Umgebung den Befehl noch nicht: Bilder jeder Seite mit dem Browser, den `npm run check` nutzt
+   (Playwright, ganze Seite).
+
+Dann geh mit ihm die drei Erklärungen durch, in einfachen Worten:
+
+- Texte und Abbildungen sind neu geschrieben und gezeichnet, nichts aus dem Buch oder vom Arbeitsblatt abgeschrieben,
+  keine Fotos.
+- Keine Namen, keine Schule, keine Klasse, keine Lehrkraft, keine Handschrift.
+- Er ist einverstanden, dass die App zwei Wochen öffentlich ist.
+
+Nenne, worauf er besonders schauen soll: die nachgebauten Abbildungen und die Fakten, die er prüfen sollte. Erst nach
+seinem Ja geht es weiter.
 
 ## ZIP-Datei erzeugen
 
@@ -58,8 +80,8 @@ Sage ehrlich:
 - Hat sie geholfen, soll jemand eine 👍-Reaktion auf das erste Feld des Issues setzen. Dann bleibt sie erhalten und
   wird für den Katalog geprüft. Dieses Feedback hilft auch anderen, die vor demselben Stoff stehen.
 - Die App speichert nichts über die Lernenden. Die Selbsteinschätzung zählen sie selbst.
-- Die App prüft den Lernstand. Das Lernen ersetzt sie nicht: Am meisten hilft sie, wenn das Kind zuerst selbst sein
-  Material durchsieht und dann mit ihr prüft, was sitzt.
+- Die App erklärt den Stoff Schritt für Schritt und prüft dann, was sitzt. Am meisten hilft sie, wenn das Kind vorher
+  selbst sein Material durchgesehen hat.
 
 ## Typische Stolpersteine
 

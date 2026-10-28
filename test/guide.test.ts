@@ -86,9 +86,9 @@ describe("the plan template", () => {
     const headings = [...plan.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
     assert.deepEqual(headings.filter((h) => ["Explore", "Plan", "Code", "Commit", "Retrospective"].includes(h ?? "")), ["Explore", "Plan", "Code", "Commit", "Retrospective"]);
   });
-  it("waits for the creator at the checkpoints: concept, plan, submit, address", () => {
+  it("waits for the creator at the checkpoints: proposal, pages, submit, address", () => {
     const checkpoints = plan.split("\n").filter((line) => line.includes("**Checkpoint:**"));
-    assert.deepEqual(checkpoints.map((line) => /\*\*Checkpoint:\*\* (\w+)/.exec(line)?.[1]), ["concept", "confirm", "submit", "address"]);
+    assert.deepEqual(checkpoints.map((line) => /\*\*Checkpoint:\*\* (\w+)/.exec(line)?.[1]), ["proposal", "pages", "submit", "address"]);
   });
   it("installs exactly the expected skills, from lernapps/practice and lernapps/tooling", () => {
     const found = installs(plan);

@@ -3,8 +3,9 @@
 ## Before you start {#before}
 
 1. Your assistant has built and checked the learning app of the archetype `explainer` on your computer. It gives you the ZIP file with the folder `src` (pages, images, components).
-2. The content meets the [rules](rules.md). The most important: no names, no copied texts, no photos of the material.
-3. You have a GitHub account.
+2. You know what you confirm: your assistant has shown you every page of the app before it gives you the ZIP file.
+3. The content meets the [rules](rules.md). The most important: no names, no copied texts, no photos of the material.
+4. You have a GitHub account.
 
 ## How to pack the ZIP file {#pack-zip}
 

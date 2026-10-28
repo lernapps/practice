@@ -8,9 +8,9 @@ Für Menschen, die das Repo pflegen. Die Anleitung für Assistenten führt einen
 | --- | --- |
 | [llms.txt](llms.txt) | Der Einstieg: Ordner anlegen, die Plan-Vorlage herunterladen, ihr folgen. |
 | `guidance/plan-template.md` | Die Plan-Vorlage mit den Phasen des Tooling: Explore, Plan, Code, Commit. Sie installiert die Skills, nennt je Phase die Skills und sagt, an welchen Checkpoints der Assistent auf den Creator wartet (Konzept, Plan, Einreichen, Adresse). |
-| `lernapps-practice-explore` | Explore: Anlass, Katalog, Hinweise, Konzept mit Umfang und Gewichtung. |
+| `lernapps-practice-explore` | Explore und Plan: eine Frage nach dem, was nur der Creator weiß; Katalog, Hinweise; ein Vorschlag mit Gewichtung, Seiten, die erst erklären und dann üben, und reicheren Formen. |
 | `lernapps-practice-photos` | Explore und Code: Fotos lesen, Abbildungen inhaltsgleich nachbauen. |
-| `lernapps-practice-submit` | Commit: die ZIP-Datei von `src/`, das Formular, Antworten und Korrekturen. |
+| `lernapps-practice-submit` | Commit: alle Seiten zeigen und die Erklärungen durchgehen, die ZIP-Datei von `src/`, das Formular, Antworten und Korrekturen. |
 
 In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`). Ein Test prüft, dass die Plan-Vorlage genau diese Skills installiert und dass die Adressen der `llms.txt` stimmen.
 
