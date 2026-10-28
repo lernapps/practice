@@ -15,7 +15,7 @@ Der Ablauftag steht in `i/<Nummer>/practice.json` (Feld `laeuftAb`). Maßgeblich
 
 ## Neu veröffentlichen {#neu-veroeffentlichen}
 
-Jede neue Veröffentlichung für dasselbe Issue ersetzt die alte und beginnt die zwei Wochen neu. Das passiert, wenn Du das Issue mit einer neuen ZIP-Adresse oder anderen Angaben bearbeitest. Nach dem Ablauf der Vorschau geht es genauso: Issue bearbeiten, neue ZIP-Datei hineinziehen, speichern.
+Jede neue Veröffentlichung für dasselbe Issue ersetzt die alte und beginnt die zwei Wochen neu. Das passiert, wenn Du eine neue ZIP-Datei als Kommentar anhängst oder die Angaben im Issue änderst. Nach dem Ablauf der Vorschau geht es genauso: neue ZIP-Datei als Kommentar anhängen.
 
 Ein Wartungsteam kann den Lauf auch ohne neues Anhängen wiederholen ([Betrieb](betrieb.md)).
 

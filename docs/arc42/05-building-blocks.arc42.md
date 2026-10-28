@@ -127,14 +127,14 @@ What GitHub and the maintainers use to start the workflows.
 id: if-workflows
 title: Workflow events
 provider: bb-workflows
-protocol: GitHub events issues opened, edited and closed, a daily schedule, workflow_dispatch with an issue number
+protocol: GitHub events issues opened, edited and closed, issue comments created and edited, a daily schedule, workflow_dispatch with an issue number
 path: .github/workflows
 :::
 ```
 
 ### Submission workflow
 
-`einreichung.yml`. Runs the jobs `intake`, `build` and `publish` one after the other for an issue that was opened or edited, or by hand for an issue number (`concept-rights-split`).
+`einreichung.yml`. Runs the jobs `intake`, `build` and `publish` one after the other for an issue that was opened or edited, for a comment of the issue's author with an attachment (`term-latest-upload`), or by hand for an issue number (`concept-rights-split`).
 
 ```arc42
 :::building-block

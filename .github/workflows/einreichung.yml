@@ -1,6 +1,7 @@
 name: Einreichung
 
-# A submission: an issue from the form .github/ISSUE_TEMPLATE/einreichen.yml with a ZIP file attached. Three jobs with
+# A submission: an issue from the form .github/ISSUE_TEMPLATE/einreichen.yml with a ZIP file attached; a new version
+# is a ZIP file in a comment of the issue's author (the latest upload counts, actions/lib/form.ts). Three jobs with
 # the least rights each:
 #   intake   (issues: read)               reads the issue, downloads and checks the ZIP file, unpacks it (nothing runs)
 #   build    (contents: read, no secret)  builds the preview with app-templates; checks the bundle; noindex
@@ -9,10 +10,13 @@ name: Einreichung
 # The logic is in actions/ (tested by check.yml). workflow_dispatch repeats the run for an existing issue without
 # attaching again; only people with write access can start it. Its input zip_url, for a maintainer's test without a
 # browser, takes the ZIP file from a fixed list of addresses instead of the issue (actions/lib/limits.ts). Issues that
-# do not come from the form are skipped.
+# do not come from the form are skipped. A comment starts a run only when the issue's author wrote it and it holds an
+# attachment; anybody else's comment changes nothing and cancels no run (its own concurrency group).
 on:
   issues:
     types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
   workflow_dispatch:
     inputs:
       issue:
@@ -28,14 +32,19 @@ on:
 permissions: {}
 
 concurrency:
-  group: einreichung-${{ github.event.issue.number || inputs.issue }}
+  group: >-
+    einreichung-${{ github.event.issue.number || inputs.issue }}${{ github.event_name == 'issue_comment' &&
+    (github.event.comment.user.id != github.event.issue.user.id || !contains(github.event.comment.body, 'https://github.com/user-attachments/files/'))
+    && format('-comment-{0}', github.event.comment.id) || '' }}
   cancel-in-progress: true
 
 jobs:
   intake:
     runs-on: ubuntu-latest
-    # an issue, not a pull request
-    if: github.event_name == 'workflow_dispatch' || github.event.issue.pull_request == null
+    # an issue, not a pull request; a comment only of the issue's author with an attachment
+    if: >-
+      github.event_name == 'workflow_dispatch' || (github.event.issue.pull_request == null && (github.event_name == 'issues'
+      || (github.event.comment.user.id == github.event.issue.user.id && contains(github.event.comment.body, 'https://github.com/user-attachments/files/'))))
     permissions:
       issues: read
       contents: read

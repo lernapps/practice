@@ -93,15 +93,14 @@ export function readDeclarations(found: Sections): Problem[] {
 export const ZIP_URL = /https:\/\/github\.com\/user-attachments\/files\/(\d{1,20})\/([A-Za-z0-9._%+~-]{1,200}\.zip)(?![A-Za-z0-9._%+~-])/g;
 
 export const NO_ZIP_HELP =
-  "Kein ZIP gefunden. So hängst Du es an: Klicke oben rechts am ersten Feld des Issues auf die drei Punkte und auf »Edit«. " +
-  "Ziehe die ZIP-Datei in das Feld »ZIP-Datei« und warte, bis dort ein Link erscheint. Er sieht so aus: " +
-  "`[name.zip](https://github.com/user-attachments/files/…/name.zip)`. Speichere dann mit »Update comment«. " +
-  "Danach prüft GitHub die Datei von selbst.";
+  "Kein ZIP gefunden. So hängst Du es an: Ziehe die ZIP-Datei in das Kommentarfeld unten in diesem Issue und warte, " +
+  "bis dort ein Link erscheint. Er sieht so aus: `[name.zip](https://github.com/user-attachments/files/…/name.zip)`. " +
+  "Klicke dann auf »Comment«. Danach prüft GitHub die Datei von selbst.";
 
 /** The address of the ZIP file in the field, or the problems. */
 export function readZipUrl(found: Sections): { url?: string; problems: Problem[] } {
   const field = found["ZIP-Datei"] ?? "";
-  const urls = [...new Set([...field.matchAll(ZIP_URL)].map((m) => m[0]))];
+  const urls = zipUrlsIn(field);
   if (urls.length === 0) {
     const other = /https?:\/\/\S+/.test(field);
     return {
@@ -121,4 +120,29 @@ export function readZipUrl(found: Sections): { url?: string; problems: Problem[]
     };
   }
   return { url: urls[0], problems: [] };
+}
+
+/** The ZIP addresses in a text, each once. */
+export function zipUrlsIn(text: string): string[] {
+  return [...new Set([...text.matchAll(ZIP_URL)].map((m) => m[0]))];
+}
+
+/** The number of an attachment address: GitHub counts up, so the larger number is the later upload. */
+export function attachmentNumber(url: string): number {
+  return Number(/\/files\/(\d{1,20})\//.exec(url)?.[1] ?? 0);
+}
+
+/**
+ * The ZIP file that counts: the latest upload of the creator, in the field of the form or in a comment of their own
+ * (`ownerComments`, the texts of the comments of the issue's author). A newer one in a comment replaces the field, so
+ * a new version needs no edit of the form.
+ */
+export function chooseZipUrl(found: Sections, ownerComments: readonly string[] = []): { url?: string; problems: Problem[] } {
+  const field = readZipUrl(found);
+  const latest = ownerComments
+    .flatMap(zipUrlsIn)
+    .reduce<string | undefined>((best, url) => (best === undefined || attachmentNumber(url) > attachmentNumber(best) ? url : best), undefined);
+  if (latest === undefined) return field;
+  if (field.url !== undefined && attachmentNumber(field.url) >= attachmentNumber(latest)) return field;
+  return { url: latest, problems: [] };
 }

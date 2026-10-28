@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { cleanSubject, isSubmission, readDeclarations, readMeta, readZipUrl, sections } from "../actions/lib/form.ts";
+import { chooseZipUrl, cleanSubject, isSubmission, readDeclarations, readMeta, readZipUrl, sections } from "../actions/lib/form.ts";
 import { issueBody, URL1 } from "./support.ts";
 
 describe("the text of an issue from the form", () => {
@@ -84,5 +84,28 @@ describe("the ZIP address", () => {
   it("refuses several different ZIP files", () => {
     assert.equal(url(`${URL1} https://github.com/user-attachments/files/2/b.zip`).problems[0]?.code, "zip-several");
     assert.equal(url(`${URL1} ${URL1}`).url, URL1);
+  });
+});
+
+describe("the ZIP file that counts", () => {
+  const NEWER = "https://github.com/user-attachments/files/34026999/neu.zip";
+  const OLDER = "https://github.com/user-attachments/files/34000000/alt.zip";
+  const field = (zip: string) => sections(issueBody({ "ZIP-Datei": zip }));
+  it("is the field's when the author commented no ZIP file", () => {
+    assert.equal(chooseZipUrl(field(URL1), ["Danke!"]).url, URL1);
+  });
+  it("is a newer upload in a comment of the author, the latest of several", () => {
+    assert.equal(chooseZipUrl(field(URL1), [`[a.zip](${OLDER})`, `[neu.zip](${NEWER})`, "noch eine Frage"]).url, NEWER);
+  });
+  it("stays the field's when the field holds the later upload", () => {
+    assert.equal(chooseZipUrl(field(NEWER), [`[alt.zip](${OLDER})`]).url, NEWER);
+  });
+  it("comes from a comment when the field has none, without the help text", () => {
+    const result = chooseZipUrl(field("_No response_"), [`[neu.zip](${NEWER})`]);
+    assert.equal(result.url, NEWER);
+    assert.deepEqual(result.problems, []);
+  });
+  it("takes only attachment addresses from comments", () => {
+    assert.equal(chooseZipUrl(field(URL1), ["https://evil.example/user-attachments/files/99999999/a.zip"]).url, URL1);
   });
 });

@@ -1,7 +1,8 @@
 name: practice validate
 description: >-
-  Checks a submission without running anything from it: reads the issue (issues: read is enough), finds the ZIP
-  address (only https://github.com/user-attachments/files/<number>/<name>.zip), downloads the file with limits,
+  Checks a submission without running anything from it: reads the issue and its comments (issues: read is enough),
+  finds the ZIP address (only https://github.com/user-attachments/files/<number>/<name>.zip; the latest upload of the
+  field and the comments of the issue's author, actions/lib/form.ts), downloads the file with limits,
   checks the directory and the files of the ZIP file (paths, kinds, endings, sizes; components only in
   src/components/, SVG images only in src/images/) and unpacks it into a throwaway folder, an SVG image only when its
   content only draws (actions/lib/svg.ts), never src/main.ts, and checks the form's fields. A ZIP file with src/ at its root is the normal case; a GitHub "Download ZIP"

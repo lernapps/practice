@@ -174,7 +174,8 @@ export function problemsComment(problems: readonly { text: string }[]): string {
 }
 
 const again = () =>
-  "Wenn Du das behoben hast, bearbeite das Issue (die drei Punkte am ersten Feld, »Edit«, speichern). Dann prüft GitHub alles noch einmal.";
+  "Wenn Du das behoben hast, hänge die neue ZIP-Datei als Kommentar an dieses Issue an; eine Angabe des Formulars " +
+  "änderst Du am ersten Feld (die drei Punkte, »Edit«). Dann prüft GitHub alles noch einmal.";
 
 /** One line of a log for a comment: no control characters, not longer than 200 characters, no live @-mention. */
 function logLine(line: string): string {
@@ -187,7 +188,7 @@ function logLine(line: string): string {
 
 export const BUILD_FAILED_TEXT =
   "Beim Bauen sind Fehler aufgetreten. Gib diese Meldungen Deinem Assistenten, er korrigiert den Inhalt. " +
-  "Hänge das neue ZIP im ersten Feld dieses Issues an (Bearbeiten) oder öffne ein neues.";
+  "Hänge die neue ZIP-Datei als Kommentar an dieses Issue an.";
 
 /** The messages of a failed build in a code block (at most 60 lines): nothing in it is read as Markdown or HTML. */
 export function buildFailedComment(excerpt: string, runUrl: string): string {

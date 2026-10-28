@@ -200,7 +200,7 @@ describe("publish", () => {
     writeFileSync(join(buildinfo, "build.json"), JSON.stringify({ ok: false, stage: "build", log }));
     await publish(env({ INTAKE_DIR: intakeDir({ version: 1, issue: 5, relevant: true, ok: true, fingerprint: "b".repeat(64), problems: [], meta: META }), BUILD_DIR: buildinfo, BUILD_RESULT: "failure", PRACTICE_REMOTE: bareRemote(), RUN_URL: "https://github.com/lernapps/practice/actions/runs/1" }), api);
     const text = posted(api);
-    assert.match(text, /Beim Bauen sind Fehler aufgetreten\. Gib diese Meldungen Deinem Assistenten, er korrigiert den Inhalt\. Hänge das neue ZIP im ersten Feld dieses Issues an \(Bearbeiten\) oder öffne ein neues\./);
+    assert.match(text, /Beim Bauen sind Fehler aufgetreten\. Gib diese Meldungen Deinem Assistenten, er korrigiert den Inhalt\. Hänge die neue ZIP-Datei als Kommentar an dieses Issue an\./);
     const block = text.split("```text\n")[1]?.split("\n```")[0] ?? "";
     assert.ok(block.split("\n").length <= 60);
     assert.ok(block.includes("src/a.yaml:3: not valid"));

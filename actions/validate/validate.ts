@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// The intake of a submission (action `validate`, job `intake`): reads the issue, finds the ZIP address, downloads the
-// ZIP file, checks it and unpacks it into a throwaway folder. It runs nothing from the ZIP file and writes nothing to
+// The intake of a submission (action `validate`, job `intake`): reads the issue and the comments of its author, finds
+// the ZIP address (the latest upload: in the field of the form or in a comment of the author), downloads the ZIP file, checks it and unpacks it into a throwaway folder. It runs nothing from the ZIP file and writes nothing to
 // GitHub: the token has issues: read only. What went wrong goes into result.json; the job `publish` turns it into the
 // comment.
 //
@@ -15,7 +15,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { apiFromEnv, COMMENT_MARKER, fingerprintIn, paginate, type Api } from "../lib/github.ts";
-import { isSubmission, readDeclarations, readMeta, readZipUrl, sections } from "../lib/form.ts";
+import { chooseZipUrl, isSubmission, readDeclarations, readMeta, sections } from "../lib/form.ts";
 import { DOWNLOAD_TIMEOUT_SECONDS, MAINTAINER_ZIP_PREFIXES, MAX_DOWNLOAD_BYTES } from "../lib/limits.ts";
 import { extractZip, inspectZip, type Problem } from "../lib/zip.ts";
 
@@ -94,7 +94,7 @@ export const curlDownload: Download = (url) => {
       return {
         problem: {
           code: "download",
-          text: "Wir konnten die ZIP-Datei nicht laden. Prüfe, ob der Link im Feld »ZIP-Datei« noch stimmt, und hänge die Datei notfalls neu an.",
+          text: "Wir konnten die ZIP-Datei nicht laden. Hänge sie bitte noch einmal als Kommentar an dieses Issue an.",
         },
       };
     }
@@ -116,6 +116,8 @@ interface Options {
   /** The issue as the API gives it. */
   state: string;
   body: string;
+  /** The texts of the comments of the issue's author, oldest first: a ZIP file there replaces an older one. */
+  ownerComments?: readonly string[];
   download: Download;
   now?: Date;
   /** The fingerprint in the comment of the last run. */
@@ -143,7 +145,7 @@ export function intake(options: Options): Result {
   const { meta, problems: metaProblems } = readMeta(found);
   problems.push(...metaProblems, ...readDeclarations(found));
   const given = options.zipUrl === undefined || options.zipUrl === "" ? undefined : options.zipUrl;
-  const { url, problems: zipProblems } = given === undefined ? readZipUrl(found) : { url: given, problems: [] };
+  const { url, problems: zipProblems } = given === undefined ? chooseZipUrl(found, options.ownerComments) : { url: given, problems: [] };
   problems.push(...zipProblems);
   if (given !== undefined && !maintainerZipUrl(given)) {
     problems.push({ code: "zip-url", text: "Die Adresse der ZIP-Datei des Testlaufs ist nicht erlaubt." });
@@ -196,13 +198,25 @@ function output(name: string, value: string): void {
   if (file) appendFileSync(file, `${name}=${value}\n`);
 }
 
-async function readIssue(api: Api, repo: string, issue: number): Promise<{ state: string; body: string }> {
+async function readIssue(api: Api, repo: string, issue: number): Promise<{ state: string; body: string; author?: number }> {
   const response = await api.request("GET", `/repos/${repo}/issues/${issue}`);
-  const row = response.body as { state?: unknown; body?: unknown; pull_request?: unknown } | undefined;
+  const row = response.body as { state?: unknown; body?: unknown; pull_request?: unknown; user?: { id?: unknown } } | undefined;
   if (response.status !== 200 || row === undefined) throw new Error(`cannot read issue #${issue} (${response.status})`);
   // a pull request is not a submission
   if (row.pull_request !== undefined) return { state: "pull_request", body: "" };
-  return { state: String(row.state), body: typeof row.body === "string" ? row.body : "" };
+  const author = typeof row.user?.id === "number" ? row.user.id : undefined;
+  return { state: String(row.state), body: typeof row.body === "string" ? row.body : "", ...(author === undefined ? {} : { author }) };
+}
+
+interface CommentRow {
+  body?: string;
+  user?: { id?: number; type?: string };
+}
+
+/** The texts of the comments the issue's author wrote, oldest first; never a bot's, never another person's. */
+export function ownerCommentTexts(rows: readonly CommentRow[], author: number | undefined): string[] {
+  if (author === undefined) return [];
+  return rows.filter((row) => row.user?.id === author && row.user.type !== "Bot").map((row) => row.body ?? "");
 }
 
 async function main(): Promise<number> {
@@ -211,8 +225,8 @@ async function main(): Promise<number> {
     if (!/^[1-9]\d{0,8}$/.test(raw)) throw new Error("ISSUE_NUMBER is not an issue number");
     const issue = Number(raw);
     const api = apiFromEnv();
-    const { state, body } = await readIssue(api, api.repo, issue);
-    const comments = await paginate<{ body?: string; user?: { type?: string } }>(api, `/repos/${api.repo}/issues/${issue}/comments`);
+    const { state, body, author } = await readIssue(api, api.repo, issue);
+    const comments = await paginate<CommentRow>(api, `/repos/${api.repo}/issues/${issue}/comments`);
     const previous = comments
       .filter((c) => c.user?.type === "Bot" && c.body?.includes(COMMENT_MARKER))
       .map((c) => fingerprintIn(c.body ?? ""))
@@ -222,6 +236,7 @@ async function main(): Promise<number> {
       outDir: resolve(process.env["OUT_DIR"] || "_intake"),
       state,
       body,
+      ownerComments: ownerCommentTexts(comments, author),
       download: curlDownload,
       previous,
       force: process.env["FORCE"] === "true",

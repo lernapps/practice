@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { curlDownload, intake, maintainerZipUrl, type Download } from "../actions/validate/validate.ts";
+import { curlDownload, intake, maintainerZipUrl, ownerCommentTexts, type Download } from "../actions/validate/validate.ts";
 import { buildZip, goodSpecs } from "./zip-builder.ts";
-import { issueBody, tmp } from "./support.ts";
+import { issueBody, tmp, URL1 } from "./support.ts";
 
 const serve = (buffer: Buffer): Download => () => ({ buffer });
 const never: Download = () => {
@@ -87,6 +87,37 @@ describe("intake", () => {
     intake({ issue: 7, outDir, state: "open", body: issueBody(), download: serve(buildZip([...goodSpecs(), { name: "proj/package.json", data: "{}" }])) });
     assert.deepEqual(readdirSync(outDir).sort(), ["meta.json", "result.json", "tree"]);
     assert.deepEqual(readdirSync(join(outDir, "tree")), ["src"]);
+  });
+});
+
+describe("a new version in a comment", () => {
+  const NEWER = "https://github.com/user-attachments/files/34026999/neu.zip";
+  it("loads the newer ZIP file of the author's comment and builds again", () => {
+    const loaded: string[] = [];
+    const download: Download = (url) => {
+      loaded.push(url);
+      return { buffer: buildZip(goodSpecs()) };
+    };
+    const first = run(issueBody(), download);
+    const second = run(issueBody(), download, { ownerComments: [`Neue Fassung: [neu.zip](${NEWER})`], previous: first.fingerprint });
+    assert.equal(second.ok, true);
+    assert.deepEqual(loaded, [URL1, NEWER]);
+  });
+  it("counts only the comments of the issue's author, never a bot's", () => {
+    const rows = [
+      { body: "a", user: { id: 1, type: "User" } },
+      { body: "b", user: { id: 2, type: "User" } },
+      { body: "c", user: { id: 1, type: "Bot" } },
+      { body: "d", user: { id: 1, type: "User" } },
+    ];
+    assert.deepEqual(ownerCommentTexts(rows, 1), ["a", "d"]);
+    assert.deepEqual(ownerCommentTexts(rows, undefined), []);
+  });
+  it("starts a run only for a comment of the issue's author with an attachment", () => {
+    const workflow = readFileSync(new URL("../.github/workflows/einreichung.yml", import.meta.url), "utf8");
+    assert.match(workflow, /issue_comment:\n\s+types: \[created, edited\]/);
+    assert.match(workflow, /github\.event\.comment\.user\.id == github\.event\.issue\.user\.id && contains\(github\.event\.comment\.body, 'https:\/\/github\.com\/user-attachments\/files\/'\)/);
+    assert.match(workflow, /format\('-comment-\{0\}', github\.event\.comment\.id\)/);
   });
 });
 

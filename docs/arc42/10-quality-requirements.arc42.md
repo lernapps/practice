@@ -155,15 +155,15 @@ metric: The comment is bounded in length, and no text of the submission is read 
 
 ### A creator corrects the content
 
-The creator edits the issue with a corrected ZIP file.
+The creator attaches a corrected ZIP file as a comment.
 
 ```arc42
 :::quality-scenario
 id: qs-correct-and-retry
 title: A creator corrects the content
 quality: qg-understandable
-stimulus: The first field of the issue gets a new ZIP file
+stimulus: The issue's author attaches a new ZIP file in a comment
 response: The check and the build run again and replace the comment and the preview (rs-run-again)
-metric: No step besides the edit
+metric: No step besides the comment
 :::
 ```

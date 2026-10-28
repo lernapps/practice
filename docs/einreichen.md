@@ -28,9 +28,9 @@ Nach etwa einer bis drei Minuten schreibt GitHub einen Kommentar:
 
 ## Nach einer Korrektur {#korrektur}
 
-Öffne Dein Issue und klicke am ersten Feld auf die drei Punkte und dann auf **Edit**. Ziehe die neue ZIP-Datei in das Feld **ZIP-Datei** und speichere. GitHub prüft und baut dann neu. Der alte Kommentar wird ersetzt.
+Eine neue Fassung ist mit einem Kommentar online: Ziehe die neue ZIP-Datei in das Kommentarfeld Deines Issues, warte auf den Link und klicke auf **Comment**. GitHub prüft und baut dann neu und ersetzt die Vorschau und seinen alten Kommentar. Es zählt immer die zuletzt angehängte ZIP-Datei. Nur Deine eigenen Kommentare zählen, nicht die von anderen.
 
-Wenn Du nur etwas anderes änderst (zum Beispiel den Titel) und die ZIP-Adresse und die drei Angaben gleich bleiben, baut GitHub nicht neu. Der Kommentar bleibt, wie er ist.
+Eine Angabe des Formulars (Fach, Klassenstufe, Bundesland) änderst Du am ersten Feld: die drei Punkte, dann **Edit**. Bleiben ZIP-Datei und Angaben gleich, baut GitHub nicht neu.
 
 ## Das Formular vorausfüllen {#vorausfuellen}
 
@@ -55,5 +55,5 @@ Sonderzeichen müssen in der Adresse umgeschrieben werden: Leerzeichen als `%20`
 ## Wenn etwas nicht klappt {#probleme}
 
 - **Kein Kommentar nach fünf Minuten:** Öffne den Reiter „Actions“ des Repos und suche den Lauf „Einreichung“. Schreibe uns einen Kommentar ins Issue.
-- **„Kein ZIP gefunden“:** Die ZIP-Datei ist nicht im Feld „ZIP-Datei“ angekommen. Ziehe sie noch einmal hinein und warte auf den Link.
+- **„Kein ZIP gefunden“:** Die ZIP-Datei ist nicht angekommen. Hänge sie als Kommentar an und warte auf den Link, bevor Du auf **Comment** klickst.
 - **Die Seite lädt noch nicht:** GitHub braucht manchmal einige Minuten, bis die Adresse antwortet. Versuche es später noch einmal.

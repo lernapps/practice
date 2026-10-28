@@ -30,9 +30,9 @@ The form and the comments are in German.
 
 ## After a correction {#korrektur}
 
-Open your issue, click the three dots at the first field and then **Edit**. Drag the new ZIP file into the field **ZIP-Datei** and save. GitHub then checks and builds again. The old comment is replaced.
+A new version goes online with a comment: drag the new ZIP file into the comment box of your issue, wait for the link and click **Comment**. GitHub then checks and builds again and replaces the preview and its old comment. The ZIP file attached last always counts. Only your own comments count, not those of others.
 
-If you change something else only (for example the title) and the ZIP address and the three details stay the same, GitHub does not build again. The comment stays as it is.
+You change a detail of the form (subject, school year, state) at the first field: the three dots, then **Edit**. If the ZIP file and the details stay the same, GitHub does not build again.
 
 ## Pre-fill the form {#vorausfuellen}
 
@@ -57,5 +57,5 @@ Special characters must be rewritten in the address: a space as `%20`, ü as `%C
 ## If something does not work {#probleme}
 
 - **No comment after five minutes:** Open the tab "Actions" of the repository and look for the run "Einreichung". Write us a comment in the issue.
-- **"Kein ZIP gefunden" (no ZIP found):** The ZIP file did not arrive in the field "ZIP-Datei". Drag it in again and wait for the link.
+- **"Kein ZIP gefunden" (no ZIP found):** The ZIP file did not arrive. Attach it as a comment and wait for the link before you click **Comment**.
 - **The page does not load yet:** GitHub sometimes needs a few minutes until the address answers. Try again later.

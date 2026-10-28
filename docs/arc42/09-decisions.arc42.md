@@ -8,7 +8,7 @@ The decisions are the owner's. Each one gives its context, the decision, what wa
 not have to fork a repository. A workflow can load the attachment of an issue without a login (measured).
 **Decision:** A submission is a GitHub issue from a form, with the content attached as a ZIP file. **Rejected:** a pull
 request from a fork. **Consequences:** Any GitHub account can start a run (`risk-any-account-starts-runs`). The
-submitter corrects the content by editing the issue.
+submitter attaches a corrected version as a comment of the issue (`term-latest-upload`).
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::

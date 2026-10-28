@@ -44,8 +44,8 @@ Erkläre ohne Fachwörter:
 
 - Nach einigen Minuten kommentiert ein Bot das Issue. Bitte den Creator, Dir den Kommentar zu geben.
 - Nennt er Probleme (Datei, Zeile, Regel): Korrigiere `src/`, prüfe mit `npm run build` und `npm run check`, committe,
-  erzeuge eine neue ZIP-Datei. Die Eltern ersetzen sie im ersten Feld des Issues (die drei Punkte, „Edit“, neue Datei
-  hineinziehen, speichern). GitHub prüft und baut dann neu.
+  erzeuge eine neue ZIP-Datei. Die Eltern hängen sie als Kommentar an das Issue an (ins Kommentarfeld ziehen, auf den
+  Link warten, „Comment“). GitHub prüft und baut dann neu; es zählt die zuletzt angehängte ZIP-Datei.
 - Nennt er die Adresse (`https://lernapps.net/practice/i/<Nummer>/`): Öffne sie und prüfe, dass die App erscheint.
 - Wünscht der Creator danach eine Änderung: wie bei Problemen. Die Vorschau zeigt sie erst nach dem neuen Kommentar des
   Bots; prüfe sie dort, bevor Du sie als erledigt meldest.

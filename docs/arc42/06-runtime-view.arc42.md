@@ -106,13 +106,13 @@ sequenceDiagram
 
 ## A run is repeated
 
-An edited issue starts the workflow again; a maintainer can start it by hand with the issue number, which forces a build. The intake stops when the fingerprint is unchanged (`term-fingerprint`). A new preview replaces the old folder and starts its days again.
+A comment of the issue's author with a new ZIP file, or an edited issue, starts the workflow again; the run takes the latest upload (`term-latest-upload`). A comment of anybody else starts nothing. A maintainer can start it by hand with the issue number, which forces a build. The intake stops when the fingerprint is unchanged (`term-fingerprint`). A new preview replaces the old folder and starts its days again.
 
 ```arc42
 :::runtime-scenario
 id: rs-run-again
 title: A run is repeated
-trigger: The issue is edited with a new ZIP file, or a maintainer starts the workflow for an issue number
+trigger: The issue's author attaches a new ZIP file in a comment or edits the issue, or a maintainer starts the workflow for an issue number
 involves: bb-workflow-submission, bb-action-validate, bb-action-build, bb-action-publish, bb-previews
 :::
 ```
@@ -136,15 +136,18 @@ sequenceDiagram
     participant build as Build (job build)
     participant publish as Publish (job publish)
     participant previews as Previews on gh-pages
-    alt the creator edits the issue
-        creator->>github: new ZIP file in the first field
+    alt the creator attaches a new version
+        creator->>github: comment with the new ZIP file
+        github->>flow: event issue comment created
+    else the creator edits the issue
+        creator->>github: new ZIP file or other fields in the first field
         github->>flow: event issue edited
     else a maintainer repeats the run
         maintainer->>github: Run workflow with the issue number
         github->>flow: manual start, forced
     end
     flow->>intake: job intake
-    intake->>github: read the issue and the fingerprint of the last comment
+    intake->>github: read the issue, the comments of its author and the fingerprint of the last comment
     alt the ZIP address and the fields are unchanged and the run is not forced
         Note over build,publish: nothing to do
     else

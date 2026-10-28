@@ -15,7 +15,7 @@ The expiry day is in `i/<number>/practice.json` (field `laeuftAb`). This date co
 
 ## Publish again {#neu-veroeffentlichen}
 
-Every new publication for the same issue replaces the old one and starts the two weeks again. This happens when you edit the issue with a new ZIP address or other details. After a preview has expired it works the same way: edit the issue, drag in a new ZIP file, save.
+Every new publication for the same issue replaces the old one and starts the two weeks again. This happens when you attach a new ZIP file as a comment or change the details in the issue. After a preview has expired it works the same way: attach a new ZIP file as a comment.
 
 A maintenance team can also repeat the run without attaching again ([Operations](betrieb.md)).
 

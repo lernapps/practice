@@ -108,6 +108,18 @@ definition: A hash of the ZIP address and the fields, kept in the comment of the
 :::
 ```
 
+## Latest upload
+
+Which ZIP file a run takes.
+
+```arc42
+:::glossary-term
+id: term-latest-upload
+title: Latest upload
+definition: Of the ZIP files in the field of the form and in the comments of the issue's author, the one uploaded last. GitHub numbers attachments in ascending order, so the largest number wins. Comments of anybody else never count.
+:::
+```
+
 ## Thumbs-up
 
 The 👍 that keeps a preview.
