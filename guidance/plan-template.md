@@ -76,7 +76,8 @@ open questions. Never the material itself, never a name. -->
 - [ ] Load skill `lernapps-practice-photos`. Read the material as it says. Under "Notes": the topics, page by page;
       each figure of the material and how you redraw it.
 - [ ] Load skill `lernapps-content-research`. Every fact you are not sure of (numbers, dates, names, ways of
-      counting): a source you opened, under "Notes". No source → mark it for the creator to check.
+      counting): a source you opened, under "Notes". Open it now, not later. Only what no source you opened settles
+      goes to the creator to check.
 - [ ] Load skills `lernapps-exercise-patterns` and `lernapps-explainer-design`. Draft the concept as skill
       `lernapps-practice-explore` says: scope and weighting for the occasion, pages, exercises, figures.
 - [ ] Fill "Goal" and "Key decisions": the occasion and what learners can do afterwards; each decision with its
@@ -182,6 +183,8 @@ checks and cannot. Becomes the content guide in Code. -->
       bot's comment.
 - [ ] The comment names problems → correct them in `src/`, `npm run build` and `npm run check`, a new ZIP file; the
       creator replaces it in the issue. Repeat until the comment gives the address.
+- [ ] The creator asks for a change after the address → add a task here; change, build, check and replace as above.
+      Done only when the bot's new comment is there and the preview shows the change.
 - [ ] **Checkpoint:** address. The comment gives the address: open it, confirm the app shows, give the creator the
       address and what the skill says about two weeks and the 👍.
 - [ ] Fill the retrospective.

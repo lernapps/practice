@@ -47,6 +47,8 @@ Erkläre ohne Fachwörter:
   erzeuge eine neue ZIP-Datei. Die Eltern ersetzen sie im ersten Feld des Issues (die drei Punkte, „Edit“, neue Datei
   hineinziehen, speichern). GitHub prüft und baut dann neu.
 - Nennt er die Adresse (`https://lernapps.net/practice/i/<Nummer>/`): Öffne sie und prüfe, dass die App erscheint.
+- Wünscht der Creator danach eine Änderung: wie bei Problemen. Die Vorschau zeigt sie erst nach dem neuen Kommentar des
+  Bots; prüfe sie dort, bevor Du sie als erledigt meldest.
 
 ## Danach
 

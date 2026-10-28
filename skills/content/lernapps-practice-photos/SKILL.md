@@ -36,6 +36,9 @@ license: MIT
 
 - Kreuze, Durchstreichungen, Zahlen und ausgefüllte Felder stammen vom Kind und können falsch sein. Leite Lösungen aus
   den Fakten ab.
+- Hängt eine Lösung an der Vorlage selbst (welcher Buchstabe welcher Teil ist, welches Feld wohin gehört) und lässt sie
+  sich nicht sicher ablesen, frage den Creator in Explore. Buchstaben, Nummern und Beschriftungen des Materials änderst
+  Du nie: Das Kind übt für dieselbe Vorlage.
 
 ### Aufgaben des Materials
 
@@ -59,7 +62,8 @@ Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
    - `source`: `eigene Zeichnung` für ein SVG von Hand, `KI-generiert` für ein erzeugtes Bild.
    - `licence`: `CC-BY-4.0`, die Lizenz der Einreichung.
    - `alt` beschreibt den Inhalt so, dass er ohne Bild verständlich ist; die Beschriftungen gehören dazu.
-5. Prüfe am Ende: Stimmen alle Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil?
+5. Prüfe am Ende: Stimmen alle Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil? Passt jeder
+   Buchstabe zu Form und Ort seines Teils in der Zeichnung? Ändert sich eine Zuordnung, prüfe die Zeichnung erneut.
 
 ## Typische Stolpersteine
 
