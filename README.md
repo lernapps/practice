@@ -28,7 +28,7 @@ Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lerna
 Ein Assistent mit Shell (Node 22, git, Netz) baut die App beim Creator. Der Einstieg ist die [llms.txt](https://lernapps.net/practice/llms.txt): Sie lässt ihn die Plan-Vorlage herunterladen. Die Vorlage folgt den Phasen des Tooling und installiert genau diese Skills:
 
 - aus diesem Repo (`skills/process/` und `skills/content/`): `lernapps-practice-explore` (Explore), `lernapps-practice-plan` (Plan), `lernapps-practice-photos` (Explore und Code), `lernapps-practice-submit` (Commit);
-- aus `lernapps/tooling`: `lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`.
+- aus `lernapps/tooling`: `lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-cli`.
 
 Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie ein Agent die Anleitung nach einer Änderung bewertet (derzeit manuell), steht in [docs/evaluation.md](docs/evaluation.md).
 
