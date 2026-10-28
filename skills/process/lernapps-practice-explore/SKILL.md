@@ -1,6 +1,6 @@
 ---
 name: lernapps-practice-explore
-description: Use in Explore of a lernapps practice plan when someone needs a learning app for an occasion - a class test, a cover lesson, finding out where a class stands, missed work - even if they only say "Klassenarbeit", "Vertretung" or "für die Arbeit üben". Ask the occasion first, search the catalog, say what the preview means for privacy, and agree on the concept, scope and weighting with the creator.
+description: Use in Explore of a lernapps practice plan when someone needs a learning app for an occasion - a class test, a cover lesson, finding out where a class stands, missed work - even if they only say "Klassenarbeit", "Vertretung" or "für die Arbeit üben". Ask the occasion first, search the catalog, say what the preview means for privacy, and agree on the concept, scope and weighting with the creator; in Plan, offer richer, interactive forms for the creator to choose.
 license: MIT
 ---
 
@@ -80,6 +80,27 @@ Umfang: ein bis zwei Kapitel mit je drei bis fünf Seiten, Deutsch, für die Stu
 
 Sage dem Creator dabei: Die App speichert nichts über die Lernenden. Antworten zählt die Seite nur, solange sie offen
 ist; nach dem Neuladen oder auf einem anderen Gerät beginnt man von vorn.
+
+## Reichere Formen anbieten
+
+Zeige dem Creator im Plan, was über Auswahl und Wahr-oder-falsch hinaus möglich ist, als grobe Skizze: was das Kind
+tut und was ihm das bringt. Er wählt, was ihn anspricht, oder nichts. Suche, was zu diesem Material passt und prüft,
+was das Kind lernen wollte.
+
+Reichhaltige Blöcke des Explainers (wie, sagt der Skill `lernapps-explainer`):
+
+- `labelled-figure` mit den Buchstaben des Materials als `marker` und `legend: false`; dazu ein `matching` mit
+  `pairsFrom: material`: Das Kind beschriftet die Abbildung.
+- `matching` mit `distractors`: Zuordnen, bei dem nicht alles aufgeht.
+- `ordering` und `timeline`: Ereignisse, Schritte, Feste in ihre Reihenfolge bringen.
+- `generated`: Aufgaben, die bei jedem Durchgang neu sind.
+- `number` mit `mistakes`: Rückmeldung genau auf den typischen Fehler.
+- `video` und `figure`: zeigen, was ein Text nur beschreibt.
+- `vue-component`: alles, wofür kein Block passt.
+
+Ideen zum Weiterdenken: auf eine Abbildung, eine Karte oder einen Kreis ziehen; Fehler in einem Text finden; in
+Gruppen sortieren; erst schätzen, dann prüfen; eine kleine Geschichte mit Entscheidungen; eine Simulation, an der das
+Kind dreht.
 
 ## Typische Stolpersteine
 

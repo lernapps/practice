@@ -75,9 +75,9 @@ Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
   durchgestrichen, lässt sich daraus keine Lösung ablesen. Leite sie aus den Fakten ab.
 - Zählweisen unterscheiden sich (nach Konfession, Bundesland, Lehrwerk). Eine Zahl auf dem Foto ist eine Zählung, nicht
   das einzige richtige Ergebnis. Schreibe dann beide Zählungen mit dem Hinweis auf die Zählung.
-- Eine Abbildung mit Beschriftungen zum Eintragen („Beschrifte A bis E“): Zeichne die Buchstaben des Materials in das
-  SVG, zeige es als `figure` ohne die Bezeichnungen und frage die Zuordnung als `matching`. Eine `labelled-figure`
-  passt dafür nicht: Sie nummeriert mit Zahlen und listet die Bezeichnungen daneben, also die Lösung.
+- Eine Abbildung mit Beschriftungen zum Eintragen („Beschrifte A bis E“): eine `labelled-figure` mit den Buchstaben
+  des Materials als `marker` und `legend: false`, die Zeichnung selbst ohne Buchstaben; dazu ein `matching` mit
+  `pairsFrom: material`. So stehen Buchstaben und Bezeichnungen nur einmal da, und die Lösung steht nicht daneben.
 - Hervorgehobene Kästen früh erkennen (Info-Kasten, nummerierte Kurztexte, Kästen mit Buchstaben). Jeder bekommt einen
   eigenen Block (`note`), damit er auf der Seite wieder sichtbar ist.
 - Die Bildanalyse und das Schreiben der Seitenliste dauern lange, wenn Seiten dicht sind. Plane Zeit ein.
