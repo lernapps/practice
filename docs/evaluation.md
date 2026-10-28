@@ -12,7 +12,7 @@ Ein manueller Ablauf, bis es automatische Evals gibt. Diese Seite erklärt einem
 | `lernapps-practice-photos` | Explore und Code: Fotos lesen, Abbildungen inhaltsgleich nachbauen. |
 | `lernapps-practice-submit` | Commit: alle Seiten zeigen und die Erklärungen durchgehen, die ZIP-Datei von `src/`, das Formular, Antworten und Korrekturen. |
 
-In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`). Ein Test prüft, dass die Plan-Vorlage genau diese Skills installiert, jeden in der Phase, die ihn zuerst lädt, und dass die Adressen der `llms.txt` stimmen.
+In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-cli`). Ein Test prüft, dass die Plan-Vorlage genau diese Skills installiert, jeden in der Phase, die ihn zuerst lädt, und dass die Adressen der `llms.txt` stimmen.
 
 ## Eine Sitzung starten {#method}
 

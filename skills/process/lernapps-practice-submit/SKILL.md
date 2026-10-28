@@ -18,11 +18,10 @@ Der Creator bestätigt im Formular, dass der Inhalt selbst erstellt ist, keine p
 Wochen öffentlich sein darf. Das kann er nur, wenn er jede Seite gesehen hat. Zeige sie ihm vor der ZIP-Datei, nach
 `npm run build`, auf dem besten Weg, den Deine Umgebung erlaubt:
 
-1. Bilder aller Seiten: `npx lernapps screenshots` (lernapps/tooling) schreibt ein Bild je Seite und eine Übersicht
-   `screenshots/index.html`. Zeige die Übersicht, zum Beispiel als HTML-Artefakt, oder die Bilder der Reihe nach.
-2. Läufst Du auf dem Rechner des Creators: Starte die App mit `npm run dev` und gib ihm die Adresse.
-3. Kennt Deine Umgebung den Befehl noch nicht: Bilder jeder Seite mit dem Browser, den `npm run check` nutzt
-   (Playwright, ganze Seite).
+1. Läufst Du auf dem Rechner des Creators: Starte die App mit `npm run dev` und gib ihm die Adresse.
+2. Sonst Bilder aller Seiten mit `npx lernapps screenshots`, wie der Skill `lernapps-cli` sagt. Zeige die Übersicht
+   `screenshots/index.html`, wo Du HTML zeigen kannst, sonst die Bilder der Reihe nach. Der Ordner kommt nicht in die
+   ZIP-Datei.
 
 Dann geh mit ihm die drei Erklärungen durch, in einfachen Worten:
 

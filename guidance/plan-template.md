@@ -138,10 +138,10 @@ checks and cannot. Becomes the content guide in Code. -->
 
 <!--
 - Build the app from the explainer and the confirmed plan, in this folder. Work on your own.
-- A check fails → skill `lernapps-check`. Fix from the message; never bypass a check.
+- A check fails → skill `lernapps-cli`. Fix from the message; never bypass a check.
 - Undecidable → choose, mark "(Vorschlag)" under "Key decisions", go on.
 - Creator asks for a change → first say your reading in one sentence; never narrow it silently.
-- Skills: `lernapps-check`, `lernapps-explainer`, `lernapps-content-questions`, `lernapps-practice-photos` (the
+- Skills: `lernapps-cli`, `lernapps-explainer`, `lernapps-content-questions`, `lernapps-practice-photos` (the
   figures), and the app's content guide `app-content`.
 -->
 
@@ -149,8 +149,8 @@ checks and cannot. Becomes the content guide in Code. -->
 
 - [ ] `grep '^phase:'` prints `phase: code`; else set it.
 - [ ] Install the skills of Code:
-      `npx --yes skills add lernapps/tooling -y -s lernapps-check -s lernapps-explainer -s lernapps-content-questions`.
-- [ ] Load skill `lernapps-check`. Create the app in this folder as it says, with
+      `npx --yes skills add lernapps/tooling -y -s lernapps-cli -s lernapps-explainer -s lernapps-content-questions`.
+- [ ] Load skill `lernapps-cli`. Create the app in this folder as it says, with
       `npx --yes github:lernapps/tooling#main create --archetype explainer`; then `git init`, `npm install`, the
       first commit. `create` keeps this plan and the skills. Never write the app by hand.
 - [ ] Fill the content guide `.agents/skills/app-content/SKILL.md` from "Notes" and "Content method". Add under

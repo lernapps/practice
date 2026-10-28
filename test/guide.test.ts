@@ -28,7 +28,7 @@ const EXPECTED = {
     "lernapps-content-questions",
     "lernapps-exercise-patterns",
     "lernapps-content-research",
-    "lernapps-check",
+    "lernapps-cli",
   ],
 };
 /** Skills of the tooling that do not fit a practice app: it is not published through GitHub and not listed. */
@@ -121,7 +121,7 @@ describe("the plan template", () => {
       assert.ok([`skill \`${skill}\``, `skills \`${skill}\``, `and \`${skill}\``].some((load) => flat.includes(`Load ${load}`) || flat.includes(`also ${load}`) || flat.includes(load)), skill);
     }
     assert.match(phase("Explore"), /Load skill `lernapps-content-research`/);
-    assert.match(phase("Code"), /Load skill `lernapps-check`/);
+    assert.match(phase("Code"), /Load skill `lernapps-cli`/);
     assert.match(phase("Code"), /app-content/);
     assert.match(phase("Commit"), /Load skill `lernapps-practice-submit`/);
   });

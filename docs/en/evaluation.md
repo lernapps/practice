@@ -12,7 +12,7 @@ A manual process, until there are automatic evals. This page explains to an agen
 | `lernapps-practice-photos` | Explore and Code: reading photos, rebuilding figures with the same content. |
 | `lernapps-practice-submit` | Commit: show every page and go through the declarations, the ZIP file of `src/`, the form, answers and corrections. |
 
-In Plan and Code the assistant uses the content skills of the tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`). A test checks that the plan template installs exactly these skills, each in the phase that loads it first, and that the addresses of `llms.txt` are right.
+In Plan and Code the assistant uses the content skills of the tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-cli`). A test checks that the plan template installs exactly these skills, each in the phase that loads it first, and that the addresses of `llms.txt` are right.
 
 ## Start a session {#method}
 
