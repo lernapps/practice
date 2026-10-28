@@ -182,6 +182,8 @@ checks and cannot. Becomes the content guide in Code. -->
       bot's comment.
 - [ ] The comment names problems → correct them in `src/`, `npm run build` and `npm run check`, a new ZIP file; the
       creator replaces it in the issue. Repeat until the comment gives the address.
+- [ ] The creator asks for a change after the address → add a task here; change, build, check and replace as above.
+      Done only when the bot's new comment is there and the preview shows the change.
 - [ ] **Checkpoint:** address. The comment gives the address: open it, confirm the app shows, give the creator the
       address and what the skill says about two weeks and the 👍.
 - [ ] Fill the retrospective.
