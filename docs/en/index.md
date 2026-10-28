@@ -1,8 +1,8 @@
-# A learning app made to measure
+# An app to practise, made to measure
 
 Your child has a test next week, and you want to practise exactly what will come up. Or you are covering a class for an absent teacher and need exercises on what they are working on right now. For occasions like these, there is rarely a ready-made app that fits.
 
-This is where it comes into being. With your AI assistant and our guide, you turn the material you already have into a learning app made to measure, with little effort. You can use it, for example, to
+This is where it comes into being. With your AI assistant and our guide, you turn the material you already have into an app to practise, made to measure, with little effort. You can use it, for example, to
 
 - prepare your child for a test,
 - give a class exercises for a cover lesson,
@@ -11,7 +11,39 @@ This is where it comes into being. With your AI assistant and our guide, you tur
 
 The app is free and runs in the browser. Whoever practises with it needs neither an account nor an installation.
 
+Should your child learn a topic at leisure, with no test in sight? That is what the [apps in the catalogue](https://lernapps.net/apps/en/) are for: there to stay, built by parents and teachers. This page is about practising for an occasion, with exactly your material.
+
+## What you get {#example}
+
+An example from a real session with Claude: photos of worksheets on Judaism (religious education, year 6, Hesse) become an app for the next test. The session and the app are in German.
+
+<ul class="cards">
+  <li class="card"><a href="https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY">
+    <img src="../example/card-conversation.webp" alt="Part of the conversation: the father gives five photos and writes “year 6, Protestant RE, Judaism”; Claude asks about the letters in the floor plan.">
+    <h3>A short conversation</h3>
+    <p>A few short messages from you. Claude asks where it matters.</p>
+  </a></li>
+  <li class="card"><a href="../example/decisions.webp">
+    <img src="../example/card-decisions.webp" alt="What the father decided, in German: “6th grade, Protestant RE, Judaism”, “My son had noted it the wrong way round”, “Stick to the sources”, “Yes, that works, build the app”, “Yes, that works, make the ZIP file”.">
+    <h3>You decide, Claude does the work</h3>
+    <p>Claude makes an app that fits the scope to learn, with plenty of exercises. Without you having to do anything.</p>
+  </a></li>
+  <li class="card"><a href="https://lernapps.net/practice/i/19/">
+    <img src="../example/card-result.webp" alt="Three pages of the finished app on a phone: self-check, redrawn floor plan of a synagogue, an exercise.">
+    <h3>An app for exactly this test</h3>
+    <p>Explained first, then practised, on a phone and without an account.</p>
+  </a></li>
+</ul>
+
+None of it is staged: [here is the whole conversation, unabridged](https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY), with every step Claude took.
+
 ## How it works {#steps}
+
+You need three things:
+
+1. **A moment of time,** perhaps in the evening, when things are quieter.
+2. **An AI assistant that can write software:** ideally Claude Code; Gemini and Codex should work too. It is often included in a subscription you already have. Check once what yours covers.
+3. **A GitHub account:** free, an email address is enough, and your AI assistant can help you create it if needed. Children under 13 may not have an account of their own, so an adult submits for them. More in [GitHub, explained](https://lernapps.net/tooling/en/github/).
 
 <ol class="flow">
   <li class="flow-step" data-who="assistant">
@@ -22,7 +54,7 @@ The app is free and runs in the browser. Whoever practises with it needs neither
   <li class="flow-step" data-who="assistant">
     <span class="flow-who">Your assistant</span>
     <h3>Your material becomes your app</h3>
-    <p>You give it photos of textbook pages or worksheets. From them it puts together explanations, exercises and a self-check, made for exactly your material. You decide together what is covered.</p>
+    <p>You give it photos of textbook pages or worksheets. From them it puts together explanations, exercises and a self-check, made for exactly your material. It proposes what is covered; you say yes or change it.</p>
   </li>
   <li class="flow-step" data-who="you">
     <span class="flow-who">You</span>
@@ -53,15 +85,14 @@ The app stores nothing about the learners. The self-check shows them how far the
 Copy this sentence into the conversation with your AI assistant and describe your occasion:
 
 ```text
-Read https://lernapps.net/practice/llms.txt and help me make a learning app for <occasion>.
+Read https://lernapps.net/practice/llms.txt and help me make an app to practise for <occasion>.
 ```
 
 For example: "for my daughter's maths test next week" or "for a cover lesson in English, year 7". The guide for the assistant is [llms.txt](llms.txt). It is written in German, and so is the content of the apps.
 
 ## Good to know {#good-to-know}
 
-- **AI assistant with a command line:** Your assistant builds the app itself and checks it before you submit. So it usually gets through the first time. For this it needs a command line, for example Claude Code or Codex; many web assistants now have an environment of their own for it.
-- **GitHub account:** To submit, you need a free GitHub account; an email address is enough. Children under 13 may not have an account of their own, so an adult submits for them. What GitHub is and how to create an account is explained in [GitHub, explained](https://lernapps.net/tooling/en/github/). Whoever practises with the app needs no account.
+- **The app checks itself:** Your assistant builds the app and checks it before you submit. So it usually gets through the first time.
 - **Privacy:** The form, the ZIP file and the app are public. So no names, no school and no photos belong in the content. More in [Privacy and copyright](privacy.md).
 - **Two weeks:** That is how long the app stays online. How it can stay longer is explained in [Lifetime](lifetime.md).
 
@@ -80,5 +111,5 @@ For example: "for my daughter's maths test next week" or "for a cover lesson in 
 - [Operations](operations.md): what the repository is for, how it runs and how to find faults.
 - [Checks](checks.md): what is checked in a submission.
 - [Evaluating the guide](evaluation.md): how an agent starts and evaluates a new session after a change (manual for now).
-- **Guide for assistants**: [llms.txt](llms.txt) leads to the plan template `guidance/plan-template.md`; it installs the three skills in `skills/` and the content skills of the tooling.
+- **Guide for assistants**: [llms.txt](llms.txt) leads to the plan template `guidance/plan-template.md`; it installs the four skills in `skills/` and the content skills of the tooling.
 - [Architecture](architecture/): how the repository is built (arc42).
