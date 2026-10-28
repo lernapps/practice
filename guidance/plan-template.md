@@ -123,14 +123,13 @@ open questions. Never the material itself, never a name. -->
 - [ ] Choose a pattern per topic as skill `lernapps-exercise-patterns` says. Write "Content method".
 - [ ] Each figure: what it shows, its labels as in the material, how you make it (generated image or SVG drawing,
       as skill `lernapps-practice-photos` says). Each component: what it shows and checks, and why no block fits.
-- [ ] Sketch two or three richer forms that fit this material and this occasion, as skill
-      `lernapps-practice-explore` says ("Reichere Formen skizzieren"): beyond choice, matching, ordering and
-      true-false.
+- [ ] Explore richer, interactive forms for this material, as skill `lernapps-practice-explore` says ("Reichere
+      Formen anbieten"), and sketch them roughly for the creator.
 - [ ] The facts to check: each with its source (skill `lernapps-content-research`), or marked for the creator.
 - [ ] Write the Code tasks under "Code": one per page or component, with its content and exercises.
 - [ ] **Checkpoint:** confirm the plan. Show it short: pages, exercises, figures, components, the facts to check;
-      what learners see and do. Then the sketches of the richer forms: the creator picks one, several or none;
-      the choice goes under "Key decisions", a picked form into the Code tasks. Stop and wait for an explicit yes. Changes → change, ask again. No `create` before
+      what learners see and do. Then the sketches of the richer forms; what the creator picks goes under "Key
+      decisions" and into the Code tasks. Stop and wait for an explicit yes. Changes → change, ask again. No `create` before
       the yes.
 - [ ] Set `phase: code`: change the value line (`grep '^phase:'` prints `phase: code`).
 
