@@ -2,7 +2,7 @@
 
 For people who maintain the repo. The guide for assistants leads an assistant without prior knowledge to the address of the app. This page says how to test that when you change the plan template or the skills.
 
-## What the guide is made of {#quelle}
+## What the guide is made of {#source}
 
 | Part | Content |
 | --- | --- |
@@ -14,9 +14,9 @@ For people who maintain the repo. The guide for assistants leads an assistant wi
 
 In Plan and Code the assistant uses the content skills of the tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`). A test checks that the plan template installs exactly these skills and that the addresses of `llms.txt` are right.
 
-## How to test {#methode}
+## How to test {#method}
 
-1. **A fresh session.** Open an assistant that knows nothing about this repo and has no project files. Give it only the sentence from the [start page](index.md#assistent) and the material.
+1. **A fresh session.** Open an assistant that knows nothing about this repo and has no project files. Give it only the sentence from the [start page](index.md#assistant) and the material.
 2. **Real material.** Use photos of real school material (worksheets, book pages). A description of the photos tests only the writing, not the reading of the images.
 3. **Do not help.** Answer like a parent. Tell the assistant nothing the guide does not say.
 4. **Build the result.** The assistant already builds and checks the app itself (`npm run build`, `npm run check`). Save the ZIP and build it locally the way GitHub would:
@@ -30,13 +30,13 @@ In Plan and Code the assistant uses the content skills of the tooling (`lernapps
 5. **The error cycle.** Give the messages unchanged to the assistant, let it correct the ZIP and build again. Count the runs and the messages per run.
 6. **Learn from the errors.** Every message the assistant could not solve alone belongs as a stumbling block in the skill of its phase: in practice's when it is about the submission, else as a note to the tooling. Then a new test.
 
-## The danger {#gefahr}
+## The danger {#danger}
 
 - **A description instead of photos.** A test with a description of the photos says nothing about whether the assistant reads photos correctly: order, margins, handwriting, boxes. State in the table below what a test did not check.
 - **Never put material in the repo.** Photos, transcripts, descriptions of the material and text from it belong in no commit, issue or pull request. The material is protected by copyright, and a child's handwriting is personal data. The ZIP files of a test also stay outside the repo (the folders `_intake/` and `_out/` are ignored).
 - **Facts not checked.** The test shows that the ZIP builds, not that the facts are right. The assistant must say what the parents should check.
 
-## Results {#ergebnisse}
+## Results {#results}
 
 | Test | Who | Input | Build | `lernapps check` | Limit |
 | --- | --- | --- | --- | --- | --- |

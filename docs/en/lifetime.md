@@ -2,7 +2,7 @@
 
 A preview lives **two weeks** (14 days). After that it is deleted automatically, unless a person has saved it with a 👍.
 
-## The rules {#regeln}
+## The rules {#rules}
 
 | Situation | What happens |
 | --- | --- |
@@ -11,23 +11,23 @@ A preview lives **two weeks** (14 days). After that it is deleted automatically,
 | The expiry day has come, and the **first field of the issue** has at least one 👍 from a **person** (not from a bot) | The preview **stays** until the issue is closed. We check whether the content fits into the catalogue. |
 | The expiry day has come, no 👍 | The preview is deleted. A comment in the issue says so, mentions you (`@your-name`) and asks whether the preview helped. |
 
-The expiry day is in `i/<number>/practice.json` (field `laeuftAb`). This date counts, **not** the time of a commit.
+The expiry day is in `i/<number>/practice.json` (field `expires`). This date counts, **not** the time of a commit.
 
-## Publish again {#neu-veroeffentlichen}
+## Publish again {#publish-again}
 
 Every new publication for the same issue replaces the old one and starts the two weeks again. This happens when you attach a new ZIP file as a comment or change the details in the issue. After a preview has expired it works the same way: attach a new ZIP file as a comment.
 
-A maintenance team can also repeat the run without attaching again ([Operations](betrieb.md)).
+A maintenance team can also repeat the run without attaching again ([Operations](operations.md)).
 
-## When the clean-up runs {#aufraeumen}
+## When the clean-up runs {#cleanup}
 
-The workflow "Aufräumen" (clean-up) runs
+The workflow "Cleanup" runs
 
 - **daily** at 03:23 UTC (checks all folders),
 - **at once** when an issue is closed (checks its folder),
 - **by hand** (with the option "dry-run", which only shows what would be deleted).
 
-## Folders without a matching issue {#ohne-issue}
+## Folders without a matching issue {#without-issue}
 
 The workflow looks only at folders `i/<number>/` on `gh-pages`. Everything else (for example the start page and `.nojekyll`) stays untouched, and so do entries of `i/` whose name is not a number.
 

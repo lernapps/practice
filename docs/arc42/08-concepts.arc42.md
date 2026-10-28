@@ -23,7 +23,7 @@ category: security
 Everything from outside is checked by form and size, in two places: the intake reads the directory of the ZIP file
 before it unpacks anything, the content of an SVG image when it unpacks it (`concept-svg-only-draws`), and `publish`
 checks the built site again. The limits live in one file
-(`actions/lib/limits.ts`), and a test compares them with the rules in [docs/regeln.md](../regeln.md).
+(`actions/lib/limits.ts`), and a test compares them with the rules in [docs/rules.md](../rules.md).
 
 ```arc42
 :::concept
@@ -49,7 +49,7 @@ category: security
 Every write of `i/` on `gh-pages` is one new commit without a parent, pushed with a lease against the state it started
 from, so that a removed preview is in no history of the branch; a lost lease repeats the change. The deployment of the
 site and the pull request previews add ordinary commits and leave `i/` as it is. The length of a preview, the
-schedule and the dry run are in [docs/lebensdauer.md](../lebensdauer.md).
+schedule and the dry run are in [docs/lifetime.md](../lifetime.md).
 
 ```arc42
 :::concept
@@ -65,7 +65,7 @@ An SVG image is a document that the browser runs when someone opens it on its ow
 unpacks an SVG only in `src/images/` and only when its text, raw and with character references decoded, holds no
 script, no event attribute, no embedded document (`foreignObject`, `iframe`, `embed`, `object`), no `javascript:`, no
 entity definition and no reference outside the file (`href` and `url()` only to `#…`, no `@import`, no address in an
-attribute). The build checks the tree again. The rules for people are in [docs/regeln.md](../regeln.md).
+attribute). The build checks the tree again. The rules for people are in [docs/rules.md](../rules.md).
 
 ```arc42
 :::concept

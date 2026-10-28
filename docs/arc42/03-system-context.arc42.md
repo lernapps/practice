@@ -109,7 +109,7 @@ requires: if-workflows, if-gh-pages-branch, if-practice-form
 ## Maintainer of practice
 
 A person with write access to the repository. They repeat runs, try the cleanup, close abusive issues and keep the
-settings (`docs/betrieb.md`).
+settings (`docs/operations.md`).
 
 ```arc42
 :::actor

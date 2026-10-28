@@ -37,7 +37,7 @@ architecture-beta
 
 ## GitHub
 
-The settings that matter (Issues, Pages from the branch `gh-pages`, required checks) are in [docs/betrieb.md](../betrieb.md).
+The settings that matter (Issues, Pages from the branch `gh-pages`, required checks) are in [docs/operations.md](../operations.md).
 
 ```arc42
 :::deployment-node

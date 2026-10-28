@@ -7,15 +7,15 @@ import type { Api } from "../actions/lib/github.ts";
 
 export const tmp = (name = "practice-test-"): string => mkdtempSync(join(tmpdir(), name));
 
-export const URL1 = "https://github.com/user-attachments/files/34026717/vorbereitung.zip";
+export const URL1 = "https://github.com/user-attachments/files/34026717/preparation.zip";
 
 export function issueBody(overrides: Record<string, string> = {}): string {
   const fields: Record<string, string> = {
     Fach: "Religion",
     Klassenstufe: "7",
     Bundesland: "Hessen",
-    "ZIP-Datei": `[vorbereitung.zip](${URL1})`,
-    Erklärungen: "- [x] Der Inhalt ist selbst erstellt\n- [x] Der Inhalt enthält keine persönlichen Daten\n- [x] Ich erlaube, dass der Inhalt zwei Wochen lang veröffentlicht wird",
+    "ZIP-Datei": `[preparation.zip](${URL1})`,
+    Erklärungen: "- [x] Der Inhalt ist selbst created\n- [x] Der Inhalt enthält keine persönlichen Daten\n- [x] Ich erlaube, dass der Inhalt zwei Wochen lang veröffentlicht wird",
     ...overrides,
   };
   return Object.entries(fields)

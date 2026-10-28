@@ -2,19 +2,19 @@
 
 A submission goes through three stages. A stage begins only when the one before had no error.
 
-## Stage 1: Intake (job `intake`) {#annahme}
+## Stage 1: Intake (job `intake`) {#acceptance}
 
 The job only reads. It runs nothing that is in the ZIP file.
 
 1. The issue comes from the form (all five headings are there) and is open. Otherwise nothing happens.
 2. The details match the lists, and the three declarations are ticked.
 3. The ZIP address has exactly the form `https://github.com/user-attachments/files/<number>/<name>.zip`. The file is downloaded with `curl -L` (only `https`, at most 5 redirects, 10 MB, 60 seconds). The final address must be at GitHub.
-4. The directory of the ZIP file is checked (paths, kinds, endings, sizes, number), then every file is unpacked with a hard size limit and compared with the checksum. The [rules](regeln.md) name the limits. `src/main.ts` is never unpacked.
-5. The content of every SVG image is checked: it may only draw ([SVG images](regeln.md#svg)).
+4. The directory of the ZIP file is checked (paths, kinds, endings, sizes, number), then every file is unpacked with a hard size limit and compared with the checksum. The [rules](rules.md) name the limits. `src/main.ts` is never unpacked.
+5. The content of every SVG image is checked: it may only draw ([SVG images](rules.md#svg)).
 
 If there is an error, no build starts. Instead the job `publish` writes a comment in plain language.
 
-## Stage 2: Build (job `build`) {#bau}
+## Stage 2: Build (job `build`) {#build}
 
 The job has read rights only and no secrets. It builds like this:
 
@@ -45,7 +45,7 @@ The job runs code of your components (their tests and their logic while building
 
 **Every one of these rules must pass.** We relax none, because they protect children (no tracking) and the shared browser memory of the platform (`own-data-only`). The check takes about 10 seconds.
 
-## What does not apply to a preview {#nicht-geprueft}
+## What does not apply to a preview {#not-checked}
 
 These rules of the platform apply to the catalogue, not to a temporary preview. We do not check them here:
 
@@ -58,10 +58,10 @@ These rules of the platform apply to the catalogue, not to a temporary preview. 
 | Formatting and style of the files | A preview never fails because of spelling (indentation, empty lines). We run no format check and do not reformat your content. Only the rules of the explainer for the content count. |
 | Entry in search engines | The preview should not be found. So `noindex` is on every page. |
 
-## Stage 3: Publication (job `publish`) {#veroeffentlichung}
+## Stage 3: Publication (job `publish`) {#publication}
 
 The job runs only code from this repository. It treats the result of the build as data.
 
 1. It checks the site once more: number and size of the files, names, endings, links, `noindex` on every page.
-2. It writes it to the branch `gh-pages` in the folder `i/<number>/` and adds `i/<number>/practice.json` ([Lifetime](lebensdauer.md)).
+2. It writes it to the branch `gh-pages` in the folder `i/<number>/` and adds `i/<number>/practice.json` ([Lifetime](lifetime.md)).
 3. It waits until the address serves the new state and writes the link in the comment.

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // Lets previews expire (action `expire`): looks at every folder i/<n>/ on the branch gh-pages and deletes the ones
-// that are over. The rules (docs/lebensdauer.md says the same for people):
+// that are over. The rules (docs/lifetime.md says the same for people):
 //   - The issue is closed                          -> delete now. No comment: someone closed it on purpose.
-//   - The day in practice.json (laeuftAb) has not come -> keep.
+//   - The day in practice.json (expires) has not come -> keep.
 //   - The day has come and the issue has a 👍 from an account that is not a bot -> keep (until the issue is closed).
 //   - The day has come, no such 👍                  -> delete, and write a note in the issue that names the author
 //                                                      of the issue (login from the API) and asks for feedback.
@@ -29,7 +29,7 @@ export type Decision =
 
 export interface Facts {
   /** practice.json, or undefined when missing or unreadable */
-  record: { issue?: unknown; laeuftAb?: unknown } | undefined;
+  record: { issue?: unknown; expires?: unknown } | undefined;
   folder: number;
   /** "open", "closed", or "missing" when the issue does not exist */
   state: string;
@@ -41,7 +41,7 @@ export interface Facts {
 /** The whole policy in one function. */
 export function decide(facts: Facts): Decision {
   const { record, folder, state, thumbs, now } = facts;
-  const ends = typeof record?.laeuftAb === "string" ? Date.parse(record.laeuftAb) : NaN;
+  const ends = typeof record?.expires === "string" ? Date.parse(record.expires) : NaN;
   if (record === undefined || record.issue !== folder || Number.isNaN(ends)) {
     return { action: "delete", reason: "no-record", notify: false };
   }

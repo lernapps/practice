@@ -1,4 +1,4 @@
-// Reads the text of an issue that came from the form `.github/ISSUE_TEMPLATE/einreichen.yml`: GitHub writes each
+// Reads the text of an issue that came from the form `.github/ISSUE_TEMPLATE/submit.yml`: GitHub writes each
 // field as a level-3 heading with the label, then the value. Everything here is strict and treats the text as data.
 import { FORM_LABELS, GRADES, MAX_SUBJECT_LENGTH, STATES } from "./limits.ts";
 import { show, type Problem } from "./zip.ts";
@@ -45,9 +45,9 @@ export function cleanSubject(raw: string): string {
 const NO_RESPONSE = /^_no response_$/i;
 
 export interface Meta {
-  fach: string;
-  klassenstufe: string;
-  bundesland: string;
+  subject: string;
+  grade: string;
+  federalState: string;
 }
 
 /** The three fields, or the problems. */
@@ -55,23 +55,23 @@ export function readMeta(found: Sections): { meta?: Meta; problems: Problem[] } 
   const problems: Problem[] = [];
   const subject = cleanSubject(found["Fach"] ?? "");
   if (subject === "" || NO_RESPONSE.test(subject)) {
-    problems.push({ code: "fach-missing", text: "Das Feld »Fach« ist leer. Schreibe das Fach hinein, zum Beispiel »Mathematik«." });
+    problems.push({ code: "subject-missing", text: "Das Feld »Fach« ist leer. Schreibe das Fach hinein, zum Beispiel »Mathematik«." });
   } else if (Array.from(subject).length > MAX_SUBJECT_LENGTH) {
-    problems.push({ code: "fach-long", text: `Das Feld »Fach« ist zu lang. Schreibe höchstens ${MAX_SUBJECT_LENGTH} Zeichen.` });
+    problems.push({ code: "subject-long", text: `Das Feld »Fach« ist zu lang. Schreibe höchstens ${MAX_SUBJECT_LENGTH} Zeichen.` });
   }
   const grade = (found["Klassenstufe"] ?? "").trim();
   if (!GRADES.includes(grade)) {
     problems.push({
-      code: "klassenstufe",
+      code: "grade",
       text: `Die Klassenstufe »${show(grade)}« gibt es nicht in der Liste. Wähle eine Zahl von 1 bis 13.`,
     });
   }
   const state = (found["Bundesland"] ?? "").trim();
   if (!STATES.includes(state)) {
-    problems.push({ code: "bundesland", text: `Das Bundesland »${show(state)}« gibt es nicht in der Liste. Wähle eines der 16 Bundesländer.` });
+    problems.push({ code: "federal-state", text: `Das Bundesland »${show(state)}« gibt es nicht in der Liste. Wähle eines der 16 Bundesländer.` });
   }
   if (problems.length > 0) return { problems };
-  return { meta: { fach: subject, klassenstufe: grade, bundesland: state }, problems };
+  return { meta: { subject, grade, federalState: state }, problems };
 }
 
 /** The three declarations must all be ticked: lines `- [x] …`. */
@@ -81,7 +81,7 @@ export function readDeclarations(found: Sections): Problem[] {
   if (lines.length < 3 || ticked < lines.length) {
     return [
       {
-        code: "erklaerungen",
+        code: "declarations",
         text: "Die drei Erklärungen sind nicht alle angekreuzt. Setze bei jeder einen Haken. Ohne sie veröffentlichen wir nichts.",
       },
     ];

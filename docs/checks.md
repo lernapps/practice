@@ -2,19 +2,19 @@
 
 Eine Einreichung geht durch drei Stufen. Eine Stufe beginnt erst, wenn die davor ohne Fehler war.
 
-## Stufe 1: Annahme (Job `intake`) {#annahme}
+## Stufe 1: Annahme (Job `intake`) {#acceptance}
 
 Der Job liest nur. Er führt nichts aus, was in der ZIP-Datei steht.
 
 1. Das Issue stammt aus dem Formular (alle fünf Überschriften sind da) und ist offen. Sonst passiert nichts.
 2. Die Angaben stimmen mit den Listen überein, und die drei Erklärungen sind angekreuzt.
 3. Die ZIP-Adresse hat genau die Form `https://github.com/user-attachments/files/<Zahl>/<Name>.zip`. Die Datei wird mit `curl -L` geladen (nur `https`, höchstens 5 Weiterleitungen, 10 MB, 60 Sekunden). Die Endadresse muss bei GitHub liegen.
-4. Das Verzeichnis der ZIP-Datei wird geprüft (Pfade, Arten, Endungen, Größen, Anzahl), dann wird jede Datei mit hartem Größenlimit entpackt und gegen die Prüfsumme gelegt. Die [Regeln](regeln.md) nennen die Grenzen. `src/main.ts` wird nie entpackt.
-5. Jedes SVG-Bild wird auf seinen Inhalt geprüft: Es darf nur zeichnen ([SVG-Bilder](regeln.md#svg)).
+4. Das Verzeichnis der ZIP-Datei wird geprüft (Pfade, Arten, Endungen, Größen, Anzahl), dann wird jede Datei mit hartem Größenlimit entpackt und gegen die Prüfsumme gelegt. Die [Regeln](rules.md) nennen die Grenzen. `src/main.ts` wird nie entpackt.
+5. Jedes SVG-Bild wird auf seinen Inhalt geprüft: Es darf nur zeichnen ([SVG-Bilder](rules.md#svg)).
 
 Bei einem Fehler startet kein Bau. Stattdessen schreibt der Job `publish` einen Kommentar in einfacher Sprache.
 
-## Stufe 2: Bau (Job `build`) {#bau}
+## Stufe 2: Bau (Job `build`) {#build}
 
 Der Job hat nur Leserechte und keine Geheimnisse. Er baut so:
 
@@ -45,7 +45,7 @@ Der Job führt dabei Code Deiner Komponenten aus (ihre Tests und ihre Logik beim
 
 **Jede dieser Regeln muss bestehen.** Wir lockern keine, denn sie schützen Kinder (keine Verfolgung) und den gemeinsamen Browser-Speicher der Plattform (`own-data-only`). Die Prüfung dauert etwa 10 Sekunden.
 
-## Was bei einer Vorschau nicht gilt {#nicht-geprueft}
+## Was bei einer Vorschau nicht gilt {#not-checked}
 
 Diese Regeln der Plattform gelten für den Katalog, nicht für eine Vorschau auf Zeit. Wir prüfen sie hier nicht:
 
@@ -58,10 +58,10 @@ Diese Regeln der Plattform gelten für den Katalog, nicht für eine Vorschau auf
 | Formatierung und Stil der Dateien | Eine Vorschau scheitert nie an der Schreibweise (Einrückung, Leerzeilen). Wir führen keine Formatprüfung aus und formatieren Deinen Inhalt nicht um. Nur die Regeln des Explainers für den Inhalt zählen. |
 | Eintrag in Suchmaschinen | Die Vorschau soll nicht gefunden werden. Darum steht `noindex` auf jeder Seite. |
 
-## Stufe 3: Veröffentlichung (Job `publish`) {#veroeffentlichung}
+## Stufe 3: Veröffentlichung (Job `publish`) {#publication}
 
 Der Job führt nur Code aus diesem Repo aus. Das Ergebnis des Baus behandelt er als Daten.
 
 1. Er prüft die Seite noch einmal: Anzahl und Größe der Dateien, Namen, Endungen, Links, `noindex` auf jeder Seite.
-2. Er schreibt sie auf den Branch `gh-pages` in den Ordner `i/<Nummer>/` und legt `i/<Nummer>/practice.json` dazu ([Lebensdauer](lebensdauer.md)).
+2. Er schreibt sie auf den Branch `gh-pages` in den Ordner `i/<Nummer>/` und legt `i/<Nummer>/practice.json` dazu ([Lebensdauer](lifetime.md)).
 3. Er wartet, bis die Adresse den neuen Stand liefert, und schreibt den Link in den Kommentar.

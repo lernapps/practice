@@ -1,7 +1,7 @@
-name: Aufräumen
+name: Cleanup
 
 # Previews end: after 14 days (unless the issue has a 👍 from a person), and at once when the issue is closed.
-# actions/expire and docs/lebensdauer.md hold the rules. A daily run, a run when an issue is closed, and a manual run
+# actions/expire and docs/lifetime.md hold the rules. A daily run, a run when an issue is closed, and a manual run
 # with a dry run (it only prints what it would delete).
 on:
   schedule:

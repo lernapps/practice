@@ -8,7 +8,7 @@ description: >-
   day it ends), as one new commit without parents (pages.ts says why), repeated when another push came in between;
   .nojekyll sits at the root. It waits until the address serves the new build, and then comments the link. The address
   is the one of the Pages settings (https://lernapps.net/practice/ expected). The job needs contents: write,
-  issues: write, pages: read. Use it in the job "publish" of einreichung.yml, after a checkout of this repo, in a
+  issues: write, pages: read. Use it in the job "publish" of submission.yml, after a checkout of this repo, in a
   concurrency group that serialises the writes to gh-pages. The logic is actions/publish/publish.ts, tested by
   test/publish.test.ts.
 inputs:

@@ -15,7 +15,7 @@ as it is; the content is what the explainer knows in `src/`: its data, images an
 id: con-explainer-only
 title: Only the explainer, only its data
 category: technical
-source: docs/regeln.md; docs/pruefungen.md; app-templates explainer README
+source: docs/rules.md; docs/checks.md; app-templates explainer README
 :::
 ```
 
@@ -28,7 +28,7 @@ Issues, their attachments, Actions and Pages carry the whole flow. There is no s
 id: con-github
 title: GitHub is the means of production
 category: organizational
-source: Platform design; ORGANIZATION.md "Rules across repos"; docs/betrieb.md
+source: Platform design; ORGANIZATION.md "Rules across repos"; docs/operations.md
 :::
 ```
 
@@ -41,7 +41,7 @@ GitHub Pages serves the branch `gh-pages` at `lernapps.net/practice/`; nothing r
 id: con-static-pages
 title: Static files below lernapps.net
 category: technical
-source: docs/betrieb.md "Einstellungen im Repo"
+source: docs/operations.md "Einstellungen im Repo"
 :::
 ```
 
@@ -54,7 +54,7 @@ Every preview is served from the origin of lernapps.net, like the platform's pag
 id: con-shared-origin
 title: The origin is shared with the platform
 category: technical
-source: docs/datenschutz.md "Die App speichert nichts über das Kind"
+source: docs/privacy.md "Die App speichert nichts über das Kind"
 :::
 ```
 
@@ -68,7 +68,7 @@ content is their own and holds no personal data.
 id: con-public-by-default
 title: Everything submitted is public
 category: organizational
-source: docs/datenschutz.md; docs/regeln.md "Die drei Erklärungen"
+source: docs/privacy.md; docs/rules.md "Die drei Erklärungen"
 :::
 ```
 
@@ -82,7 +82,7 @@ commit is the one lernapps/tooling pins.
 id: con-pinned-sources
 title: Sources are pinned to a commit
 category: convention
-source: ORGANIZATION.md "Rules across repos"; test/repo.test.ts; docs/betrieb.md "Updates"
+source: ORGANIZATION.md "Rules across repos"; test/repo.test.ts; docs/operations.md "Updates"
 :::
 ```
 
@@ -98,6 +98,6 @@ person who submitted it as its author.
 id: con-language-licence
 title: Languages and licence
 category: convention
-source: ORGANIZATION.md "Language", "License"; LICENSE; docs/datenschutz.md "Urheberrecht"
+source: ORGANIZATION.md "Language", "License"; LICENSE; docs/privacy.md "Urheberrecht"
 :::
 ```

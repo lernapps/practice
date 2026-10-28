@@ -264,7 +264,7 @@ export function run(appDir: string, out: string): BuildResult {
     return finish();
   }
 
-  // The checks of the built app: `lernapps check <bundle>`, as for a listing, without a catalog entry (docs/pruefungen.md).
+  // The checks of the built app: `lernapps check <bundle>`, as for a listing, without a catalog entry (docs/checks.md).
   result.stage = "check";
   const checked = command(appDir, "npx", [
     "--no",

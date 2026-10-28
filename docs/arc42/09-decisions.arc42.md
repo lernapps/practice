@@ -112,7 +112,7 @@ addresses: qg-nothing-collected, con-public-by-default, risk-material-copyright,
 
 ## The template at the tooling's pin, read from its main
 
-**Context:** The explainer template and the rules of `lernapps check` (`docs/pruefungen.md`) belong to other
+**Context:** The explainer template and the rules of `lernapps check` (`docs/checks.md`) belong to other
 repositories, and the assistant creates the app with `create` from `tooling#main`. **Decision:** At every run the build finds
 the commit of the tooling's main (`git ls-remote`, without a token), reads `appTemplates.commit` from its package.json,
 and checks with `@lernapps/tooling` of that same commit; it stops when it cannot. This repository keeps no pin of its

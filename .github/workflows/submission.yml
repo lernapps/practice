@@ -1,6 +1,6 @@
-name: Einreichung
+name: Submission
 
-# A submission: an issue from the form .github/ISSUE_TEMPLATE/einreichen.yml with a ZIP file attached; a new version
+# A submission: an issue from the form .github/ISSUE_TEMPLATE/submit.yml with a ZIP file attached; a new version
 # is a ZIP file in a comment of the issue's author (the latest upload counts, actions/lib/form.ts). Three jobs with
 # the least rights each:
 #   intake   (issues: read)               reads the issue, downloads and checks the ZIP file, unpacks it (nothing runs)
@@ -33,7 +33,7 @@ permissions: {}
 
 concurrency:
   group: >-
-    einreichung-${{ github.event.issue.number || inputs.issue }}${{ github.event_name == 'issue_comment' &&
+    submission-${{ github.event.issue.number || inputs.issue }}${{ github.event_name == 'issue_comment' &&
     (github.event.comment.user.id != github.event.issue.user.id || !contains(github.event.comment.body, 'https://github.com/user-attachments/files/'))
     && format('-comment-{0}', github.event.comment.id) || '' }}
   cancel-in-progress: true

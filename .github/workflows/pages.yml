@@ -6,7 +6,7 @@ name: Pages
 # Renovate bumps the pinned commits.
 #
 # gh-pages holds three things: the site (the root), the previews of the submissions (i/<number>/, written by
-# einreichung.yml and aufraeumen.yml) and the previews of pull requests (pr-preview/pr-<number>/, pr-preview.yml).
+# submission.yml and cleanup.yml) and the previews of pull requests (pr-preview/pr-<number>/, pr-preview.yml).
 # The deploy replaces the site and leaves the other two alone (keep: i/; the action always keeps pr-preview/).
 #
 # The change scope (lernapps/tooling changes.yml) gates the jobs: a change of only the plan (.vibe/**) runs nothing;
@@ -44,13 +44,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    concurrency: # one writer at a time on gh-pages, like einreichung.yml and aufraeumen.yml
+    concurrency: # one writer at a time on gh-pages, like submission.yml and cleanup.yml
       group: gh-pages
       cancel-in-progress: false
     steps:
       - uses: lernapps/tooling/actions/site-deploy@f1cca40d0e78fcfa6f8b70473691ac7bf5c73d0b # main
         with:
-          keep: i/ # the previews of the submissions (einreichung.yml)
+          keep: i/ # the previews of the submissions (submission.yml)
 
   site: # required status check: always runs, fails when a job above failed or was cancelled
     needs: [changes, build, deploy]

@@ -2,7 +2,7 @@
 
 Für Menschen, die das Repo pflegen. Die Anleitung für Assistenten führt einen Assistenten ohne Vorwissen bis zur Adresse der App. Diese Seite sagt, wie man das prüft, wenn man die Plan-Vorlage oder die Skills ändert.
 
-## Woraus die Anleitung besteht {#quelle}
+## Woraus die Anleitung besteht {#source}
 
 | Teil | Inhalt |
 | --- | --- |
@@ -14,9 +14,9 @@ Für Menschen, die das Repo pflegen. Die Anleitung für Assistenten führt einen
 
 In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`). Ein Test prüft, dass die Plan-Vorlage genau diese Skills installiert und dass die Adressen der `llms.txt` stimmen.
 
-## So testet man {#methode}
+## So testet man {#method}
 
-1. **Frische Sitzung.** Öffne einen Assistenten ohne Vorwissen über dieses Repo und ohne Projektdateien. Gib ihm nur den Satz von der [Startseite](index.md#assistent) und das Material.
+1. **Frische Sitzung.** Öffne einen Assistenten ohne Vorwissen über dieses Repo und ohne Projektdateien. Gib ihm nur den Satz von der [Startseite](index.md#assistant) und das Material.
 2. **Echtes Material.** Nimm Fotos von echtem Schulmaterial (Arbeitsblätter, Buchseiten). Eine Beschreibung der Fotos prüft nur das Schreiben, nicht das Lesen der Bilder.
 3. **Nichts nachhelfen.** Antworte wie ein Elternteil. Sage dem Assistenten nichts, was die Anleitung nicht sagt.
 4. **Das Ergebnis bauen.** Der Assistent baut und prüft die App schon selbst (`npm run build`, `npm run check`). Speichere das ZIP und baue es lokal, so wie GitHub es täte:
@@ -30,13 +30,13 @@ In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-e
 5. **Fehlerkreislauf.** Gib die Meldungen unverändert dem Assistenten, lass ihn das ZIP korrigieren und baue neu. Zähle die Läufe und die Meldungen je Lauf.
 6. **Aus Fehlern lernen.** Jede Meldung, die der Assistent nicht allein lösen konnte, gehört als Stolperstein in den Skill der Phase: in die von practice, wenn sie die Einreichung betrifft, sonst als Hinweis an das Tooling. Danach ein neuer Durchlauf.
 
-## Die Gefahr {#gefahr}
+## Die Gefahr {#danger}
 
 - **Beschreibung statt Fotos.** Ein Test mit einer Beschreibung der Fotos sagt nichts darüber, ob der Assistent Fotos richtig liest: Reihenfolge, Ränder, Handschrift, Kästen. Nenne in der Tabelle unten, was der Durchlauf nicht geprüft hat.
 - **Material nie ins Repo.** Fotos, Abschriften, Beschreibungen des Materials und Texte daraus gehören weder in einen Commit noch in ein Issue oder einen Pull Request. Das Material ist urheberrechtlich geschützt, und die Handschrift eines Kindes ist ein persönliches Datum. Auch die ZIP-Dateien eines Testlaufs bleiben außerhalb des Repos (der Ordner `_intake/` und `_out/` ist ignoriert).
 - **Nicht geprüfte Fakten.** Der Test zeigt, dass das ZIP baut, nicht dass die Fakten stimmen. Der Assistent muss melden, was die Eltern prüfen sollten.
 
-## Ergebnisse {#ergebnisse}
+## Ergebnisse {#results}
 
 | Durchlauf | Wer | Eingabe | Bau | `lernapps check` | Einschränkung |
 | --- | --- | --- | --- | --- | --- |

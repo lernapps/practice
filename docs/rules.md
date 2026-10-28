@@ -1,19 +1,19 @@
 # Regeln für Inhalt und Angaben
 
-## Was Du einreichst {#inhalt}
+## Was Du einreichst {#content}
 
 Den Inhalt einer Lern-App vom Archetyp **`explainer`**: Kapitel mit Seiten, Erklärungen und Aufgaben als YAML-Dateien, dazu Datendateien, Bilder und Komponenten. Die Beschreibung der Dateien steht im [Schema des Explainers](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) und in der [Anleitung zum Archetyp](https://github.com/lernapps/app-templates/tree/main/explainer). Es gibt kein Lehrwerk dazu: Du reichst eigene Inhalte ein.
 
-## Aufbau der ZIP-Datei {#aufbau}
+## Aufbau der ZIP-Datei {#structure}
 
 - Oben in der ZIP-Datei steht der Ordner `src`. Die Datei `src/app.yaml` muss da sein.
 - Es geht auch mit einem Ordner um alles herum (GitHub „Download ZIP“). Dann zählt nur `<Ordner>/src/`.
 - Was außerhalb von `src` liegt, ignorieren wir und entpacken es nie.
 - Wir ändern nichts an der Vorlage. `src/main.ts` gehört ihr: Steht die Datei in der ZIP-Datei, ignorieren wir sie, und der Bau nimmt die der Vorlage.
-- Eigene Komponenten liegen in `src/components/`, so wie der Explainer sie kennt: `<Name>.vue`, `<Name>.ts` und `<Name>.test.ts`, ohne Unterordner. Ihren Code prüft der Bau (siehe [Prüfungen](pruefungen.md#bau)).
+- Eigene Komponenten liegen in `src/components/`, so wie der Explainer sie kennt: `<Name>.vue`, `<Name>.ts` und `<Name>.test.ts`, ohne Unterordner. Ihren Code prüft der Bau (siehe [Prüfungen](checks.md#build)).
 - Datendateien liegen in `src/data/`, Bilder in `src/images/`.
 
-## Erlaubte Dateien {#dateien}
+## Erlaubte Dateien {#files}
 
 | Regel | Wert |
 | --- | --- |
@@ -44,7 +44,7 @@ Ein SVG-Bild darf nur zeichnen. Denn öffnet jemand das Bild für sich, führt d
 
 Der Kommentar nennt das Bild und was darin stört.
 
-## Die Angaben im Formular {#angaben}
+## Die Angaben im Formular {#details}
 
 | Feld | Regel |
 | --- | --- |
@@ -54,15 +54,15 @@ Der Kommentar nennt das Bild und was darin stört.
 | ZIP-Datei | ein Link `https://github.com/user-attachments/files/<Zahl>/<Name>.zip`, den GitHub beim Hineinziehen schreibt. Andere Adressen laden wir nicht. |
 | Erklärungen | alle drei angekreuzt |
 
-## Die drei Erklärungen {#erklaerungen}
+## Die drei Erklärungen {#declarations}
 
 1. Der Inhalt ist selbst erstellt (auch mit KI-Hilfe). Es ist nichts aus Büchern oder Arbeitsblättern abgeschrieben, und er enthält keine Fotos von Material.
 2. Der Inhalt enthält keine persönlichen Daten (Namen, Schule, Klasse, Lehrkraft).
 3. Ich erlaube, dass der Inhalt zwei Wochen lang veröffentlicht wird. Bei einer späteren Aufnahme in den Katalog gilt CC BY 4.0, und ich bin Urheberin oder Urheber.
 
-Mehr dazu: [Datenschutz und Urheberrecht](datenschutz.md).
+Mehr dazu: [Datenschutz und Urheberrecht](privacy.md).
 
-## Inhalt, der immer gilt {#immer}
+## Inhalt, der immer gilt {#always}
 
 - Texte für Lernende sind auf Deutsch und in einfacher Sprache.
 - Beispiele nutzen erfundene Namen, nie echte.

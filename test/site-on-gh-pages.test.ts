@@ -12,7 +12,7 @@ import { publish } from "../actions/publish/publish.ts";
 import { bareRemote, commitCount, fakeApi, git, pagesFile, pagesFiles, tmp } from "./support.ts";
 
 const PAGE = '<!doctype html><html><head><meta name="robots" content="noindex"></head><body>x</body></html>';
-const META = { issue: 5, fach: "Religion", klassenstufe: "7", bundesland: "Hessen", erstellt: "2026-10-27T10:00:00.000Z" };
+const META = { issue: 5, subject: "Religion", grade: "7", federalState: "Hessen", created: "2026-10-27T10:00:00.000Z" };
 
 /** The site as pages.yml leaves it, the preview of a pull request, and two submissions (7 is over, 8 is not). */
 const SEED: Record<string, string> = {
@@ -20,15 +20,15 @@ const SEED: Record<string, string> = {
   "en/index.html": "<html>site en</html>",
   "regeln/index.html": "<html>regeln</html>",
   "404.html": "<html>404</html>",
-  "stil.css": "body{}",
+  "style.css": "body{}",
   "llms.txt": "guide",
   ".nojekyll": "",
   "pr-preview/pr-3/index.html": "<html>preview of pr 3</html>",
   "pr-preview/pr-3/en/index.html": "<html>preview of pr 3 en</html>",
   "i/7/index.html": "x",
-  "i/7/practice.json": JSON.stringify({ issue: 7, laeuftAb: "2026-11-10T00:00:00Z" }),
+  "i/7/practice.json": JSON.stringify({ issue: 7, expires: "2026-11-10T00:00:00Z" }),
   "i/8/index.html": "x",
-  "i/8/practice.json": JSON.stringify({ issue: 8, laeuftAb: "2026-12-10T00:00:00Z" }),
+  "i/8/practice.json": JSON.stringify({ issue: 8, expires: "2026-12-10T00:00:00Z" }),
 };
 
 async function seed(remote: string): Promise<void> {

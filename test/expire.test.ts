@@ -8,7 +8,7 @@ import { expiredComment, mentionable } from "../actions/lib/github.ts";
 import { bareRemote, fakeApi, pagesFiles, tmp } from "./support.ts";
 
 const NOW = new Date("2026-11-20T12:00:00Z");
-const record = (issue: number, ends: string) => ({ issue, laeuftAb: ends });
+const record = (issue: number, ends: string) => ({ issue, expires: ends });
 const facts = (more: Partial<Facts>): Facts => ({ record: record(1, "2026-11-10T00:00:00Z"), folder: 1, state: "open", thumbs: 0, now: NOW, ...more });
 
 describe("decide", () => {
@@ -29,7 +29,7 @@ describe("decide", () => {
     assert.equal(decide(facts({ state: "missing", record: record(1, "2026-12-31T00:00:00Z") })).action, "keep");
   });
   it("deletes a folder without a usable record, or a record for another issue, at once", () => {
-    for (const bad of [undefined, { issue: 1 }, { issue: 2, laeuftAb: "2026-12-31T00:00:00Z" }, { issue: 1, laeuftAb: "gestern" }, { issue: 1, laeuftAb: 5 }]) {
+    for (const bad of [undefined, { issue: 1 }, { issue: 2, expires: "2026-12-31T00:00:00Z" }, { issue: 1, expires: "gestern" }, { issue: 1, expires: 5 }]) {
       assert.deepEqual(decide(facts({ record: bad })), { action: "delete", reason: "no-record", notify: false }, JSON.stringify(bad));
     }
   });

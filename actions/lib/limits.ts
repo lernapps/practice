@@ -1,4 +1,4 @@
-// The limits of a submission in one place. docs/regeln.md names the same numbers for people; test/limits.test.ts
+// The limits of a submission in one place. docs/rules.md names the same numbers for people; test/limits.test.ts
 // keeps the two in step.
 
 /** The ZIP file as downloaded. */
@@ -64,7 +64,7 @@ export const SITE_EXTENSIONS: readonly string[] = [
   "webmanifest",
 ];
 
-/** The labels (level-3 headings) of the issue form `.github/ISSUE_TEMPLATE/einreichen.yml`. */
+/** The labels (level-3 headings) of the issue form `.github/ISSUE_TEMPLATE/submit.yml`. */
 export const FORM_LABELS = ["Fach", "Klassenstufe", "Bundesland", "ZIP-Datei", "Erklärungen"] as const;
 
 export const GRADES: readonly string[] = Array.from({ length: 13 }, (_, i) => String(i + 1));

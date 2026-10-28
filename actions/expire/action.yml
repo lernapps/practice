@@ -5,9 +5,9 @@ description: >-
   no 👍 reaction from an account that is not a bot (then a short note goes into the issue). A folder without a readable
   practice.json for its own issue is deleted at once; entries of i/ whose name is not a number and everything outside
   i/ stay. The date is the one in practice.json, not the time of a commit. With dry-run it only prints what it would
-  do. The job needs contents: write, issues: write. Use it in the job "expire" of aufraeumen.yml, after a checkout of
+  do. The job needs contents: write, issues: write. Use it in the job "expire" of cleanup.yml, after a checkout of
   this repo, in the concurrency group that serialises the writes to gh-pages. The logic is actions/expire/expire.ts,
-  tested by test/expire.test.ts; docs/lebensdauer.md describes the rules for people.
+  tested by test/expire.test.ts; docs/lifetime.md describes the rules for people.
 inputs:
   issue:
     description: "Only this issue's folder (empty: all)"
