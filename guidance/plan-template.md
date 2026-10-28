@@ -111,8 +111,8 @@ open questions. Never the material itself, never a name. -->
 - Map the confirmed concept onto the explainer: chapters, pages, blocks, exercises, figures, components.
 - No new content questions. A content gap → back to Explore; say so.
 - Confirmable in one read. After the yes, work on your own until Commit.
-- Skills: `lernapps-explainer-design`, `lernapps-exercise-patterns` and `lernapps-content-research`, loaded in
-  Explore; reread them if they are no longer in view.
+- Skills: `lernapps-practice-explore`, `lernapps-explainer-design`, `lernapps-exercise-patterns` and
+  `lernapps-content-research`, loaded in Explore; reread them if they are no longer in view.
 -->
 
 ### Tasks
@@ -123,10 +123,14 @@ open questions. Never the material itself, never a name. -->
 - [ ] Choose a pattern per topic as skill `lernapps-exercise-patterns` says. Write "Content method".
 - [ ] Each figure: what it shows, its labels as in the material, how you make it (generated image or SVG drawing,
       as skill `lernapps-practice-photos` says). Each component: what it shows and checks, and why no block fits.
+- [ ] Sketch two or three richer forms that fit this material and this occasion, as skill
+      `lernapps-practice-explore` says ("Reichere Formen skizzieren"): beyond choice, matching, ordering and
+      true-false.
 - [ ] The facts to check: each with its source (skill `lernapps-content-research`), or marked for the creator.
 - [ ] Write the Code tasks under "Code": one per page or component, with its content and exercises.
 - [ ] **Checkpoint:** confirm the plan. Show it short: pages, exercises, figures, components, the facts to check;
-      what learners see and do. Stop and wait for an explicit yes. Changes → change, ask again. No `create` before
+      what learners see and do. Then the sketches of the richer forms: the creator picks one, several or none;
+      the choice goes under "Key decisions", a picked form into the Code tasks. Stop and wait for an explicit yes. Changes → change, ask again. No `create` before
       the yes.
 - [ ] Set `phase: code`: change the value line (`grep '^phase:'` prints `phase: code`).
 

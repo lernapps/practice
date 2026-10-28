@@ -1,6 +1,6 @@
 ---
 name: lernapps-practice-explore
-description: Use in Explore of a lernapps practice plan when someone needs a learning app for an occasion - a class test, a cover lesson, finding out where a class stands, missed work - even if they only say "Klassenarbeit", "Vertretung" or "für die Arbeit üben". Ask the occasion first, search the catalog, say what the preview means for privacy, and agree on the concept, scope and weighting with the creator.
+description: Use in Explore of a lernapps practice plan when someone needs a learning app for an occasion - a class test, a cover lesson, finding out where a class stands, missed work - even if they only say "Klassenarbeit", "Vertretung" or "für die Arbeit üben". Ask the occasion first, search the catalog, say what the preview means for privacy, and agree on the concept, scope and weighting with the creator; in Plan, sketch two or three richer exercise forms for the creator to choose.
 license: MIT
 ---
 
@@ -80,6 +80,35 @@ Umfang: ein bis zwei Kapitel mit je drei bis fünf Seiten, Deutsch, für die Stu
 
 Sage dem Creator dabei: Die App speichert nichts über die Lernenden. Antworten zählt die Seite nur, solange sie offen
 ist; nach dem Neuladen oder auf einem anderen Gerät beginnt man von vorn.
+
+## Reichere Formen skizzieren
+
+Im Plan zeigst Du dem Creator vor seinem Ja zwei oder drei Formen, die über Auswahl, Zuordnen, Ordnen und
+Wahr-oder-falsch hinausgehen. Sonst kennt er nur das Übliche und kann nichts anderes wünschen. Die Ideen holst Du
+aus den Skills `lernapps-exercise-patterns` und `lernapps-explainer-design`; sie müssen zu diesem Material und
+diesem Anlass passen und prüfen, was das Kind lernen wollte, nicht neuen Stoff.
+
+Je Form eine grobe Skizze als Text, höchstens zehn Zeilen, und drei Sätze:
+
+- was das Kind tut,
+- was ihm das für den Anlass bringt,
+- was sie kostet: eingebauter Block, oder eine Komponente (mehr Zeit, eigene Prüfungen im Bau).
+
+```text
+Festkreis (Komponente)
+  ┌──── Sep ────┐
+ Aug    [ ? ]   Okt     Das Kind zieht die sieben Feste auf den Kreis.
+  │   ○  ○  ○   │       Ein falscher Monat springt zurück, mit Hinweis
+ Jul            Nov     („Sukkot folgt auf Jom Kippur“).
+  └──── … ──────┘
+  Bringt: Reihenfolge und Jahreszeit zusammen geübt.
+```
+
+Weitere Beispiele: ein Grundriss, auf den das Kind die Buchstaben zieht; Ereigniskarten, die es auf einer Zeitleiste
+ordnet; ein kurzer Text mit drei Fehlern zum Finden; erzeugte Aufgaben, die bei jedem Durchgang neu sind, damit das
+Kind die Antworten nicht auswendig lernt.
+
+Der Creator wählt eine, mehrere oder keine. Er muss nichts wählen: Ohne Wahl bleibt es bei den eingebauten Blöcken.
 
 ## Typische Stolpersteine
 
