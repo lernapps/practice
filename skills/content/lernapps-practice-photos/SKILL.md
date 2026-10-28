@@ -47,11 +47,13 @@ license: MIT
 ## Abbildungen nachbauen
 
 Eine Abbildung des Materials baust Du inhaltsgleich nach: dieselben Teile, dieselbe Anordnung, dieselben
-Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
+Beschriftungen und Zahlen. Nur die Gestaltung ist Deine. Zeigt sie Daten (Zeiten im Jahr, Werte, eine Reihenfolge), nimm
+lieber einen Block wie `timeline` oder `table`: Die App zeichnet ihn aus den Daten.
 
 1. **Kannst Du Bilder erzeugen,** erzeuge die Abbildung neu, nach Deiner Beschreibung des Inhalts, nicht nach dem
    Foto als Vorlage. Speichere sie als `.png`, `.jpg` oder `.webp`.
-2. **Sonst zeichne sie schematisch als SVG** von Hand: Formen, Linien, Pfeile, Text mit `<text>`. Ein SVG darf nur
+2. **Sonst zeichne sie schematisch als SVG:** Formen, Linien, Pfeile, Text mit `<text>`. Berechne die Lage aus den
+   Daten, statt Koordinaten zu schätzen, und setze Beschriftungen an ihren Ort statt an Linien. Ein SVG darf nur
    zeichnen: kein `<script>`, kein `on…=`, kein `<foreignObject>`, kein `<iframe>`, `<embed>` oder `<object>`, kein
    `javascript:`, kein Verweis nach außen (`href` und `url(…)` nur auf `#…` in derselben Datei), kein `@import`, kein
    `<!ENTITY`. Sonst lehnt die Einreichung das Bild ab.
@@ -62,8 +64,10 @@ Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
    - `source`: `eigene Zeichnung` für ein SVG von Hand, `KI-generiert` für ein erzeugtes Bild.
    - `licence`: `CC-BY-4.0`, die Lizenz der Einreichung.
    - `alt` beschreibt den Inhalt so, dass er ohne Bild verständlich ist; die Beschriftungen gehören dazu.
-5. Prüfe am Ende: Stimmen alle Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil? Passt jeder
-   Buchstabe zu Form und Ort seines Teils in der Zeichnung? Ändert sich eine Zuordnung, prüfe die Zeichnung erneut.
+5. Prüfe am Ende jede Abbildung einzeln in voller Größe, nicht im Screenshot der ganzen Seite: Stimmen alle
+   Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil? Passt jeder Buchstabe zu Form und Ort seines
+   Teils, zeigt jede Linie auf das Richtige? Nennen Abbildung, `alt` und Text dieselben Fakten? Ändert sich eine
+   Zuordnung, prüfe die Zeichnung erneut.
 
 ## Typische Stolpersteine
 

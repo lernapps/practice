@@ -1,6 +1,6 @@
 # lernapps practice
 
-> Eine Lern-App nach Maß für einen Anlass (eine Arbeit, eine Vertretungsstunde, verpasster Stoff), aus dem Material des Creators, eingereicht über ein Formular und zwei Wochen lang erreichbar.
+> Eine App zum Üben nach Maß für einen Anlass (eine Arbeit, eine Vertretungsstunde, verpasster Stoff), aus dem Material des Creators, eingereicht über ein Formular und zwei Wochen lang erreichbar. Zum Lernen ohne Anlass gibt es den Katalog von lernapps.net.
 
 Du brauchst eine Shell mit Node 22.18 oder neuer, git und Netz.
 

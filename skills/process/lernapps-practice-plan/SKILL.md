@@ -22,7 +22,7 @@ liest. Nicht Seite für Seite: Hebe hervor, was besonders ist, kurz und gegliede
 - was die App erklärt, bevor das Kind übt,
 - die reicheren Formen und die nachgebauten Abbildungen,
 - Deine Vermutungen, sichtbar markiert („(Vorschlag)“), damit der Creator sie mit einem Blick findet,
-- die Fakten, die er prüfen sollte.
+- die Fakten, die er prüfen sollte, auch umgerechnete (ein jüdisches Datum als Monat).
 
 Bleib beim Umfang aus Explore. Was nicht im Material steht, kommt nicht hinzu.
 
