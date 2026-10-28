@@ -30,7 +30,7 @@ Ein Assistent mit Shell (Node 22, git, Netz) baut die App beim Creator. Der Eins
 - aus diesem Repo (`skills/process/` und `skills/content/`): `lernapps-practice-explore` (Explore), `lernapps-practice-plan` (Plan), `lernapps-practice-photos` (Explore und Code), `lernapps-practice-submit` (Commit);
 - aus `lernapps/tooling`: `lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`.
 
-Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie man die Anleitung testet, steht in [docs/testing.md](docs/testing.md).
+Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie ein Agent die Anleitung nach einer Änderung bewertet (derzeit manuell), steht in [docs/evaluation.md](docs/evaluation.md).
 
 ## Mitarbeiten
 

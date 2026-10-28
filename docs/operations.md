@@ -19,7 +19,7 @@ Ein Build im Browser ist nicht möglich, weil die Bau-Werkzeuge native Programme
 | `.github/workflows/pages.yml` | Baut und prüft diese Seite und veröffentlicht sie auf `gh-pages` (siehe [Die Seite](#page)). Die Pflichtprüfung heißt `site`. |
 | `.github/workflows/pr-preview.yml` | Eine Vorschau dieser Seite je Pull Request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | Die Texte (Deutsch und Englisch), das Bauskript und der Stil dieser Seite. |
-| `docs/llms.txt`, `guidance/plan-template.md` | Der Einstieg für Assistenten und die Plan-Vorlage, der sie folgen (siehe [Die Anleitung testen](testing.md)). |
+| `docs/llms.txt`, `guidance/plan-template.md` | Der Einstieg für Assistenten und die Plan-Vorlage, der sie folgen (siehe [Evaluation der Anleitung](evaluation.md)). |
 | `skills/` | Die vier Skills von practice, die die Plan-Vorlage installiert: `lernapps-practice-explore`, `lernapps-practice-plan`, `lernapps-practice-photos`, `lernapps-practice-submit`. |
 | `scripts/try.ts` | Der lokale Probelauf: schickt ein ZIP durch Prüfung und Bau der Actions (`npm run try -- <zip>`). |
 | `docs/arc42/` | Die Architektur dieses Repos als arc42-Modell, nur auf Englisch. Das Bauskript prüft sie mit `arc42 validate --strict` und veröffentlicht sie unter [Architektur](architecture/). |

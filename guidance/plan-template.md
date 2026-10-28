@@ -22,7 +22,9 @@ in an issue of lernapps/practice, and GitHub serves it for two weeks at https://
 2. Read this plan before each step. One phase at a time, tasks in order.
 3. Task done → tick `[x]` at once and move it to "Completed" of its phase. An unticked box counts as not done.
 4. New task found → add it.
-5. Each phase names its skills. Load a skill when its task comes, not before. Read it in full, from its file.
+5. Each phase installs and names its skills. Install them when the phase begins, load a skill when its task comes, not
+   before. Read it in full, from its file. Install no other skill: this app is not published through GitHub and not
+   listed.
 6. Checkpoint: stop, ask, wait for the creator's answer. A message sent before the question is no yes.
    Only a checkpoint waits. A phase's last box → set the next phase and go on in the same message.
 7. At most 2 questions per message, one topic each. No questions inside drafts or lists.
@@ -63,11 +65,9 @@ open questions. Never the material itself, never a name. -->
 
 ### Tasks
 
-- [ ] Install the skills, if missing, in this folder: from lernapps/practice
-      `npx --yes skills add lernapps/practice -y -s lernapps-practice-explore -s lernapps-practice-plan -s lernapps-practice-photos -s lernapps-practice-submit`,
-      from lernapps/tooling
-      `npx --yes skills add lernapps/tooling -y -s lernapps-explainer -s lernapps-explainer-design -s lernapps-content-questions -s lernapps-exercise-patterns -s lernapps-content-research -s lernapps-check`.
-      No other skill: this app is not published through GitHub and not listed.
+- [ ] Install the skills of Explore in this folder:
+      `npx --yes skills add lernapps/practice -y -s lernapps-practice-explore -s lernapps-practice-photos` and
+      `npx --yes skills add lernapps/tooling -y -s lernapps-content-research`.
 - [ ] Load skill `lernapps-practice-explore`. In one message, as it says: ask the occasion, subject, school year,
       Land and the material; say what the creator must know before. Wait for the answer.
 - [ ] Search the catalog as the skill says. An app fits → give the creator its link and ask whether it is enough;
@@ -107,6 +107,8 @@ open questions. Never the material itself, never a name. -->
 ### Tasks
 
 - [ ] `grep '^phase:'` prints `phase: plan`; else set it.
+- [ ] Install the skills of Plan: `npx --yes skills add lernapps/practice -y -s lernapps-practice-plan` and
+      `npx --yes skills add lernapps/tooling -y -s lernapps-exercise-patterns -s lernapps-explainer-design`.
 - [ ] Load skills `lernapps-practice-plan`, `lernapps-exercise-patterns` and `lernapps-explainer-design`. Map the
       content as skill `lernapps-explainer-design` says: chapters and pages, with the pages skill
       `lernapps-practice-plan` names for the occasion.
@@ -146,6 +148,8 @@ checks and cannot. Becomes the content guide in Code. -->
 ### Tasks
 
 - [ ] `grep '^phase:'` prints `phase: code`; else set it.
+- [ ] Install the skills of Code:
+      `npx --yes skills add lernapps/tooling -y -s lernapps-check -s lernapps-explainer -s lernapps-content-questions`.
 - [ ] Load skill `lernapps-check`. Create the app in this folder as it says, with
       `npx --yes github:lernapps/tooling#main create --archetype explainer`; then `git init`, `npm install`, the
       first commit. `create` keeps this plan and the skills. Never write the app by hand.
@@ -177,6 +181,7 @@ checks and cannot. Becomes the content guide in Code. -->
 ### Tasks
 
 - [ ] `grep '^phase:'` prints `phase: commit`; else set it.
+- [ ] Install the skill of Commit: `npx --yes skills add lernapps/practice -y -s lernapps-practice-submit`.
 - [ ] Load skill `lernapps-practice-submit`. Show the creator every page of the built app as it says.
 - [ ] **Checkpoint:** pages, and the declarations. The creator has seen every page; highlight what you decided in Code
       ("(Vorschlag)" under "Key decisions"); go through the three declarations of the form with them, as the skill

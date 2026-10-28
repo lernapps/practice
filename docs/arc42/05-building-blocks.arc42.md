@@ -534,7 +534,7 @@ path: skills
 
 ### Trial run
 
-`scripts/try.ts`, run with `npm run try -- <zip>`. Sends a ZIP file through the intake checks and the build on the maintainer's machine and prints the comment ([docs/testing.md](https://github.com/lernapps/practice/blob/main/docs/testing.md)).
+`scripts/try.ts`, run with `npm run try -- <zip>`. Sends a ZIP file through the intake checks and the build on the maintainer's machine and prints the comment ([docs/evaluation.md](https://github.com/lernapps/practice/blob/main/docs/evaluation.md)).
 
 ```arc42
 :::ignore W018 the trial run is one script in the folder scripts, which the site build covers; the two do different jobs :::
