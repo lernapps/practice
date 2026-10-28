@@ -110,6 +110,6 @@ someone deletes them.
 id: risk-history-kept-by-github
 title: GitHub may keep removed commits
 severity: low
-mitigation: docs/datenschutz.md says so; the submitter deletes the issue and the attachment, or asks a maintainer to.
+mitigation: docs/privacy.md says so; the submitter deletes the issue and the attachment, or asks a maintainer to.
 :::
 ```

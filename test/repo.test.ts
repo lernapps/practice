@@ -38,8 +38,8 @@ describe("workflows and actions", () => {
     }
   });
 
-  it("give each job of einreichung.yml the least rights", () => {
-    const text = read(".github/workflows/einreichung.yml");
+  it("give each job of submission.yml the least rights", () => {
+    const text = read(".github/workflows/submission.yml");
     assert.match(text, /^permissions: \{\}/m);
     assert.match(text, /intake:[\s\S]*?permissions:\n\s+issues: read\n\s+contents: read\n/);
     assert.match(text, /build:[\s\S]*?permissions:\n\s+contents: read\n\s+steps:/);
@@ -48,22 +48,22 @@ describe("workflows and actions", () => {
   });
 
   it("run einreichung on issues opened and edited, and on workflow_dispatch with the input issue", () => {
-    const text = read(".github/workflows/einreichung.yml");
+    const text = read(".github/workflows/submission.yml");
     assert.match(text, /issues:\n\s+types: \[opened, edited\]/);
     assert.match(text, /workflow_dispatch:\n\s+inputs:\n\s+issue:\n[\s\S]*?required: true/);
   });
 
   it("run aufraeumen daily at a minute that is not 0, and on closed issues, with a dry run", () => {
-    const text = read(".github/workflows/aufraeumen.yml");
+    const text = read(".github/workflows/cleanup.yml");
     const cron = /cron: "(\d+) (\d+) \* \* \*"/.exec(text);
     assert.ok(cron && cron[1] !== "0");
     assert.match(text, /issues:\n\s+types: \[closed\]/);
     assert.match(text, /dry-run:/);
-    assert.match(read("docs/lebensdauer.md"), new RegExp(`${String(cron?.[2]).padStart(2, "0")}:${cron?.[1]} Uhr UTC`));
+    assert.match(read("docs/lifetime.md"), new RegExp(`${String(cron?.[2]).padStart(2, "0")}:${cron?.[1]} Uhr UTC`));
   });
 
   it("serialise the writes to gh-pages in one group", () => {
-    for (const file of [".github/workflows/einreichung.yml", ".github/workflows/aufraeumen.yml"]) {
+    for (const file of [".github/workflows/submission.yml", ".github/workflows/cleanup.yml"]) {
       assert.match(read(file), /concurrency:\n\s+group: gh-pages\n\s+cancel-in-progress: false/, file);
     }
   });
@@ -74,10 +74,10 @@ describe("workflows and actions", () => {
 });
 
 describe("the form", () => {
-  const form = read(".github/ISSUE_TEMPLATE/einreichen.yml");
+  const form = read(".github/ISSUE_TEMPLATE/submit.yml");
   it("has the fixed ids and the title", () => {
     assert.match(form, /^name: Vorbereitung einreichen$/m);
-    assert.deepEqual([...form.matchAll(/^\s+id: (\w+)$/gm)].map((m) => m[1]), ["fach", "klassenstufe", "bundesland", "zip", "erklaerungen"]);
+    assert.deepEqual([...form.matchAll(/^\s+id: (\w+)$/gm)].map((m) => m[1]), ["subject", "grade", "federalState", "zip", "declarations"]);
   });
   it("has the labels the intake looks for", () => {
     for (const label of FORM_LABELS) assert.ok(form.includes(`label: ${label}`), label);
@@ -87,17 +87,17 @@ describe("the form", () => {
       const part = form.split(`id: ${id}`)[1]?.split("validations:")[0] ?? "";
       return [...part.matchAll(/^\s+- "?([^"\n]+?)"?$/gm)].map((m) => m[1]);
     };
-    assert.deepEqual(options("klassenstufe"), GRADES);
-    assert.deepEqual(options("bundesland"), STATES);
+    assert.deepEqual(options("grade"), GRADES);
+    assert.deepEqual(options("federalState"), STATES);
   });
   it("asks for three declarations, each required", () => {
-    const part = form.split("id: erklaerungen")[1] ?? "";
+    const part = form.split("id: declarations")[1] ?? "";
     assert.equal(part.match(/required: true/g)?.length, 3);
   });
 });
 
 describe("the docs", () => {
-  const rules = read("docs/regeln.md");
+  const rules = read("docs/rules.md");
   it("name the limits of the code", () => {
     assert.ok(rules.includes(`höchstens ${MAX_DOWNLOAD_BYTES / 1024 / 1024} MB`));
     assert.ok(rules.includes(`höchstens ${MAX_FILES} Dateien`));
@@ -109,14 +109,14 @@ describe("the docs", () => {
   });
   it("name the lifetime", () => {
     assert.equal(LIFETIME_DAYS, 14);
-    assert.match(read("docs/lebensdauer.md"), /zwei Wochen\*\* \(14 Tage\)/);
+    assert.match(read("docs/lifetime.md"), /zwei Wochen\*\* \(14 Tage\)/);
   });
   it("explain the prefill parameters of every field the URL can set", () => {
-    const text = read("docs/einreichen.md");
-    for (const parameter of ["template", "title", "fach", "klassenstufe", "bundesland"]) assert.ok(text.includes(`\`${parameter}\``), parameter);
+    const text = read("docs/submit.md");
+    for (const parameter of ["template", "title", "subject", "grade", "federalState"]) assert.ok(text.includes(`\`${parameter}\``), parameter);
   });
   it("name the checks of a bundle that really run", () => {
-    const text = read("docs/pruefungen.md");
+    const text = read("docs/checks.md");
     for (const rule of ["accessible", "usable-at-360px", "no-tracking", "no-request-before-click", "own-data-only", "links-resolve", "pages-reachable", "explainer-readable-without-js"]) {
       assert.ok(text.includes(`\`${rule}\``), rule);
     }

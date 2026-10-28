@@ -23,8 +23,8 @@ notation: mermaid
 flowchart LR
     bb-form["Submission form"]
     subgraph bb-workflows["Workflows"]
-        bb-workflow-submission["einreichung.yml"]
-        bb-workflow-cleanup["aufraeumen.yml"]
+        bb-workflow-submission["submission.yml"]
+        bb-workflow-cleanup["cleanup.yml"]
         bb-workflow-pages["pages.yml"]
         bb-workflow-pr-preview["pr-preview.yml"]
         bb-workflow-check["check.yml"]
@@ -101,7 +101,7 @@ id: if-practice-form
 title: Submission form
 provider: bb-form
 protocol: GitHub issue form with the content as a ZIP attachment; results as comments on the issue
-path: .github/ISSUE_TEMPLATE/einreichen.yml
+path: .github/ISSUE_TEMPLATE/submit.yml
 :::
 ```
 
@@ -134,7 +134,7 @@ path: .github/workflows
 
 ### Submission workflow
 
-`einreichung.yml`. Runs the jobs `intake`, `build` and `publish` one after the other for an issue that was opened or edited, for a comment of the issue's author with an attachment (`term-latest-upload`), or by hand for an issue number (`concept-rights-split`).
+`submission.yml`. Runs the jobs `intake`, `build` and `publish` one after the other for an issue that was opened or edited, for a comment of the issue's author with an attachment (`term-latest-upload`), or by hand for an issue number (`concept-rights-split`).
 
 ```arc42
 :::building-block
@@ -142,7 +142,7 @@ id: bb-workflow-submission
 title: Submission workflow
 technology: GitHub Actions workflow
 parent: bb-workflows
-path: .github/workflows/einreichung.yml
+path: .github/workflows/submission.yml
 requires: if-action-validate, if-action-build, if-action-publish
 implements: concept-rights-split
 :::
@@ -150,7 +150,7 @@ implements: concept-rights-split
 
 ### Cleanup workflow
 
-`aufraeumen.yml`. Runs the cleanup daily, when an issue is closed and by hand (`concept-temporary-preview`).
+`cleanup.yml`. Runs the cleanup daily, when an issue is closed and by hand (`concept-temporary-preview`).
 
 ```arc42
 :::building-block
@@ -158,7 +158,7 @@ id: bb-workflow-cleanup
 title: Cleanup workflow
 technology: GitHub Actions workflow
 parent: bb-workflows
-path: .github/workflows/aufraeumen.yml
+path: .github/workflows/cleanup.yml
 requires: if-action-expire
 implements: concept-temporary-preview
 :::
@@ -534,7 +534,7 @@ path: skills
 
 ### Trial run
 
-`scripts/try.ts`, run with `npm run try -- <zip>`. Sends a ZIP file through the intake checks and the build on the maintainer's machine and prints the comment ([docs/anleitung-testen.md](https://github.com/lernapps/practice/blob/main/docs/anleitung-testen.md)).
+`scripts/try.ts`, run with `npm run try -- <zip>`. Sends a ZIP file through the intake checks and the build on the maintainer's machine and prints the comment ([docs/testing.md](https://github.com/lernapps/practice/blob/main/docs/testing.md)).
 
 ```arc42
 :::ignore W018 the trial run is one script in the folder scripts, which the site build covers; the two do different jobs :::

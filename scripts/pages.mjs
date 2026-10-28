@@ -5,7 +5,7 @@
 //
 // Rules for the Markdown:
 //   - A heading may end with {#anchor}. German and English pages use the same anchors.
-//   - A link to another page is written as the file name (regeln.md, einreichen.md#formular); it becomes the address
+//   - A link to another page is written as the file name (rules.md, submit.md#form); it becomes the address
 //     of the page in the same language, with the prefix of the build (SITE_PATH_PREFIX). llms.txt is the guide for assistants, architecture/ the architecture (English only).
 //   - The first # heading is the title, the first paragraph the description.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -70,7 +70,7 @@ for (const [lang, { dir, root, home, back, suffix }] of Object.entries(LANGUAGES
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="${escapeHtml(description)}">
   <title>${escapeHtml(isHome ? `${plain(title)} – lernapps.net` : `${plain(title)} – ${suffix}`)}</title>
-  <link rel="stylesheet" href="${prefix}stil.css">
+  <link rel="stylesheet" href="${prefix}style.css">
 </head>
 <body>
   <main id="main-content" tabindex="-1">

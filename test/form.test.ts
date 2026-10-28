@@ -22,7 +22,7 @@ describe("the fields", () => {
   it("are read", () => {
     const { meta, problems } = readMeta(sections(issueBody()));
     assert.deepEqual(problems, []);
-    assert.deepEqual(meta, { fach: "Religion", klassenstufe: "7", bundesland: "Hessen" });
+    assert.deepEqual(meta, { subject: "Religion", grade: "7", federalState: "Hessen" });
   });
   it("must come from the lists", () => {
     for (const bad of [{ Klassenstufe: "14" }, { Klassenstufe: "0" }, { Klassenstufe: "07" }, { Klassenstufe: "7; rm -rf" }, { Bundesland: "Atlantis" }, { Bundesland: "hessen" }]) {
@@ -57,7 +57,7 @@ describe("the fields", () => {
 describe("the ZIP address", () => {
   const url = (field: string) => readZipUrl(sections(issueBody({ "ZIP-Datei": field })));
   it("is found in the link GitHub writes", () => {
-    assert.equal(url(`[vorbereitung.zip](${URL1})`).url, URL1);
+    assert.equal(url(`[preparation.zip](${URL1})`).url, URL1);
     assert.equal(url(URL1).url, URL1);
   });
   it("accepts only the attachment store of GitHub", () => {

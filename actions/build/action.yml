@@ -10,11 +10,11 @@ description: >-
   the template), then @lernapps/tooling at the commit of tooling's main the pin was read at (the tooling an app made
   by `create` now has, instead of the one the template's lock file pins), runs the components' tests (vp test, when the submission has
   components), builds with npm run build (the explainer's build checks the content and the components' code), and
-  runs `lernapps check` on the bundle (docs/pruefungen.md says which rules that is and which do not apply to a
+  runs `lernapps check` on the bundle (docs/checks.md says which rules that is and which do not apply to a
   preview). Then every page gets <meta name="robots" content="noindex">. The result is the artifact "site" (only when
   the build passed) and the artifact "build" (build.json with the end of the log, always). The job needs
   contents: read and no secret: it runs the submitted components' code, so it must hold nothing worth taking. The
-  logic is actions/build/build.ts, tested by test/build.test.ts. Use it in the job "build" of einreichung.yml, after
+  logic is actions/build/build.ts, tested by test/build.test.ts. Use it in the job "build" of submission.yml, after
   a checkout of this repo.
 runs:
   using: composite

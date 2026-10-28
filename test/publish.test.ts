@@ -23,7 +23,7 @@ function site(extra: Record<string, string> = {}): string {
   return dir;
 }
 
-const META = { issue: 5, fach: "Religion", klassenstufe: "7", bundesland: "Hessen", erstellt: "2026-10-27T10:00:00.000Z" };
+const META = { issue: 5, subject: "Religion", grade: "7", federalState: "Hessen", created: "2026-10-27T10:00:00.000Z" };
 
 describe("checkSite", () => {
   it("passes the site of a build", () => assert.deepEqual(checkSite(site()).problems, []));
@@ -51,9 +51,9 @@ describe("checkSite", () => {
 describe("practice.json", () => {
   it("has the metadata, the day it was made and the day it ends (14 days later)", () => {
     const record = practiceRecord(META, "12.1", new Date("2026-10-27T10:00:00Z"));
-    assert.equal(record.erstellt, "2026-10-27T10:00:00.000Z");
-    assert.equal(record.laeuftAb, "2026-11-10T10:00:00.000Z");
-    assert.equal(record.fach, "Religion");
+    assert.equal(record.created, "2026-10-27T10:00:00.000Z");
+    assert.equal(record.expires, "2026-11-10T10:00:00.000Z");
+    assert.equal(record.subject, "Religion");
     assert.equal(record.issue, 5);
   });
 });
@@ -154,7 +154,7 @@ describe("publish", () => {
     const record = JSON.parse(pagesFile(remote, "i/5/practice.json"));
     assert.equal(record.issue, 5);
     assert.equal(record.built, "12.1");
-    assert.equal(Date.parse(record.laeuftAb) - Date.parse(record.erstellt), 14 * 24 * 3600 * 1000);
+    assert.equal(Date.parse(record.expires) - Date.parse(record.created), 14 * 24 * 3600 * 1000);
     const text = posted(api);
     assert.match(text, /^<!-- lernapps-practice -->/);
     assert.match(text, /Deine Vorbereitung ist unter http:\/\/127\.0\.0\.1:\d+\/practice\/i\/5\/ erreichbar\.\n\nSo hilft sie am meisten: Dein Kind sieht zuerst selbst sein Material durch und überlegt, was es für die Arbeit können muss\. Danach zeigt ihm die App, was schon sitzt und wo noch Lücken sind\. Sie prüft den Lernstand\. Das Lernen selbst ersetzt sie nicht\.\n\nDas ist eine vorübergehende Vorschau\. Sie wird nach zwei Wochen \(am \d+\. \w+ 2026\) automatisch gelöscht\. Wenn sie Dir oder Deinem Kind geholfen hat, setze bitte eine 👍-Reaktion auf das erste Feld dieses Issues\. Dann bleibt sie erhalten und wir prüfen, ob sie in den Katalog passt\./);

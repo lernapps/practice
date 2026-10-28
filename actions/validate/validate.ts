@@ -30,7 +30,7 @@ export interface Result {
   /** Hash of the ZIP address and the fields; publish writes it into the comment, the next run compares. */
   fingerprint?: string;
   problems: Problem[];
-  meta?: { issue: number; fach: string; klassenstufe: string; bundesland: string; erstellt: string };
+  meta?: { issue: number; subject: string; grade: string; federalState: string; created: string };
   zip?: { url: string; bytes: number; files: number; unpackedBytes: number };
 }
 
@@ -157,7 +157,7 @@ export function intake(options: Options): Result {
     // Without a valid form there is no point in downloading; but a missing ZIP is not the only thing to tell.
     return fail();
   }
-  const fingerprint = createHash("sha256").update([url, meta.fach, meta.klassenstufe, meta.bundesland].join("\n")).digest("hex");
+  const fingerprint = createHash("sha256").update([url, meta.subject, meta.grade, meta.federalState].join("\n")).digest("hex");
   if (options.previous === fingerprint && options.force !== true) {
     return write({ version: 1, issue, relevant: true, ok: false, unchanged: true, fingerprint, problems: [] });
   }
@@ -174,7 +174,7 @@ export function intake(options: Options): Result {
   }
   const files = inspection.entries.filter((entry) => !entry.isDirectory);
   const created = (options.now ?? new Date()).toISOString();
-  const fullMeta = { issue, ...meta, erstellt: created };
+  const fullMeta = { issue, ...meta, created };
   writeFileSync(join(outDir, "meta.json"), `${JSON.stringify(fullMeta, null, 2)}\n`);
   return write({
     version: 1,

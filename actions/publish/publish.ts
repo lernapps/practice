@@ -72,13 +72,14 @@ export function checkSite(dir: string): SiteReport {
 }
 
 export interface Practice {
-  version: 1;
+  /** 2: English keys (version 1 had German ones). */
+  version: 2;
   issue: number;
-  fach: string;
-  klassenstufe: string;
-  bundesland: string;
-  erstellt: string;
-  laeuftAb: string;
+  subject: string;
+  grade: string;
+  federalState: string;
+  created: string;
+  expires: string;
   built: string;
 }
 
@@ -87,13 +88,13 @@ export function practiceRecord(meta: NonNullable<Result["meta"]>, built: string,
   const created = now.toISOString();
   const ends = new Date(now.getTime() + LIFETIME_DAYS * 24 * 3600 * 1000).toISOString();
   return {
-    version: 1,
+    version: 2,
     issue: meta.issue,
-    fach: meta.fach,
-    klassenstufe: meta.klassenstufe,
-    bundesland: meta.bundesland,
-    erstellt: created,
-    laeuftAb: ends,
+    subject: meta.subject,
+    grade: meta.grade,
+    federalState: meta.federalState,
+    created,
+    expires: ends,
     built,
   };
 }
@@ -182,7 +183,7 @@ export async function publish(env: NodeJS.ProcessEnv, api: Api & { repo: string 
   const timeout = Number(env["LERNAPPS_PUBLISH_TIMEOUT"] ?? "300");
   const ready = await served(link, built, Number.isFinite(timeout) ? timeout : 300);
   if (!ready) console.log(`::warning::${link} does not serve this build yet; the comment says so`);
-  await upsertComment(api, api.repo, issue, COMMENT_MARKER, `${previewComment(link, record.laeuftAb, ready)}\n\n${fingerprintLine(result.fingerprint ?? "")}`);
+  await upsertComment(api, api.repo, issue, COMMENT_MARKER, `${previewComment(link, record.expires, ready)}\n\n${fingerprintLine(result.fingerprint ?? "")}`);
   console.log(`issue #${issue}: ${link}`);
   return 0;
 }

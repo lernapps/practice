@@ -11,7 +11,7 @@ description: >-
   (unchanged), so an edit of something else does not build again; force repeats anyway. It writes nothing to GitHub. The result is the artifact "intake": result.json
   always (what the next jobs read, and the problems in plain German for the comment), and for a valid submission
   meta.json and tree/src/. The outputs say whether the issue is a submission and whether it is valid. The logic is
-  actions/validate/validate.ts, tested by test/validate.test.ts. Use it in the job "intake" of einreichung.yml, after
+  actions/validate/validate.ts, tested by test/validate.test.ts. Use it in the job "intake" of submission.yml, after
   a checkout of this repo.
 inputs:
   issue:

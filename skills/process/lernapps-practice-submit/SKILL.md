@@ -25,7 +25,7 @@ git archive --format=zip --output=../<anlass>.zip HEAD src
 - Erlaubt: `.yaml`, `.yml`, `.md`, `.png`, `.jpg`, `.webp`; `.svg` nur in `src/images/`; `.vue` und `.ts` nur in
   `src/components/` (`<Name>.vue`, `<Name>.ts`, `<Name>.test.ts`). Höchstens 300 Dateien und 10 MB.
 - Keine Fotos des Materials, keine Namen.
-- Die Regeln: https://lernapps.net/practice/regeln/
+- Die Regeln: https://lernapps.net/practice/rules/
 
 ## Einreichen
 
@@ -34,7 +34,7 @@ Erkläre ohne Fachwörter:
 1. Die Eltern brauchen ein kostenloses GitHub-Konto (https://github.com/signup), nur mit E-Mail-Adresse. Kinder unter
    13 dürfen keins haben, deshalb legen es die Eltern an.
 2. Gib den Link zum Formular:
-   `https://github.com/lernapps/practice/issues/new?template=einreichen.yml&fach=<Fach>&klassenstufe=<Zahl>&bundesland=<Name>`
+   `https://github.com/lernapps/practice/issues/new?template=submit.yml&subject=<Fach>&grade=<Zahl>&federalState=<Name>`
    (Leerzeichen und Umlaute URL-kodiert).
 3. Die ZIP-Datei in das Feld „ZIP-Datei“ ziehen, warten, bis ein Link erscheint, die drei Erklärungen anhaken (selbst
    erstellt, keine persönlichen Daten, zwei Wochen veröffentlichen), absenden.

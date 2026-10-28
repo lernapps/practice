@@ -1,19 +1,19 @@
 # Rules for content and details
 
-## What you submit {#inhalt}
+## What you submit {#content}
 
 The content of a learning app of the archetype **`explainer`**: chapters with pages, explanations and exercises as YAML files, plus data files, images and components. The files are described in the [schema of the explainer](https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json) and in the [guide to the archetype](https://github.com/lernapps/app-templates/tree/main/explainer). There is no textbook for it: you submit your own content.
 
-## Structure of the ZIP file {#aufbau}
+## Structure of the ZIP file {#structure}
 
 - The folder `src` is at the top of the ZIP file. The file `src/app.yaml` must be there.
 - A folder around everything also works (GitHub "Download ZIP"). Then only `<folder>/src/` counts.
 - What lies outside `src` we ignore and never unpack.
 - We change nothing in the template. `src/main.ts` belongs to it: if the file is in the ZIP file, we ignore it, and the build takes the template's.
-- Your own components are in `src/components/`, as the explainer knows them: `<Name>.vue`, `<Name>.ts` and `<Name>.test.ts`, without subfolders. The build checks their code (see [Checks](pruefungen.md#bau)).
+- Your own components are in `src/components/`, as the explainer knows them: `<Name>.vue`, `<Name>.ts` and `<Name>.test.ts`, without subfolders. The build checks their code (see [Checks](checks.md#build)).
 - Data files are in `src/data/`, images in `src/images/`.
 
-## Allowed files {#dateien}
+## Allowed files {#files}
 
 | Rule | Value |
 | --- | --- |
@@ -32,7 +32,7 @@ The content of a learning app of the archetype **`explainer`**: chapters with pa
 
 We check the sizes in the directory of the ZIP file **and** while unpacking. A ZIP file that states wrong sizes is rejected. Umlauts in file names are not allowed; in the text of the YAML files they are of course allowed.
 
-## The details in the form {#angaben}
+## The details in the form {#details}
 
 | Field | Rule |
 | --- | --- |
@@ -42,15 +42,15 @@ We check the sizes in the directory of the ZIP file **and** while unpacking. A Z
 | ZIP-Datei | a link `https://github.com/user-attachments/files/<number>/<name>.zip` that GitHub writes when you drag the file in. We load no other addresses. |
 | Erklärungen (declarations) | all three ticked |
 
-## The three declarations {#erklaerungen}
+## The three declarations {#declarations}
 
 1. The content is made by yourself (also with AI help). Nothing is copied from books or worksheets, and it contains no photos of material.
 2. The content contains no personal data (names, school, class, teacher).
 3. I allow the content to be published for two weeks. If it is later added to the catalogue, CC BY 4.0 applies, and I am the author.
 
-More on this: [Privacy and copyright](datenschutz.md).
+More on this: [Privacy and copyright](privacy.md).
 
-## Content that always applies {#immer}
+## Content that always applies {#always}
 
 - Texts for learners are in German and in plain language.
 - Examples use invented names, never real ones.

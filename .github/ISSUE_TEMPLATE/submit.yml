@@ -10,14 +10,14 @@ body:
         Die Vorschau wird nach zwei Wochen automatisch gelöscht.
         Der Lernstand bleibt im Browser Deines Kindes. Er wird nirgends gespeichert.
   - type: input
-    id: fach
+    id: subject
     attributes:
       label: Fach
       description: Zum Beispiel Mathematik, Religion oder Biologie.
     validations:
       required: true
   - type: dropdown
-    id: klassenstufe
+    id: grade
     attributes:
       label: Klassenstufe
       options:
@@ -37,7 +37,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: bundesland
+    id: federalState
     attributes:
       label: Bundesland
       options:
@@ -67,7 +67,7 @@ body:
     validations:
       required: true
   - type: checkboxes
-    id: erklaerungen
+    id: declarations
     attributes:
       label: Erklärungen
       options:

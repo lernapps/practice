@@ -21,7 +21,7 @@ describe("intake", () => {
     assert.equal(result.zip?.files, 4);
     assert.ok(existsSync(join(outDir, "tree/src/app.yaml")));
     const meta = JSON.parse(readFileSync(join(outDir, "meta.json"), "utf8"));
-    assert.deepEqual(meta, { issue: 7, fach: "Religion", klassenstufe: "7", bundesland: "Hessen", erstellt: "2026-10-27T10:00:00.000Z" });
+    assert.deepEqual(meta, { issue: 7, subject: "Religion", grade: "7", federalState: "Hessen", created: "2026-10-27T10:00:00.000Z" });
     assert.equal(JSON.parse(readFileSync(join(outDir, "result.json"), "utf8")).ok, true);
   });
 
@@ -40,7 +40,7 @@ describe("intake", () => {
 
   it("collects the problems of the fields and the declarations together, without a download", () => {
     const result = run(issueBody({ Klassenstufe: "99", Fach: "", Erklärungen: "- [ ] a\n- [ ] b\n- [ ] c" }), never);
-    assert.deepEqual(result.problems.map((p) => p.code).sort(), ["erklaerungen", "fach-missing", "klassenstufe"]);
+    assert.deepEqual(result.problems.map((p) => p.code).sort(), ["declarations", "grade", "subject-missing"]);
   });
 
   it("reports a bad ZIP file, writes no tree and no meta", () => {
@@ -114,7 +114,7 @@ describe("a new version in a comment", () => {
     assert.deepEqual(ownerCommentTexts(rows, undefined), []);
   });
   it("starts a run only for a comment of the issue's author with an attachment", () => {
-    const workflow = readFileSync(new URL("../.github/workflows/einreichung.yml", import.meta.url), "utf8");
+    const workflow = readFileSync(new URL("../.github/workflows/submission.yml", import.meta.url), "utf8");
     assert.match(workflow, /issue_comment:\n\s+types: \[created, edited\]/);
     assert.match(workflow, /github\.event\.comment\.user\.id == github\.event\.issue\.user\.id && contains\(github\.event\.comment\.body, 'https:\/\/github\.com\/user-attachments\/files\/'\)/);
     assert.match(workflow, /format\('-comment-\{0\}', github\.event\.comment\.id\)/);
@@ -147,14 +147,14 @@ describe("a maintainer's test run with zip_url", () => {
   it("leaves the issue's address when zip_url is empty", () => {
     const asked: string[] = [];
     run(issueBody(), (url) => (asked.push(url), { buffer: buildZip(goodSpecs()) }), { zipUrl: "" });
-    assert.deepEqual(asked, ["https://github.com/user-attachments/files/34026717/vorbereitung.zip"]);
+    assert.deepEqual(asked, ["https://github.com/user-attachments/files/34026717/preparation.zip"]);
   });
   it("accepts only the fixed prefixes and attachment addresses", () => {
     for (const url of [
       RAW,
       "https://raw.githubusercontent.com/lernapps/tooling/abc123/x/probe.zip",
       "https://raw.githubusercontent.com/mrsimpson/test-lernkontrolle/main/zips/probe-1.zip",
-      "https://github.com/user-attachments/files/34026717/vorbereitung.zip",
+      "https://github.com/user-attachments/files/34026717/preparation.zip",
     ]) {
       assert.equal(maintainerZipUrl(url), true, url);
     }
@@ -180,7 +180,7 @@ describe("a maintainer's test run with zip_url", () => {
     assert.deepEqual(result.problems.map((p) => p.code), ["zip-url"]);
   });
   it("is set only through env in the workflow, never in a run: step", () => {
-    const workflow = readFileSync(new URL("../.github/workflows/einreichung.yml", import.meta.url), "utf8");
+    const workflow = readFileSync(new URL("../.github/workflows/submission.yml", import.meta.url), "utf8");
     assert.match(workflow, /zip_url:\n\s+description: [^\n]+\n\s+required: false/);
     assert.match(workflow, /zip-url: \$\{\{ inputs\.zip_url \}\}/);
     const action = readFileSync(new URL("../actions/validate/action.yml", import.meta.url), "utf8");
