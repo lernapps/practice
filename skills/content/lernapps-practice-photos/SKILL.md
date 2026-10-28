@@ -47,13 +47,11 @@ license: MIT
 ## Abbildungen nachbauen
 
 Eine Abbildung des Materials baust Du inhaltsgleich nach: dieselben Teile, dieselbe Anordnung, dieselben
-Beschriftungen und Zahlen. Nur die Gestaltung ist Deine. Zeigt sie Daten (Zeiten im Jahr, Werte, eine Reihenfolge), nimm
-lieber einen Block wie `timeline` oder `table`: Die App zeichnet ihn aus den Daten.
+Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
 
 1. **Kannst Du Bilder erzeugen,** erzeuge die Abbildung neu, nach Deiner Beschreibung des Inhalts, nicht nach dem
    Foto als Vorlage. Speichere sie als `.png`, `.jpg` oder `.webp`.
-2. **Sonst zeichne sie schematisch als SVG:** Formen, Linien, Pfeile, Text mit `<text>`. Berechne die Lage aus den
-   Daten, statt Koordinaten zu schätzen, und setze Beschriftungen an ihren Ort statt an Linien. Ein SVG darf nur
+2. **Sonst zeichne sie schematisch als SVG** von Hand: Formen, Linien, Pfeile, Text mit `<text>`. Ein SVG darf nur
    zeichnen: kein `<script>`, kein `on…=`, kein `<foreignObject>`, kein `<iframe>`, `<embed>` oder `<object>`, kein
    `javascript:`, kein Verweis nach außen (`href` und `url(…)` nur auf `#…` in derselben Datei), kein `@import`, kein
    `<!ENTITY`. Sonst lehnt die Einreichung das Bild ab.
