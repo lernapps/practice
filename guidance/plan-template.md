@@ -69,6 +69,8 @@ open questions. Never the material itself, never a name. -->
       `npx --yes skills add lernapps/tooling -y -s lernapps-explainer -s lernapps-explainer-design -s lernapps-content-questions -s lernapps-exercise-patterns -s lernapps-content-research -s lernapps-check`.
       No other skill: this app is not published through GitHub and not listed.
 - [ ] Load skill `lernapps-practice-explore`. Ask the occasion first, as it says.
+- [ ] For a class test: ask, as the skill says, whether the child has looked through its material and what it wants
+      to learn. Not yet → suggest it does so first, and wait.
 - [ ] Search the catalog as the skill says. An app fits → give the creator its link and ask whether it is enough;
       yes → the plan ends here.
 - [ ] Tell the creator what the skill says before the material: public for two weeks, no names, school or
@@ -96,6 +98,8 @@ open questions. Never the material itself, never a name. -->
 - Occasion: what is coming (a class test, a cover lesson, the state of a class, missed work), for whom.
 - Learners: subject, school year, Land; for religion the denomination.
 - Material: what the creator gives (photos of worksheets, book pages, a self-test) and what of it counts.
+- Own work: for a class test, whether the child has looked through the material itself and what it wants to learn,
+  in its words.
 - Weighting: what matters most for the occasion (all topics evenly, the weak ones, a quick overview).
 - Look and feel: calm like a worksheet; figures that help.
 

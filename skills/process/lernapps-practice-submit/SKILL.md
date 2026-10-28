@@ -58,6 +58,8 @@ Sage ehrlich:
 - Hat sie geholfen, soll jemand eine 👍-Reaktion auf das erste Feld des Issues setzen. Dann bleibt sie erhalten und
   wird für den Katalog geprüft. Dieses Feedback hilft auch anderen, die vor demselben Stoff stehen.
 - Die App speichert nichts über die Lernenden. Die Selbsteinschätzung zählen sie selbst.
+- Die App prüft den Lernstand. Das Lernen ersetzt sie nicht: Am meisten hilft sie, wenn das Kind zuerst selbst sein
+  Material durchsieht und dann mit ihr prüft, was sitzt.
 
 ## Typische Stolpersteine
 
