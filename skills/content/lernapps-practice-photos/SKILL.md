@@ -62,8 +62,10 @@ Beschriftungen und Zahlen. Nur die Gestaltung ist Deine.
    - `source`: `eigene Zeichnung` für ein SVG von Hand, `KI-generiert` für ein erzeugtes Bild.
    - `licence`: `CC-BY-4.0`, die Lizenz der Einreichung.
    - `alt` beschreibt den Inhalt so, dass er ohne Bild verständlich ist; die Beschriftungen gehören dazu.
-5. Prüfe am Ende: Stimmen alle Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil? Passt jeder
-   Buchstabe zu Form und Ort seines Teils in der Zeichnung? Ändert sich eine Zuordnung, prüfe die Zeichnung erneut.
+5. Prüfe am Ende jede Abbildung einzeln in voller Größe, nicht im Screenshot der ganzen Seite: Stimmen alle
+   Beschriftungen und Zahlen mit dem Material überein? Fehlt ein Teil? Passt jeder Buchstabe zu Form und Ort seines
+   Teils, zeigt jede Linie auf das Richtige? Nennen Abbildung, `alt` und Text dieselben Fakten? Ändert sich eine
+   Zuordnung, prüfe die Zeichnung erneut.
 
 ## Typische Stolpersteine
 

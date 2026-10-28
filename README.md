@@ -1,40 +1,23 @@
 # practice
 
-Eine Arbeit steht an, und keine App im Katalog passt? Dann macht der KI-Assistent der Eltern aus Fotos von Schulmaterial in Minuten eine kleine Lern-App nach Maß, die zwei Wochen lang vorübergehend erreichbar ist. Technisch reichen Eltern oder Schüler den Quelltext einer Lern-App (Archetyp `explainer`) als ZIP-Datei über ein Issue-Formular ein; ein Workflow baut daraus auf GitHub eine Vorschau unter `https://lernapps.net/practice/i/<Issue-Nummer>/`, schreibt den Link in einen Kommentar und räumt die Vorschau nach 14 Tagen ab. Die App speichert nichts über das Kind.
+lernapps.net bietet zwei Wege: **Lernen** mit den dauerhaften Apps im [Katalog](https://lernapps.net/apps/) und **Üben** für einen Anlass, etwa die nächste Arbeit. Dieses Repo ist der Weg zum Üben. Der KI-Assistent eines Creators macht aus Fotos von Schulmaterial eine App zum Üben nach Maß (Archetyp `explainer`). Der Creator reicht sie als ZIP-Datei über ein Issue-Formular ein. Ein Workflow veröffentlicht sie unter `https://lernapps.net/practice/i/<Issue-Nummer>/` und räumt sie nach 14 Tagen ab.
 
-Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lernapps.net](https://lernapps.net/); die Vorlagen kommen aus [lernapps/app-templates](https://github.com/lernapps/app-templates), die Regeln und Prüfungen aus [lernapps/tooling](https://github.com/lernapps/tooling).
+Das Repo enthält keine Apps und keine Laufzeit. Die Vorlagen kommen aus [lernapps/app-templates](https://github.com/lernapps/app-templates), die Regeln und Prüfungen aus [lernapps/tooling](https://github.com/lernapps/tooling).
 
-## Wohin?
+## Einstieg
 
-- **Einreichen:** [Formular öffnen](https://github.com/lernapps/practice/issues/new?template=submit.yml), Anleitung in [docs/submit.md](docs/submit.md).
-- **Dokumentation:** <https://lernapps.net/practice/> (Deutsch) und <https://lernapps.net/practice/en/> (English). Die Quellen: [docs/index.md](docs/index.md) und [docs/en/index.md](docs/en/index.md).
-- **Für KI-Assistenten:** [docs/llms.txt](docs/llms.txt) ist der Einstieg. Sie führt zur Plan-Vorlage [guidance/plan-template.md](guidance/plan-template.md), der der Assistent folgt (siehe [Skills](#skills)).
-- **Betrieb und Einstellungen:** [docs/operations.md](docs/operations.md).
-
-## Was im Repo liegt
-
-- `guidance/plan-template.md`: die Plan-Vorlage mit den Phasen Explore, Plan, Code und Commit.
-- `skills/`: vier Skills für Assistenten (`lernapps-practice-explore`, `lernapps-practice-plan`, `lernapps-practice-photos`, `lernapps-practice-submit`).
-- `docs/`: Dokumentation für Menschen (Deutsch in `docs/*.md`, Englisch in `docs/en/*.md`) und `llms.txt`.
-- `docs/arc42/`: die Architektur des Repos als arc42-Modell (nur Englisch), veröffentlicht unter <https://lernapps.net/practice/architecture/>.
-- `scripts/` und `site/`: Bauskript und Stil der Seite und `scripts/try.ts` (Probelauf eines ZIP).
-- `.github/ISSUE_TEMPLATE/submit.yml`: das Formular.
-- `.github/workflows/`: dünne Workflows `submission.yml`, `cleanup.yml`, `check.yml`, `pages.yml` (Seite bauen, prüfen, veröffentlichen) und `pr-preview.yml` (Vorschau je Pull Request).
-- `actions/`: die Composite-Actions `validate` (prüfen), `build` (bauen), `publish` (veröffentlichen), `expire` (ablaufen lassen) und der gemeinsame Code in `actions/lib/`.
-- `test/`: Tests der Skripte mit `node:test`.
-
-## Skills
-
-Ein Assistent mit Shell (Node 22, git, Netz) baut die App beim Creator. Der Einstieg ist die [llms.txt](https://lernapps.net/practice/llms.txt): Sie lässt ihn die Plan-Vorlage herunterladen. Die Vorlage folgt den Phasen des Tooling und installiert genau diese Skills:
-
-- aus diesem Repo (`skills/process/` und `skills/content/`): `lernapps-practice-explore` (Explore), `lernapps-practice-plan` (Plan), `lernapps-practice-photos` (Explore und Code), `lernapps-practice-submit` (Commit);
-- aus `lernapps/tooling`: `lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-cli`.
-
-Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie ein Agent die Anleitung nach einer Änderung bewertet (derzeit manuell), steht in [docs/evaluation.md](docs/evaluation.md).
+- **Für Creator:** <https://lernapps.net/practice/>, Quelle in [docs/index.md](docs/index.md) und [docs/en/index.md](docs/en/index.md).
+- **Für KI-Assistenten:** [docs/llms.txt](docs/llms.txt). Sie führt zur Plan-Vorlage [guidance/plan-template.md](guidance/plan-template.md) und zu den Skills in `skills/`.
+- **Einreichung und Vorschau:** `.github/workflows/` und die Composite-Actions in `actions/`.
+- **Betrieb:** [docs/operations.md](docs/operations.md). **Architektur:** [docs/arc42/](docs/arc42/). **Bewertung der Anleitung:** [docs/evaluation.md](docs/evaluation.md).
 
 ## Mitarbeiten
 
-`npm test` führt alle Tests aus (Node 22.18 oder neuer, keine Abhängigkeiten). Die Seite baut man mit `npm ci && npm run build` und prüft sie mit `npm run check`; ein lokaler Blick: `SITE_PATH_PREFIX=/ npm run build && python3 -m http.server -d _site 8000`. Die Tests prüfen unter anderem gute und böse ZIP-Dateien, den Ablauf mit einem lokalen Git-Remote und die Regeln des Aufräumens. `npm run try -- <zip>` schickt eine ZIP-Datei lokal durch Prüfung und Bau der Actions. `AGENTS.md` nennt die Regeln für Assistenten.
+- `npm test`: alle Tests (Node 22.18 oder neuer).
+- `npm ci && npm run build && npm run check`: die Seite bauen und prüfen.
+- `npm run try -- <zip>`: eine ZIP-Datei lokal prüfen und bauen.
+
+`AGENTS.md` nennt die Regeln für Assistenten.
 
 ## Lizenz
 
