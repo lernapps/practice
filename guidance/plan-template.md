@@ -53,18 +53,18 @@ open questions. Never the material itself, never a name. -->
 ## Explore
 
 <!--
-- Find out the occasion, whether an app exists and what the material holds. Ask only what only the creator knows, in
-  one message; decide the rest yourself and propose it in Plan.
+- Find out the occasion, whether an app exists and what the material holds: that is the scope. Ask only what only the
+  creator knows, in one message; decide the rest yourself and propose it in Plan.
+- Stick to the scope: research only to explain the material and to check facts, never to find more to ask.
 - Write no code, run no `create`.
 - An answer counts only in the creator's words under "Answers". What you decided is a proposal, marked "(Vorschlag)".
-- Skills: `lernapps-practice-explore`, `lernapps-practice-photos`, `lernapps-content-research`,
-  `lernapps-exercise-patterns`, `lernapps-explainer-design`.
+- Skills: `lernapps-practice-explore`, `lernapps-practice-photos`, `lernapps-content-research`.
 -->
 
 ### Tasks
 
 - [ ] Install the skills, if missing, in this folder: from lernapps/practice
-      `npx --yes skills add lernapps/practice -y -s lernapps-practice-explore -s lernapps-practice-photos -s lernapps-practice-submit`,
+      `npx --yes skills add lernapps/practice -y -s lernapps-practice-explore -s lernapps-practice-plan -s lernapps-practice-photos -s lernapps-practice-submit`,
       from lernapps/tooling
       `npx --yes skills add lernapps/tooling -y -s lernapps-explainer -s lernapps-explainer-design -s lernapps-content-questions -s lernapps-exercise-patterns -s lernapps-content-research -s lernapps-check`.
       No other skill: this app is not published through GitHub and not listed.
@@ -76,15 +76,11 @@ open questions. Never the material itself, never a name. -->
       each figure of the material and how you redraw it.
 - [ ] Load skill `lernapps-content-research`. Every fact you are not sure of (numbers, dates, names, ways of
       counting): a source you opened, under "Notes". Open it now, not later. Only what no source you opened settles
-      goes to the creator to check.
-- [ ] Load skills `lernapps-exercise-patterns` and `lernapps-explainer-design`. Decide the concept as skill
-      `lernapps-practice-explore` says: weighting for the occasion, pages that explain before they practise,
-      exercises, figures. No checkpoint here: the creator sees it all once, in Plan.
-- [ ] Fill "Goal" and "Key decisions": the occasion and what learners can do afterwards; each decision with its
-      reason, your own choices marked "(Vorschlag)".
-- [ ] Write the answers under "Answers".
+      goes to the creator to check. Research only what explains the material; nothing beyond it.
+- [ ] Write the answers under "Answers" and the scope under "Notes": the topics of the material, nothing else.
 - [ ] Set `archetype: explainer` and `phase: plan`: change the value lines (`grep -E '^(archetype|phase):'` prints
-      `archetype: explainer` and `phase: plan`).
+      `archetype: explainer` and `phase: plan`). Tell the creator in one sentence that you now prepare the proposal;
+      do not ask. Go on in the same message.
 
 ### Answers
 
@@ -100,29 +96,32 @@ open questions. Never the material itself, never a name. -->
 ## Plan
 
 <!--
-- Map the concept onto the explainer: chapters, pages, blocks, exercises, figures, components.
-- No new questions. A gap → decide and mark it "(Vorschlag)".
+- Decide the app and map it onto the explainer: chapters, pages, blocks, exercises, figures, components.
+- No new questions. A gap → decide and mark it "(Vorschlag)". Stay within the scope of Explore.
 - One proposal, confirmable in one read; the only checkpoint before the app is built. After the yes, work on your
   own until Commit.
-- Skills: `lernapps-practice-explore`, `lernapps-explainer-design`, `lernapps-exercise-patterns` and
-  `lernapps-content-research`, loaded in Explore; reread them if they are no longer in view.
+- Skills: `lernapps-practice-plan`, `lernapps-exercise-patterns`, `lernapps-explainer-design`; and
+  `lernapps-content-research`, loaded in Explore; reread it if it is no longer in view.
 -->
 
 ### Tasks
 
 - [ ] `grep '^phase:'` prints `phase: plan`; else set it.
-- [ ] Map the content as skill `lernapps-explainer-design` says: chapters and pages, with the pages skill
-      `lernapps-practice-explore` names for the occasion.
+- [ ] Load skills `lernapps-practice-plan`, `lernapps-exercise-patterns` and `lernapps-explainer-design`. Map the
+      content as skill `lernapps-explainer-design` says: chapters and pages, with the pages skill
+      `lernapps-practice-plan` names for the occasion.
 - [ ] Choose a pattern per topic as skill `lernapps-exercise-patterns` says. Write "Content method".
 - [ ] Each figure: what it shows, its labels as in the material, how you make it (generated image or SVG drawing,
       as skill `lernapps-practice-photos` says). Each component: what it shows and checks, and why no block fits.
-- [ ] Choose richer, interactive forms for this material, as skill `lernapps-practice-explore` says ("Reichere
-      Formen vorschlagen"), and sketch them roughly.
+- [ ] Choose richer, interactive forms for this material, as skill `lernapps-practice-plan` says, and sketch them
+      roughly.
+- [ ] Fill "Goal" and "Key decisions": the occasion and what learners can do afterwards; each decision with its
+      reason, your own choices marked "(Vorschlag)".
 - [ ] The facts to check: each with its source (skill `lernapps-content-research`), or marked for the creator.
 - [ ] Write the Code tasks under "Code": one per page or component, with its content and exercises.
-- [ ] **Checkpoint:** proposal. Show it short, in plain words: what the app explains and what learners then do,
-      page by page; the figures and the sketches of the richer forms; every "(Vorschlag)"; the facts the creator
-      should check. Ask for one yes or for changes. Stop and wait. Changes → change, write them under "Answers", show
+- [ ] **Checkpoint:** proposal. Brief and structured, as skill `lernapps-practice-plan` says: only what is special
+      or conceptual, not page by page; your guesses ("(Vorschlag)") highlighted; the facts the creator should check.
+      Ask for one yes or for changes. Stop and wait. Changes → change, write them under "Answers", show
       only what changed. No `create` before the yes.
 - [ ] Set `phase: code`: change the value line (`grep '^phase:'` prints `phase: code`).
 
@@ -178,10 +177,10 @@ checks and cannot. Becomes the content guide in Code. -->
 ### Tasks
 
 - [ ] `grep '^phase:'` prints `phase: commit`; else set it.
-- [ ] Load skill `lernapps-practice-submit`. Show the creator every page of the built app as it says ("Alle Seiten
-      zeigen").
-- [ ] **Checkpoint:** pages, and the declarations. The creator has seen every page; go through the three
-      declarations of the form with them, as the skill says. Stop and wait for a yes. Changes → change, build, check,
+- [ ] Load skill `lernapps-practice-submit`. Show the creator every page of the built app as it says.
+- [ ] **Checkpoint:** pages, and the declarations. The creator has seen every page; highlight what you decided in Code
+      ("(Vorschlag)" under "Key decisions"); go through the three declarations of the form with them, as the skill
+      says. Stop and wait for a yes. Changes → change, build, check,
       show the changed pages again.
 - [ ] Make the ZIP file of `src/` as the skill says.
 - [ ] **Checkpoint:** submit. Give the creator the ZIP file and the link to the form as the skill says; wait for the

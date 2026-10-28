@@ -20,7 +20,7 @@ Ein Build im Browser ist nicht möglich, weil die Bau-Werkzeuge native Programme
 | `.github/workflows/pr-preview.yml` | Eine Vorschau dieser Seite je Pull Request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | Die Texte (Deutsch und Englisch), das Bauskript und der Stil dieser Seite. |
 | `docs/llms.txt`, `guidance/plan-template.md` | Der Einstieg für Assistenten und die Plan-Vorlage, der sie folgen (siehe [Die Anleitung testen](testing.md)). |
-| `skills/` | Die drei Skills von practice, die die Plan-Vorlage installiert: `lernapps-practice-explore`, `lernapps-practice-photos`, `lernapps-practice-submit`. |
+| `skills/` | Die vier Skills von practice, die die Plan-Vorlage installiert: `lernapps-practice-explore`, `lernapps-practice-plan`, `lernapps-practice-photos`, `lernapps-practice-submit`. |
 | `scripts/try.ts` | Der lokale Probelauf: schickt ein ZIP durch Prüfung und Bau der Actions (`npm run try -- <zip>`). |
 | `docs/arc42/` | Die Architektur dieses Repos als arc42-Modell, nur auf Englisch. Das Bauskript prüft sie mit `arc42 validate --strict` und veröffentlicht sie unter [Architektur](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Lokale Composite-Actions mit der Logik. Jede hat eine `action.yml` und ein Skript in TypeScript ohne Abhängigkeiten. |

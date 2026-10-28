@@ -503,8 +503,8 @@ path: guidance/plan-template.md
 
 ### Skills for assistants
 
-The installable skills `lernapps-practice-explore` (Explore), `lernapps-practice-photos` (Explore and Code) and
-`lernapps-practice-submit` (Commit); each says in its `SKILL.md` when to use it.
+The installable skills `lernapps-practice-explore` (Explore), `lernapps-practice-plan` (Plan),
+`lernapps-practice-photos` (Explore and Code) and `lernapps-practice-submit` (Commit); each says in its `SKILL.md` when to use it.
 
 ```arc42
 :::building-block

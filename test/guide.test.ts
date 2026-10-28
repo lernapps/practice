@@ -21,7 +21,7 @@ const folders = readdirSync(join(root, "skills")).flatMap((group) =>
 
 /** The skills the creator's folder holds, by source: exactly these and the content guide that `create` writes. */
 const EXPECTED = {
-  "lernapps/practice": ["lernapps-practice-explore", "lernapps-practice-photos", "lernapps-practice-submit"],
+  "lernapps/practice": ["lernapps-practice-explore", "lernapps-practice-plan", "lernapps-practice-photos", "lernapps-practice-submit"],
   "lernapps/tooling": [
     "lernapps-explainer",
     "lernapps-explainer-design",
@@ -127,7 +127,7 @@ describe("the skills", () => {
     const front = /^---\n([\s\S]*?)\n---\n/.exec(text)?.[1] ?? "";
     it(`${name}: front matter with name, a description that names its phase, and the licence`, () => {
       assert.match(front, new RegExp(`^name: ${name}$`, "m"));
-      assert.match(front, /^description: Use in (Explore|Code|Commit)\b.+ when .+$/m);
+      assert.match(front, /^description: Use in (Explore|Plan|Code|Commit)\b.+ when .+$/m);
       assert.match(front, /^license: MIT$/m);
       assert.ok(!/^description: .*: /m.test(front), "a colon and a space in an unquoted description breaks the YAML");
     });

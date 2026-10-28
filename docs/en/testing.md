@@ -7,8 +7,9 @@ For people who maintain the repo. The guide for assistants leads an assistant wi
 | Part | Content |
 | --- | --- |
 | [llms.txt](llms.txt) | The entry: create a folder, download the plan template, follow it. |
-| `guidance/plan-template.md` | The plan template with the phases of the tooling: Explore, Plan, Code, Commit. It installs the skills, names the skills of each phase and says at which checkpoints the assistant waits for the creator (concept, plan, submission, address). |
-| `lernapps-practice-explore` | Explore and Plan: one question for what only the creator knows; catalogue, notes; one proposal with weighting, pages that explain before they practise, and richer forms. |
+| `guidance/plan-template.md` | The plan template with the phases of the tooling: Explore, Plan, Code, Commit. It installs the skills, names the skills of each phase and says at which checkpoints the assistant waits for the creator (proposal, pages, submission, address). |
+| `lernapps-practice-explore` | Explore: one question for what only the creator knows; catalogue, notes; the scope from the material. |
+| `lernapps-practice-plan` | Plan: a brief proposal with the focus, pages that explain before they practise, richer forms and marked guesses. |
 | `lernapps-practice-photos` | Explore and Code: reading photos, rebuilding figures with the same content. |
 | `lernapps-practice-submit` | Commit: show every page and go through the declarations, the ZIP file of `src/`, the form, answers and corrections. |
 
