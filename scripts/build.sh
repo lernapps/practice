@@ -16,6 +16,7 @@ export SITE_PATH_PREFIX="$PREFIX"
 rm -rf _site
 mkdir -p _site
 cp site/404.html site/style.css site/spa.css _site/
+cp -r site/example _site/
 cp docs/llms.txt _site/llms.txt
 
 # Markdown to pages (scripts/pages.mjs), German and English.
