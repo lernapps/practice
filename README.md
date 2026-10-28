@@ -14,7 +14,7 @@ Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lerna
 ## Was im Repo liegt
 
 - `guidance/plan-template.md`: die Plan-Vorlage mit den Phasen Explore, Plan, Code und Commit.
-- `skills/`: drei Skills für Assistenten (`lernapps-practice-explore`, `lernapps-practice-photos`, `lernapps-practice-submit`).
+- `skills/`: vier Skills für Assistenten (`lernapps-practice-explore`, `lernapps-practice-plan`, `lernapps-practice-photos`, `lernapps-practice-submit`).
 - `docs/`: Dokumentation für Menschen (Deutsch in `docs/*.md`, Englisch in `docs/en/*.md`) und `llms.txt`.
 - `docs/arc42/`: die Architektur des Repos als arc42-Modell (nur Englisch), veröffentlicht unter <https://lernapps.net/practice/architecture/>.
 - `scripts/` und `site/`: Bauskript und Stil der Seite und `scripts/try.ts` (Probelauf eines ZIP).
@@ -27,10 +27,10 @@ Das Repo enthält keine Apps und keine Laufzeit. Es gehört zur Plattform [lerna
 
 Ein Assistent mit Shell (Node 22, git, Netz) baut die App beim Creator. Der Einstieg ist die [llms.txt](https://lernapps.net/practice/llms.txt): Sie lässt ihn die Plan-Vorlage herunterladen. Die Vorlage folgt den Phasen des Tooling und installiert genau diese Skills:
 
-- aus diesem Repo (`skills/process/` und `skills/content/`): `lernapps-practice-explore` (Explore), `lernapps-practice-photos` (Explore und Code), `lernapps-practice-submit` (Commit);
+- aus diesem Repo (`skills/process/` und `skills/content/`): `lernapps-practice-explore` (Explore), `lernapps-practice-plan` (Plan), `lernapps-practice-photos` (Explore und Code), `lernapps-practice-submit` (Commit);
 - aus `lernapps/tooling`: `lernapps-explainer`, `lernapps-explainer-design`, `lernapps-content-questions`, `lernapps-exercise-patterns`, `lernapps-content-research`, `lernapps-check`.
 
-Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie man die Anleitung testet, steht in [docs/testing.md](docs/testing.md).
+Dann legt `npx --yes github:lernapps/tooling#main create --archetype explainer` die App an, mit dem Inhaltsleitfaden `app-content`. Wie ein Agent die Anleitung nach einer Änderung bewertet (derzeit manuell), steht in [docs/evaluation.md](docs/evaluation.md).
 
 ## Mitarbeiten
 

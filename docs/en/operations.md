@@ -19,8 +19,8 @@ A build in the browser is not possible, because the build tools need native prog
 | `.github/workflows/pages.yml` | Builds and checks this site and publishes it to `gh-pages` (see [The site](#page)). The required check is called `site`. |
 | `.github/workflows/pr-preview.yml` | A preview of this site for every pull request. |
 | `docs/*.md`, `docs/en/*.md`, `scripts/`, `site/` | The texts (German and English), the build script and the style of this site. |
-| `docs/llms.txt`, `guidance/plan-template.md` | The entry for assistants and the plan template they follow (see [Testing the guide](testing.md)). |
-| `skills/` | The three skills of practice that the plan template installs: `lernapps-practice-explore`, `lernapps-practice-photos`, `lernapps-practice-submit`. |
+| `docs/llms.txt`, `guidance/plan-template.md` | The entry for assistants and the plan template they follow (see [Evaluating the guide](evaluation.md)). |
+| `skills/` | The four skills of practice that the plan template installs: `lernapps-practice-explore`, `lernapps-practice-plan`, `lernapps-practice-photos`, `lernapps-practice-submit`. |
 | `scripts/try.ts` | The local trial run: sends a ZIP file through the checks and the build of the actions (`npm run try -- <zip>`). |
 | `docs/arc42/` | The architecture of this repository as an arc42 model, in English only. The build script validates it with `arc42 validate --strict` and publishes it as [Architecture](architecture/). |
 | `actions/validate`, `build`, `publish`, `expire` | Local composite actions with the logic. Each has an `action.yml` and a script in TypeScript without dependencies. |

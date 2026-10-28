@@ -21,7 +21,7 @@ const folders = readdirSync(join(root, "skills")).flatMap((group) =>
 
 /** The skills the creator's folder holds, by source: exactly these and the content guide that `create` writes. */
 const EXPECTED = {
-  "lernapps/practice": ["lernapps-practice-explore", "lernapps-practice-photos", "lernapps-practice-submit"],
+  "lernapps/practice": ["lernapps-practice-explore", "lernapps-practice-plan", "lernapps-practice-photos", "lernapps-practice-submit"],
   "lernapps/tooling": [
     "lernapps-explainer",
     "lernapps-explainer-design",
@@ -86,15 +86,29 @@ describe("the plan template", () => {
     const headings = [...plan.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
     assert.deepEqual(headings.filter((h) => ["Explore", "Plan", "Code", "Commit", "Retrospective"].includes(h ?? "")), ["Explore", "Plan", "Code", "Commit", "Retrospective"]);
   });
-  it("waits for the creator at the checkpoints: concept, plan, submit, address", () => {
+  it("waits for the creator at the checkpoints: proposal, pages, submit, address", () => {
     const checkpoints = plan.split("\n").filter((line) => line.includes("**Checkpoint:**"));
-    assert.deepEqual(checkpoints.map((line) => /\*\*Checkpoint:\*\* (\w+)/.exec(line)?.[1]), ["concept", "confirm", "submit", "address"]);
+    assert.deepEqual(checkpoints.map((line) => /\*\*Checkpoint:\*\* (\w+)/.exec(line)?.[1]), ["proposal", "pages", "submit", "address"]);
   });
-  it("installs exactly the expected skills, from lernapps/practice and lernapps/tooling", () => {
+  it("installs exactly the expected skills, from lernapps/practice and lernapps/tooling, each once", () => {
     const found = installs(plan);
-    assert.deepEqual(found.map((f) => f.source), Object.keys(EXPECTED));
-    for (const { source, skills } of found) assert.deepEqual(skills, EXPECTED[source as keyof typeof EXPECTED], source);
+    assert.deepEqual([...new Set(found.map((f) => f.source))].sort(), Object.keys(EXPECTED).sort());
+    for (const [source, expected] of Object.entries(EXPECTED)) {
+      const skills = found.filter((f) => f.source === source).flatMap((f) => f.skills);
+      assert.deepEqual([...skills].sort(), [...expected].sort(), source);
+    }
     for (const name of EXCLUDED) assert.ok(!found.some((f) => f.skills.includes(name)), name);
+  });
+  it("installs each skill in the phase that loads it first, not before", () => {
+    const phases = plan.split(/^## /m).filter((p) => /^(Explore|Plan|Code|Commit)\n/.test(p));
+    let installed: string[] = [];
+    for (const phase of phases) {
+      installed = [...installed, ...installs(phase).flatMap((f) => f.skills)];
+      const loaded = [...phase.replace(/\s+/g, " ").matchAll(/Load skills? ((?:`[a-z0-9-]+`(?:, | and )?)+)/g)].flatMap((m) =>
+        [...(m[1] ?? "").matchAll(/`([a-z0-9-]+)`/g)].map((s) => s[1] ?? ""),
+      );
+      for (const skill of loaded) assert.ok(installed.includes(skill), `${skill} is loaded in ${phase.split("\n")[0]} before it is installed`);
+    }
   });
   it("installs the skills of this repo that exist, and every one of them", () => {
     assert.deepEqual(folders.map((f) => f.name).sort(), [...EXPECTED["lernapps/practice"]].sort());
@@ -127,7 +141,7 @@ describe("the skills", () => {
     const front = /^---\n([\s\S]*?)\n---\n/.exec(text)?.[1] ?? "";
     it(`${name}: front matter with name, a description that names its phase, and the licence`, () => {
       assert.match(front, new RegExp(`^name: ${name}$`, "m"));
-      assert.match(front, /^description: Use in (Explore|Code|Commit)\b.+ when .+$/m);
+      assert.match(front, /^description: Use in (Explore|Plan|Code|Commit)\b.+ when .+$/m);
       assert.match(front, /^license: MIT$/m);
       assert.ok(!/^description: .*: /m.test(front), "a colon and a space in an unquoted description breaks the YAML");
     });

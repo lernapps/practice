@@ -79,6 +79,6 @@ For example: "for my daughter's maths test next week" or "for a cover lesson in 
 
 - [Operations](operations.md): what the repository is for, how it runs and how to find faults.
 - [Checks](checks.md): what is checked in a submission.
-- [Testing the guide](testing.md): how to test the guide for assistants and build locally.
+- [Evaluating the guide](evaluation.md): how an agent starts and evaluates a new session after a change (manual for now).
 - **Guide for assistants**: [llms.txt](llms.txt) leads to the plan template `guidance/plan-template.md`; it installs the three skills in `skills/` and the content skills of the tooling.
 - [Architecture](architecture/): how the repository is built (arc42).

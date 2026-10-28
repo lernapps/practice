@@ -150,9 +150,8 @@ export function germanDate(iso: string): string {
 export function previewComment(link: string, expires: string, ready: boolean): string {
   return (
     `Deine Vorbereitung ist unter ${link} erreichbar.\n\n` +
-    "So hilft sie am meisten: Dein Kind sieht zuerst selbst sein Material durch und überlegt, was es für die Arbeit " +
-    "können muss. Danach zeigt ihm die App, was schon sitzt und wo noch Lücken sind. Sie prüft den Lernstand. " +
-    "Das Lernen selbst ersetzt sie nicht.\n\n" +
+    "Sie erklärt den Stoff Schritt für Schritt und prüft dann, was sitzt. Am meisten hilft sie, wenn Dein Kind " +
+    "vorher selbst sein Material durchgesehen hat.\n\n" +
     "Das ist eine vorübergehende Vorschau. " +
     `Sie wird nach zwei Wochen (am ${germanDate(expires)}) automatisch gelöscht. ` +
     "Wenn sie Dir oder Deinem Kind geholfen hat, setze bitte eine 👍-Reaktion auf das erste Feld dieses Issues. " +

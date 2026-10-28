@@ -79,6 +79,6 @@ Zum Beispiel: „für die Mathearbeit meiner Tochter nächste Woche" oder „fü
 
 - [Betrieb](operations.md): wozu das Repo da ist, wie es läuft und wie man Fehler sucht.
 - [Prüfungen](checks.md): was bei einer Einreichung geprüft wird.
-- [Die Anleitung testen](testing.md): wie man die Anleitung für Assistenten prüft und lokal baut.
+- [Evaluation der Anleitung](evaluation.md): wie ein Agent nach einer Änderung eine neue Sitzung startet und bewertet (derzeit manuell).
 - **Anleitung für Assistenten**: Die [llms.txt](llms.txt) führt zur Plan-Vorlage `guidance/plan-template.md`; sie installiert die drei Skills in `skills/` und die Inhalts-Skills des Tooling.
 - [Architektur](architecture/): wie das Repo gebaut ist (arc42). Diese Seite gibt es nur auf Englisch.
