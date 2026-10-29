@@ -127,7 +127,7 @@ describe("the repo", () => {
   it("has the usual files of the sister repos", () => {
     for (const file of ["AGENTS.md", "CLAUDE.md", "README.md", "LICENSE", "renovate.json", ".gitignore", "package.json"]) assert.ok(read(file).length > 0, file);
     assert.equal(read("CLAUDE.md"), "@AGENTS.md\n");
-    assert.match(read("AGENTS.md"), /^Reply as per ISO 24495/);
+    assert.match(read("AGENTS.md"), /^# Communication style\n\nReply as per ISO 24495/);
   });
   it("pins no app-templates of its own: the build reads the pin of lernapps/tooling on main", () => {
     assert.equal(JSON.parse(read("package.json")).appTemplates, undefined);
