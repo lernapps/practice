@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@doctc/arc42": "0.38.0",
-    "@lernapps/site": "github:lernapps/lernapps.github.io#f9d5e6583f255cf5013ca8991d0cfca465e171e6",
+    "@lernapps/site": "github:lernapps/lernapps.github.io#97d6aca2b94c94b1ab419a879785d0dc113b3f93",
     "marked": "18.1.1"
   }
 }
