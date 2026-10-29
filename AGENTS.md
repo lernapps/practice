@@ -1,12 +1,16 @@
-Reply as per ISO 24495
+# Communication style
 
-When you work on a new feature, first clarify how it fits into the platform design and the architecture. Use the skills [pdt](https://github.com/lernapps/docs/tree/main/skills/pdt) and [arc42-language](https://github.com/doctoolchain/arc42-language) for that.
+Reply as per ISO 24495
 
 In texts for people, lead with the value they get, not with the handling: say what a step gives them, then, only where needed, what they do.
 
-After every user message, call `whats_next` of the `workflows` MCP server and follow its `instructions`. Keep the session state in the returned `plan_file_path`: read it at the start of each phase and update it as directed.
-
 If a message is ambiguous, ask before calling `whats_next`. Then state assumptions and tradeoffs, and say if a simpler approach exists.
+
+# Process
+
+When you work on a new feature, first clarify how it fits into the platform design and the architecture. Use the skills [pdt](https://github.com/lernapps/docs/tree/main/skills/pdt) and [arc42-language](https://github.com/doctoolchain/arc42-language) for that.
+
+After every user message, call `whats_next` of the `workflows` MCP server and follow its `instructions`. Keep the session state in the returned `plan_file_path`: read it at the start of each phase and update it as directed.
 
 Do only what the current phase requires; do not work ahead. Check the phase success criteria before calling `proceed_to_phase`.
 
