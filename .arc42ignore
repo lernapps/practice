@@ -3,6 +3,7 @@
 .arc42ignore
 .claude
 .gitignore
+.mcp.json
 AGENTS.md
 CLAUDE.md
 LICENSE
