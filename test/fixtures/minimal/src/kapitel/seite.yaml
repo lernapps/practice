@@ -1,5 +1,6 @@
 title: Seite
 description: Eine Seite mit Text und einer Übung.
+scope: Die Seite hat einen Text und eine Übung.
 blocks:
   - type: section
     id: text

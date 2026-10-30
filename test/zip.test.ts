@@ -14,7 +14,7 @@ describe("a good ZIP file", () => {
   it("passes, and folder entries (length 0) are neither files nor endings", () => {
     const inspection = inspectZip(buildZip(goodSpecs()));
     assert.deepEqual(inspection.problems, []);
-    assert.equal(inspection.entries.filter((e) => !e.isDirectory).length, 5);
+    assert.equal(inspection.entries.filter((e) => !e.isDirectory).length, 4);
     assert.equal(inspection.wrapper, "");
   });
 
@@ -23,7 +23,7 @@ describe("a good ZIP file", () => {
     const inspection = inspectZip(zip);
     const target = mkdtempSync(join(tmpdir(), "practice-test-"));
     assert.deepEqual(extractZip(zip, inspection.entries, target), []);
-    assert.equal(readFileSync(join(target, "src/kap/seite.yaml"), "utf8"), "title: Seite\n");
+    assert.equal(readFileSync(join(target, "src/kap/seite.yaml"), "utf8"), "title: Seite\nscope: Text.\n");
     assert.deepEqual(readFileSync(join(target, "src/images/bild-1.png")), Buffer.from([0x89, 0x50, 0x4e, 0x47]));
   });
 
@@ -216,7 +216,6 @@ describe("data files and SVG images", () => {
   });
   it("refuses a missing src/app.yaml", () => {
     assert.ok(codes([{ name: "src/x.yaml", data: "x" }]).includes("no-app-yaml"));
-    assert.ok(codes([{ name: "src/app.yaml", data: "x" }]).includes("no-scope"));
   });
 });
 
@@ -250,7 +249,7 @@ describe("sizes and bombs", () => {
     assert.ok(codes([...goodSpecs(), ...many]).includes("too-many-files"));
   });
   it("accepts 300 files", () => {
-    const many = Array.from({ length: 295 }, (_, i) => ({ name: `src/f${i}.yaml`, data: "a: 1\n" }));
+    const many = Array.from({ length: 296 }, (_, i) => ({ name: `src/f${i}.yaml`, data: "a: 1\n" }));
     assert.deepEqual(codes([...goodSpecs(), ...many]), []);
   });
   it("refuses a directory that states more than 25 MB together", () => {

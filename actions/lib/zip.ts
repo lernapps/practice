@@ -412,14 +412,6 @@ export function inspectZip(buffer: Buffer): Inspection {
       problem("no-app-yaml", `Die Datei \`src/app.yaml\` fehlt. Sie beschreibt die App (Titel, Kapitel). ${HELP_ZIP}`),
     );
   }
-  if (!files.some((entry) => entry.path === "src/scope.md")) {
-    problems.push(
-      problem(
-        "no-scope",
-        `Die Datei \`src/scope.md\` fehlt. Mit ihr misst der KI-Tutor offene Antworten am Lernstoff statt an Allgemeinwissen: Sie beschreibt den ganzen Stoff in eigenen Worten, Seite für Seite, und was dazugehört und was nicht. ${HELP_ZIP}`,
-      ),
-    );
-  }
 
   // The local headers: where each file's data starts, that its name is the same as in the directory, and that no
   // two used entries share bytes.
@@ -523,4 +515,16 @@ export function extractZip(buffer: Buffer, entries: readonly Entry[], target: st
     writeFileSync(path, data, { flag: "wx" });
   }
   return collapse(problems);
+}
+
+/**
+ * The problem of an app.yaml without the scope for the tutor (`scope:` at its top level): with it, the tutor judges open
+ * answers by the material, which it never sees, instead of by general knowledge.
+ */
+export function scopeProblem(appYaml: string): Problem | undefined {
+  if (/^scope:/m.test(appYaml)) return undefined;
+  return {
+    code: "no-scope",
+    text: "In `src/app.yaml` fehlt `scope:`. Damit misst der KI-Tutor offene Antworten am Lernstoff statt an Allgemeinwissen: `scope:` in `src/app.yaml` sagt, was dazugehört und was nicht, und `scope:` in jeder Seite, was sie lehrt, in eigenen Worten.",
+  };
 }
