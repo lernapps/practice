@@ -30,7 +30,8 @@ Dann geh mit ihm die drei Erklärungen durch, in einfachen Worten:
 - Keine Namen, keine Schule, keine Klasse, keine Lehrkraft, keine Handschrift.
 - Er ist einverstanden, dass die App zwei Wochen öffentlich ist.
 
-Nenne, worauf er besonders schauen soll: die nachgebauten Abbildungen und die Fakten, die er prüfen sollte. Erst nach
+Nenne, worauf er besonders schauen soll: die nachgebauten Abbildungen, die Fakten, die er prüfen sollte, die Punkte
+der offenen Aufgaben und den Scope (`src/scope.md`: stimmt, was dazugehört und was nicht?). Erst nach
 seinem Ja geht es weiter.
 
 ## ZIP-Datei erzeugen

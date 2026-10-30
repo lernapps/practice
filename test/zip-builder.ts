@@ -86,6 +86,7 @@ export function goodSpecs(): Spec[] {
     { name: "src/kap/" },
     { name: "src/kap/chapter.yaml", data: "title: Kapitel\npages: [seite]\n" },
     { name: "src/kap/seite.yaml", data: "title: Seite\n" },
+    { name: "src/scope.md", data: "# Test\n\n## Kapitel (/kap/)\n\n### Seite (/kap/seite/)\n\nText.\n\n## Gehört dazu\n\n- a\n\n## Gehört nicht dazu\n\n- b\n" },
     { name: "src/images/" },
     { name: "src/images/bild-1.png", data: Buffer.from([0x89, 0x50, 0x4e, 0x47]) },
   ];
