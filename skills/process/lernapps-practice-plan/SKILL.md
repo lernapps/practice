@@ -39,13 +39,15 @@ Selbsteinschätzung prüft ohne zu erklären.
 | Den Stand einer Klasse feststellen | Fragen quer durch den Stoff mit Auswertung zuerst, dann je Thema eine Seite zum Nacharbeiten |
 | Verpasster Stoff | je Thema eine Seite in der Reihenfolge des Unterrichts |
 
-- **Selbsteinschätzung:** Fragen quer durch den Stoff und eine Auswertung als Kasten, die je nach Ergebnis auf die
-  passenden Seiten verlinkt. Die Lernenden zählen selbst.
+- **Selbsteinschätzung:** die Selbsteinschätzung des Explainers (`selfAssessment`, Skill
+  `lernapps-explainer-self-assessment`): Aufgaben quer durch den Stoff, und am Ende sagt sie je Seite, ob das Kind sie
+  schon kann oder noch einmal ansehen sollte.
 - Keine Seite nur mit Plan, Etappen oder Inhaltsverzeichnis: Die App hat ihre Navigation schon, und eine Aufgabe
   dazu prüft nichts vom Stoff.
 
-Sage dem Creator dabei: Die App speichert nichts über die Lernenden. Antworten zählt die Seite nur, solange sie offen
-ist; nach dem Neuladen oder auf einem anderen Gerät beginnt man von vorn.
+Sage dem Creator dabei: Die App speichert nichts über die Lernenden außerhalb ihres Browsers. Antworten zählt die
+Seite nur, solange sie offen ist; eine offene Antwort bleibt, bis der Tab geschlossen wird. Auf einem anderen Gerät
+beginnt man von vorn.
 
 ## Reichere Formen vorschlagen
 
@@ -60,6 +62,10 @@ Reichhaltige Blöcke des Explainers (wie, sagt der Skill `lernapps-explainer`):
 - `ordering` und `timeline`: Ereignisse, Schritte, Feste in ihre Reihenfolge bringen.
 - `generated`: Aufgaben, die bei jedem Durchgang neu sind.
 - `number` mit `mistakes`: Rückmeldung genau auf den typischen Fehler.
+- `open-task`: Das Kind antwortet in eigenen Worten, getippt oder auf Papier mit Foto, und vergleicht dann mit den
+  Punkten einer guten Antwort. Schlage sie vor, wo das Material beschreiben, erklären, vergleichen oder einen eigenen
+  Text verlangt, besonders in Deutsch, Fremdsprachen und Fächern wie Religion; nicht für das, was eine Auswahl
+  prüfen kann. Mit oder ohne Tutor.
 - `video` und `figure`: zeigen, was ein Text nur beschreibt.
 - `vue-component`: alles, wofür kein Block passt.
 

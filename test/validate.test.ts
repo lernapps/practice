@@ -18,7 +18,7 @@ describe("intake", () => {
     const outDir = join(tmp(), "out");
     const result = intake({ issue: 7, outDir, state: "open", body: issueBody(), download: serve(buildZip(goodSpecs())), now: new Date("2026-10-27T10:00:00Z") });
     assert.equal(result.ok, true);
-    assert.equal(result.zip?.files, 4);
+    assert.equal(result.zip?.files, 5);
     assert.ok(existsSync(join(outDir, "tree/src/app.yaml")));
     const meta = JSON.parse(readFileSync(join(outDir, "meta.json"), "utf8"));
     assert.deepEqual(meta, { issue: 7, subject: "Religion", grade: "7", federalState: "Hessen", created: "2026-10-27T10:00:00.000Z" });

@@ -412,6 +412,14 @@ export function inspectZip(buffer: Buffer): Inspection {
       problem("no-app-yaml", `Die Datei \`src/app.yaml\` fehlt. Sie beschreibt die App (Titel, Kapitel). ${HELP_ZIP}`),
     );
   }
+  if (!files.some((entry) => entry.path === "src/scope.md")) {
+    problems.push(
+      problem(
+        "no-scope",
+        `Die Datei \`src/scope.md\` fehlt. Mit ihr misst der KI-Tutor offene Antworten am Lernstoff statt an Allgemeinwissen: Sie beschreibt den ganzen Stoff in eigenen Worten, Seite für Seite, und was dazugehört und was nicht. ${HELP_ZIP}`,
+      ),
+    );
+  }
 
   // The local headers: where each file's data starts, that its name is the same as in the directory, and that no
   // two used entries share bytes.
