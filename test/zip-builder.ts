@@ -82,7 +82,7 @@ export function buildZip(specs: Spec[], options: { zip64?: boolean; comment?: st
 export function goodSpecs(): Spec[] {
   return [
     { name: "src/" },
-    { name: "src/app.yaml", data: "title: Test\nlanguages: [de]\nchapters: [kap]\nscope: { in: [a], out: [b] }\n" },
+    { name: "src/app.yaml", data: "title: Test\nlanguages: [de]\nchapters: [kap]\nscope: { out: [b] }\n" },
     { name: "src/kap/" },
     { name: "src/kap/chapter.yaml", data: "title: Kapitel\npages: [seite]\n" },
     { name: "src/kap/seite.yaml", data: "title: Seite\nscope: Text.\n" },

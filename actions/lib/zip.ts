@@ -525,6 +525,6 @@ export function scopeProblem(appYaml: string): Problem | undefined {
   if (/^scope:/m.test(appYaml)) return undefined;
   return {
     code: "no-scope",
-    text: "In `src/app.yaml` fehlt `scope:`. Damit misst der KI-Tutor offene Antworten am Lernstoff statt an Allgemeinwissen: `scope:` in `src/app.yaml` sagt, was dazugehört und was nicht, und `scope:` in jeder Seite, was sie lehrt, in eigenen Worten.",
+    text: "In `src/app.yaml` fehlt `scope:`. Damit misst der KI-Tutor offene Antworten am Lernstoff statt an Allgemeinwissen: `scope:` in jeder Seite sagt, was sie lehrt, in eigenen Worten, und `scope:` in `src/app.yaml`, was nicht dazugehört.",
   };
 }

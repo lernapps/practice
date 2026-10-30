@@ -31,7 +31,7 @@ Dann geh mit ihm die drei Erklärungen durch, in einfachen Worten:
 - Er ist einverstanden, dass die App zwei Wochen öffentlich ist.
 
 Nenne, worauf er besonders schauen soll: die nachgebauten Abbildungen, die Fakten, die er prüfen sollte, die Punkte
-der offenen Aufgaben und den Scope (`scope:` in `src/app.yaml` und in jeder Seite: stimmt, was dazugehört und was nicht?). Erst nach
+der offenen Aufgaben und den Scope (`scope:` in jeder Seite und in `src/app.yaml`: stimmt, was die Seiten lehren und was nicht dazugehört?). Erst nach
 seinem Ja geht es weiter.
 
 ## ZIP-Datei erzeugen

@@ -163,7 +163,7 @@ checks and cannot. Becomes the content guide in Code. -->
 - [ ] <the tasks written in Plan; each: write it in `src/`, then `npm run build`>
 - [ ] The figures: as skill `lernapps-practice-photos` says, in `src/images/`, with `source` and `licence`.
 - [ ] The scope, once the pages stand: `scope:` in each page, what it teaches from the material in your own words, as
-      prose; and `scope: { text, in, out }` in `src/app.yaml`, what belongs to it and what does not (skill
+      prose; and `scope: { text, out }` in `src/app.yaml`, what the app is about and what does not belong to it (skill
       `lernapps-explainer`, `runtime.md`). The tutor judges open answers by it. `npm run build` checks it.
 - [ ] `npm run build` and `npm run check` pass.
 - [ ] The content guide matches what was built.
