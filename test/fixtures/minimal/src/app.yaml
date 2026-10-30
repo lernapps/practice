@@ -2,3 +2,5 @@ title: Probe
 intro: Eine kleine App, die nur prüft, ob der Bau auf GitHub läuft.
 languages: [de]
 chapters: [kapitel]
+scope:
+  out: [alles andere]

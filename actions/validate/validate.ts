@@ -17,7 +17,7 @@ import { createHash } from "node:crypto";
 import { apiFromEnv, COMMENT_MARKER, fingerprintIn, paginate, type Api } from "../lib/github.ts";
 import { chooseZipUrl, isSubmission, readDeclarations, readMeta, sections } from "../lib/form.ts";
 import { DOWNLOAD_TIMEOUT_SECONDS, MAINTAINER_ZIP_PREFIXES, MAX_DOWNLOAD_BYTES } from "../lib/limits.ts";
-import { extractZip, inspectZip, type Problem } from "../lib/zip.ts";
+import { extractZip, inspectZip, scopeProblem, type Problem } from "../lib/zip.ts";
 
 export interface Result {
   version: 1;
@@ -168,9 +168,11 @@ export function intake(options: Options): Result {
   if (inspection.problems.length > 0) return fail(inspection.problems);
   const tree = join(outDir, "tree");
   const unpackProblems = extractZip(downloaded.buffer, inspection.entries, tree);
-  if (unpackProblems.length > 0) {
+  // the scope for the tutor in the app's content (the build checks each page's)
+  const scope = unpackProblems.length > 0 ? undefined : scopeProblem(readFileSync(join(tree, "src", "app.yaml"), "utf8"));
+  if (unpackProblems.length > 0 || scope !== undefined) {
     rmSync(tree, { recursive: true, force: true });
-    return fail(unpackProblems);
+    return fail(scope === undefined ? unpackProblems : [scope]);
   }
   const files = inspection.entries.filter((entry) => !entry.isDirectory);
   const created = (options.now ?? new Date()).toISOString();

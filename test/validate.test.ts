@@ -14,11 +14,22 @@ const run = (body: string, download: Download, extra: Partial<Parameters<typeof 
   intake({ issue: 7, outDir: join(tmp(), "out"), state: "open", body, download, now: new Date("2026-10-27T10:00:00Z"), ...extra });
 
 describe("intake", () => {
+  it("refuses an app without the scope for the tutor in src/app.yaml, and keeps no tree", () => {
+    const outDir = join(tmp(), "out");
+    const specs = goodSpecs().map((spec) =>
+      spec.name === "src/app.yaml" ? { ...spec, data: "title: Test\nlanguages: [de]\nchapters: [kap]\n" } : spec,
+    );
+    const result = intake({ issue: 7, outDir, state: "open", body: issueBody(), download: serve(buildZip(specs)), now: new Date("2026-10-27T10:00:00Z") });
+    assert.equal(result.ok, false);
+    assert.deepEqual(result.problems.map((problem) => problem.code), ["no-scope"]);
+    assert.ok(!existsSync(join(outDir, "tree")));
+  });
+
   it("accepts a good submission, unpacks src/ and writes meta.json", () => {
     const outDir = join(tmp(), "out");
     const result = intake({ issue: 7, outDir, state: "open", body: issueBody(), download: serve(buildZip(goodSpecs())), now: new Date("2026-10-27T10:00:00Z") });
     assert.equal(result.ok, true);
-    assert.equal(result.zip?.files, 5);
+    assert.equal(result.zip?.files, 4);
     assert.ok(existsSync(join(outDir, "tree/src/app.yaml")));
     const meta = JSON.parse(readFileSync(join(outDir, "meta.json"), "utf8"));
     assert.deepEqual(meta, { issue: 7, subject: "Religion", grade: "7", federalState: "Hessen", created: "2026-10-27T10:00:00.000Z" });
