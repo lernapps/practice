@@ -176,7 +176,10 @@ export function prepare(tree: string, appSrc: string): number {
   for (const name of readdirSync(appSrc)) {
     if (name !== "main.ts") rmSync(join(appSrc, name), { recursive: true, force: true });
   }
-  cpSync(join(tree, "src"), appSrc, { recursive: true, errorOnExist: true, force: false });
+  // entry by entry: Node 26 refuses to copy a folder onto one that exists (appSrc keeps main.ts), Node 22 merged them
+  for (const name of readdirSync(join(tree, "src"))) {
+    cpSync(join(tree, "src", name), join(appSrc, name), { recursive: true, errorOnExist: true, force: false });
+  }
   return entries.filter((path) => !path.endsWith("/")).length;
 }
 
