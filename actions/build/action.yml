@@ -35,7 +35,7 @@ runs:
         cache-dependency-path: |
           _templates/package-lock.json
           _templates/explainer/package-lock.json
-    - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+    - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: intake
         path: _intake
@@ -68,7 +68,7 @@ runs:
         path: ~/.cache/ms-playwright
         key: ${{ steps.browser.outputs.cache-primary-key }}
     - if: always()
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: build
         path: |
@@ -77,7 +77,7 @@ runs:
         if-no-files-found: ignore
         retention-days: 3
     - if: steps.run.outputs.ok == 'true'
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: site
         path: _out/site
