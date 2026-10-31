@@ -67,9 +67,11 @@ for (const [lang, { dir, root, home, back, suffix }] of Object.entries(LANGUAGES
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="${escapeHtml(description)}">
   <title>${escapeHtml(isHome ? `${plain(title)} – lernapps.net` : `${plain(title)} – ${suffix}`)}</title>
+  <link rel="stylesheet" href="${prefix}lernapps-page.css">
   <link rel="stylesheet" href="${prefix}style.css">
 </head>
 <body>
