@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="The content of a learning app of the archetype explainer: chapters with pages, explanations and exercises as YAML files, plus data files, images and components. The files are described in the schema of the explainer and in the guide to the archetype. There is no textbook for it: you submit your own content.">
+  <title>Rules for content and details – App made to measure – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-page.css">
+  <link rel="stylesheet" href="/practice/pr-preview/pr-34/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-frame.css">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-34/en/rules/">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-34/rules/">
+<script>(() => {
+  const key = "lernapps-lang", here = "en", pages = {"de":"/practice/pr-preview/pr-34/rules/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="en">Skip to content</a>
+<p class="la-preview" lang="en">Preview of a change. The real page: <a href="https://lernapps.net/practice/en/rules/">lernapps.net/practice/en/rules/</a></p><header class="la-header" lang="en">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/en/" aria-label="lernapps.net – home page"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Main navigation"><ul><li><a href="/apps/en/">Catalog</a></li><li><a href="/practice/pr-preview/pr-34/en/" aria-current="page">Practise</a></li><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-34/rules/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav>
+    <details class="la-menu"><summary>Menu</summary><nav class="la-nav la-nav--menu" aria-label="Main navigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">For learners</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/en/">App catalog</a></li><li><a href="/practice/pr-preview/pr-34/en/" aria-current="page">Practise for a test</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">For makers</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Understand and join in</p><ul aria-labelledby="la-menu-2"><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-34/rules/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-34/en/">To the start page: App made to measure</a></p>
+<h1>Rules for content and details</h1>
+<h2 id="content">What you submit</h2>
+<p>The content of a learning app of the archetype <strong><code>explainer</code></strong>: chapters with pages, explanations and exercises as YAML files, plus data files, images and components. The files are described in the <a href="https://github.com/lernapps/app-templates/blob/main/runtime/explainer/explainer.v1.schema.json">schema of the explainer</a> and in the <a href="https://github.com/lernapps/app-templates/tree/main/explainer">guide to the archetype</a>. There is no textbook for it: you submit your own content.</p>
+<h2 id="structure">Structure of the ZIP file</h2>
+<ul>
+<li>The folder <code>src</code> is at the top of the ZIP file. The file <code>src/app.yaml</code> must be there.</li>
+<li>A folder around everything also works (GitHub &quot;Download ZIP&quot;). Then only <code>&lt;folder&gt;/src/</code> counts.</li>
+<li>What lies outside <code>src</code> we ignore and never unpack.</li>
+<li>We change nothing in the template. <code>src/main.ts</code> belongs to it: if the file is in the ZIP file, we ignore it, and the build takes the template&#39;s.</li>
+<li>Your own components are in <code>src/components/</code>, as the explainer knows them: <code>&lt;Name&gt;.vue</code>, <code>&lt;Name&gt;.ts</code> and <code>&lt;Name&gt;.test.ts</code>, without subfolders. The build checks their code (see <a href="/practice/pr-preview/pr-34/en/checks/#build">Checks</a>).</li>
+<li>Data files are in <code>src/data/</code>, images in <code>src/images/</code>.</li>
+</ul>
+<h2 id="files">Allowed files</h2>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Endings</td>
+<td><code>.yaml</code>, <code>.yml</code>, <code>.md</code>, <code>.png</code>, <code>.jpg</code>, <code>.webp</code></td>
+</tr>
+<tr>
+<td>Components</td>
+<td><code>.vue</code> and <code>.ts</code> only in <code>src/components/</code>; names like <code>NumberLine.vue</code>, <code>NumberLine.ts</code>, <code>NumberLine.test.ts</code></td>
+</tr>
+<tr>
+<td>SVG images</td>
+<td><code>.svg</code> only in <code>src/images/</code>, names of lower-case letters, digits and hyphens (see <a href="#svg">SVG images</a>)</td>
+</tr>
+<tr>
+<td>Not allowed</td>
+<td>everything else, for example <code>.js</code>, <code>.html</code>, <code>.json</code></td>
+</tr>
+<tr>
+<td>Names</td>
+<td>only <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>-</code> and <code>_</code>; exactly one dot before the ending (no <code>image.png.js</code>)</td>
+</tr>
+<tr>
+<td>Hidden files</td>
+<td>not allowed (names that start with a dot, for example <code>.DS_Store</code>)</td>
+</tr>
+<tr>
+<td>Paths</td>
+<td>only folders below <code>src/</code>, at most 6 folders deep; no <code>..</code>, no absolute path, no backslash</td>
+</tr>
+<tr>
+<td>Links and special files</td>
+<td>not allowed (symlinks, devices); encrypted files not allowed</td>
+</tr>
+<tr>
+<td>ZIP file</td>
+<td>at most 10 MB</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>at most 300 files below <code>src</code></td>
+</tr>
+<tr>
+<td>Size unpacked</td>
+<td>at most 25 MB in total, at most 10 MB per file</td>
+</tr>
+<tr>
+<td>Time limit for the download</td>
+<td>60 seconds</td>
+</tr>
+</tbody></table>
+<p>We check the sizes in the directory of the ZIP file <strong>and</strong> while unpacking. A ZIP file that states wrong sizes is rejected. Umlauts in file names are not allowed; in the text of the YAML files they are of course allowed.</p>
+<h2 id="details">The details in the form</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fach (subject)</td>
+<td>Required, at most 60 characters, one line. We remove control characters.</td>
+</tr>
+<tr>
+<td>Klassenstufe (school year)</td>
+<td>a number from 1 to 13 from the list</td>
+</tr>
+<tr>
+<td>Bundesland (federal state)</td>
+<td>one of the 16 federal states from the list</td>
+</tr>
+<tr>
+<td>ZIP-Datei</td>
+<td>a link <code>https://github.com/user-attachments/files/&lt;number&gt;/&lt;name&gt;.zip</code> that GitHub writes when you drag the file in. We load no other addresses.</td>
+</tr>
+<tr>
+<td>Erklärungen (declarations)</td>
+<td>all three ticked</td>
+</tr>
+</tbody></table>
+<h2 id="declarations">The three declarations</h2>
+<ol>
+<li>The content is made by yourself (also with AI help). Nothing is copied from books or worksheets, and it contains no photos of material.</li>
+<li>The content contains no personal data (names, school, class, teacher).</li>
+<li>I allow the content to be published for two weeks. If it is later added to the catalogue, CC BY 4.0 applies, and I am the author.</li>
+</ol>
+<p>More on this: <a href="/practice/pr-preview/pr-34/en/privacy/">Privacy and copyright</a>.</p>
+<h2 id="always">Content that always applies</h2>
+<ul>
+<li>Texts for learners are in German and in plain language.</li>
+<li>Examples use invented names, never real ones.</li>
+<li>Sources go in the field <code>sources</code> of <code>src/app.yaml</code> if you take over facts.</li>
+<li>The YAML rules of the explainer are strict. A colon or a comma in the text without quotation marks leads to an error. The comment then shows you the line.</li>
+</ul>
+  </main>
+<footer class="la-footer" lang="en">
+  <div class="la-footer__inner">
+    <p>lernapps.net is free and has no ads. It lives on your thanks.</p>
+    <nav aria-label="Footer"><ul><li><a href="/en/privacy/">Privacy</a></li><li><a href="/en/imprint/">Imprint</a></li><li><a href="/docs/en/platform-design/">Platform design</a></li><li><a href="https://github.com/lernapps/practice">Source code</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

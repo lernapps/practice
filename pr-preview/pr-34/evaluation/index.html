@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Ein manueller Ablauf, bis es automatische Evals gibt. Diese Seite erklärt einem Agenten, zum Beispiel dem KI-Assistenten von jemandem, der das Repo pflegt, wie er nach einer Änderung an llms.txt, Plan-Vorlage oder Skills eine neue Sitzung startet, darin den Creator spielt und das Ergebnis bewertet. ## Woraus die Anleitung besteht {#source}">
+  <title>Evaluation der Anleitung – Lern-App nach Maß – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-page.css">
+  <link rel="stylesheet" href="/practice/pr-preview/pr-34/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-frame.css">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-34/evaluation/">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-34/en/evaluation/">
+<script>(() => {
+  const key = "lernapps-lang", here = "de", pages = {"en":"/practice/pr-preview/pr-34/en/evaluation/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="de">Zum Inhalt springen</a>
+<p class="la-preview" lang="de">Vorschau einer Änderung. Die echte Seite: <a href="https://lernapps.net/practice/evaluation/">lernapps.net/practice/evaluation/</a></p><header class="la-header" lang="de">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/" aria-label="lernapps.net – Startseite"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Hauptnavigation"><ul><li><a href="/apps/">Katalog</a></li><li><a href="/practice/pr-preview/pr-34/" aria-current="page">Üben</a></li><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-34/en/evaluation/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav>
+    <details class="la-menu"><summary>Menü</summary><nav class="la-nav la-nav--menu" aria-label="Hauptnavigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">Für Lernende</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/">App Katalog</a></li><li><a href="/practice/pr-preview/pr-34/" aria-current="page">Üben für eine Prüfung</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">Für Macher</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Verstehen und mitmachen</p><ul aria-labelledby="la-menu-2"><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-34/en/evaluation/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-34/">Zur Startseite: Lern-App nach Maß</a></p>
+<h1>Evaluation der Anleitung</h1>
+<p>Ein manueller Ablauf, bis es automatische Evals gibt. Diese Seite erklärt einem Agenten, zum Beispiel dem KI-Assistenten von jemandem, der das Repo pflegt, wie er nach einer Änderung an <code>llms.txt</code>, Plan-Vorlage oder Skills eine neue Sitzung startet, darin den Creator spielt und das Ergebnis bewertet.</p>
+<h2 id="source">Woraus die Anleitung besteht</h2>
+<table>
+<thead>
+<tr>
+<th>Teil</th>
+<th>Inhalt</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/practice/pr-preview/pr-34/llms.txt">llms.txt</a></td>
+<td>Der Einstieg: Ordner anlegen, die Plan-Vorlage herunterladen, ihr folgen.</td>
+</tr>
+<tr>
+<td><code>guidance/plan-template.md</code></td>
+<td>Die Plan-Vorlage mit den Phasen des Tooling: Explore, Plan, Code, Commit. Sie installiert und nennt je Phase die Skills und sagt, an welchen Checkpoints der Assistent auf den Creator wartet (Vorschlag, Seiten, Einreichen, Adresse).</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-explore</code></td>
+<td>Explore: eine Frage nach dem, was nur der Creator weiß; Katalog, Hinweise; der Umfang aus dem Material.</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-plan</code></td>
+<td>Plan: ein kurzer Vorschlag mit Schwerpunkt, Seiten, die erst erklären und dann üben, reicheren Formen und markierten Vermutungen.</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-photos</code></td>
+<td>Explore und Code: Fotos lesen, Abbildungen inhaltsgleich nachbauen.</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-submit</code></td>
+<td>Commit: alle Seiten zeigen und die Erklärungen durchgehen, die ZIP-Datei von <code>src/</code>, das Formular, Antworten und Korrekturen.</td>
+</tr>
+</tbody></table>
+<p>In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (<code>lernapps-explainer</code>, <code>lernapps-explainer-design</code>, <code>lernapps-content-questions</code>, <code>lernapps-exercise-patterns</code>, <code>lernapps-content-research</code>, <code>lernapps-cli</code>). Ein Test prüft, dass die Plan-Vorlage genau diese Skills installiert, jeden in der Phase, die ihn zuerst lädt, und dass die Adressen der <code>llms.txt</code> stimmen.</p>
+<h2 id="method">Eine Sitzung starten</h2>
+<ol>
+<li><strong>Frische Sitzung.</strong> Starte einen Assistenten mit Shell (Node 22.18 oder neuer, git, Netz), ohne Vorwissen über dieses Repo und ohne Projektdateien. Gib ihm nur den Satz von der <a href="/practice/pr-preview/pr-34/#assistant">Startseite</a>.</li>
+<li><strong>Befehle freigeben.</strong> Die Plan-Vorlage lässt <code>npx skills add</code>, <code>create</code> und <code>npm</code> laufen. Viele Umgebungen fragen dafür nach; eine Sitzung im Auto-Modus ohne Menschen blockiert <code>npx skills add</code>. Erlaube die Befehle vorab, oder starte den Assistenten als Unteragenten dort, wo sie laufen dürfen.</li>
+<li><strong>Den Creator spielen.</strong> Antworte wie ein Elternteil: knapp, ohne Hilfe, die die Anleitung nicht gibt. Gib echte Fotos von Schulmaterial, außerhalb des Ordners der App. Eine Beschreibung der Fotos prüft nur das Schreiben, nicht das Lesen der Bilder.</li>
+</ol>
+<h2 id="observe">Beobachten</h2>
+<ul>
+<li>Wie oft fragt der Assistent, und wartet er nur an den Checkpoints (Vorschlag, Seiten, Einreichen, Adresse)?</li>
+<li>Liegen im Ordner genau die Skills der Tabelle oben und <code>app-content</code>, jeder ab seiner Phase?</li>
+<li>Ist der Vorschlag kurz, sind die Vermutungen markiert, bleibt er beim Umfang des Materials?</li>
+<li>Zeigt der Assistent vor dem Einreichen jede Seite?</li>
+</ul>
+<h2 id="submit">Einreichen</h2>
+<ul>
+<li><p><strong>Lokal:</strong> Speichere das ZIP und baue es so, wie GitHub es täte:</p>
+<pre><code class="language-text">npm ci
+npm run try -- ergebnis.zip
+</code></pre>
+<p>Der Befehl prüft das ZIP mit den Regeln der Einreichung, baut es mit der Vorlage in dem Stand, den das Tooling auf <code>main</code> festlegt (<code>appTemplates.commit</code>; mit <code>--commit &lt;sha&gt;</code> ein anderer) und prüft das Bundle mit <code>lernapps check</code>. Er schreibt die Meldungen so, wie der Bot sie in das Issue kommentiert. Das gebaute Bundle liegt in <code>_out/site</code>.</p>
+</li>
+<li><p><strong>Auf GitHub, ohne Browser:</strong> Lege ein Test-Issue im Format des Formulars an und starte den Workflow „Submission“ mit <code>issue</code> und <code>zip_url</code> (<a href="/practice/pr-preview/pr-34/operations/#repeat">Betrieb</a>). Gib den Kommentar des Bots unverändert dem Assistenten.</p>
+</li>
+</ul>
+<h2 id="evaluate">Bewerten</h2>
+<ul>
+<li>Öffne jede Seite der Vorschau im Browser: Erklärt sie, bevor sie übt? Stimmen Abbildungen und Buchstaben mit dem Material? Steht irgendwo ein nicht ersetzter Platzhalter? Meldet die Konsole Fehler?</li>
+<li>Zähle die Läufe bis zur Adresse und die Meldungen je Lauf.</li>
+<li>Ordne jeden Befund zu: Anleitung (Plan-Vorlage, Skills von practice) änderst Du hier; Inhalts-Skills und Prüfungen gehören in ein Issue an lernapps/tooling, Fehler der Laufzeit in ein Issue an lernapps/app-templates, je mit einem Testbeispiel.</li>
+<li>Höchstens drei Durchläufe je Änderung; zwischen zwei Durchläufen verbessern.</li>
+</ul>
+<h2 id="danger">Die Gefahr</h2>
+<ul>
+<li><strong>Beschreibung statt Fotos.</strong> Ein Test mit einer Beschreibung der Fotos sagt nichts darüber, ob der Assistent Fotos richtig liest: Reihenfolge, Ränder, Handschrift, Kästen. Nenne in der Tabelle unten, was der Durchlauf nicht geprüft hat.</li>
+<li><strong>Material nie ins Repo.</strong> Fotos, Abschriften, Beschreibungen des Materials und Texte daraus gehören weder in einen Commit noch in ein Issue oder einen Pull Request. Das Material ist urheberrechtlich geschützt, und die Handschrift eines Kindes ist ein persönliches Datum. Auch die ZIP-Dateien eines Testlaufs bleiben außerhalb des Repos (der Ordner <code>_intake/</code> und <code>_out/</code> ist ignoriert).</li>
+<li><strong>Nicht geprüfte Fakten.</strong> Der Test zeigt, dass das ZIP baut, nicht dass die Fakten stimmen. Der Assistent muss melden, was die Eltern prüfen sollten.</li>
+</ul>
+<h2 id="results">Ergebnisse</h2>
+<table>
+<thead>
+<tr>
+<th>Durchlauf</th>
+<th>Wer</th>
+<th>Eingabe</th>
+<th>Bau</th>
+<th><code>lernapps check</code></th>
+<th>Einschränkung</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Agent mit Hintergrundwissen über das Repo</td>
+<td>Fotos</td>
+<td>3 Läufe: 12 Meldungen, 2 Meldungen, ohne Meldung</td>
+<td>ohne Befund (8 Regeln)</td>
+<td>Das Hintergrundwissen half; die Anleitung war nicht allein. Aus den Meldungen entstanden die Stolpersteine.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Frische Sitzung, nur die Anleitung</td>
+<td>Beschreibung der Fotos</td>
+<td>1 Lauf, ohne Meldung</td>
+<td>ohne Befund</td>
+<td>Das Lesen der Bilder war nicht Teil des Durchlaufs.</td>
+</tr>
+</tbody></table>
+<p>| 3 bis 5 | Frische Sitzung mit Shell als Unteragent, nur die Anleitung | Fotos | je 1 Lauf, ohne Meldung | ohne Befund | Eingereicht über <code>zip_url</code> statt des Formulars. Die Befunde betrafen die Anleitung und flossen in die Skills. |</p>
+<p>Die Durchläufe 1 und 2 galten der früheren Anleitung für einen Chat ohne Shell. Offen: ein Lauf mit dem Formular im Browser statt <code>zip_url</code>.</p>
+  </main>
+<footer class="la-footer" lang="de">
+  <div class="la-footer__inner">
+    <p>lernapps.net ist kostenlos und ohne Werbung. Es lebt von deinem Danke.</p>
+    <nav aria-label="Fußzeile"><ul><li><a href="/privacy/">Datenschutz</a></li><li><a href="/imprint/">Impressum</a></li><li><a href="/docs/platform-design/">Plattform-Design</a></li><li><a href="https://github.com/lernapps/practice">Quellcode</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

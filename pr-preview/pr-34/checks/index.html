@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Eine Einreichung geht durch drei Stufen. Eine Stufe beginnt erst, wenn die davor ohne Fehler war.">
+  <title>Prüfungen – Lern-App nach Maß – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-page.css">
+  <link rel="stylesheet" href="/practice/pr-preview/pr-34/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-34/lernapps-frame.css">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-34/checks/">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-34/en/checks/">
+<script>(() => {
+  const key = "lernapps-lang", here = "de", pages = {"en":"/practice/pr-preview/pr-34/en/checks/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="de">Zum Inhalt springen</a>
+<p class="la-preview" lang="de">Vorschau einer Änderung. Die echte Seite: <a href="https://lernapps.net/practice/checks/">lernapps.net/practice/checks/</a></p><header class="la-header" lang="de">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/" aria-label="lernapps.net – Startseite"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Hauptnavigation"><ul><li><a href="/apps/">Katalog</a></li><li><a href="/practice/pr-preview/pr-34/" aria-current="page">Üben</a></li><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-34/en/checks/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav>
+    <details class="la-menu"><summary>Menü</summary><nav class="la-nav la-nav--menu" aria-label="Hauptnavigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">Für Lernende</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/">App Katalog</a></li><li><a href="/practice/pr-preview/pr-34/" aria-current="page">Üben für eine Prüfung</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">Für Macher</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Verstehen und mitmachen</p><ul aria-labelledby="la-menu-2"><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-34/en/checks/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-34/">Zur Startseite: Lern-App nach Maß</a></p>
+<h1>Prüfungen</h1>
+<p>Eine Einreichung geht durch drei Stufen. Eine Stufe beginnt erst, wenn die davor ohne Fehler war.</p>
+<h2 id="acceptance">Stufe 1: Annahme (Job <code>intake</code>)</h2>
+<p>Der Job liest nur. Er führt nichts aus, was in der ZIP-Datei steht.</p>
+<ol>
+<li>Das Issue stammt aus dem Formular (alle fünf Überschriften sind da) und ist offen. Sonst passiert nichts.</li>
+<li>Die Angaben stimmen mit den Listen überein, und die drei Erklärungen sind angekreuzt.</li>
+<li>Die ZIP-Adresse hat genau die Form <code>https://github.com/user-attachments/files/&lt;Zahl&gt;/&lt;Name&gt;.zip</code>. Die Datei wird mit <code>curl -L</code> geladen (nur <code>https</code>, höchstens 5 Weiterleitungen, 10 MB, 60 Sekunden). Die Endadresse muss bei GitHub liegen.</li>
+<li>Das Verzeichnis der ZIP-Datei wird geprüft (Pfade, Arten, Endungen, Größen, Anzahl), dann wird jede Datei mit hartem Größenlimit entpackt und gegen die Prüfsumme gelegt. Die <a href="/practice/pr-preview/pr-34/rules/">Regeln</a> nennen die Grenzen. <code>src/main.ts</code> wird nie entpackt.</li>
+<li>Jedes SVG-Bild wird auf seinen Inhalt geprüft: Es darf nur zeichnen (<a href="/practice/pr-preview/pr-34/rules/#svg">SVG-Bilder</a>).</li>
+</ol>
+<p>Bei einem Fehler startet kein Bau. Stattdessen schreibt der Job <code>publish</code> einen Kommentar in einfacher Sprache.</p>
+<h2 id="build">Stufe 2: Bau (Job <code>build</code>)</h2>
+<p>Der Job hat nur Leserechte und keine Geheimnisse. Er baut so:</p>
+<ol>
+<li>Er holt <code>lernapps/app-templates</code> in genau dem Stand (Commit), mit dem Dein Assistent die App angelegt hat: <code>appTemplates.commit</code> aus der <code>package.json</code> von <code>lernapps/tooling</code> auf <code>main</code>, gelesen beim Bauen. Ist sie nicht lesbar, bricht der Bau mit einer klaren Meldung ab.</li>
+<li>Er nimmt den Ordner <code>explainer/</code> als App und ersetzt <code>src/</code> durch Deinen Inhalt. Die <code>main.ts</code> der Vorlage bleibt. Beispielkomponenten und Beispielkapitel entfallen.</li>
+<li>Er installiert mit <code>npm ci</code>, führt die Tests Deiner Komponenten aus (<code>vp test</code>, nur wenn es Komponenten gibt) und baut mit <code>npm run build</code>. Die Vorlage hängt von <code>file:..</code> ab (dem Elternordner mit der Laufzeit). Darum wird erst im Wurzelordner von <code>app-templates</code> installiert (das baut die Laufzeit), dann im Ordner <code>explainer/</code>. Beide Lock-Dateien legen die Versionen fest. Danach installiert er <code>@lernapps/tooling</code> in dem Commit von <code>main</code>, aus dem er den Stand der Vorlage gelesen hat: dasselbe Tooling, mit dem Dein Assistent die App angelegt und geprüft hat.</li>
+<li>Er prüft das gebaute Bundle mit <code>lernapps check _site</code> (siehe unten).</li>
+<li>Er setzt in jede HTML-Seite <code>&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;&gt;</code>, damit Suchmaschinen die Vorschau nicht aufnehmen.</li>
+</ol>
+<p>Der Bau des Explainers prüft dabei den Inhalt und den Code jeder Komponente: kein Netz (<code>fetch</code> und Co.), kein <code>eval</code>, kein <code>innerHTML</code> und kein <code>v-html</code>, nur erlaubte Imports, Browser-Objekte erst in <code>onMounted</code>, höchstens 20 kB eigener Code, je Komponente ein Test, und für eine Übungs-Komponente der Vertrag mit 50 festen Aufgaben. Ein Verstoß steht mit Datei, Zeile und Regel im Kommentar.</p>
+<p>Der Job führt dabei Code Deiner Komponenten aus (ihre Tests und ihre Logik beim Bauen). Er hat deshalb nur Leserechte und kein Geheimnis. Die Typprüfung der Komponenten (<code>vue-tsc</code>) läuft hier nicht; sie läuft bei Deinem Assistenten mit <code>npm run check</code>.</p>
+<h2 id="bundle">Die Prüfung des Bundles</h2>
+<p><code>lernapps check &lt;Ordner&gt;</code> prüft ein gebautes Bundle ohne Katalogeintrag. Dafür öffnet es jede Seite in einem Browser, wie ein Lernender es täte, und prüft diese acht Regeln der Plattform:</p>
+<table>
+<thead>
+<tr>
+<th>Regel</th>
+<th>Frage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>accessible</code></td>
+<td>Ist die Seite barrierefrei (WCAG 2.1 AA)?</td>
+</tr>
+<tr>
+<td><code>usable-at-360px</code></td>
+<td>Geht alles bei 360 px Breite ohne Querscrollen?</td>
+</tr>
+<tr>
+<td><code>no-tracking</code></td>
+<td>Setzt die Seite keine Cookies und sendet keine Daten?</td>
+</tr>
+<tr>
+<td><code>no-request-before-click</code></td>
+<td>Fragt die Seite keinen anderen Server an, bevor jemand klickt?</td>
+</tr>
+<tr>
+<td><code>own-data-only</code></td>
+<td>Berührt die Seite nur die eigenen Daten im Browser?</td>
+</tr>
+<tr>
+<td><code>links-resolve</code></td>
+<td>Führt jeder Link auf eine Seite oder Datei, die es gibt?</td>
+</tr>
+<tr>
+<td><code>pages-reachable</code></td>
+<td>Ist jede Seite von der Startseite aus erreichbar?</td>
+</tr>
+<tr>
+<td><code>explainer-readable-without-js</code></td>
+<td>Ist der Inhalt auch ohne JavaScript lesbar?</td>
+</tr>
+</tbody></table>
+<p><strong>Jede dieser Regeln muss bestehen.</strong> Wir lockern keine, denn sie schützen Kinder (keine Verfolgung) und den gemeinsamen Browser-Speicher der Plattform (<code>own-data-only</code>). Die Prüfung dauert etwa 10 Sekunden.</p>
+<h2 id="not-checked">Was bei einer Vorschau nicht gilt</h2>
+<p>Diese Regeln der Plattform gelten für den Katalog, nicht für eine Vorschau auf Zeit. Wir prüfen sie hier nicht:</p>
+<table>
+<thead>
+<tr>
+<th>Nicht geprüft</th>
+<th>Grund</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Katalogeintrag (<code>entry-from-schema</code>, <code>entry-links-resolve</code>, <code>entry-fitness-matches</code>)</td>
+<td>Eine Vorschau steht nicht im Katalog. Es gibt keinen Eintrag, den man prüfen könnte.</td>
+</tr>
+<tr>
+<td><code>dependency-licence</code>, <code>app-content-guide</code></td>
+<td>Beide brauchen das Repo einer App. Die Abhängigkeiten stehen in der Lock-Datei der Vorlage. Eine Vorschau hat keinen eigenen Inhalts-Leitfaden.</td>
+</tr>
+<tr>
+<td>Inhaltliche Prüfung (<code>learners-act</code>, <code>learner-text-german</code>, <code>third-party-licence</code>, <code>no-learner-data-in-texts</code>)</td>
+<td>Das beurteilt ein Mensch bei der Aufnahme in den Katalog. Bis dahin gelten Deine drei Erklärungen.</td>
+</tr>
+<tr>
+<td>Impressum und Datenschutz der App</td>
+<td>Die Seiten der Vorlage verlinken sie schon auf <code>lernapps.net</code>. Eine eigene Prüfung entfällt.</td>
+</tr>
+<tr>
+<td>Formatierung und Stil der Dateien</td>
+<td>Eine Vorschau scheitert nie an der Schreibweise (Einrückung, Leerzeilen). Wir führen keine Formatprüfung aus und formatieren Deinen Inhalt nicht um. Nur die Regeln des Explainers für den Inhalt zählen.</td>
+</tr>
+<tr>
+<td>Eintrag in Suchmaschinen</td>
+<td>Die Vorschau soll nicht gefunden werden. Darum steht <code>noindex</code> auf jeder Seite.</td>
+</tr>
+</tbody></table>
+<h2 id="publication">Stufe 3: Veröffentlichung (Job <code>publish</code>)</h2>
+<p>Der Job führt nur Code aus diesem Repo aus. Das Ergebnis des Baus behandelt er als Daten.</p>
+<ol>
+<li>Er prüft die Seite noch einmal: Anzahl und Größe der Dateien, Namen, Endungen, Links, <code>noindex</code> auf jeder Seite.</li>
+<li>Er schreibt sie auf den Branch <code>gh-pages</code> in den Ordner <code>i/&lt;Nummer&gt;/</code> und legt <code>i/&lt;Nummer&gt;/practice.json</code> dazu (<a href="/practice/pr-preview/pr-34/lifetime/">Lebensdauer</a>).</li>
+<li>Er wartet, bis die Adresse den neuen Stand liefert, und schreibt den Link in den Kommentar.</li>
+</ol>
+  </main>
+<footer class="la-footer" lang="de">
+  <div class="la-footer__inner">
+    <p>lernapps.net ist kostenlos und ohne Werbung. Es lebt von deinem Danke.</p>
+    <nav aria-label="Fußzeile"><ul><li><a href="/privacy/">Datenschutz</a></li><li><a href="/imprint/">Impressum</a></li><li><a href="/docs/platform-design/">Plattform-Design</a></li><li><a href="https://github.com/lernapps/practice">Quellcode</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>
