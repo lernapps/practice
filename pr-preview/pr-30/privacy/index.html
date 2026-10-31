@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="| Was | Wo | Wie lange | | --- | --- | --- | | Dein Issue (Fach, Klassenstufe, Bundesland, Link zur ZIP-Datei, Kommentare) | GitHub, öffentlich sichtbar | bis das Issue gelöscht wird | | Die ZIP-Datei | GitHub (Anhang des Issues; der Link ist öffentlich) | wie das Issue | | Die gebaute Vorschau | Branch gh-pages dieses Repos, öffentlich unter lernapps.net/practice/i/&lt;Nummer&gt;/ | zwei Wochen, oder länger mit 👍 (siehe Lebensdauer) | | Zwischenergebnisse eines Laufs (Artefakte) | GitHub Actions | 3 Tage | | practice.json zur Vorschau (Fach, Klassenstufe, Bundesland, Datum) | im Ordner der Vorschau | wie die Vorschau |">
+  <title>Datenschutz und Urheberrecht – Lern-App nach Maß – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-30/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-30/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-30/lernapps-frame.css">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-30/privacy/">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-30/en/privacy/">
+<script>(() => {
+  const key = "lernapps-lang", here = "de", pages = {"en":"/practice/pr-preview/pr-30/en/privacy/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="de">Zum Inhalt springen</a>
+<p class="la-preview" lang="de">Vorschau einer Änderung. Die echte Seite: <a href="https://lernapps.net/practice/privacy/">lernapps.net/practice/privacy/</a></p><header class="la-header" lang="de">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/" aria-label="lernapps.net – Startseite"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Hauptnavigation"><ul><li><a href="/apps/">Katalog</a></li><li><a href="/practice/pr-preview/pr-30/" aria-current="page">Üben</a></li><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-30/en/privacy/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav>
+    <details class="la-menu"><summary>Menü</summary><nav class="la-nav la-nav--menu" aria-label="Hauptnavigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">Für Lernende</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/">App Katalog</a></li><li><a href="/practice/pr-preview/pr-30/" aria-current="page">Üben für eine Prüfung</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">Für Macher</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Verstehen und mitmachen</p><ul aria-labelledby="la-menu-2"><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-30/en/privacy/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-30/">Zur Startseite: Lern-App nach Maß</a></p>
+<h1>Datenschutz und Urheberrecht</h1>
+<h2 id="stored">Was gespeichert wird</h2>
+<table>
+<thead>
+<tr>
+<th>Was</th>
+<th>Wo</th>
+<th>Wie lange</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Dein Issue (Fach, Klassenstufe, Bundesland, Link zur ZIP-Datei, Kommentare)</td>
+<td>GitHub, öffentlich sichtbar</td>
+<td>bis das Issue gelöscht wird</td>
+</tr>
+<tr>
+<td>Die ZIP-Datei</td>
+<td>GitHub (Anhang des Issues; der Link ist öffentlich)</td>
+<td>wie das Issue</td>
+</tr>
+<tr>
+<td>Die gebaute Vorschau</td>
+<td>Branch <code>gh-pages</code> dieses Repos, öffentlich unter <code>lernapps.net/practice/i/&lt;Nummer&gt;/</code></td>
+<td>zwei Wochen, oder länger mit 👍 (siehe <a href="/practice/pr-preview/pr-30/lifetime/">Lebensdauer</a>)</td>
+</tr>
+<tr>
+<td>Zwischenergebnisse eines Laufs (Artefakte)</td>
+<td>GitHub Actions</td>
+<td>3 Tage</td>
+</tr>
+<tr>
+<td><code>practice.json</code> zur Vorschau (Fach, Klassenstufe, Bundesland, Datum)</td>
+<td>im Ordner der Vorschau</td>
+<td>wie die Vorschau</td>
+</tr>
+</tbody></table>
+<p><strong>Alles hier ist öffentlich.</strong> Reiche darum nichts ein, was nicht öffentlich sein darf.</p>
+<h2 id="personal-data">Persönliche Daten gehören nicht in den Inhalt</h2>
+<p>Der Inhalt enthält keine Namen, keine Schule, keine Klasse, keine Lehrkraft und keine Fotos von Kindern. Das erklärst Du im Formular (zweite Erklärung). Das Feld „Fach“ gehört zum Issue und ist ebenfalls öffentlich; schreibe dort nur das Fach.</p>
+<p>Auch das Issue selbst ist öffentlich. Schreibe dort nichts Persönliches hinein. Die Kommentare des Programms wiederholen keine Angaben aus dem Formular.</p>
+<h2 id="progress">Die App speichert nichts über das Kind</h2>
+<p>Die Vorschau sendet nichts an einen Server und setzt keine Cookies. Das prüft der Bau mit den Regeln <code>no-tracking</code> und <code>no-request-before-click</code> (<a href="/practice/pr-preview/pr-30/checks/">Prüfungen</a>). Die App speichert nichts über das Kind: keine Antworten, keinen Lernstand, keine Punkte. Antworten zählt die Seite nur im Arbeitsspeicher, solange sie offen ist; nach dem Neuladen oder auf einem anderen Gerät beginnt das Kind von vorn. Die Selbsteinschätzung zählt das Kind selbst. Die Tests der Vorlage prüfen das: nach dem Üben liegt nichts im Speicher des Browsers (nicht der Bau einer einzelnen Vorschau). Die Vorlage kann nur zwei Wahlen auf dem Gerät merken, die ein Inhalt erst anbietet: einen KI-Tutor und „Videos immer direkt laden“. Die Anleitung für Assistenten lässt beides weg.</p>
+<p>Die Vorschau liegt auf derselben Domain wie andere Apps der Plattform. Darum erlaubt die Regel <code>own-data-only</code> jeder App nur den Zugriff auf ihre eigenen Schlüssel im Browser-Speicher.</p>
+<h2 id="copyright">Urheberrecht</h2>
+<ul>
+<li>Du reichst nur <strong>selbst erstellte</strong> Inhalte ein (auch mit KI-Hilfe). Nichts aus Büchern, Arbeitsblättern oder anderen Quellen abschreiben, und keine Fotos von Material. Das erklärst Du im Formular (erste Erklärung).</li>
+<li>Du erlaubst, dass der Inhalt <strong>zwei Wochen</strong> veröffentlicht wird (dritte Erklärung).</li>
+<li>Wird der Inhalt später in den <strong>Katalog</strong> aufgenommen, gilt die Lizenz <strong>CC BY 4.0</strong>, und Du bist Urheberin oder Urheber. Das heißt: Andere dürfen den Inhalt nutzen und ändern, wenn sie Dich nennen.</li>
+<li>Quellen für Fakten nennst Du im Inhalt (<code>sources</code> in <code>src/app.yaml</code>).</li>
+</ul>
+<h2 id="deletion">Löschen</h2>
+<ul>
+<li>Die Vorschau löschen wir nach zwei Wochen, oder sofort, wenn Du das Issue schließt.</li>
+<li>Jede Änderung an den Vorschauen ersetzt den Branch <code>gh-pages</code> durch einen einzigen neuen Commit ohne Vorgänger. Gelöschte Vorschauen bleiben dort also nicht in einem alten Stand erhalten. GitHub kann nicht mehr erreichbare Stände noch eine Weile intern aufbewahren; das können wir nicht beeinflussen.</li>
+<li>Das Issue und die ZIP-Datei löschst Du selbst (Issue löschen, oder uns bitten). Bei Fragen schreibe einen Kommentar in Dein Issue.</li>
+</ul>
+  </main>
+<footer class="la-footer" lang="de">
+  <div class="la-footer__inner">
+    <p>lernapps.net ist kostenlos und ohne Werbung. Es lebt von deinem Danke.</p>
+    <nav aria-label="Fußzeile"><ul><li><a href="/privacy/">Datenschutz</a></li><li><a href="/imprint/">Impressum</a></li><li><a href="/docs/platform-design/">Plattform-Design</a></li><li><a href="https://github.com/lernapps/practice">Quellcode</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

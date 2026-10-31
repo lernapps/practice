@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="1. Your assistant has built and checked the learning app of the archetype explainer on your computer. It gives you the ZIP file with the folder src (pages, images, components). 2. You know what you confirm: your assistant has shown you every page of the app before it gives you the ZIP file. 3. The content meets the rules. The most important: no names, no copied texts, no photos of the material. 4. You have a GitHub account.">
+  <title>Submit: step by step – App made to measure – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-30/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-30/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-30/lernapps-frame.css">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-30/en/submit/">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-30/submit/">
+<script>(() => {
+  const key = "lernapps-lang", here = "en", pages = {"de":"/practice/pr-preview/pr-30/submit/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="en">Skip to content</a>
+<p class="la-preview" lang="en">Preview of a change. The real page: <a href="https://lernapps.net/practice/en/submit/">lernapps.net/practice/en/submit/</a></p><header class="la-header" lang="en">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/en/" aria-label="lernapps.net – home page"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Main navigation"><ul><li><a href="/apps/en/">Catalog</a></li><li><a href="/practice/pr-preview/pr-30/en/" aria-current="page">Practise</a></li><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-30/submit/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav>
+    <details class="la-menu"><summary>Menu</summary><nav class="la-nav la-nav--menu" aria-label="Main navigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">For learners</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/en/">App catalog</a></li><li><a href="/practice/pr-preview/pr-30/en/" aria-current="page">Practise for a test</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">For makers</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Understand and join in</p><ul aria-labelledby="la-menu-2"><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-30/submit/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-30/en/">To the start page: App made to measure</a></p>
+<h1>Submit: step by step</h1>
+<h2 id="before">Before you start</h2>
+<ol>
+<li>Your assistant has built and checked the learning app of the archetype <code>explainer</code> on your computer. It gives you the ZIP file with the folder <code>src</code> (pages, images, components).</li>
+<li>You know what you confirm: your assistant has shown you every page of the app before it gives you the ZIP file.</li>
+<li>The content meets the <a href="/practice/pr-preview/pr-30/en/rules/">rules</a>. The most important: no names, no copied texts, no photos of the material.</li>
+<li>You have a GitHub account.</li>
+</ol>
+<h2 id="pack-zip">How to pack the ZIP file</h2>
+<p>Pack the <strong>folder <code>src</code> itself</strong>. Then <code>src/app.yaml</code> is at the top of the ZIP file. The ZIP file may be at most 10 MB.</p>
+<p>It also works if you download the whole project from GitHub as a ZIP file (&quot;Download ZIP&quot;). Then everything is in one folder such as <code>my-project-main/</code>. We read only <code>my-project-main/src/</code> from it. We ignore everything else and never unpack it.</p>
+<h2 id="submit">How to submit</h2>
+<ol>
+<li>Open the form: <a href="https://github.com/lernapps/practice/issues/new?template=submit.yml">https://github.com/lernapps/practice/issues/new?template=submit.yml</a></li>
+<li>Fill in <strong>Fach</strong> (subject), <strong>Klassenstufe</strong> (school year) and <strong>Bundesland</strong> (federal state).</li>
+<li>Drag the ZIP file into the field <strong>ZIP-Datei</strong>. Wait until a link such as <code>[name.zip](https://github.com/user-attachments/files/…/name.zip)</code> appears there.</li>
+<li>Tick the <strong>three declarations</strong>.</li>
+<li>Click <strong>Submit new issue</strong>.</li>
+</ol>
+<p>After about one to three minutes GitHub writes a comment:</p>
+<ul>
+<li><strong>All good:</strong> You get the address of the preview, for example <code>https://lernapps.net/practice/i/12/</code>.</li>
+<li><strong>Something is missing or wrong:</strong> The comment says what, in plain words. Give it to your assistant.</li>
+<li><strong>Error while building:</strong> The comment shows the messages of the build (file, line, rule). Give them to your assistant, who corrects the content.</li>
+</ul>
+<p>The form and the comments are in German.</p>
+<h2 id="correction">After a correction</h2>
+<p>A new version goes online with a comment: drag the new ZIP file into the comment box of your issue, wait for the link and click <strong>Comment</strong>. GitHub then checks and builds again and replaces the preview and its old comment. The ZIP file attached last always counts. Only your own comments count, not those of others.</p>
+<p>You change a detail of the form (subject, school year, state) at the first field: the three dots, then <strong>Edit</strong>. If the ZIP file and the details stay the same, GitHub does not build again.</p>
+<h2 id="prefill">Pre-fill the form</h2>
+<p>The form can be pre-filled with parameters in the address. This helps assistants that give you a ready link. The names of the parameters are the identifiers (ids) of the fields:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Field</th>
+<th>Example value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>template</code></td>
+<td>always <code>submit.yml</code></td>
+<td><code>submit.yml</code></td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>title of the issue</td>
+<td><code>Vorbereitung: Religion</code></td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>subject</td>
+<td><code>Religion</code></td>
+</tr>
+<tr>
+<td><code>grade</code></td>
+<td>school year (a number from 1 to 13)</td>
+<td><code>7</code></td>
+</tr>
+<tr>
+<td><code>federalState</code></td>
+<td>federal state (exactly as in the list)</td>
+<td><code>Hessen</code></td>
+</tr>
+</tbody></table>
+<p>Example:</p>
+<pre><code class="language-text">https://github.com/lernapps/practice/issues/new?template=submit.yml&amp;title=Vorbereitung%3A%20Religion&amp;subject=Religion&amp;grade=7&amp;federalState=Hessen
+</code></pre>
+<p>Special characters must be rewritten in the address: a space as <code>%20</code>, ü as <code>%C3%BC</code> (for example <code>Baden-W%C3%BCrttemberg</code>). You cannot pre-fill the ZIP file and the declarations. You must tick the declarations yourself.</p>
+<h2 id="problems">If something does not work</h2>
+<ul>
+<li><strong>No comment after five minutes:</strong> Open the tab &quot;Actions&quot; of the repository and look for the run &quot;Submission&quot;. Write us a comment in the issue.</li>
+<li><strong>&quot;Kein ZIP gefunden&quot; (no ZIP found):</strong> The ZIP file did not arrive. Attach it as a comment and wait for the link before you click <strong>Comment</strong>.</li>
+<li><strong>The page does not load yet:</strong> GitHub sometimes needs a few minutes until the address answers. Try again later.</li>
+</ul>
+  </main>
+<footer class="la-footer" lang="en">
+  <div class="la-footer__inner">
+    <p>lernapps.net is free and has no ads. It lives on your thanks.</p>
+    <nav aria-label="Footer"><ul><li><a href="/en/privacy/">Privacy</a></li><li><a href="/en/imprint/">Imprint</a></li><li><a href="/docs/en/platform-design/">Platform design</a></li><li><a href="https://github.com/lernapps/practice">Source code</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

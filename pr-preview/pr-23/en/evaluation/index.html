@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="A manual process, until there are automatic evals. This page explains to an agent, for example the AI assistant of someone who maintains the repo, how to start a new session after a change to llms.txt, the plan template or the skills, play the creator in it and evaluate the result. ## What the guide is made of {#source}">
+  <title>Evaluating the guide – App made to measure – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-23/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-23/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-23/lernapps-frame.css">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-23/en/evaluation/">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-23/evaluation/">
+<script>(() => {
+  const key = "lernapps-lang", here = "en", pages = {"de":"/practice/pr-preview/pr-23/evaluation/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="en">Skip to content</a>
+<p class="la-preview" lang="en">Preview of a change. The real page: <a href="https://lernapps.net/practice/en/evaluation/">lernapps.net/practice/en/evaluation/</a></p><header class="la-header" lang="en">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/en/" aria-label="lernapps.net – home page"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Main navigation"><ul><li><a href="/apps/en/">Catalog</a></li><li><a href="/practice/pr-preview/pr-23/en/" aria-current="page">Practise</a></li><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-23/evaluation/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav>
+    <details class="la-menu"><summary>Menu</summary><nav class="la-nav la-nav--menu" aria-label="Main navigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">For learners</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/en/">App catalog</a></li><li><a href="/practice/pr-preview/pr-23/en/" aria-current="page">Practise for a test</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">For makers</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Understand and join in</p><ul aria-labelledby="la-menu-2"><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-23/evaluation/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-23/en/">To the start page: App made to measure</a></p>
+<h1>Evaluating the guide</h1>
+<p>A manual process, until there are automatic evals. This page explains to an agent, for example the AI assistant of someone who maintains the repo, how to start a new session after a change to <code>llms.txt</code>, the plan template or the skills, play the creator in it and evaluate the result.</p>
+<h2 id="source">What the guide is made of</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/practice/pr-preview/pr-23/llms.txt">llms.txt</a></td>
+<td>The entry: create a folder, download the plan template, follow it.</td>
+</tr>
+<tr>
+<td><code>guidance/plan-template.md</code></td>
+<td>The plan template with the phases of the tooling: Explore, Plan, Code, Commit. It installs and names the skills of each phase and says at which checkpoints the assistant waits for the creator (proposal, pages, submission, address).</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-explore</code></td>
+<td>Explore: one question for what only the creator knows; catalogue, notes; the scope from the material.</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-plan</code></td>
+<td>Plan: a brief proposal with the focus, pages that explain before they practise, richer forms and marked guesses.</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-photos</code></td>
+<td>Explore and Code: reading photos, rebuilding figures with the same content.</td>
+</tr>
+<tr>
+<td><code>lernapps-practice-submit</code></td>
+<td>Commit: show every page and go through the declarations, the ZIP file of <code>src/</code>, the form, answers and corrections.</td>
+</tr>
+</tbody></table>
+<p>In Plan and Code the assistant uses the content skills of the tooling (<code>lernapps-explainer</code>, <code>lernapps-explainer-design</code>, <code>lernapps-content-questions</code>, <code>lernapps-exercise-patterns</code>, <code>lernapps-content-research</code>, <code>lernapps-cli</code>). A test checks that the plan template installs exactly these skills, each in the phase that loads it first, and that the addresses of <code>llms.txt</code> are right.</p>
+<h2 id="method">Start a session</h2>
+<ol>
+<li><strong>A fresh session.</strong> Start an assistant with a shell (Node 22.18 or newer, git, network), without prior knowledge of this repo and without project files. Give it only the sentence from the <a href="/practice/pr-preview/pr-23/en/#assistant">start page</a>.</li>
+<li><strong>Allow the commands.</strong> The plan template runs <code>npx skills add</code>, <code>create</code> and <code>npm</code>. Many environments ask for approval; a session in auto mode without a person blocks <code>npx skills add</code>. Allow the commands beforehand, or start the assistant as a sub-agent where they may run.</li>
+<li><strong>Play the creator.</strong> Answer like a parent: briefly, without help the guide does not give. Give real photos of school material, outside the app&#39;s folder. A description of the photos tests only the writing, not the reading of the images.</li>
+</ol>
+<h2 id="observe">Observe</h2>
+<ul>
+<li>How often does the assistant ask, and does it wait only at the checkpoints (proposal, pages, submission, address)?</li>
+<li>Does the folder hold exactly the skills of the table above and <code>app-content</code>, each from its phase on?</li>
+<li>Is the proposal brief, are the guesses marked, does it stay within the scope of the material?</li>
+<li>Does the assistant show every page before the submission?</li>
+</ul>
+<h2 id="submit">Submit</h2>
+<ul>
+<li><p><strong>Locally:</strong> save the ZIP and build it the way GitHub would:</p>
+<pre><code class="language-text">npm ci
+npm run try -- result.zip
+</code></pre>
+<p>The command checks the ZIP with the rules of the submission, builds it with the template at the state the tooling pins on <code>main</code> (<code>appTemplates.commit</code>; another one with <code>--commit &lt;sha&gt;</code>) and checks the bundle with <code>lernapps check</code>. It prints the messages the way the bot comments them on the issue. The built bundle is in <code>_out/site</code>.</p>
+</li>
+<li><p><strong>On GitHub, without a browser:</strong> create a test issue in the format of the form and start the workflow &quot;Submission&quot; with <code>issue</code> and <code>zip_url</code> (<a href="/practice/pr-preview/pr-23/en/operations/#repeat">Operations</a>). Give the bot&#39;s comment unchanged to the assistant.</p>
+</li>
+</ul>
+<h2 id="evaluate">Evaluate</h2>
+<ul>
+<li>Open every page of the preview in a browser: does it explain before it practises? Do figures and letters match the material? Is a placeholder left unfilled anywhere? Does the console report errors?</li>
+<li>Count the runs up to the address and the messages per run.</li>
+<li>Assign each finding: the guide (plan template, skills of practice) you change here; content skills and checks go into an issue at lernapps/tooling, faults of the runtime into an issue at lernapps/app-templates, each with a test example.</li>
+<li>At most three runs per change; improve between two runs.</li>
+</ul>
+<h2 id="danger">The danger</h2>
+<ul>
+<li><strong>A description instead of photos.</strong> A test with a description of the photos says nothing about whether the assistant reads photos correctly: order, margins, handwriting, boxes. State in the table below what a test did not check.</li>
+<li><strong>Never put material in the repo.</strong> Photos, transcripts, descriptions of the material and text from it belong in no commit, issue or pull request. The material is protected by copyright, and a child&#39;s handwriting is personal data. The ZIP files of a test also stay outside the repo (the folders <code>_intake/</code> and <code>_out/</code> are ignored).</li>
+<li><strong>Facts not checked.</strong> The test shows that the ZIP builds, not that the facts are right. The assistant must say what the parents should check.</li>
+</ul>
+<h2 id="results">Results</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Who</th>
+<th>Input</th>
+<th>Build</th>
+<th><code>lernapps check</code></th>
+<th>Limit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>An agent with background knowledge of the repo</td>
+<td>Photos</td>
+<td>3 runs: 12 messages, 2 messages, none</td>
+<td>no finding (8 rules)</td>
+<td>The background knowledge helped; the guide was not alone. The stumbling blocks came from the messages.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A fresh session, only the guide</td>
+<td>A description of the photos</td>
+<td>1 run, no message</td>
+<td>no finding</td>
+<td>Reading the images was not part of the test.</td>
+</tr>
+</tbody></table>
+<p>| 3 to 5 | A fresh session with a shell as a sub-agent, only the guide | Photos | 1 run each, no message | no finding | Submitted through <code>zip_url</code> instead of the form. The findings concerned the guide and went into the skills. |</p>
+<p>Tests 1 and 2 were of the earlier guide for a chat without a shell. Open: a run with the form in a browser instead of <code>zip_url</code>.</p>
+  </main>
+<footer class="la-footer" lang="en">
+  <div class="la-footer__inner">
+    <p>lernapps.net is free and has no ads. It lives on your thanks.</p>
+    <nav aria-label="Footer"><ul><li><a href="/en/privacy/">Privacy</a></li><li><a href="/en/imprint/">Imprint</a></li><li><a href="/docs/en/platform-design/">Platform design</a></li><li><a href="https://github.com/lernapps/practice">Source code</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

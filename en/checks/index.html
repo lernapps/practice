@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="A submission goes through three stages. A stage begins only when the one before had no error.">
+  <title>Checks – App made to measure – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/style.css">
+<!-- lernapps-frame -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/lernapps-frame.css">
+<link rel="alternate" hreflang="en" href="/practice/en/checks/">
+<link rel="alternate" hreflang="de" href="/practice/checks/">
+<script>(() => {
+  const key = "lernapps-lang", here = "en", pages = {"de":"/practice/checks/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="en">Skip to content</a>
+<header class="la-header" lang="en">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/en/" aria-label="lernapps.net – home page"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Main navigation"><ul><li><a href="/apps/en/">Catalog</a></li><li><a href="/practice/en/" aria-current="page">Practise</a></li><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li><li class="la-lang"><a href="/practice/checks/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav>
+    <details class="la-menu"><summary>Menu</summary><nav class="la-nav la-nav--menu" aria-label="Main navigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">For learners</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/en/">App catalog</a></li><li><a href="/practice/en/" aria-current="page">Practise for a test</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">For makers</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Understand and join in</p><ul aria-labelledby="la-menu-2"><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/checks/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/en/">To the start page: App made to measure</a></p>
+<h1>Checks</h1>
+<p>A submission goes through three stages. A stage begins only when the one before had no error.</p>
+<h2 id="acceptance">Stage 1: Intake (job <code>intake</code>)</h2>
+<p>The job only reads. It runs nothing that is in the ZIP file.</p>
+<ol>
+<li>The issue comes from the form (all five headings are there) and is open. Otherwise nothing happens.</li>
+<li>The details match the lists, and the three declarations are ticked.</li>
+<li>The ZIP address has exactly the form <code>https://github.com/user-attachments/files/&lt;number&gt;/&lt;name&gt;.zip</code>. The file is downloaded with <code>curl -L</code> (only <code>https</code>, at most 5 redirects, 10 MB, 60 seconds). The final address must be at GitHub.</li>
+<li>The directory of the ZIP file is checked (paths, kinds, endings, sizes, number), then every file is unpacked with a hard size limit and compared with the checksum. The <a href="/practice/en/rules/">rules</a> name the limits. <code>src/main.ts</code> is never unpacked.</li>
+<li>The content of every SVG image is checked: it may only draw (<a href="/practice/en/rules/#svg">SVG images</a>).</li>
+</ol>
+<p>If there is an error, no build starts. Instead the job <code>publish</code> writes a comment in plain language.</p>
+<h2 id="build">Stage 2: Build (job <code>build</code>)</h2>
+<p>The job has read rights only and no secrets. It builds like this:</p>
+<ol>
+<li>It fetches <code>lernapps/app-templates</code> in exactly the state (commit) with which your assistant created the app: <code>appTemplates.commit</code> from the <code>package.json</code> of <code>lernapps/tooling</code> on <code>main</code>, read at build time. If it cannot be read, the build stops with a clear message.</li>
+<li>It takes the folder <code>explainer/</code> as the app and replaces <code>src/</code> with your content. The <code>main.ts</code> of the template stays. Example components and example chapters are dropped.</li>
+<li>It installs with <code>npm ci</code>, runs the tests of your components (<code>vp test</code>, only if there are components) and builds with <code>npm run build</code>. The template depends on <code>file:..</code> (the parent folder with the runtime). So it installs first in the root folder of <code>app-templates</code> (this builds the runtime), then in the folder <code>explainer/</code>. Both lock files fix the versions. Then it installs <code>@lernapps/tooling</code> at the commit of <code>main</code> from which it read the state of the template: the same tooling with which your assistant created and checked the app.</li>
+<li>It checks the built bundle with <code>lernapps check _site</code> (see below).</li>
+<li>It puts <code>&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;&gt;</code> into every HTML page, so that search engines do not index the preview.</li>
+</ol>
+<p>The build of the explainer checks the content and the code of every component: no network (<code>fetch</code> and the like), no <code>eval</code>, no <code>innerHTML</code> and no <code>v-html</code>, only allowed imports, browser objects only from <code>onMounted</code>, at most 20 kB of own code, a test per component, and for an exercise component the contract with 50 fixed tasks. A violation is in the comment with file, line and rule.</p>
+<p>The job runs code of your components (their tests and their logic while building). That is why it has read rights only and no secret. The type check of the components (<code>vue-tsc</code>) does not run here; it runs at your assistant with <code>npm run check</code>.</p>
+<h2 id="bundle">The check of the bundle</h2>
+<p><code>lernapps check &lt;folder&gt;</code> checks a built bundle without a catalogue entry. For this it opens every page in a browser, as a learner would, and checks these eight rules of the platform:</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>accessible</code></td>
+<td>Is the page accessible (WCAG 2.1 AA)?</td>
+</tr>
+<tr>
+<td><code>usable-at-360px</code></td>
+<td>Does everything work at 360 px width without scrolling sideways?</td>
+</tr>
+<tr>
+<td><code>no-tracking</code></td>
+<td>Does the page set no cookies and send no data?</td>
+</tr>
+<tr>
+<td><code>no-request-before-click</code></td>
+<td>Does the page ask no other server before someone clicks?</td>
+</tr>
+<tr>
+<td><code>own-data-only</code></td>
+<td>Does the page touch only its own data in the browser?</td>
+</tr>
+<tr>
+<td><code>links-resolve</code></td>
+<td>Does every link lead to a page or file that exists?</td>
+</tr>
+<tr>
+<td><code>pages-reachable</code></td>
+<td>Is every page reachable from the start page?</td>
+</tr>
+<tr>
+<td><code>explainer-readable-without-js</code></td>
+<td>Is the content readable without JavaScript too?</td>
+</tr>
+</tbody></table>
+<p><strong>Every one of these rules must pass.</strong> We relax none, because they protect children (no tracking) and the shared browser memory of the platform (<code>own-data-only</code>). The check takes about 10 seconds.</p>
+<h2 id="not-checked">What does not apply to a preview</h2>
+<p>These rules of the platform apply to the catalogue, not to a temporary preview. We do not check them here:</p>
+<table>
+<thead>
+<tr>
+<th>Not checked</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Catalogue entry (<code>entry-from-schema</code>, <code>entry-links-resolve</code>, <code>entry-fitness-matches</code>)</td>
+<td>A preview is not in the catalogue. There is no entry to check.</td>
+</tr>
+<tr>
+<td><code>dependency-licence</code>, <code>app-content-guide</code></td>
+<td>Both need the repository of an app. The dependencies are in the lock file of the template. A preview has no content guide of its own.</td>
+</tr>
+<tr>
+<td>Check of the content (<code>learners-act</code>, <code>learner-text-german</code>, <code>third-party-licence</code>, <code>no-learner-data-in-texts</code>)</td>
+<td>A person judges this when the content is added to the catalogue. Until then your three declarations apply.</td>
+</tr>
+<tr>
+<td>Imprint and privacy notice of the app</td>
+<td>The pages of the template already link them on <code>lernapps.net</code>. A separate check is not needed.</td>
+</tr>
+<tr>
+<td>Formatting and style of the files</td>
+<td>A preview never fails because of spelling (indentation, empty lines). We run no format check and do not reformat your content. Only the rules of the explainer for the content count.</td>
+</tr>
+<tr>
+<td>Entry in search engines</td>
+<td>The preview should not be found. So <code>noindex</code> is on every page.</td>
+</tr>
+</tbody></table>
+<h2 id="publication">Stage 3: Publication (job <code>publish</code>)</h2>
+<p>The job runs only code from this repository. It treats the result of the build as data.</p>
+<ol>
+<li>It checks the site once more: number and size of the files, names, endings, links, <code>noindex</code> on every page.</li>
+<li>It writes it to the branch <code>gh-pages</code> in the folder <code>i/&lt;number&gt;/</code> and adds <code>i/&lt;number&gt;/practice.json</code> (<a href="/practice/en/lifetime/">Lifetime</a>).</li>
+<li>It waits until the address serves the new state and writes the link in the comment.</li>
+</ol>
+  </main>
+<footer class="la-footer" lang="en">
+  <div class="la-footer__inner">
+    <p>lernapps.net is free and has no ads. It lives on your thanks.</p>
+    <nav aria-label="Footer"><ul><li><a href="/en/privacy/">Privacy</a></li><li><a href="/en/imprint/">Imprint</a></li><li><a href="/docs/en/platform-design/">Platform design</a></li><li><a href="https://github.com/lernapps/practice">Source code</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

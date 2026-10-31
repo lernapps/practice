@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="1. Dein Assistent hat die Lern-App vom Archetyp explainer auf Deinem Rechner gebaut und geprüft. Er gibt Dir die ZIP-Datei mit dem Ordner src (Seiten, Bilder, Komponenten). 2. Du weißt, was Du bestätigst: Dein Assistent hat Dir jede Seite der App gezeigt, bevor er Dir die ZIP-Datei gibt. 3. Der Inhalt erfüllt die Regeln. Das wichtigste: keine Namen, keine abgeschriebenen Texte, keine Fotos des Materials. 4. Du hast ein GitHub-Konto.">
+  <title>Einreichen: Schritt für Schritt – Lern-App nach Maß – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-31/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-31/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-31/lernapps-frame.css">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-31/submit/">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-31/en/submit/">
+<script>(() => {
+  const key = "lernapps-lang", here = "de", pages = {"en":"/practice/pr-preview/pr-31/en/submit/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="de">Zum Inhalt springen</a>
+<p class="la-preview" lang="de">Vorschau einer Änderung. Die echte Seite: <a href="https://lernapps.net/practice/submit/">lernapps.net/practice/submit/</a></p><header class="la-header" lang="de">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/" aria-label="lernapps.net – Startseite"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Hauptnavigation"><ul><li><a href="/apps/">Katalog</a></li><li><a href="/practice/pr-preview/pr-31/" aria-current="page">Üben</a></li><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-31/en/submit/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav>
+    <details class="la-menu"><summary>Menü</summary><nav class="la-nav la-nav--menu" aria-label="Hauptnavigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">Für Lernende</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/">App Katalog</a></li><li><a href="/practice/pr-preview/pr-31/" aria-current="page">Üben für eine Prüfung</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">Für Macher</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Verstehen und mitmachen</p><ul aria-labelledby="la-menu-2"><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-31/en/submit/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-31/">Zur Startseite: Lern-App nach Maß</a></p>
+<h1>Einreichen: Schritt für Schritt</h1>
+<h2 id="before">Vorher</h2>
+<ol>
+<li>Dein Assistent hat die Lern-App vom Archetyp <code>explainer</code> auf Deinem Rechner gebaut und geprüft. Er gibt Dir die ZIP-Datei mit dem Ordner <code>src</code> (Seiten, Bilder, Komponenten).</li>
+<li>Du weißt, was Du bestätigst: Dein Assistent hat Dir jede Seite der App gezeigt, bevor er Dir die ZIP-Datei gibt.</li>
+<li>Der Inhalt erfüllt die <a href="/practice/pr-preview/pr-31/rules/">Regeln</a>. Das wichtigste: keine Namen, keine abgeschriebenen Texte, keine Fotos des Materials.</li>
+<li>Du hast ein GitHub-Konto.</li>
+</ol>
+<h2 id="pack-zip">So packst Du die ZIP-Datei</h2>
+<p>Packe den <strong>Ordner <code>src</code> selbst</strong> ein. Oben in der ZIP-Datei steht dann <code>src/app.yaml</code>. Die ZIP-Datei darf höchstens 10 MB groß sein.</p>
+<p>Es geht auch, wenn Du das ganze Projekt als ZIP von GitHub lädst („Download ZIP“). Dann liegt alles in einem Ordner wie <code>mein-projekt-main/</code>. Wir lesen daraus nur <code>mein-projekt-main/src/</code>. Alles andere ignorieren wir und entpacken es nie.</p>
+<h2 id="submit">So reichst Du ein</h2>
+<ol>
+<li>Öffne das Formular: <a href="https://github.com/lernapps/practice/issues/new?template=submit.yml">https://github.com/lernapps/practice/issues/new?template=submit.yml</a></li>
+<li>Fülle <strong>Fach</strong>, <strong>Klassenstufe</strong> und <strong>Bundesland</strong> aus.</li>
+<li>Ziehe die ZIP-Datei in das Feld <strong>ZIP-Datei</strong>. Warte, bis dort ein Link wie <code>[name.zip](https://github.com/user-attachments/files/…/name.zip)</code> erscheint.</li>
+<li>Setze bei den <strong>drei Erklärungen</strong> einen Haken.</li>
+<li>Klicke auf <strong>Submit new issue</strong>.</li>
+</ol>
+<p>Nach etwa einer bis drei Minuten schreibt GitHub einen Kommentar:</p>
+<ul>
+<li><strong>Alles gut:</strong> Du bekommst die Adresse der Vorschau, zum Beispiel <code>https://lernapps.net/practice/i/12/</code>.</li>
+<li><strong>Etwas fehlt oder ist falsch:</strong> Der Kommentar sagt in einfachen Worten, was. Gib ihn Deinem Assistenten.</li>
+<li><strong>Fehler beim Bauen:</strong> Der Kommentar zeigt die Meldungen des Baus (Datei, Zeile, Regel). Gib sie Deinem Assistenten, er korrigiert den Inhalt.</li>
+</ul>
+<h2 id="correction">Nach einer Korrektur</h2>
+<p>Eine neue Fassung ist mit einem Kommentar online: Ziehe die neue ZIP-Datei in das Kommentarfeld Deines Issues, warte auf den Link und klicke auf <strong>Comment</strong>. GitHub prüft und baut dann neu und ersetzt die Vorschau und seinen alten Kommentar. Es zählt immer die zuletzt angehängte ZIP-Datei. Nur Deine eigenen Kommentare zählen, nicht die von anderen.</p>
+<p>Eine Angabe des Formulars (Fach, Klassenstufe, Bundesland) änderst Du am ersten Feld: die drei Punkte, dann <strong>Edit</strong>. Bleiben ZIP-Datei und Angaben gleich, baut GitHub nicht neu.</p>
+<h2 id="prefill">Das Formular vorausfüllen</h2>
+<p>Das Formular lässt sich über Parameter in der Adresse vorausfüllen. Das hilft Assistenten, die Dir einen fertigen Link geben. Die Namen der Parameter sind die Kennungen (ids) der Felder:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Feld</th>
+<th>Beispielwert</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>template</code></td>
+<td>immer <code>submit.yml</code></td>
+<td><code>submit.yml</code></td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Titel des Issues</td>
+<td><code>Vorbereitung: Religion</code></td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>Fach</td>
+<td><code>Religion</code></td>
+</tr>
+<tr>
+<td><code>grade</code></td>
+<td>Klassenstufe (eine Zahl von 1 bis 13)</td>
+<td><code>7</code></td>
+</tr>
+<tr>
+<td><code>federalState</code></td>
+<td>Bundesland (genau wie in der Liste)</td>
+<td><code>Hessen</code></td>
+</tr>
+</tbody></table>
+<p>Beispiel:</p>
+<pre><code class="language-text">https://github.com/lernapps/practice/issues/new?template=submit.yml&amp;title=Vorbereitung%3A%20Religion&amp;subject=Religion&amp;grade=7&amp;federalState=Hessen
+</code></pre>
+<p>Sonderzeichen müssen in der Adresse umgeschrieben werden: Leerzeichen als <code>%20</code>, ü als <code>%C3%BC</code> (zum Beispiel <code>Baden-W%C3%BCrttemberg</code>). Die ZIP-Datei und die Erklärungen kannst Du nicht vorausfüllen. Die Erklärungen musst Du selbst ankreuzen.</p>
+<h2 id="problems">Wenn etwas nicht klappt</h2>
+<ul>
+<li><strong>Kein Kommentar nach fünf Minuten:</strong> Öffne den Reiter „Actions“ des Repos und suche den Lauf „Submission“. Schreibe uns einen Kommentar ins Issue.</li>
+<li><strong>„Kein ZIP gefunden“:</strong> Die ZIP-Datei ist nicht angekommen. Hänge sie als Kommentar an und warte auf den Link, bevor Du auf <strong>Comment</strong> klickst.</li>
+<li><strong>Die Seite lädt noch nicht:</strong> GitHub braucht manchmal einige Minuten, bis die Adresse antwortet. Versuche es später noch einmal.</li>
+</ul>
+  </main>
+<footer class="la-footer" lang="de">
+  <div class="la-footer__inner">
+    <p>lernapps.net ist kostenlos und ohne Werbung. Es lebt von deinem Danke.</p>
+    <nav aria-label="Fußzeile"><ul><li><a href="/privacy/">Datenschutz</a></li><li><a href="/imprint/">Impressum</a></li><li><a href="/docs/platform-design/">Plattform-Design</a></li><li><a href="https://github.com/lernapps/practice">Quellcode</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>

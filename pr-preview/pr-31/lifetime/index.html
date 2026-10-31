@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Eine Vorschau lebt zwei Wochen (14 Tage). Danach wird sie automatisch gelöscht, außer eine Person hat sie mit 👍 gerettet.">
+  <title>Lebensdauer einer Vorschau – Lern-App nach Maß – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-31/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-31/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-31/lernapps-frame.css">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-31/lifetime/">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-31/en/lifetime/">
+<script>(() => {
+  const key = "lernapps-lang", here = "de", pages = {"en":"/practice/pr-preview/pr-31/en/lifetime/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="de">Zum Inhalt springen</a>
+<p class="la-preview" lang="de">Vorschau einer Änderung. Die echte Seite: <a href="https://lernapps.net/practice/lifetime/">lernapps.net/practice/lifetime/</a></p><header class="la-header" lang="de">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/" aria-label="lernapps.net – Startseite"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Hauptnavigation"><ul><li><a href="/apps/">Katalog</a></li><li><a href="/practice/pr-preview/pr-31/" aria-current="page">Üben</a></li><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-31/en/lifetime/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav>
+    <details class="la-menu"><summary>Menü</summary><nav class="la-nav la-nav--menu" aria-label="Hauptnavigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">Für Lernende</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/">App Katalog</a></li><li><a href="/practice/pr-preview/pr-31/" aria-current="page">Üben für eine Prüfung</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">Für Macher</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/build/">App bauen</a></li><li><a href="/tooling/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Verstehen und mitmachen</p><ul aria-labelledby="la-menu-2"><li><a href="/tutor/">Tutor</a></li><li><a href="/features/">Features</a></li><li><a href="/docs/">Plattform</a></li><li><a href="/join/">Mitmachen</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-31/en/lifetime/" hreflang="en" lang="en" data-la-lang="en" aria-label="Language: English">English</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-31/">Zur Startseite: Lern-App nach Maß</a></p>
+<h1>Lebensdauer einer Vorschau</h1>
+<p>Eine Vorschau lebt <strong>zwei Wochen</strong> (14 Tage). Danach wird sie automatisch gelöscht, außer eine Person hat sie mit 👍 gerettet.</p>
+<h2 id="rules">Die Regeln</h2>
+<table>
+<thead>
+<tr>
+<th>Lage</th>
+<th>Was passiert</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Das Issue ist <strong>geschlossen</strong></td>
+<td>Die Vorschau wird <strong>sofort</strong> gelöscht. Es gibt keinen Kommentar, denn jemand hat das Issue mit Absicht geschlossen.</td>
+</tr>
+<tr>
+<td>Der Ablauftag ist noch nicht erreicht</td>
+<td>Die Vorschau bleibt.</td>
+</tr>
+<tr>
+<td>Der Ablauftag ist erreicht, und auf dem <strong>ersten Feld des Issues</strong> liegt mindestens ein 👍 von einem <strong>Menschen</strong> (nicht von einem Bot)</td>
+<td>Die Vorschau <strong>bleibt</strong>, bis das Issue geschlossen wird. Wir prüfen, ob der Inhalt in den Katalog passt.</td>
+</tr>
+<tr>
+<td>Der Ablauftag ist erreicht, kein 👍</td>
+<td>Die Vorschau wird gelöscht. Ein Kommentar im Issue sagt es, nennt Dich (<code>@Dein-Name</code>) und fragt, ob die Vorschau geholfen hat.</td>
+</tr>
+</tbody></table>
+<p>Der Ablauftag steht in <code>i/&lt;Nummer&gt;/practice.json</code> (Feld <code>expires</code>). Maßgeblich ist dieses Datum, <strong>nicht</strong> die Zeit eines Commits.</p>
+<h2 id="publish-again">Neu veröffentlichen</h2>
+<p>Jede neue Veröffentlichung für dasselbe Issue ersetzt die alte und beginnt die zwei Wochen neu. Das passiert, wenn Du eine neue ZIP-Datei als Kommentar anhängst oder die Angaben im Issue änderst. Nach dem Ablauf der Vorschau geht es genauso: neue ZIP-Datei als Kommentar anhängen.</p>
+<p>Ein Wartungsteam kann den Lauf auch ohne neues Anhängen wiederholen (<a href="/practice/pr-preview/pr-31/operations/">Betrieb</a>).</p>
+<h2 id="cleanup">Wann das Aufräumen läuft</h2>
+<p>Der Workflow „Cleanup“ läuft</p>
+<ul>
+<li><strong>täglich</strong> um 03:23 Uhr UTC (prüft alle Ordner),</li>
+<li><strong>sofort</strong>, wenn ein Issue geschlossen wird (prüft dessen Ordner),</li>
+<li><strong>von Hand</strong> (mit der Option „dry-run“, die nur anzeigt, was gelöscht würde).</li>
+</ul>
+<h2 id="without-issue">Ordner ohne passendes Issue</h2>
+<p>Der Workflow betrachtet nur Ordner <code>i/&lt;Zahl&gt;/</code> auf <code>gh-pages</code>. Alles andere (zum Beispiel die Startseite und <code>.nojekyll</code>) bleibt unberührt, ebenso Einträge von <code>i/</code>, deren Name keine Zahl ist.</p>
+<ul>
+<li><strong>Ordner ohne lesbare <code>practice.json</code></strong>, oder mit einer für ein anderes Issue: wird <strong>sofort gelöscht</strong>. Das Programm schreibt die Dateien und die <code>practice.json</code> in einem einzigen Commit. Ein solcher Ordner stammt also nicht von diesem Ablauf.</li>
+<li><strong>Ordner, dessen Issue nicht mehr existiert</strong> (gelöscht oder verschoben): bleibt bis zum Ablauftag in <code>practice.json</code> und wird dann ohne Kommentar gelöscht. Ein 👍 kann es nicht mehr geben.</li>
+<li><strong>Issue mit 👍, aber geschlossen</strong>: wird gelöscht. Schließen beendet die Vorschau immer.</li>
+</ul>
+  </main>
+<footer class="la-footer" lang="de">
+  <div class="la-footer__inner">
+    <p>lernapps.net ist kostenlos und ohne Werbung. Es lebt von deinem Danke.</p>
+    <nav aria-label="Fußzeile"><ul><li><a href="/privacy/">Datenschutz</a></li><li><a href="/imprint/">Impressum</a></li><li><a href="/docs/platform-design/">Plattform-Design</a></li><li><a href="https://github.com/lernapps/practice">Quellcode</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>
