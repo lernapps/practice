@@ -107,7 +107,7 @@ open questions. Never the material itself, never a name. -->
 ### Tasks
 
 - [ ] `grep '^phase:'` prints `phase: plan`; else set it.
-- [ ] Install the skills of the archetype: `npx lernapps skills --archetype explainer`.
+- [ ] Install the skills of the archetype: `npx --no -- lernapps skills --archetype explainer`.
 - [ ] Load skills `lernapps-practice-plan`, `lernapps-exercise-patterns` and `lernapps-explainer-design`. Map the
       content as skill `lernapps-explainer-design` says: chapters and pages, with the pages skill
       `lernapps-practice-plan` names for the occasion.
@@ -148,7 +148,7 @@ checks and cannot. Becomes the content guide in Code. -->
 
 - [ ] `grep '^phase:'` prints `phase: code`; else set it.
 - [ ] Load skill `lernapps-cli`. Create the app in this folder as it says, with
-      `npx lernapps create --archetype explainer`; then `git init`, `npm install`, the
+      `npx --no -- lernapps create --archetype explainer`; then `git init`, `npm install`, the
       first commit. `create` keeps this plan and the skills. Never write the app by hand.
 - [ ] Fill the content guide `.agents/skills/app-content/SKILL.md` from "Notes" and "Content method". Add under
       "Rules learned from mistakes" the line: "Diese App wird über lernapps/practice eingereicht: eine Änderung ist

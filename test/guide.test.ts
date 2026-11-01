@@ -81,7 +81,7 @@ describe("the plan template", () => {
     const phase = (name: string) => phases.find((p) => p.startsWith(`${name}\n`)) ?? "";
     assert.ok(phase("Explore").includes("lernapps-practice-explore` missing"), "Explore says what a missing skill means");
     // the archetype's skills come with `lernapps skills --archetype explainer`, at the start of Plan, before one is loaded
-    const install = plan.indexOf("npx lernapps skills --archetype explainer");
+    const install = plan.indexOf("npx --no -- lernapps skills --archetype explainer");
     assert.ok(install > plan.indexOf("## Plan"), "in Plan");
     assert.ok(install < plan.indexOf("Load skills `lernapps-practice-plan`"), "before its skills are loaded");
   });
@@ -99,7 +99,7 @@ describe("the plan template", () => {
     assert.match(phase("Commit"), /Load skill `lernapps-practice-submit`/);
   });
   it("creates the explainer with the tooling's create and adds the rule of a practice app to the content guide", () => {
-    assert.ok(plan.includes("npx lernapps create --archetype explainer"));
+    assert.ok(plan.includes("npx --no -- lernapps create --archetype explainer"));
     assert.ok(plan.includes("Diese App wird über lernapps/practice eingereicht: eine Änderung ist\n      ein neues ZIP im Issue; kein Push, kein Listing."));
     assert.ok(plan.includes("`npm run build` and `npm run check` pass"));
   });
