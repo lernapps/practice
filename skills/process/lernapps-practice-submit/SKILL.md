@@ -19,7 +19,7 @@ Wochen öffentlich sein darf. Das kann er nur, wenn er jede Seite gesehen hat. Z
 `npm run build`, auf dem besten Weg, den Deine Umgebung erlaubt:
 
 1. Läufst Du auf dem Rechner des Creators: Starte die App mit `npm run dev` und gib ihm die Adresse.
-2. Sonst Bilder aller Seiten mit `npx lernapps screenshots`, wie der Skill `lernapps-cli` sagt. Zeige die Übersicht
+2. Sonst Bilder aller Seiten mit `npx --no -- lernapps screenshots`, wie der Skill `lernapps-cli` sagt. Zeige die Übersicht
    `screenshots/index.html`, wo Du HTML zeigen kannst, sonst die Bilder der Reihe nach. Der Ordner kommt nicht in die
    ZIP-Datei.
 

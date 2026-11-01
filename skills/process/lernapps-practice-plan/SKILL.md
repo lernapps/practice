@@ -41,7 +41,8 @@ Selbsteinschätzung prüft ohne zu erklären.
 
 - **Selbsteinschätzung:** die Selbsteinschätzung des Explainers (`selfAssessment`, Skill
   `lernapps-explainer-self-assessment`): Aufgaben quer durch den Stoff, und am Ende sagt sie je Seite, ob das Kind sie
-  schon kann oder noch einmal ansehen sollte.
+  schon kann oder noch einmal ansehen sollte. Sie steht in der Struktur vorn, geschrieben wird sie aber erst in Commit,
+  wenn die Seiten feststehen (so sagt es der Skill `lernapps-explainer-self-assessment`): Plane sie hier, schreibe sie dort.
 - Keine Seite nur mit Plan, Etappen oder Inhaltsverzeichnis: Die App hat ihre Navigation schon, und eine Aufgabe
   dazu prüft nichts vom Stoff.
 
