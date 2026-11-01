@@ -1,7 +1,7 @@
 // The guidance for assistants: docs/llms.txt (the first instruction), guidance/plan-template.md (the process) and the
-// skills in skills/. What they name must exist: the addresses of this repo, the commands, the skills; and the plan
-// template keeps the front matter of the tooling's plans (schema: @lernapps/tooling/guidance/
-// plan-front-matter.v1.schema.json), which `create` and the hooks read.
+// skills in skills/. What they name must exist: the commands, the skills; and the plan template keeps the front
+// matter of the tooling's plans (schema: @lernapps/tooling/guidance/plan-front-matter.v1.schema.json), which `create`
+// and the hooks read. Nothing is downloaded: `npx --yes @lernapps/practice init` writes the template and the skills.
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -9,7 +9,6 @@ import { describe, it } from "node:test";
 
 const root = new URL("..", import.meta.url).pathname;
 const read = (path: string) => readFileSync(join(root, path), "utf8");
-const RAW = "https://raw.githubusercontent.com/lernapps/practice/main/";
 const TEMPLATE = "guidance/plan-template.md";
 const plan = read(TEMPLATE);
 const guide = read("docs/llms.txt");
@@ -19,47 +18,30 @@ const folders = readdirSync(join(root, "skills")).flatMap((group) =>
   readdirSync(join(root, "skills", group)).map((name) => ({ name, dir: `skills/${group}/${name}` })),
 );
 
-/** The skills the creator's folder holds, by source: exactly these and the content guide that `create` writes. */
-const EXPECTED = {
-  "lernapps/practice": ["lernapps-practice-explore", "lernapps-practice-plan", "lernapps-practice-photos", "lernapps-practice-submit"],
-  "lernapps/tooling": [
-    "lernapps-explainer",
-    "lernapps-explainer-design",
-    "lernapps-content-questions",
-    "lernapps-exercise-patterns",
-    "lernapps-content-research",
-    "lernapps-cli",
-  ],
-};
-/** Skills of the tooling that do not fit a practice app: it is not published through GitHub and not listed. */
-const EXCLUDED = ["lernapps-app", "lernapps-commit", "lernapps-github", "lernapps-listing", "lernapps-content-growth", "lernapps-quiz", "lernapps-quiz-design", "lernapps-interactive", "lernapps-interactive-design"];
-
-/** The `npx skills add` commands of a text: their source and the names after -s. */
-const installs = (text: string) =>
-  [...text.replace(/\n\s+/g, " ").matchAll(/npx --yes skills add (\S+) -y((?: -s [a-z0-9-]+)+)/g)].map((m) => ({
-    source: m[1] ?? "",
-    skills: [...(m[2] ?? "").matchAll(/-s ([a-z0-9-]+)/g)].map((s) => s[1] ?? ""),
-  }));
+/** The skills of this package, which init syncs with those of the tooling. */
+const PRACTICE = ["lernapps-practice-explore", "lernapps-practice-plan", "lernapps-practice-photos", "lernapps-practice-submit"];
+/** The skills of the tooling the plan loads: init syncs all but the archetype's, which `lernapps skills` adds. */
+const TOOLING = ["lernapps-content-questions", "lernapps-exercise-patterns", "lernapps-content-research", "lernapps-cli"];
+const ARCHETYPE = ["lernapps-explainer", "lernapps-explainer-design"];
 
 describe("docs/llms.txt", () => {
   it("is short: the first instruction only", () => {
     assert.ok(guide.split("\n").length <= 25, `${guide.split("\n").length} lines`);
     assert.ok(!/^## \d/m.test(guide), "no numbered steps of a process");
   });
-  it("downloads the plan template of this repo with curl as .vibe/plans/01-<anlass>.md", () => {
-    const url = `${RAW}${TEMPLATE}`;
-    assert.ok(guide.includes(`curl -fsSL -o .vibe/plans/01-<anlass>.md ${url}`));
+  it("starts the app with `npx --yes @lernapps/practice init <anlass>`, which writes the plan template", () => {
+    assert.ok(guide.includes("npx --yes @lernapps/practice init <anlass>"));
+    assert.ok(guide.includes(".vibe/plans/01-<anlass>.md"));
     assert.ok(existsSync(join(root, TEMPLATE)));
   });
-  it("names only addresses that exist in this repo", () => {
-    for (const [url] of guide.matchAll(/https:\/\/\S+/g)) {
-      assert.ok(url.startsWith(RAW), url);
-      assert.ok(existsSync(join(root, url.slice(RAW.length))), url);
-    }
+  it("downloads nothing: no address, no curl", () => {
+    assert.ok(!/https?:\/\//.test(guide.replace(/^>.*$/m, "")), "an address in the instruction");
+    assert.ok(!/curl/.test(guide));
   });
   it("names the prerequisite and says to read the template in full and follow it", () => {
     assert.match(guide, /Node 22\.18/);
     assert.match(guide, /git/);
+    assert.match(guide, /npm-Registry/);
     assert.match(guide, /vollständig/);
     assert.match(guide, /Aufgabe für Aufgabe/);
   });
@@ -90,43 +72,34 @@ describe("the plan template", () => {
     const checkpoints = plan.split("\n").filter((line) => line.includes("**Checkpoint:**"));
     assert.deepEqual(checkpoints.map((line) => /\*\*Checkpoint:\*\* (\w+)/.exec(line)?.[1]), ["proposal", "pages", "submit", "address"]);
   });
-  it("installs exactly the expected skills, from lernapps/practice and lernapps/tooling, each once", () => {
-    const found = installs(plan);
-    assert.deepEqual([...new Set(found.map((f) => f.source))].sort(), Object.keys(EXPECTED).sort());
-    for (const [source, expected] of Object.entries(EXPECTED)) {
-      const skills = found.filter((f) => f.source === source).flatMap((f) => f.skills);
-      assert.deepEqual([...skills].sort(), [...expected].sort(), source);
-    }
-    for (const name of EXCLUDED) assert.ok(!found.some((f) => f.skills.includes(name)), name);
+  it("installs nothing from GitHub: no skills add, no github:, no download", () => {
+    assert.ok(!/skills add|github:lernapps|raw\.githubusercontent|curl/.test(plan));
   });
-  it("installs each skill in the phase that loads it first, not before", () => {
-    const phases = plan.split(/^## /m).filter((p) => /^(Explore|Plan|Code|Commit)\n/.test(p));
-    let installed: string[] = [];
-    for (const phase of phases) {
-      installed = [...installed, ...installs(phase).flatMap((f) => f.skills)];
-      const loaded = [...phase.replace(/\s+/g, " ").matchAll(/Load skills? ((?:`[a-z0-9-]+`(?:, | and )?)+)/g)].flatMap((m) =>
-        [...(m[1] ?? "").matchAll(/`([a-z0-9-]+)`/g)].map((s) => s[1] ?? ""),
-      );
-      for (const skill of loaded) assert.ok(installed.includes(skill), `${skill} is loaded in ${phase.split("\n")[0]} before it is installed`);
-    }
+  it("names the skills of the phases, which init put in the folder, and installs the archetype's after the choice", () => {
+    assert.match(plan, /`npx --yes @lernapps\/practice init <short name>`/);
+    const phases = plan.split(/^## /m);
+    const phase = (name: string) => phases.find((p) => p.startsWith(`${name}\n`)) ?? "";
+    assert.ok(phase("Explore").includes("lernapps-practice-explore` missing"), "Explore says what a missing skill means");
+    // the archetype's skills come with `lernapps skills --archetype explainer`, at the start of Plan, before one is loaded
+    const install = plan.indexOf("npx lernapps skills --archetype explainer");
+    assert.ok(install > plan.indexOf("## Plan"), "in Plan");
+    assert.ok(install < plan.indexOf("Load skills `lernapps-practice-plan`"), "before its skills are loaded");
   });
-  it("installs the skills of this repo that exist, and every one of them", () => {
-    assert.deepEqual(folders.map((f) => f.name).sort(), [...EXPECTED["lernapps/practice"]].sort());
+  it("is made of the skills of this package", () => {
+    assert.deepEqual(folders.map((f) => f.name).sort(), [...PRACTICE].sort());
   });
-  it("loads every installed skill in a phase, and the content guide in Code", () => {
+  it("loads every skill it needs in a phase, and the content guide in Code", () => {
     const phases = plan.split(/^## /m);
     const phase = (name: string) => phases.find((p) => p.startsWith(`${name}\n`)) ?? "";
     const flat = plan.replace(/\s+/g, " ");
-    for (const skill of Object.values(EXPECTED).flat()) {
-      assert.ok([`skill \`${skill}\``, `skills \`${skill}\``, `and \`${skill}\``].some((load) => flat.includes(`Load ${load}`) || flat.includes(`also ${load}`) || flat.includes(load)), skill);
-    }
-    assert.match(phase("Explore"), /Load skill `lernapps-content-research`/);
+    for (const skill of [...PRACTICE, ...TOOLING, ...ARCHETYPE]) assert.ok(flat.includes(`\`${skill}\``), skill);
+    assert.match(phase("Explore"), /Load skill `lernapps-practice-explore`/);
     assert.match(phase("Code"), /Load skill `lernapps-cli`/);
     assert.match(phase("Code"), /app-content/);
     assert.match(phase("Commit"), /Load skill `lernapps-practice-submit`/);
   });
-  it("creates the explainer with the tooling of main and adds the rule of a practice app to the content guide", () => {
-    assert.ok(plan.includes("npx --yes github:lernapps/tooling#main create --archetype explainer"));
+  it("creates the explainer with the tooling's create and adds the rule of a practice app to the content guide", () => {
+    assert.ok(plan.includes("npx lernapps create --archetype explainer"));
     assert.ok(plan.includes("Diese App wird über lernapps/practice eingereicht: eine Änderung ist\n      ein neues ZIP im Issue; kein Push, kein Listing."));
     assert.ok(plan.includes("`npm run build` and `npm run check` pass"));
   });

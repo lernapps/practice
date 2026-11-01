@@ -2,21 +2,21 @@
 // A local trial run of a submission: sends a ZIP file through the same checks and the same build as a run on GitHub
 // (actions/validate and actions/build) and prints the result the way the bot comments it. Nothing is written to
 // GitHub. Like the build on GitHub, it runs the code of the submission's components (their tests and the explainer's
-// build), on this machine. The first run fetches app-templates at the commit that lernapps/tooling pins on main (read
-// now, as the action build reads it) into _templates/ and installs it (a few minutes, needs the network); later runs
-// at the same commit reuse it.
+// build), on this machine. The first run takes the template out of @lernapps/app-templates at the version that the
+// latest @lernapps/tooling on npm depends on (read now, as the action build reads it) into _templates/ and installs it
+// (a few minutes, needs the network); later runs with the same pair reuse it.
 //
-//   npm run try -- <file.zip>                    exit code 0: the ZIP file passes; 1: the bot would report problems
-//   npm run try -- <file.zip> --commit <sha>     the same with app-templates at another commit
+//   npm run try -- <file.zip>                      exit code 0: the ZIP file passes; 1: the bot would report problems
+//   npm run try -- <file.zip> --tooling <version>  the same with another version of @lernapps/tooling
 //
 // The built site lands in _out/site; look at it with: python3 -m http.server -d _out/site 8000
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildFailedComment, problemsComment, previewComment } from "../actions/lib/github.ts";
 import { extractZip, inspectZip } from "../actions/lib/zip.ts";
-import { prepare, readPin, run, useTooling, type BuildResult, type Pin } from "../actions/build/build.ts";
+import { appFromTemplate, prepare, readPin, run, TEMPLATES, type BuildResult, type Pin } from "../actions/build/build.ts";
 
 const root = resolve(fileURLToPath(import.meta.url), "../..");
 
@@ -28,23 +28,26 @@ function sh(cwd: string, file: string, args: string[]): void {
   if (done.status !== 0) throw new Error(`${file} ${args.join(" ")} failed in ${cwd}`);
 }
 
-/** app-templates at the commit `pin` in _templates/, installed like the action does (root first, then explainer/). */
+/**
+ * The app of the template of @lernapps/app-templates at the pin, installed like the action does, in
+ * _templates/<templates>-<tooling>/: the package unpacked from npm, its folder explainer/ as the app, npm install.
+ */
 export function ensureTemplates(pin: Pin, base = root): string {
-  const dir = join(base, "_templates");
-  const head = () => spawnSync("git", ["rev-parse", "HEAD"], { cwd: dir, encoding: "utf8" }).stdout.trim();
-  if (!existsSync(join(dir, ".git")) || head() !== pin.commit) {
+  const dir = join(base, "_templates", `${pin.templates}-${pin.tooling}`);
+  const app = join(dir, "app");
+  const done = join(dir, "installed");
+  if (!existsSync(done)) {
     rmSync(dir, { recursive: true, force: true });
     mkdirSync(dir, { recursive: true });
-    sh(dir, "git", ["init", "--quiet"]);
-    sh(dir, "git", ["fetch", "--quiet", "--depth", "1", pin.url, pin.commit]);
-    sh(dir, "git", ["checkout", "--quiet", "FETCH_HEAD"]);
+    sh(dir, "npm", ["pack", `${TEMPLATES}@${pin.templates}`, "--silent", "--ignore-scripts", "--pack-destination", "."]);
+    const tarball = readdirSync(dir).find((name) => name.endsWith(".tgz"));
+    if (tarball === undefined) throw new Error(`npm pack of ${TEMPLATES}@${pin.templates} wrote no tarball`);
+    sh(dir, "tar", ["-xzf", tarball]);
+    appFromTemplate(join(dir, "package"), app, pin);
+    sh(app, "npm", ["install", "--no-audit", "--no-fund"]);
+    writeFileSync(done, "");
   }
-  for (const where of [dir, join(dir, "explainer")]) {
-    if (!existsSync(join(where, "node_modules"))) sh(where, "npm", ["ci", "--no-audit", "--no-fund"]);
-  }
-  // the tooling of the commit the pin was read at, as the action build installs it
-  if (useTooling(join(dir, "explainer"), pin.tooling)) console.log(`@lernapps/tooling at ${pin.tooling}`);
-  return join(dir, "explainer");
+  return app;
 }
 
 export const buildAt = (pin: Pin): Builder => (tree, out) => {
@@ -81,23 +84,23 @@ export function tryZip(zipPath: string, say: (text: string) => void, build: Buil
   return 0;
 }
 
-/** The arguments of `npm run try`: the ZIP file and, after --commit, a commit of app-templates. */
-export function parseArgs(args: readonly string[]): { zip?: string; commit?: string } {
-  const at = args.indexOf("--commit");
-  const commit = at >= 0 ? args[at + 1] : undefined;
+/** The arguments of `npm run try`: the ZIP file and, after --tooling, a version of @lernapps/tooling. */
+export function parseArgs(args: readonly string[]): { zip?: string; tooling?: string } {
+  const at = args.indexOf("--tooling");
+  const tooling = at >= 0 ? args[at + 1] : undefined;
   const zip = args.filter((_arg, i) => at < 0 || (i !== at && i !== at + 1))[0];
-  return { ...(zip === undefined ? {} : { zip }), ...(commit === undefined ? {} : { commit }) };
+  return { ...(zip === undefined ? {} : { zip }), ...(tooling === undefined ? {} : { tooling }) };
 }
 
 if (process.argv[1] !== undefined && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const { zip, commit } = parseArgs(process.argv.slice(2));
-  if (zip === undefined || !existsSync(zip) || (process.argv.includes("--commit") && commit === undefined)) {
-    console.error("Usage: npm run try -- <file.zip> [--commit <commit of app-templates>]");
+  const { zip, tooling } = parseArgs(process.argv.slice(2));
+  if (zip === undefined || !existsSync(zip) || (process.argv.includes("--tooling") && tooling === undefined)) {
+    console.error("Usage: npm run try -- <file.zip> [--tooling <version of @lernapps/tooling>]");
     process.exitCode = 2;
   } else {
     try {
-      const pin = await readPin(fetch, commit);
-      console.log(`app-templates at ${pin.commit}${commit ? " (given)" : " (the pin of lernapps/tooling on main)"}, tooling at ${pin.tooling}`);
+      const pin = await readPin(fetch, tooling);
+      console.log(`tooling ${pin.tooling}${tooling ? " (given)" : " (latest)"}, app-templates ${pin.templates}`);
       process.exitCode = tryZip(resolve(zip), (text) => console.log(`\n--- So kommentiert der Bot ---\n\n${text}\n`), buildAt(pin));
     } catch (error) {
       console.error(`try: ${error instanceof Error ? error.message : String(error)}`);

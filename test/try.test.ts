@@ -69,10 +69,10 @@ describe("npm run try", () => {
 });
 
 describe("the arguments of npm run try", () => {
-  it("are the ZIP file and, optionally, a commit of app-templates", () => {
+  it("are the ZIP file and, optionally, a version of the tooling", () => {
     assert.deepEqual(parseArgs(["a.zip"]), { zip: "a.zip" });
-    assert.deepEqual(parseArgs(["a.zip", "--commit", "abc"]), { zip: "a.zip", commit: "abc" });
-    assert.deepEqual(parseArgs(["--commit", "abc", "a.zip"]), { zip: "a.zip", commit: "abc" });
+    assert.deepEqual(parseArgs(["a.zip", "--tooling", "0.1.0"]), { zip: "a.zip", tooling: "0.1.0" });
+    assert.deepEqual(parseArgs(["--tooling", "0.1.0", "a.zip"]), { zip: "a.zip", tooling: "0.1.0" });
     assert.deepEqual(parseArgs([]), {});
   });
 });

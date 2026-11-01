@@ -1,16 +1,13 @@
 name: practice build
 description: >-
-  Builds a valid submission (the artifact "intake" of the action validate) into a static site. It takes app-templates
-  at the commit that lernapps/tooling pins on main (appTemplates.commit in its package.json at the commit main is at,
-  found with git ls-remote and read from raw.githubusercontent.com without a token; the job stops with a clear error
-  when that fails), the same
-  state that `npx github:lernapps/tooling#main create` copies into an app. It uses the folder explainer/ as the app,
-  replaces its src/ by the submitted tree (the template's main.ts stays; the example components and chapter go),
-  installs with npm ci (first the root of app-templates, whose build the template's dependency file:.. needs; then
-  the template), then @lernapps/tooling at the commit of tooling's main the pin was read at (the tooling an app made
-  by `create` now has, instead of the one the template's lock file pins), runs the components' tests (vp test, when the submission has
-  components), builds with npm run build (the explainer's build checks the content and the components' code), and
-  runs `lernapps check` on the bundle (docs/checks.md says which rules that is and which do not apply to a
+  Builds a valid submission (the artifact "intake" of the action validate) into a static site. It takes the pair that
+  `lernapps create` gives an app made now: @lernapps/tooling at the version npm has as latest, and the exact version of
+  @lernapps/app-templates it depends on (read from the registry without a token; the job stops with a clear error when
+  that fails). It unpacks that package, uses the folder explainer/ as the app, replaces its src/ by the submitted tree
+  (the template's main.ts stays; the example components and chapter go), installs with npm install (the template's lock
+  file stays out of the package, as `create` leaves it out of an app), runs the components' tests (vp test, when the
+  submission has components), builds with npm run build (the explainer's build checks the content and the components'
+  code), and runs `lernapps check` on the bundle (docs/checks.md says which rules that is and which do not apply to a
   preview). Then every page gets <meta name="robots" content="noindex">. The result is the artifact "site" (only when
   the build passed) and the artifact "build" (build.json with the end of the log, always). The job needs
   contents: read and no secret: it runs the submitted components' code, so it must hold nothing worth taking. The
@@ -22,46 +19,37 @@ runs:
     - id: pin
       shell: bash
       run: node "$GITHUB_ACTION_PATH/build.ts" pin
-    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      with:
-        repository: ${{ steps.pin.outputs.repository }}
-        ref: ${{ steps.pin.outputs.commit }}
-        path: _templates # the whole tree: explainer/ depends on file:.. (the root)
-        persist-credentials: false
     - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
       with:
         node-version: 26
-        cache: npm
-        cache-dependency-path: |
-          _templates/package-lock.json
-          _templates/explainer/package-lock.json
     - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: intake
         path: _intake
-    # The root first: its prepare script builds dist/, which the template's file:.. dependency needs.
+    # the template comes out of the package that npm holds at the pinned version, as `lernapps create` takes it
     - shell: bash
-      run: npm ci --no-audit --no-fund
-      working-directory: _templates
-    - shell: bash
-      run: npm ci --no-audit --no-fund
-      working-directory: _templates/explainer
-    # the tooling of the commit the pin was read at, as create gives it to an app made now
-    - shell: bash
-      run: node "$GITHUB_ACTION_PATH/build.ts" tooling _templates/explainer "$TOOLING_COMMIT"
+      run: |
+        mkdir _pack
+        npm pack "@lernapps/app-templates@$TEMPLATES" --silent --ignore-scripts --pack-destination _pack
+        tar -xzf _pack/*.tgz -C _pack
+        node "$GITHUB_ACTION_PATH/build.ts" template _pack/package _app "$TEMPLATES" "$TOOLING"
       env:
-        TOOLING_COMMIT: ${{ steps.pin.outputs.tooling }}
+        TEMPLATES: ${{ steps.pin.outputs.templates }}
+        TOOLING: ${{ steps.pin.outputs.tooling }}
     - shell: bash
-      run: node "$GITHUB_ACTION_PATH/build.ts" prepare _intake/tree _templates/explainer/src
+      run: npm install --no-audit --no-fund
+      working-directory: _app
+    - shell: bash
+      run: node "$GITHUB_ACTION_PATH/build.ts" prepare _intake/tree _app/src
     - id: browser
       uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ~/.cache/ms-playwright
-        key: playwright-${{ runner.os }}-${{ hashFiles('_templates/explainer/package-lock.json') }}
+        key: playwright-${{ runner.os }}-${{ steps.pin.outputs.tooling }}
         restore-keys: playwright-${{ runner.os }}-
     - id: run
       shell: bash
-      run: node "$GITHUB_ACTION_PATH/build.ts" run _templates/explainer _out
+      run: node "$GITHUB_ACTION_PATH/build.ts" run _app _out
     - if: always() && steps.browser.outcome == 'success' && steps.browser.outputs.cache-hit != 'true'
       uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:

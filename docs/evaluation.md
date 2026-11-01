@@ -17,7 +17,7 @@ In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-e
 ## Eine Sitzung starten {#method}
 
 1. **Frische Sitzung.** Starte einen Assistenten mit Shell (Node 22.18 oder neuer, git, Netz), ohne Vorwissen über dieses Repo und ohne Projektdateien. Gib ihm nur den Satz von der [Startseite](index.md#assistant).
-2. **Befehle freigeben.** Die Plan-Vorlage lässt `npx skills add`, `create` und `npm` laufen. Viele Umgebungen fragen dafür nach; eine Sitzung im Auto-Modus ohne Menschen blockiert `npx skills add`. Erlaube die Befehle vorab, oder starte den Assistenten als Unteragenten dort, wo sie laufen dürfen.
+2. **Befehle freigeben.** Die Plan-Vorlage lässt `npx --yes @lernapps/practice init`, `create` und `npm` laufen. Viele Umgebungen fragen dafür nach; eine Sitzung im Auto-Modus ohne Menschen blockiert `npx`. Erlaube die Befehle vorab, oder starte den Assistenten als Unteragenten dort, wo sie laufen dürfen.
 3. **Den Creator spielen.** Antworte wie ein Elternteil: knapp, ohne Hilfe, die die Anleitung nicht gibt. Gib echte Fotos von Schulmaterial, außerhalb des Ordners der App. Eine Beschreibung der Fotos prüft nur das Schreiben, nicht das Lesen der Bilder.
 
 ## Beobachten {#observe}
@@ -36,7 +36,7 @@ In Plan und Code nutzt der Assistent die Inhalts-Skills des Tooling (`lernapps-e
   npm run try -- ergebnis.zip
   ```
 
-  Der Befehl prüft das ZIP mit den Regeln der Einreichung, baut es mit der Vorlage in dem Stand, den das Tooling auf `main` festlegt (`appTemplates.commit`; mit `--commit <sha>` ein anderer) und prüft das Bundle mit `lernapps check`. Er schreibt die Meldungen so, wie der Bot sie in das Issue kommentiert. Das gebaute Bundle liegt in `_out/site`.
+  Der Befehl prüft das ZIP mit den Regeln der Einreichung, baut es mit der Vorlage in der Version, von der das neueste Tooling abhängt (mit `--tooling <version>` eine andere) und prüft das Bundle mit `lernapps check`. Er schreibt die Meldungen so, wie der Bot sie in das Issue kommentiert. Das gebaute Bundle liegt in `_out/site`.
 - **Auf GitHub, ohne Browser:** Lege ein Test-Issue im Format des Formulars an und starte den Workflow „Submission“ mit `issue` und `zip_url` ([Betrieb](operations.md#repeat)). Gib den Kommentar des Bots unverändert dem Assistenten.
 
 ## Bewerten {#evaluate}

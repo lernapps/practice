@@ -25,8 +25,8 @@ jobs:
           node-version: 26
       - run: npm test
 
-  # The build step on a real runner, with a minimal fixture instead of an issue: install app-templates at the pinned
-  # commit, build, check the bundle, mark the pages, check the site as publish does. Only this repo's code and the
+  # The build step on a real runner, with a minimal fixture instead of an issue: take the template out of @lernapps/app-templates at the pinned
+  # version, build, check the bundle, mark the pages, check the site as publish does. Only this repo's code and the
   # fixture run here; nothing is written to any branch.
   build-smoke:
     runs-on: ubuntu-latest
