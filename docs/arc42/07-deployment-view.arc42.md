@@ -71,7 +71,7 @@ id: dn-repository
 title: Repository lernapps/practice
 type: server
 parent: env-github
-hosts: bb-workflow-submission, bb-workflow-cleanup, bb-workflow-pages, bb-workflow-pr-preview, bb-workflow-check, bb-assistant-skills, bb-plan-template
+hosts: bb-workflow-submission, bb-workflow-cleanup, bb-workflow-pages, bb-workflow-pr-preview, bb-workflow-check, bb-assistant-skills, bb-plan-template, bb-package-command
 :::
 ```
 

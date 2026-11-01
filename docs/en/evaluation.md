@@ -17,7 +17,7 @@ In Plan and Code the assistant uses the content skills of the tooling (`lernapps
 ## Start a session {#method}
 
 1. **A fresh session.** Start an assistant with a shell (Node 22.18 or newer, git, network), without prior knowledge of this repo and without project files. Give it only the sentence from the [start page](index.md#assistant).
-2. **Allow the commands.** The plan template runs `npx skills add`, `create` and `npm`. Many environments ask for approval; a session in auto mode without a person blocks `npx skills add`. Allow the commands beforehand, or start the assistant as a sub-agent where they may run.
+2. **Allow the commands.** The plan template runs `npx --yes @lernapps/practice init`, `create` and `npm`. Many environments ask for approval; a session in auto mode without a person blocks `npx`. Allow the commands beforehand, or start the assistant as a sub-agent where they may run.
 3. **Play the creator.** Answer like a parent: briefly, without help the guide does not give. Give real photos of school material, outside the app's folder. A description of the photos tests only the writing, not the reading of the images.
 
 ## Observe {#observe}
@@ -36,7 +36,7 @@ In Plan and Code the assistant uses the content skills of the tooling (`lernapps
   npm run try -- result.zip
   ```
 
-  The command checks the ZIP with the rules of the submission, builds it with the template at the state the tooling pins on `main` (`appTemplates.commit`; another one with `--commit <sha>`) and checks the bundle with `lernapps check`. It prints the messages the way the bot comments them on the issue. The built bundle is in `_out/site`.
+  The command checks the ZIP with the rules of the submission, builds it with the template at the version the latest tooling depends on (another one with `--tooling <version>`) and checks the bundle with `lernapps check`. It prints the messages the way the bot comments them on the issue. The built bundle is in `_out/site`.
 - **On GitHub, without a browser:** create a test issue in the format of the form and start the workflow "Submission" with `issue` and `zip_url` ([Operations](operations.md#repeat)). Give the bot's comment unchanged to the assistant.
 
 ## Evaluate {#evaluate}

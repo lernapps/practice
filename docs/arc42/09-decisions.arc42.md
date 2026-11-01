@@ -110,21 +110,22 @@ addresses: qg-nothing-collected, con-public-by-default, risk-material-copyright,
 :::
 ```
 
-## The template at the tooling's pin, read from its main
+## The template at the tooling's version, read from npm
 
 **Context:** The explainer template and the rules of `lernapps check` (`docs/checks.md`) belong to other
-repositories, and the assistant creates the app with `create` from `tooling#main`. **Decision:** At every run the build finds
-the commit of the tooling's main (`git ls-remote`, without a token), reads `appTemplates.commit` from its package.json,
-and checks with `@lernapps/tooling` of that same commit; it stops when it cannot. This repository keeps no pin of its
-own. **Rejected:** a pin here, moved by hand; a copy of the template or
-of the rules. **Consequences:** GitHub builds with the template state the creator's app was made from, and a move of
-the pin in the tooling reaches the next build at once (`risk-template-pin`). The rules cannot be loosened here.
+repositories, and the assistant creates the app with `create` of the npm package `@lernapps/tooling`. **Decision:** At every
+run the build asks the npm registry for the latest version of `@lernapps/tooling` (without a token), takes the exact version
+of `@lernapps/app-templates` it depends on, unpacks that package for the template and checks with that tooling; it stops
+when it cannot. This repository keeps no pin of its own. **Rejected:** a pin here, moved by hand; a copy of the template
+or of the rules; a git commit as the pin, which an assistant behind a summarising fetch tool could not read.
+**Consequences:** GitHub builds with the template version the creator's app was made from, and a new release of the
+tooling reaches the next build at once (`risk-template-pin`). The rules cannot be loosened here.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::
 :::decision
-id: dec-pin-from-tooling-main
-title: The template at the tooling's pin, read from its main
+id: dec-pin-from-tooling-version
+title: The template at the tooling's version, read from npm
 status: accepted
 addresses: con-pinned-sources, con-explainer-only, risk-template-pin
 :::
@@ -135,8 +136,8 @@ addresses: con-pinned-sources, con-explainer-only, risk-template-pin
 **Context:** The assistant has a shell, and the tooling leads its assistants through a plan in phases. **Decision:**
 The guide is a short start, the plan template and three skills of this repository (`concept-plan-and-phase-skills`);
 the content skills and `create` are the tooling's. **Rejected:** a chat flow in one document; own copies of the
-tooling's skills. **Consequences:** The assistant needs Node, git and the network on the creator's computer. A change
-of the tooling's skills reaches practice apps at once.
+tooling's skills. **Consequences:** The assistant needs Node, git and the npm registry on the creator's computer. A new
+release of the tooling's skills reaches the next practice app made.
 
 ```arc42
 :::ignore W008 the day of the owner's decision is not recorded :::

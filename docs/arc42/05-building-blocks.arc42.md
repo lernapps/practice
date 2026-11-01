@@ -38,6 +38,7 @@ flowchart LR
     subgraph bb-guidance["Guidance"]
         bb-assistant-guide["Guide for assistants"]
         bb-plan-template["Plan template"]
+        bb-package-command["Package command"]
         bb-assistant-skills["Skills for assistants"]
         bb-trial-run["Trial run"]
         bb-documentation["Pages for people"]
@@ -70,6 +71,7 @@ flowchart LR
     bb-assistant-guide -->|"if-practice-plan"| bb-plan-template
     bb-plan-template -->|"if-practice-skills"| bb-assistant-skills
     bb-plan-template -->|"if-tooling-guidance"| bb-tooling
+    bb-package-command -->|"if-tooling-guidance"| bb-tooling
     bb-action-build -->|"if-tooling-pin"| bb-tooling
     bb-trial-run -->|"if-tooling-pin"| bb-tooling
     bb-trial-run -->|"if-lib"| bb-lib
@@ -279,7 +281,7 @@ How a workflow calls the build.
 id: if-action-build
 title: Build action
 provider: bb-action-build
-protocol: Composite action; reads the artifact intake and the pin of lernapps/tooling on main
+protocol: Composite action; reads the artifact intake and, from the npm registry, the latest @lernapps/tooling and the version of @lernapps/app-templates it depends on
 path: actions/build/action.yml
 :::
 ```
@@ -470,10 +472,30 @@ implements: concept-plan-and-phase-skills
 :::
 ```
 
+### Package command
+
+`bin/lernapps-practice.mjs`: the command of the npm package `@lernapps/practice`. `npx --yes @lernapps/practice init <anlass>`
+is the `init` of `@lernapps/tooling` with this package as its add-on: it writes the plan template of this package and puts
+its skills and those of the tooling into the folder, for every agent it finds. It downloads nothing a fetch tool could
+shorten.
+
+```arc42
+:::building-block
+id: bb-package-command
+title: Package command
+technology: Node.js
+parent: bb-guidance
+path: bin
+requires: if-tooling-guidance
+implements: concept-plan-and-phase-skills
+:::
+```
+
 ### Plan template
 
 `guidance/plan-template.md`: the plan of a practice app in the phases of the tooling, with the front matter of the
-tooling's plans; it installs the skills, names those of each phase and holds the creator's checkpoints.
+tooling's plans; it names the skills of each phase (`init` put them into the folder), installs those of the archetype and
+holds the creator's checkpoints.
 
 ```arc42
 :::building-block
@@ -489,14 +511,14 @@ implements: concept-plan-and-phase-skills
 
 #### Plan template interface
 
-What the assistant downloads as its plan.
+What the assistant gets as its plan.
 
 ```arc42
 :::interface
 id: if-practice-plan
 title: Practice plan template
 provider: bb-plan-template
-protocol: Markdown file at raw.githubusercontent.com/lernapps/practice/main/guidance/plan-template.md
+protocol: Markdown file guidance/plan-template.md in the npm package @lernapps/practice, which `npx @lernapps/practice init` writes unchanged into the creator's folder
 path: guidance/plan-template.md
 :::
 ```
@@ -616,13 +638,13 @@ What the build takes: the folder `explainer/` of the template.
 id: if-archetypes
 title: Archetypes
 provider: bb-app-templates
-protocol: git repository at the commit that lernapps/tooling pins on main
+protocol: npm package @lernapps/app-templates at the exact version that @lernapps/tooling depends on
 :::
 ```
 
 ## Tooling
 
-The `lernapps check` command, the pin of the template, `create` and the content skills, and the shared site actions ([its architecture](https://github.com/lernapps/tooling/blob/main/docs/arc42/05-building-blocks.arc42.md)).
+The `lernapps check` command, the version of the template, `init`, `create` and the content skills, and the shared site actions ([its architecture](https://github.com/lernapps/tooling/blob/main/docs/arc42/05-building-blocks.arc42.md)).
 
 ```arc42
 :::ignore H014 implemented in another repository, lernapps/tooling: https://github.com/lernapps/tooling :::
@@ -657,9 +679,9 @@ copies.
 :::ignore H014 implemented in another repository, lernapps/tooling: https://github.com/lernapps/tooling :::
 :::interface
 id: if-tooling-pin
-title: Pin of the template
+title: Version of the template
 provider: bb-tooling
-protocol: the commit of main (git ls-remote), and appTemplates.repository and appTemplates.commit in package.json at that commit, over HTTPS from raw.githubusercontent.com
+protocol: the registry document of @lernapps/tooling at latest (https://registry.npmjs.org/@lernapps%2ftooling/latest): its version and its exact dependency on @lernapps/app-templates, over HTTPS without a token
 :::
 ```
 
@@ -673,7 +695,7 @@ What the plan template has the assistant use.
 id: if-tooling-guidance
 title: Tooling guidance
 provider: bb-tooling
-protocol: npx github:lernapps/tooling#main create; agent skills of lernapps/tooling installed with the skills installer
+protocol: npx lernapps init and create; the skills of @lernapps/tooling and @lernapps/practice, synced into the project by init (skills experimental_sync) for every agent the installer finds
 :::
 ```
 

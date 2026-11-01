@@ -94,9 +94,9 @@ here, and a submission made before a move is built with the new template.
 ```arc42
 :::risk
 id: risk-template-pin
-title: The pin of the template follows the tooling's main
+title: The version of the template follows the tooling's latest release
 severity: low
-mitigation: dec-pin-from-tooling-main; the tooling's own tests build the template at its pin; the smoke build of the check workflow builds a fixture at the pin on a runner; a failed read stops the build with a clear message.
+mitigation: dec-pin-from-tooling-version; the tooling's own tests build the template at its version; the smoke build of the check workflow builds a fixture at the latest version on a runner; a failed read stops the build with a clear message.
 :::
 ```
 

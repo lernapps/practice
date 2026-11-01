@@ -1,19 +1,35 @@
 {
-  "name": "lernapps-practice",
+  "name": "@lernapps/practice",
   "version": "0.0.0",
-  "private": true,
-  "description": "Temporary previews of learning apps that families submit as a ZIP file in an issue; documentation at https://lernapps.net/practice/",
+  "description": "The assistant's side of lernapps practice: the plan template and the skills with which a creator's AI assistant builds an app for an occasion (a class test, a cover lesson), which the creator submits as a ZIP file in an issue; documentation at https://lernapps.net/practice/",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lernapps/practice.git"
+  },
+  "bin": {
+    "lernapps-practice": "./bin/lernapps-practice.mjs"
+  },
+  "files": [
+    "bin",
+    "dist/skills",
+    "guidance/plan-template.md"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./guidance/plan-template.md": "./guidance/plan-template.md"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "type": "module",
   "scripts": {
     "build": "./scripts/build.sh",
     "check": "site-check --site /practice/",
     "test": "node --test --test-reporter=spec \"test/*.test.ts\"",
-    "try": "node scripts/try.ts"
+    "try": "node scripts/try.ts",
+    "prepack": "node scripts/dist-skills.ts"
   },
   "engines": {
     "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
@@ -22,5 +38,11 @@
     "@doctc/arc42": "0.38.0",
     "@lernapps/site": "github:lernapps/lernapps.github.io#00b7891b625342ace8cc8cff3f295ed19e46f289",
     "marked": "18.1.2"
+  },
+  "dependencies": {
+    "@lernapps/tooling": "0.1.0"
+  },
+  "lernapps": {
+    "planTemplate": "guidance/plan-template.md"
   }
 }

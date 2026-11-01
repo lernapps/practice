@@ -2,16 +2,16 @@
 
 > Eine App zum Üben nach Maß für einen Anlass (eine Arbeit, eine Vertretungsstunde, verpasster Stoff), aus dem Material des Creators, eingereicht über ein Formular und zwei Wochen lang erreichbar. Zum Lernen ohne Anlass gibt es den Katalog von lernapps.net.
 
-Du brauchst eine Shell mit Node 22.18 oder neuer, git und Netz.
+Du brauchst eine Shell mit Node 22.18 oder neuer, git und Zugang zur npm-Registry.
 
 ## Anfangen
 
 1. Lege einen neuen, leeren Ordner für die App an und wechsle hinein.
-2. Lade die Plan-Vorlage vollständig und unverändert als `.vibe/plans/01-<anlass>.md` herunter, mit curl, nicht mit einem Werkzeug, das zusammenfasst:
+2. Starte die App dort mit einem Befehl:
 
    ```sh
-   mkdir -p .vibe/plans
-   curl -fsSL -o .vibe/plans/01-<anlass>.md https://raw.githubusercontent.com/lernapps/practice/main/guidance/plan-template.md
+   npx --yes @lernapps/practice init <anlass>
    ```
 
-3. Lies sie vollständig. Folge ihr Aufgabe für Aufgabe: Sie installiert die Skills, nennt die Skills jeder Phase und sagt, wann Du auf den Creator wartest.
+   Er schreibt die Plan-Vorlage vollständig und unverändert als `.vibe/plans/01-<anlass>.md` (nichts wird heruntergeladen, das ein Werkzeug zusammenfassen könnte) und legt die Skills ins Projekt, für jeden Agenten, den er findet.
+3. Lies die Plan-Vorlage vollständig. Folge ihr Aufgabe für Aufgabe: Sie nennt die Skills jeder Phase und sagt, wann Du auf den Creator wartest.

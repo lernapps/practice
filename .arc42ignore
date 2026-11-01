@@ -17,3 +17,6 @@ site
 test
 .github
 actions
+# The plan of the work on this repository, and the release configuration of the package (read by semantic-release only).
+.vibe
+.releaserc.json

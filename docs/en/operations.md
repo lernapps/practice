@@ -74,7 +74,7 @@ A repetition always builds again, even if the ZIP address and details are the sa
 ## Updates {#updates}
 
 - Renovate (preset from `lernapps/tooling`) raises the pinned commits of the actions, also those of the shared actions for the site (`site-check`, `site-deploy`, `site-preview`), the frame `@lernapps/site` and `marked`.
-- Nobody raises the state of the templates here. At every run the build reads `appTemplates.commit` from the `package.json` of `lernapps/tooling` on `main`. So GitHub builds with the same template with which `create` made the app at the assistant. It also takes `@lernapps/tooling` at that commit of `main`. `npm run try -- <zip> --commit <sha>` tries another state of the template locally.
+- Nobody raises the state of the templates here. At every run the build asks the npm registry for the latest version of `@lernapps/tooling` and the exact version of `@lernapps/app-templates` it depends on. So GitHub builds with the same template with which `create` made the app at the assistant. `npm run try -- <zip> --tooling <version>` tries another version locally.
 
 ## Abuse and limits {#abuse}
 
@@ -87,5 +87,5 @@ Any GitHub account can create an issue and so start a run. Only the set of limit
 | No comment, run "Submission" green | The issue does not come from the form (a heading is missing), or the ZIP address and details are the same as at the last run. The log of `intake` says so. |
 | `publish` red: "cannot push gh-pages" | Several runs at the same time. Repeat. |
 | Comment "Falls die Seite noch nicht lädt" (if the page does not load yet) | Pages has not delivered the state yet. Usually there after a few minutes. Check the Pages setting. |
-| `build` red at `pin` | `https://raw.githubusercontent.com/lernapps/tooling/main/package.json` could not be read or holds no valid `appTemplates.commit`. Repeat; otherwise check the tooling. |
-| `build` red at `npm ci` | The lock file of the template does not match the state. Check `appTemplates.commit` in the tooling. |
+| `build` red at `pin` | `https://registry.npmjs.org/@lernapps%2ftooling/latest` could not be read or names no exact version of `@lernapps/app-templates`. Repeat; otherwise check the tooling. |
+| `build` red at `npm install` | A dependency of the template cannot be installed. Check the version of `@lernapps/app-templates` that the tooling names. |

@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 // The build of a submission (action `build`, job `build`: contents: read, no secrets, no issues: write). Four
-// commands; the action calls them in this order, with `npm ci` between the first two:
+// commands; the action calls them in this order:
 //
-//   pin [<commit>]             outputs repository and commit of app-templates: the pin appTemplates of the package.json
-//                              of lernapps/tooling at the commit main is at now, the same that `create` from
-//                              tooling#main takes, and that commit as tooling; a commit given replaces the one of
-//                              app-templates
-//   tooling <app-dir> <commit> after npm ci: @lernapps/tooling at that commit in the app, as `create` gives an app
-//   prepare <tree> <app-src>   replaces the template's src/ by the submitted tree, keeping the template's main.ts
-//   run <app-dir> <out-dir>    the components' tests (when there are any), npm run build, `lernapps check` on the
-//                              bundle, noindex on every page; writes <out-dir>/site/ and <out-dir>/build.json (ok,
-//                              stage, log tail, seconds)
+//   pin [<version>]                  outputs the version of @lernapps/tooling that npm has as latest, and the version of
+//                                    @lernapps/app-templates it depends on: the pair `lernapps create` gives an app made
+//                                    now; a version given replaces the tooling's (a trial of another state)
+//   template <package> <app-dir>     writes the folder explainer/ of the unpacked package @lernapps/app-templates as the
+//   <templates> <tooling>            app: its .gitignore restored, the dependencies on the runtime and the tooling set to
+//                                    these exact versions, the template's lock and .npmrc left out, as `create` does
+//   prepare <tree> <app-src>         replaces the template's src/ by the submitted tree, keeping the template's main.ts
+//   run <app-dir> <out-dir>          the components' tests (when there are any), npm run build, `lernapps check` on the
+//                                    bundle, noindex on every page; writes <out-dir>/site/ and <out-dir>/build.json (ok,
+//                                    stage, log tail, seconds)
 //
 // What the submission may contain was checked by validate; `prepare` checks the tree again, because a tree travels
 // between jobs as an artifact. The build runs code of the submission: the components' logic and tests, which the
@@ -24,6 +25,7 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
+  renameSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -32,100 +34,68 @@ import { fileURLToPath } from "node:url";
 import { svgProblems } from "../lib/svg.ts";
 import { pathProblem } from "../lib/zip.ts";
 
-/** The repository whose main holds the pin of app-templates and whose commit checks the bundle. */
-export const TOOLING_REPOSITORY = "https://github.com/lernapps/tooling";
-/** Where the pin of app-templates is read: the package.json of lernapps/tooling at a commit. */
-export const toolingPackage = (commit: string) => `https://raw.githubusercontent.com/lernapps/tooling/${commit}/package.json`;
+/** Where npm answers what a package is at a version, or at the dist-tag latest, without a token. */
+export const registryManifest = (name: string, version = "latest") =>
+  `https://registry.npmjs.org/${name.replace("/", "%2f")}/${version}`;
+
+/** The packages of lernapps that the build needs. */
+export const TOOLING = "@lernapps/tooling";
+export const TEMPLATES = "@lernapps/app-templates";
 
 export interface Pin {
-  /** owner/name on GitHub */
-  repository: string;
-  commit: string;
-  /** git URL of the repository */
-  url: string;
-  /** The commit of lernapps/tooling the pin was read at: the build checks with @lernapps/tooling of this commit. */
+  /** version of @lernapps/tooling */
   tooling: string;
+  /** version of @lernapps/app-templates that this tooling depends on */
+  templates: string;
 }
 
 /** Fetches a text from an address; the default is Node's fetch. */
 export type Fetcher = (url: string) => Promise<{ ok: boolean; status: number; text: () => Promise<string> }>;
-/** The commit that main of lernapps/tooling is at now; the default asks git (`git ls-remote`, no token). */
-export type MainResolver = () => string;
 
-const COMMIT = /^[0-9a-f]{40}$/;
-
-/** The commit of main of lernapps/tooling, from `git ls-remote`. Throws when git cannot tell. */
-export const lsRemoteMain: MainResolver = () => {
-  const run = spawnSync("git", ["ls-remote", TOOLING_REPOSITORY, "refs/heads/main"], { encoding: "utf8", timeout: 60_000 });
-  const commit = /^([0-9a-f]{40})\trefs\/heads\/main$/m.exec(run.stdout ?? "")?.[1];
-  if (run.status !== 0 || commit === undefined) {
-    throw new Error(`git ls-remote ${TOOLING_REPOSITORY} refs/heads/main failed: ${(run.stderr ?? run.error?.message ?? "").trim() || "no main"}`);
-  }
-  return commit;
-};
+const VERSION = /^\d+\.\d+\.\d+$/;
 
 /**
- * The pin of app-templates that lernapps/tooling holds on main (appTemplates in its package.json), the one that
- * `npx github:lernapps/tooling#main create` takes, read at the commit main is at now; that commit is also the
- * @lernapps/tooling the build checks with, as an app made now has it. `commit`, when given, replaces the commit of
- * app-templates read (a trial of another state). Throws with a message that says what failed.
+ * The pair `lernapps create` gives an app made now: @lernapps/tooling at the version npm has as latest (`version`, when
+ * given, replaces it: a trial of another state) and the exact version of @lernapps/app-templates it depends on, which is
+ * the runtime its tests ran with. Throws with a message that says what failed.
  */
-export async function readPin(fetcher: Fetcher = fetch, commit?: string, resolveMain: MainResolver = lsRemoteMain): Promise<Pin> {
-  if (commit !== undefined && !COMMIT.test(commit)) throw new Error(`${commit} is not a commit (40 hex digits)`);
-  let tooling: string;
-  try {
-    tooling = resolveMain();
-    if (!COMMIT.test(tooling)) throw new Error(`${tooling} is not a commit`);
-  } catch (error) {
-    throw new Error(
-      `cannot find the commit of main of lernapps/tooling (${error instanceof Error ? error.message : String(error)}); the build stops, run it again later`,
-    );
-  }
-  const address = toolingPackage(tooling);
-  let manifest: { appTemplates?: { repository?: unknown; commit?: unknown } };
+export async function readPin(fetcher: Fetcher = fetch, version?: string): Promise<Pin> {
+  if (version !== undefined && !VERSION.test(version)) throw new Error(`${version} is not a version (1.2.3)`);
+  const address = registryManifest(TOOLING, version);
+  let manifest: { version?: unknown; dependencies?: Record<string, unknown> };
   try {
     const response = await fetcher(address);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     manifest = JSON.parse(await response.text()) as typeof manifest;
   } catch (error) {
     throw new Error(
-      `cannot read the pin of app-templates from ${address} (${error instanceof Error ? error.message : String(error)}); the build stops, run it again later`,
+      `cannot read ${TOOLING} from ${address} (${error instanceof Error ? error.message : String(error)}); the build stops, run it again later`,
     );
   }
-  const pin = manifest.appTemplates;
-  const url = typeof pin?.repository === "string" ? pin.repository : "";
-  const repository = /^https:\/\/github\.com\/(lernapps\/[\w.-]+?)(\.git)?$/.exec(url)?.[1];
-  if (!repository) throw new Error(`${address}: appTemplates.repository is not a repository of lernapps on GitHub`);
-  const pinned = typeof pin?.commit === "string" ? pin.commit : "";
-  if (!COMMIT.test(pinned)) throw new Error(`${address}: appTemplates.commit is not a commit`);
-  return { repository, commit: commit ?? pinned, url, tooling };
+  const tooling = typeof manifest.version === "string" ? manifest.version : "";
+  if (!VERSION.test(tooling)) throw new Error(`${address}: the version is not a version`);
+  const templates = typeof manifest.dependencies?.[TEMPLATES] === "string" ? manifest.dependencies[TEMPLATES] : "";
+  if (!VERSION.test(templates)) throw new Error(`${address}: ${TEMPLATES} is not an exact version in its dependencies`);
+  return { tooling, templates };
 }
-
-/** The npm spec of @lernapps/tooling at `commit`, as `create` writes it into an app. */
-export const toolingSpec = (commit: string) => `@lernapps/tooling@github:lernapps/tooling#${commit}`;
 
 /**
- * Makes the app at `appDir` (installed with npm ci from the template's lock) use @lernapps/tooling at `commit`:
- * `npm install` of that commit, unless it is installed already. Returns whether it installed.
+ * The app from the template of the unpacked package @lernapps/app-templates (`packageDir`): its folder explainer/ in
+ * `appDir`, as `lernapps create` writes it without the plan and the files every app has: the .gitignore npm leaves out
+ * of a package comes back from _gitignore, the runtime and the tooling are the exact versions of the pin, and the
+ * template's lock and .npmrc (for its own checkout) stay out. The template's README says what the archetype can do and
+ * is no part of the app.
  */
-export function useTooling(appDir: string, commit: string, install = (args: string[]) => command(appDir, "npm", args)): boolean {
-  if (!COMMIT.test(commit)) throw new Error(`${commit} is not a commit of lernapps/tooling`);
-  if (installedTooling(appDir) === commit) return false;
-  const done = install(["install", "--no-audit", "--no-fund", "--save-dev", toolingSpec(commit)]);
-  if (done.status !== 0) throw new Error(`npm install of @lernapps/tooling at ${commit} failed:\n${messages(done.output, appDir, 20)}`);
-  return true;
-}
-
-/** The commit of @lernapps/tooling installed in `appDir`, from npm's lock of node_modules; undefined if unknown. */
-export function installedTooling(appDir: string): string | undefined {
-  try {
-    const lock = JSON.parse(readFileSync(join(appDir, "node_modules", ".package-lock.json"), "utf8")) as {
-      packages?: Record<string, { resolved?: string }>;
-    };
-    return /#([0-9a-f]{40})$/.exec(lock.packages?.["node_modules/@lernapps/tooling"]?.resolved ?? "")?.[1];
-  } catch {
-    return undefined;
-  }
+export function appFromTemplate(packageDir: string, appDir: string, pin: Pin): void {
+  const template = join(packageDir, "explainer");
+  if (!existsSync(join(template, "package.json"))) throw new Error(`${template} is no template: it has no package.json`);
+  cpSync(template, appDir, { recursive: true });
+  if (existsSync(join(appDir, "_gitignore"))) renameSync(join(appDir, "_gitignore"), join(appDir, ".gitignore"));
+  for (const name of ["package-lock.json", ".npmrc", "README.md"]) rmSync(join(appDir, name), { force: true });
+  const manifestFile = join(appDir, "package.json");
+  const manifest = JSON.parse(readFileSync(manifestFile, "utf8")) as { devDependencies?: Record<string, string> };
+  manifest.devDependencies = { ...manifest.devDependencies, [TEMPLATES]: pin.templates, [TOOLING]: pin.tooling };
+  writeFileSync(manifestFile, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
 export const NOINDEX = '<meta name="robots" content="noindex">';
@@ -310,15 +280,14 @@ async function main(args: string[]): Promise<number> {
     const [command, ...rest] = args;
     if (command === "pin" && rest.length <= 1) {
       const pin = await readPin(fetch, rest[0] || undefined);
-      output("repository", pin.repository);
-      output("commit", pin.commit);
       output("tooling", pin.tooling);
-      console.log(`app-templates ${pin.repository} at ${pin.commit}${rest[0] ? " (given)" : ` (the pin of ${toolingPackage(pin.tooling)})`}; tooling at ${pin.tooling}`);
+      output("templates", pin.templates);
+      console.log(`${TOOLING} ${pin.tooling}${rest[0] ? " (given)" : " (latest)"}, which depends on ${TEMPLATES} ${pin.templates}`);
       return 0;
     }
-    if (command === "tooling" && rest.length === 2) {
-      const installed = useTooling(resolve(rest[0] ?? ""), rest[1] ?? "");
-      console.log(`@lernapps/tooling at ${rest[1]}${installed ? "" : " (installed already)"}`);
+    if (command === "template" && rest.length === 4) {
+      appFromTemplate(resolve(rest[0] ?? ""), resolve(rest[1] ?? ""), { templates: rest[2] ?? "", tooling: rest[3] ?? "" });
+      console.log(`the app is the template explainer/ of ${TEMPLATES} ${rest[2]}, with ${TOOLING} ${rest[3]}`);
       return 0;
     }
     if (command === "prepare" && rest.length === 2) {
@@ -332,7 +301,7 @@ async function main(args: string[]): Promise<number> {
       console.log(`build: ${result.ok ? "ok" : `failed at ${result.stage}`} (build ${result.seconds.build} s, check ${result.seconds.check} s)`);
       return result.ok ? 0 : 1;
     }
-    console.error("Usage: build.ts pin [<commit>] | tooling <app-dir> <commit> | prepare <tree> <app-src> | run <app-dir> <out-dir>");
+    console.error("Usage: build.ts pin [<version>] | template <package-dir> <app-dir> <templates> <tooling> | prepare <tree> <app-src> | run <app-dir> <out-dir>");
     return 2;
   } catch (error) {
     console.error(`::error::build: ${error instanceof Error ? error.message : String(error)}`);
