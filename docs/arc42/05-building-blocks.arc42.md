@@ -38,6 +38,7 @@ flowchart LR
     subgraph bb-guidance["Guidance"]
         bb-assistant-guide["Guide for assistants"]
         bb-plan-template["Plan template"]
+        bb-package-command["Package command"]
         bb-assistant-skills["Skills for assistants"]
         bb-trial-run["Trial run"]
         bb-documentation["Pages for people"]
@@ -70,6 +71,7 @@ flowchart LR
     bb-assistant-guide -->|"if-practice-plan"| bb-plan-template
     bb-plan-template -->|"if-practice-skills"| bb-assistant-skills
     bb-plan-template -->|"if-tooling-guidance"| bb-tooling
+    bb-package-command -->|"if-tooling-guidance"| bb-tooling
     bb-action-build -->|"if-tooling-pin"| bb-tooling
     bb-trial-run -->|"if-tooling-pin"| bb-tooling
     bb-trial-run -->|"if-lib"| bb-lib
@@ -470,10 +472,30 @@ implements: concept-plan-and-phase-skills
 :::
 ```
 
+### Package command
+
+`bin/lernapps-practice.mjs`: the command of the npm package `@lernapps/practice`. `npx --yes @lernapps/practice init <anlass>`
+is the `init` of `@lernapps/tooling` with this package as its add-on: it writes the plan template of this package and puts
+its skills and those of the tooling into the folder, for every agent it finds. It downloads nothing a fetch tool could
+shorten.
+
+```arc42
+:::building-block
+id: bb-package-command
+title: Package command
+technology: Node.js
+parent: bb-guidance
+path: bin
+requires: if-tooling-guidance
+implements: concept-plan-and-phase-skills
+:::
+```
+
 ### Plan template
 
 `guidance/plan-template.md`: the plan of a practice app in the phases of the tooling, with the front matter of the
-tooling's plans; it installs the skills, names those of each phase and holds the creator's checkpoints.
+tooling's plans; it names the skills of each phase (`init` put them into the folder), installs those of the archetype and
+holds the creator's checkpoints.
 
 ```arc42
 :::building-block
@@ -489,7 +511,7 @@ implements: concept-plan-and-phase-skills
 
 #### Plan template interface
 
-What the assistant downloads as its plan.
+What the assistant gets as its plan.
 
 ```arc42
 :::interface
