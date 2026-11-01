@@ -27,7 +27,8 @@ node scripts/pages.mjs docs _site
 # fixed controls stay off the header with site/spa.css, as in lernapps/tooling.
 arc42 --dir docs/arc42 validate --strict
 arc42 --dir docs/arc42 build --out _site/architecture --base "${PREFIX}architecture/"
-sed -i 's|</head>|<link rel="stylesheet" href="../spa.css">\n</head>|' _site/architecture/index.html
+# in Node, not with sed: GNU and BSD sed differ (-i, \n in the replacement), and this builds on macOS as well
+node -e 'const fs = require("node:fs"); const file = "_site/architecture/index.html"; fs.writeFileSync(file, fs.readFileSync(file, "utf8").replace("</head>", () => `<link rel="stylesheet" href="../spa.css">\n</head>`))'
 
 # Header, footer and language switch of all lernapps.net sites; noindex and the banner in a preview.
 lernapps-frame --site /practice/ --source https://github.com/lernapps/practice --out _site
