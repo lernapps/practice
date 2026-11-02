@@ -25,7 +25,7 @@ const LANGUAGES = {
 };
 
 const escapeHtml = (text) => text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-const plain = (text) => text.replace(/`/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/[*_]/g, "");
+const plain = (text) => text.replace(/<[^>]+>/g, "").replace(/`/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/[*_]/g, "");
 
 function render(markdown, lang) {
   const { root } = LANGUAGES[lang];
