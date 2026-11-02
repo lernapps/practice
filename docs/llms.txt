@@ -2,7 +2,13 @@
 
 > Eine App zum Üben nach Maß für einen Anlass (eine Arbeit, eine Vertretungsstunde, verpasster Stoff), aus dem Material des Creators, eingereicht über ein Formular und zwei Wochen lang erreichbar. Zum Lernen ohne Anlass gibt es den Katalog von lernapps.net.
 
-Du brauchst eine Shell mit Node 22.18 oder neuer, git und Zugang zur npm-Registry.
+## Zuerst: kannst Du Befehle ausführen?
+
+Du brauchst eine Shell mit Node 22.18 oder neuer, git und Zugang zu npmjs.com (`npm`, `npx`). Kannst Du keine Befehle
+ausführen, oder erreicht `npx` die npm-Registry nicht (ein Chat im Browser, etwa chatgpt.com, kann das meist nicht):
+**Höre hier auf und tue nichts weiter.** Sage dem Creator in zwei Sätzen, dass es in dieser Umgebung nicht geht und dass er
+mit derselben Bitte in einer Umgebung neu anfangen soll, die es kann, etwa in der Desktop-Anwendung seines KI-Assistenten.
+Baue die App nicht von Hand nach dieser Seite und rate keine Dateien: Ohne die Pakete passt das Ergebnis nicht zu lernapps.net.
 
 ## Anfangen
 
