@@ -141,10 +141,27 @@ Je Stufe: eigener Feature-Branch im jeweiligen Repo, Tests grün, `npm pack --dr
 
 ## Commit
 ### Tasks
-- [ ] *To be added when this phase becomes active*
+- [x] Pakete auf Versionen umstellen: Vorlagen in `app-templates` (`@lernapps/tooling` als `^0.1.2` statt Git-Pin, PR #121), `apps` (Upgrade-Workflow und Replay verstehen Versions-Pins, PR #163). Der Pin der Site selbst (`package.json`, `tooling-ref`, `TOOLING_REF`) bleibt ein Commit: ein wiederverwendbarer Workflow lässt sich nur über eine Git-Referenz benennen.
+- [x] `sed` portabel machen: `tooling` (#233, `scripts/html-edit.ts`), `practice` (#42), `docs` (PR #87, wartet auf den Merge des Nutzers).
+- [x] Mit Agenten testen (Runde 1 und 2, je Tooling-Weg und practice-Weg, Sonnet, nur veröffentlichte Anleitung, `/tmp`, ich als Creator): beide Wege kommen bis zur GitHub-Grenze, alle vier Apps bestehen `lernapps check`, die ZIP-Datei des practice-Agenten bestand den Eingangstest und den Bau von `practice` (19 Seiten, ohne Befund).
+- [x] Runde 3 mit `tooling` 0.1.3 und `practice` 0.1.4: beide Agenten kamen bis zur GitHub-Grenze, beide Apps bestehen `lernapps check`, die Skizze in `.vibe/sketches/` blockierte `create` nicht mehr, das ZIP bestand Eingangstest und Bau von `practice` (19 Seiten, ohne Befund).
+- [x] Aufräumen: Worktrees `practice-npm` und `tooling-feat` entfernt, Temp-Ordner der Runden 1 und 2 gelöscht (Runde 3 bleibt unter `/tmp/lernapps-exp3-*` zur Ansicht).
 
 ### Completed
 *None yet*
+
+## Retrospective
+**Ergebnis.** Alles, was die Assistenten der Creator brauchen, kommt aus der npm-Registry: `@lernapps/app-templates` 0.1.0, `@lernapps/tooling` (0.1.x) und `@lernapps/practice` (0.1.x), jeweils mit Provenance (Trusted Publishing, `semantic-release` nach Merge auf `main`, Tag mit dem Token der GitHub-App). Die Kette `app-templates → tooling → practice` läuft von selbst (Renovate `fix(deps)`, ohne Schleife; ein Test pro Repo hält den Graphen, `test/release-chain.test.ts`). Der Platzhalter `lernapps` (0.0.1) hält den ungescopten Namen.
+
+**Was die Agenten-Läufe gezeigt haben.** Runde 1: Skills und Plan-Template stimmten, aber der Pfad `npx --yes lernapps` (Name frei), README von GitHub, kein Repo nach `init`, Screenshots-Ordner ließ den Check scheitern. Behoben in `tooling` #237 und `practice` #39. Runde 2: die gesamte Information kam aus npm (nur `llms.txt`, Katalog, Eintrags-Schema, Wikipedia und Lehrplan aus dem Netz); neu: Skizzen in `.vibe/` blockierten `create`, YAML-Fallen, `matching`-Paare. Behoben in `tooling` #238. Offen bei `app-templates`: Formel in Auswahlantworten (Issue #120).
+
+**Fehler auf meinem Weg, damit sie nicht wiederkehren.** Ich habe „arc42 sauber“ gemeldet, ohne die Zählzeile zu lesen (drei Hinweise). Ich habe Backticks in einen Template-String geschrieben (Build brach). Ich habe die Aussage eines Agenten („keine Logikzeichen in der Formelsprache“) erst nach Prüfung verworfen: `temml` kennt sie. Der Berechtigungsprüfer hat zwei Mal einen Merge ohne Review abgelehnt (`app-templates` #116, `docs` #87); ich habe nicht umgangen, sondern den Nutzer gefragt.
+
+**Runde 3.** Wieder kam alles aus npm. Neue Funde, noch nicht behoben: (1) `lernapps.net/apps/llms.txt` enthält keinen Katalog, der practice-Agent musste die HTML-Startseite lesen; (2) `computer-science.md` der Übungsmuster kennt keine Logik, die Aufgaben mit `generated` für UND/ODER sind umständlich; (3) `create` nennt die App nach dem Ordner, nicht nach dem Kurznamen aus `init`; (4) `lernapps screenshots` rendert 390 px, die Anleitung sagt 360 px; (5) breite Tabellen laufen auf dem Handy horizontal (app-templates); (6) die Selbsteinschätzung steht in Code, der Skill sagt Commit; (7) Agenten haken Kästchen pauschal ab.
+
+**Danach.** Behoben und veröffentlicht: Name aus `init` bleibt App-Name, Abhak-Regel in `AGENTS.md`, 360 px (PR #200), `llms.txt` ohne GitHub-Verweise und mit dem Stopp für Umgebungen ohne Shell oder npm (zum Beispiel chatgpt.com im Browser). Stand: `tooling` 0.2.1, `practice` 0.1.6, `app-templates` 0.1.0. Issues: `apps`#165 (Katalog als statische Datei), `app-templates`#120, #122, #123, `tooling`#241.
+
+**Offene Punkte.** `app-templates` #120 (Formel); `arc42-language` #139 (der arc42-Befehl `diff` schneidet große Ausgabe auf macOS-Pipes ab); die Aufgaben der Agenten sind nicht erzwungen (sie haken Kästchen ab, die sie nicht erfüllt haben).
 
 
 
