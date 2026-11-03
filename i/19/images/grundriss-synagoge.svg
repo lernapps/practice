@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img">
+  <title>Grundriss einer Synagoge, Osten oben</title>
+  <rect x="0" y="0" width="400" height="500" fill="#ffffff"/>
+  <rect x="20" y="40" width="360" height="440" fill="#f4f1ea" stroke="#333" stroke-width="3"/>
+  <text x="200" y="26" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#333">Osten (Richtung Jerusalem)</text>
+  <!-- Toraschrein -->
+  <rect x="165" y="46" width="70" height="30" fill="#8a6b3d" stroke="#333" stroke-width="2"/>
+  <!-- Menora links und rechts -->
+  <g stroke="#333" stroke-width="2" fill="#d9b44a">
+    <rect x="95" y="58" width="40" height="14"/>
+    <rect x="265" y="58" width="40" height="14"/>
+  </g>
+  <!-- Ewiges Licht -->
+  <circle cx="200" cy="100" r="9" fill="#f2c94c" stroke="#333" stroke-width="2"/>
+  <!-- Bima -->
+  <rect x="170" y="225" width="60" height="60" fill="#c9c2b0" stroke="#333" stroke-width="2"/>
+  <rect x="185" y="240" width="30" height="30" fill="#e3ddcc" stroke="#333" stroke-width="2"/>
+  <!-- Frauenemporen -->
+  <g fill="#bdbdbd" stroke="#333" stroke-width="2">
+    <rect x="32" y="130" width="52" height="300"/>
+    <rect x="316" y="130" width="52" height="300"/>
+  </g>
+  <!-- Bankreihen -->
+  <g stroke="#333" stroke-width="5" stroke-linecap="round">
+    <path d="M105 135h75M220 135h75M105 160h75M220 160h75M105 185h75M220 185h75"/>
+    <path d="M105 305h75M220 305h75M105 330h75M220 330h75M105 355h75M220 355h75M105 380h75M220 380h75M105 405h75M220 405h75"/>
+    <path d="M105 215h55M240 215h55M105 245h55M240 245h55M105 275h55M240 275h55"/>
+  </g>
+  <!-- Eingang -->
+  <rect x="170" y="476" width="60" height="8" fill="#ffffff"/>
+  <text x="200" y="496" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#333">Eingang</text>
+</svg>
