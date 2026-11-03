@@ -93,8 +93,18 @@ export function appFromTemplate(packageDir: string, appDir: string, pin: Pin): v
   if (existsSync(join(appDir, "_gitignore"))) renameSync(join(appDir, "_gitignore"), join(appDir, ".gitignore"));
   for (const name of ["package-lock.json", ".npmrc", "README.md"]) rmSync(join(appDir, name), { force: true });
   const manifestFile = join(appDir, "package.json");
-  const manifest = JSON.parse(readFileSync(manifestFile, "utf8")) as { devDependencies?: Record<string, string> };
+  const manifest = JSON.parse(readFileSync(manifestFile, "utf8")) as {
+    devDependencies?: Record<string, string>;
+    overrides?: Record<string, unknown>;
+  };
   manifest.devDependencies = { ...manifest.devDependencies, [TEMPLATES]: pin.templates, [TOOLING]: pin.tooling };
+  // The template overrides the runtime with its own folder (file:..) for its checkout; with the pinned runtime that
+  // override conflicts with the direct dependency (npm EOVERRIDE). `lernapps create` drops it the same way.
+  if (manifest.overrides && TEMPLATES in manifest.overrides) {
+    const { [TEMPLATES]: _runtime, ...kept } = manifest.overrides;
+    if (Object.keys(kept).length > 0) manifest.overrides = kept;
+    else delete manifest.overrides;
+  }
   writeFileSync(manifestFile, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
