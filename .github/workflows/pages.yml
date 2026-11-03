@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   changes:
-    uses: lernapps/tooling/.github/workflows/changes.yml@fe0c62a1d46693e3fddc639247fd1fec8a9bc172 # main
+    uses: lernapps/tooling/.github/workflows/changes.yml@8bb19b57a2660a3977883c67b1045a77c2d1a602 # main
     with:
       tooling-ref: 8bb19b57a2660a3977883c67b1045a77c2d1a602 # the classifier of the same commit
 
@@ -36,7 +36,7 @@ jobs:
     if: needs.changes.outputs.site == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: lernapps/tooling/actions/site-check@fe0c62a1d46693e3fddc639247fd1fec8a9bc172 # main
+      - uses: lernapps/tooling/actions/site-check@8bb19b57a2660a3977883c67b1045a77c2d1a602 # main
 
   deploy:
     if: github.ref == 'refs/heads/main' && needs.changes.outputs.site == 'true'
@@ -48,7 +48,7 @@ jobs:
       group: gh-pages
       cancel-in-progress: false
     steps:
-      - uses: lernapps/tooling/actions/site-deploy@fe0c62a1d46693e3fddc639247fd1fec8a9bc172 # main
+      - uses: lernapps/tooling/actions/site-deploy@8bb19b57a2660a3977883c67b1045a77c2d1a602 # main
         with:
           keep: i/ # the previews of the submissions (submission.yml)
 
