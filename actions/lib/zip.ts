@@ -185,7 +185,7 @@ function findEnd(buffer: Buffer): number {
 export interface Inspection {
   entries: Entry[];
   problems: Problem[];
-  /** The folder around src/ that was cut off ("mathe-karte-main/"), or "" when src/ is at the root. */
+  /** The folder around src/ that was cut off ("mathe-arithmetik-main/"), or "" when src/ is at the root. */
   wrapper: string;
   /** Entries outside src/ that are ignored, never unpacked. */
   ignored: number;
