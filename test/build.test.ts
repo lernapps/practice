@@ -173,7 +173,11 @@ describe("the app from the template of the package", () => {
     writeFileSync(join(explainer, "src/main.ts"), "// main\n");
     writeFileSync(
       join(explainer, "package.json"),
-      JSON.stringify({ name: "explainer", devDependencies: { "@lernapps/app-templates": "file:..", "@lernapps/tooling": "github:lernapps/tooling#x", vue: "3" } }),
+      JSON.stringify({
+        name: "explainer",
+        devDependencies: { "@lernapps/app-templates": "file:..", "@lernapps/tooling": "github:lernapps/tooling#x", vue: "3" },
+        overrides: { "@lernapps/app-templates": "file:.." },
+      }),
     );
     return dir;
   };
@@ -184,8 +188,13 @@ describe("the app from the template of the package", () => {
     assert.ok(!existsSync(join(app, "_gitignore")));
     for (const name of [".npmrc", "README.md", "package-lock.json"]) assert.ok(!existsSync(join(app, name)), name);
     assert.ok(existsSync(join(app, "src/main.ts")));
-    const manifest = JSON.parse(readFileSync(join(app, "package.json"), "utf8")) as { devDependencies: Record<string, string> };
+    const manifest = JSON.parse(readFileSync(join(app, "package.json"), "utf8")) as {
+      devDependencies: Record<string, string>;
+      overrides?: unknown;
+    };
     assert.deepEqual(manifest.devDependencies, { "@lernapps/app-templates": "0.2.0", "@lernapps/tooling": "0.3.1", vue: "3" });
+    // the template's override of the runtime with its own folder would conflict with the pin (npm EOVERRIDE)
+    assert.equal(manifest.overrides, undefined);
   });
   it("stops when the package has no template explainer/", () => {
     assert.throws(() => appFromTemplate(tmp(), join(tmp(), "app"), pin), /is no template/);
