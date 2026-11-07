@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Your AI assistant turns the worksheets into an app to practise with. Copy this sentence into a new conversation:">
+  <title>Practise with exactly the material that will come up – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-61/lernapps-page.css">
+  <link rel="stylesheet" href="/practice/pr-preview/pr-61/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-61/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-61/lernapps-frame.css">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-61/en/">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-61/">
+<script>(() => {
+  const key = "lernapps-lang", here = "en", pages = {"de":"/practice/pr-preview/pr-61/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="en">Skip to content</a>
+<p class="la-preview" lang="en">Preview of a change. The real page: <a href="https://lernapps.net/practice/en/">lernapps.net/practice/en/</a></p><header class="la-header" lang="en">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/en/" aria-label="lernapps.net – home page"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Main navigation"><ul><li><a href="/apps/en/">Catalog</a></li><li><a href="/practice/pr-preview/pr-61/en/" aria-current="page">Practise</a></li><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-61/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav>
+    <details class="la-menu"><summary>Menu</summary><nav class="la-nav la-nav--menu" aria-label="Main navigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">For learners</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/en/">App catalog</a></li><li><a href="/practice/pr-preview/pr-61/en/" aria-current="page">Practise for a test</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">For makers</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Understand and join in</p><ul aria-labelledby="la-menu-2"><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-61/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<h1>Practise with <mark class="mark">exactly the material</mark> that will come up</h1>
+<p>Your AI assistant turns the worksheets into an app to practise with. Copy this sentence into a new conversation:</p>
+<pre id="assistant"><code>Read https://lernapps.net/practice/llms.txt and help me make an app to practise for &lt;occasion&gt;.</code></pre><p>For example: “for my daughter&#39;s maths test next week” or “for a cover lesson in English, year 7”.</p>
+<ol class="steps" id="steps">
+  <li>
+    <h2>Set the scope</h2>
+    <a href="https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY"><img src="../example/card-conversation.webp" alt="Part of the conversation, in German: the father gives five photos and writes “year 6, Protestant RE, Judaism”; Claude asks about the letters in the floor plan." width="720" height="540"></a>
+    <p>Photos of the worksheets, plus subject, year and what will come up.</p>
+  </li>
+  <li>
+    <h2>Your assistant does this for you</h2>
+    <p>Explanations and exercises, made for exactly this material, in a few minutes.</p>
+  </li>
+  <li>
+    <h2>Practise</h2>
+    <a href="https://lernapps.net/practice/i/19/"><img src="../example/card-result.webp" alt="Three pages of the finished app on a phone: self-check, redrawn floor plan of a synagogue, an exercise." width="720" height="540"></a>
+    <p>With a link, on any device, without an account. <a href="https://lernapps.net/practice/i/19/">Try the RE app (in German) →</a></p>
+  </li>
+</ol><h2 id="needs">What you need</h2>
+<ul>
+<li><strong>An AI assistant that can write software,</strong> such as Claude Code, Codex or Gemini. It often comes with a subscription you already have.</li>
+<li><strong>A free GitHub account.</strong> Through GitHub you submit the content and get the link to the app.</li>
+</ul>
+<p>Content and app are public, so leave out names and the school. <a href="https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY">See a real conversation</a> · <a href="/practice/pr-preview/pr-61/en/submit/">Submitting step by step</a> · <a href="/practice/pr-preview/pr-61/en/privacy/">Privacy</a></p>
+<p>For maintainers: <a href="/practice/pr-preview/pr-61/en/operations/">Operations</a> · <a href="/practice/pr-preview/pr-61/en/checks/">Checks</a> · <a href="/practice/pr-preview/pr-61/en/evaluation/">Evaluating the guide</a> · <a href="/practice/pr-preview/pr-61/architecture/">Architecture</a></p>
+  </main>
+<footer class="la-footer" lang="en">
+  <div class="la-footer__inner">
+    <p>lernapps.net is free and has no ads. It lives on your thanks.</p>
+    <nav aria-label="Footer"><ul><li><a href="/en/privacy/">Privacy</a></li><li><a href="/en/imprint/">Imprint</a></li><li><a href="/docs/en/platform-design/">Platform design</a></li><li><a href="https://github.com/lernapps/practice">Source code</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>
