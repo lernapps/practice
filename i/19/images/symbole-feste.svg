@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" role="img">
+  <title>Sechs Symbole jüdischer Feste</title>
+  <rect width="600" height="340" fill="#ffffff"/>
+  <g font-family="sans-serif" font-size="15" text-anchor="middle" fill="#333">
+    <!-- Sederteller -->
+    <circle cx="100" cy="90" r="55" fill="#f4f1ea" stroke="#333" stroke-width="3"/>
+    <g fill="#8a6b3d"><circle cx="100" cy="60" r="9"/><circle cx="73" cy="82" r="9"/><circle cx="127" cy="82" r="9"/><circle cx="82" cy="115" r="9"/><circle cx="118" cy="115" r="9"/></g>
+    <text x="100" y="170">Pessach: Sederteller</text>
+    <!-- Gesetzestafeln -->
+    <path d="M240 140 V55 a28 28 0 0 1 56 0 V140 Z" fill="#c9c2b0" stroke="#333" stroke-width="3"/>
+    <path d="M304 140 V55 a28 28 0 0 1 56 0 V140 Z" fill="#c9c2b0" stroke="#333" stroke-width="3"/>
+    <text x="300" y="170">Schawuot: Gesetzestafeln</text>
+    <!-- Schofar -->
+    <path d="M440 120 Q470 40 540 50 Q500 60 485 100 Q470 135 440 120 Z" fill="#d9b44a" stroke="#333" stroke-width="3"/>
+    <text x="490" y="170">Rosch ha-Schana: Schofar</text>
+    <!-- Laubhütte -->
+    <rect x="60" y="240" width="80" height="60" fill="#f4f1ea" stroke="#333" stroke-width="3"/>
+    <path d="M50 240 L100 210 L150 240 Z" fill="#6a994e" stroke="#333" stroke-width="3"/>
+    <text x="100" y="325">Sukkot: Laubhütte</text>
+    <!-- Chanukka-Leuchter -->
+    <g stroke="#333" stroke-width="3" fill="#d9b44a">
+      <path d="M210 300 H390" fill="none"/>
+      <rect x="216" y="262" width="8" height="38"/><rect x="236" y="262" width="8" height="38"/><rect x="256" y="262" width="8" height="38"/><rect x="276" y="262" width="8" height="38"/><rect x="296" y="262" width="8" height="38"/><rect x="316" y="262" width="8" height="38"/><rect x="336" y="262" width="8" height="38"/><rect x="356" y="262" width="8" height="38"/><rect x="376" y="262" width="8" height="38"/></g>
+    <text x="300" y="325">Chanukka: Leuchter</text>
+    <!-- Purim Maske -->
+    <ellipse cx="490" cy="260" rx="40" ry="50" fill="#f4f1ea" stroke="#333" stroke-width="3"/>
+    <circle cx="475" cy="250" r="6" fill="#333"/><circle cx="505" cy="250" r="6" fill="#333"/>
+    <path d="M470 275 Q490 295 510 275" fill="none" stroke="#333" stroke-width="3"/>
+    <text x="490" y="325">Purim: Maske</text>
+  </g>
+</svg>

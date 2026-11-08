@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img">
+  <title>Jahreskreis der jüdischen Feste nach den Monaten des Kalenderjahres</title>
+  <rect width="400" height="400" fill="#ffffff"/>
+  <circle cx="200" cy="200" r="120" fill="#f4f1ea" stroke="#333" stroke-width="3"/>
+  <g font-family="sans-serif" font-size="13" fill="#555" text-anchor="middle">
+    <text x="200" y="98">Januar</text><text x="253" y="112">Feb.</text><text x="291" y="150">März</text>
+    <text x="305" y="205">April</text><text x="291" y="262">Mai</text><text x="253" y="300">Juni</text>
+    <text x="200" y="314">Juli/Aug.</text><text x="147" y="300">Sept.</text><text x="109" y="262">Okt.</text>
+    <text x="95" y="205">Nov.</text><text x="109" y="150">Dez.</text>
+  </g>
+  <g font-family="sans-serif" font-size="14" font-weight="bold" fill="#1d3b6e">
+    <text x="262" y="38" text-anchor="start">Purim</text>
+    <text x="318" y="108" text-anchor="start">Pessach</text>
+    <text x="316" y="288" text-anchor="start">Schawuot</text>
+    <text x="4" y="320" text-anchor="start">Rosch ha-Schana,</text>
+    <text x="4" y="338" text-anchor="start">Jom Kippur,</text>
+    <text x="4" y="356" text-anchor="start">Sukkot</text>
+    <text x="4" y="70" text-anchor="start">Chanukka</text>
+  </g>
+  <g stroke="#1d3b6e" stroke-width="1.5">
+    <path d="M262 42 L253 98"/><path d="M318 112 L300 140"/><path d="M316 292 L295 268"/>
+    <path d="M84 312 L120 280"/><path d="M60 76 L108 140"/>
+  </g>
+</svg>

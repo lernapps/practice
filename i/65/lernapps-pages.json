@@ -1,0 +1,42 @@
+{
+  "format": 1,
+  "strand": "none",
+  "pages": [
+    {
+      "path": "licht/lichtquellen/",
+      "title": "Lichtquellen"
+    },
+    {
+      "path": "licht/sehen/",
+      "title": "Wie wir sehen"
+    },
+    {
+      "path": "licht/ausbreitung/",
+      "title": "Wie sich Licht ausbreitet"
+    },
+    {
+      "path": "licht/sichtlinien/",
+      "title": "Wer sieht wen? Was wird hell?"
+    },
+    {
+      "path": "licht/oberflaechen/",
+      "title": "Licht auf Oberflächen"
+    },
+    {
+      "path": "schatten/schattenraum/",
+      "title": "Schattenraum und Schattenbild"
+    },
+    {
+      "path": "schatten/schattengroesse/",
+      "title": "Wie groß wird der Schatten?"
+    },
+    {
+      "path": "schatten/kern-halbschatten/",
+      "title": "Kernschatten und Halbschatten"
+    },
+    {
+      "path": "schatten/teilschatten/",
+      "title": "Teilschatten"
+    }
+  ]
+}
