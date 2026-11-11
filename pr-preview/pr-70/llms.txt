@@ -1,0 +1,23 @@
+# lernapps practice
+
+> Eine App zum Üben nach Maß für einen Anlass (eine Arbeit, eine Vertretungsstunde, verpasster Stoff), aus dem Material des Creators, eingereicht über ein Formular und zwei Wochen lang erreichbar. Zum Lernen ohne Anlass gibt es den Katalog von lernapps.net.
+
+## Zuerst: kannst Du Befehle ausführen?
+
+Du brauchst eine Shell mit Node 22.18 oder neuer, git und Zugang zu npmjs.com (`npm`, `npx`). Kannst Du keine Befehle
+ausführen, oder erreicht `npx` die npm-Registry nicht (ein Chat im Browser, etwa chatgpt.com, kann das meist nicht):
+**Höre hier auf und tue nichts weiter.** Sage dem Creator in zwei Sätzen, dass es in dieser Umgebung nicht geht und dass er
+mit derselben Bitte in einer Umgebung neu anfangen soll, die es kann, etwa in der Desktop-Anwendung seines KI-Assistenten.
+Baue die App nicht von Hand nach dieser Seite und rate keine Dateien: Ohne die Pakete passt das Ergebnis nicht zu lernapps.net.
+
+## Anfangen
+
+1. Lege einen neuen, leeren Ordner für die App an und wechsle hinein.
+2. Starte die App dort mit einem Befehl:
+
+   ```sh
+   npx --yes @lernapps/practice init <anlass>
+   ```
+
+   Für `<anlass>` nimm einen kurzen Namen aus Kleinbuchstaben, Ziffern und Bindestrichen, zum Beispiel `mathe-arbeit-bruchrechnen`. Er schreibt die Plan-Vorlage vollständig und unverändert als `.vibe/plans/01-<anlass>.md` (nichts wird heruntergeladen, das ein Werkzeug zusammenfassen könnte) und legt die Skills ins Projekt, für jeden Agenten, den er findet.
+3. Lies die Plan-Vorlage vollständig. Folge ihr Aufgabe für Aufgabe: Sie nennt die Skills jeder Phase und sagt, wann Du auf den Creator wartest.
