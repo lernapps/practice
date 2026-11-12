@@ -40,7 +40,7 @@
     "marked": "18.1.3"
   },
   "dependencies": {
-    "@lernapps/tooling": "0.11.5"
+    "@lernapps/tooling": "0.12.0"
   },
   "lernapps": {
     "planTemplate": "guidance/plan-template.md"
