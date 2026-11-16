@@ -25,7 +25,7 @@ Zum Beispiel: „für die Mathearbeit nächste Woche“ oder „für eine Vertre
 
 ## Das brauchst du {#needs}
 
-- **Einen KI-Assistenten, der programmieren kann,** etwa Claude Code, Codex oder Gemini. Oft steckt er in einem Abo, das du schon hast.
+- **Einen KI-Assistenten, der programmieren kann,** etwa Claude Code, Codex oder Gemini. Oft steckt er in einem Abo, das du schon hast. Hast du keinen eingerichtet? Dann übe [mit Codespaces](codespaces.md): im Browser, ohne Installation.
 - **Ein kostenloses GitHub-Konto.** Über GitHub reichst du den Inhalt ein und bekommst den Link zur App.
 
 Inhalt und App sind öffentlich, also ohne Namen und Schule. [Ein echtes Gespräch ansehen](https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY) · [Einreichen Schritt für Schritt](submit.md) · [Datenschutz](privacy.md)

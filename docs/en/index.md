@@ -25,7 +25,7 @@ For example: “for my daughter's maths test next week” or “for a cover less
 
 ## What you need {#needs}
 
-- **An AI assistant that can write software,** such as Claude Code, Codex or Gemini. It often comes with a subscription you already have.
+- **An AI assistant that can write software,** such as Claude Code, Codex or Gemini. It often comes with a subscription you already have. Have none set up? Then practise [with Codespaces](codespaces.md): in the browser, nothing to install.
 - **A free GitHub account.** Through GitHub you submit the content and get the link to the app.
 
 Content and app are public, so leave out names and the school. [See a real conversation](https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY) · [Submitting step by step](submit.md) · [Privacy](privacy.md)

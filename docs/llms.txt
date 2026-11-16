@@ -12,7 +12,7 @@ Baue die App nicht von Hand nach dieser Seite und rate keine Dateien: Ohne die P
 
 ## Anfangen
 
-1. Lege einen neuen, leeren Ordner für die App an und wechsle hinein.
+1. Lege einen neuen, leeren Ordner für die App an und wechsle hinein. In einem Codespace (ein Arbeitsplatz im Browser, aus der Vorlage lernapps/start) ist der Ordner, in dem Du bist, schon der Ordner der App: lege dort keinen Unterordner an und starte `init` in diesem Ordner.
 2. Starte die App dort mit einem Befehl:
 
    ```sh
