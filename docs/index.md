@@ -6,6 +6,10 @@ Dein KI-Assistent macht aus den Arbeitsblättern eine App zum Üben. Kopier dies
 
 Zum Beispiel: „für die Mathearbeit nächste Woche“ oder „für eine Vertretungsstunde in Englisch, Klasse 7“.
 
+<div class="hinweis">
+<p><strong>Noch keinen Assistenten eingerichtet?</strong> Dann übe im Browser, ohne etwas zu installieren: <a href="codespaces/">Mit Codespaces üben →</a></p>
+</div>
+
 <ol class="steps" id="steps">
   <li>
     <h2>Umfang abstecken</h2>
@@ -25,7 +29,7 @@ Zum Beispiel: „für die Mathearbeit nächste Woche“ oder „für eine Vertre
 
 ## Das brauchst du {#needs}
 
-- **Einen KI-Assistenten, der programmieren kann,** etwa Claude Code, Codex oder Gemini. Oft steckt er in einem Abo, das du schon hast. Hast du keinen eingerichtet? Dann übe [mit Codespaces](codespaces.md): im Browser, ohne Installation.
+- **Einen KI-Assistenten, der programmieren kann,** etwa Claude Code, Codex oder Gemini. Oft steckt er in einem Abo, das du schon hast.
 - **Ein kostenloses GitHub-Konto.** Über GitHub reichst du den Inhalt ein und bekommst den Link zur App.
 
 Inhalt und App sind öffentlich, also ohne Namen und Schule. [Ein echtes Gespräch ansehen](https://claude.ai/code/cshk_016NmpwdFN1zQTE4S4W9Mu3XYRYcNBKLgoHcMwkR1dQpfY) · [Einreichen Schritt für Schritt](submit.md) · [Datenschutz](privacy.md)

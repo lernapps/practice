@@ -14,3 +14,6 @@ img { max-width: 100%; height: auto; }
 .steps h2::before { content: counter(step); flex: none; display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 999px; background: var(--la-text); color: var(--la-bg); font-size: 0.85rem; font-weight: 700; }
 .steps img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: top; border: 1px solid var(--la-line); border-radius: 0.75rem; background: #0f172a; }
 .steps p { margin: 0.6rem 0 0; color: var(--la-muted); }
+.hinweis { margin: 1.5rem 0; padding: 0.9rem 1.1rem; border: 1px solid var(--la-line); border-left: 4px solid var(--la-accent); border-radius: var(--la-radius); background: var(--la-surface); }
+.hinweis p { margin: 0; }
+.hinweis a { font-weight: 600; }
