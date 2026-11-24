@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 330" font-family="sans-serif" font-size="11" role="img">
+<rect width="360" height="330" fill="#ffffff"/>
+<text x="8" y="18" font-size="13" font-weight="bold" fill="#1a202c">Gini-Koeffizient in Deutschland</text>
+<line x1="44" y1="270.0" x2="340" y2="270.0" stroke="#e2e8f0"/>
+<text x="38" y="274.0" text-anchor="end" fill="#4a5568">0</text>
+<line x1="44" y1="245.6" x2="340" y2="245.6" stroke="#e2e8f0"/>
+<text x="38" y="249.6" text-anchor="end" fill="#4a5568">0,1</text>
+<line x1="44" y1="221.1" x2="340" y2="221.1" stroke="#e2e8f0"/>
+<text x="38" y="225.1" text-anchor="end" fill="#4a5568">0,2</text>
+<line x1="44" y1="196.7" x2="340" y2="196.7" stroke="#e2e8f0"/>
+<text x="38" y="200.7" text-anchor="end" fill="#4a5568">0,3</text>
+<line x1="44" y1="172.2" x2="340" y2="172.2" stroke="#e2e8f0"/>
+<text x="38" y="176.2" text-anchor="end" fill="#4a5568">0,4</text>
+<line x1="44" y1="147.8" x2="340" y2="147.8" stroke="#e2e8f0"/>
+<text x="38" y="151.8" text-anchor="end" fill="#4a5568">0,5</text>
+<line x1="44" y1="123.3" x2="340" y2="123.3" stroke="#e2e8f0"/>
+<text x="38" y="127.3" text-anchor="end" fill="#4a5568">0,6</text>
+<line x1="44" y1="98.9" x2="340" y2="98.9" stroke="#e2e8f0"/>
+<text x="38" y="102.9" text-anchor="end" fill="#4a5568">0,7</text>
+<line x1="44" y1="74.4" x2="340" y2="74.4" stroke="#e2e8f0"/>
+<text x="38" y="78.4" text-anchor="end" fill="#4a5568">0,8</text>
+<line x1="44" y1="50.0" x2="340" y2="50.0" stroke="#e2e8f0"/>
+<text x="38" y="54.0" text-anchor="end" fill="#4a5568">0,9</text>
+<text x="44.0" y="286" text-anchor="middle" fill="#4a5568">2000</text>
+<text x="118.0" y="286" text-anchor="middle" fill="#4a5568">2005</text>
+<text x="192.0" y="286" text-anchor="middle" fill="#4a5568">2010</text>
+<text x="266.0" y="286" text-anchor="middle" fill="#4a5568">2015</text>
+<text x="340.0" y="286" text-anchor="middle" fill="#4a5568">2020</text>
+<line x1="44" y1="270" x2="340" y2="270" stroke="#1a202c"/>
+<polyline points="73.6,80.3 147.6,74.7 221.6,79.6 295.6,79.6 325.2,68.1" fill="none" stroke="#2b6cb0" stroke-width="2.5" />
+<circle cx="73.6" cy="80.3" r="3.5" fill="#2b6cb0"/>
+<text x="73.6" y="72.3" text-anchor="middle" font-size="10" fill="#1a202c">0,776</text>
+<circle cx="147.6" cy="74.7" r="3.5" fill="#2b6cb0"/>
+<text x="147.6" y="66.7" text-anchor="middle" font-size="10" fill="#1a202c">0,799</text>
+<circle cx="221.6" cy="79.6" r="3.5" fill="#2b6cb0"/>
+<text x="221.6" y="71.6" text-anchor="middle" font-size="10" fill="#1a202c">0,779</text>
+<circle cx="295.6" cy="79.6" r="3.5" fill="#2b6cb0"/>
+<text x="295.6" y="71.6" text-anchor="middle" font-size="10" fill="#1a202c">0,779</text>
+<circle cx="325.2" cy="68.1" r="3.5" fill="#2b6cb0"/>
+<text x="325.2" y="60.1" text-anchor="middle" font-size="10" fill="#1a202c">0,826</text>
+<polyline points="44.0,208.9 58.8,208.9 147.6,195.7 221.6,200.8 295.6,198.9 325.2,197.4 340.0,185.9" fill="none" stroke="#dd6b20" stroke-width="2.5" stroke-dasharray="6 3"/>
+<circle cx="44.0" cy="208.9" r="3.5" fill="#dd6b20"/>
+<text x="44.0" y="200.9" text-anchor="middle" font-size="10" fill="#1a202c">0,25</text>
+<circle cx="58.8" cy="208.9" r="3.5" fill="#dd6b20"/>
+<circle cx="147.6" cy="195.7" r="3.5" fill="#dd6b20"/>
+<text x="147.6" y="187.7" text-anchor="middle" font-size="10" fill="#1a202c">0,304</text>
+<circle cx="221.6" cy="200.8" r="3.5" fill="#dd6b20"/>
+<text x="221.6" y="192.8" text-anchor="middle" font-size="10" fill="#1a202c">0,283</text>
+<circle cx="295.6" cy="198.9" r="3.5" fill="#dd6b20"/>
+<text x="295.6" y="190.9" text-anchor="middle" font-size="10" fill="#1a202c">0,291</text>
+<circle cx="325.2" cy="197.4" r="3.5" fill="#dd6b20"/>
+<text x="325.2" y="189.4" text-anchor="middle" font-size="10" fill="#1a202c">0,297</text>
+<circle cx="340.0" cy="185.9" r="3.5" fill="#dd6b20"/>
+<text x="340.0" y="177.9" text-anchor="middle" font-size="10" fill="#1a202c">0,344</text>
+<line x1="50" y1="304" x2="74" y2="304" stroke="#2b6cb0" stroke-width="2.5"/><text x="80" y="308" fill="#1a202c">Vermögen</text>
+<line x1="170" y1="304" x2="194" y2="304" stroke="#dd6b20" stroke-width="2.5" stroke-dasharray="6 3"/><text x="200" y="308" fill="#1a202c">Einkommen</text>
+<text x="8" y="324" font-size="10" fill="#4a5568">0 = alle haben gleich viel, 1 = eine Person hat alles</text>
+</svg>

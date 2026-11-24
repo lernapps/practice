@@ -1,0 +1,12 @@
+# Einkommen
+
+Menschen verdienen sehr unterschiedlich. Zahlen für 2020: Ein Vorstandsvorsitzender eines DAX-Unternehmens bekam im Durchschnitt 5,29 Millionen Euro brutto im Jahr (440.000 Euro im Monat), der bestverdienende 14 Millionen Euro; ein Vorstandsmitglied bei VW verdiente das 75-Fache eines Mitarbeiters; das Durchschnittsgehalt Vollzeitbeschäftigter lag bei 47.700 Euro brutto im Jahr; die Armutsquote lag bei 16,1 % (13,4 Millionen Menschen). Brutto ist der Betrag vor dem Abzug von Steuern und Sozialversicherungen. Es gibt vier Einkommensquellen: Einkommen aus unselbstständiger Arbeit (Gehalt, Lohn, Heuer, Diäten, Gage, Ausbildungsvergütung, Sold); aus selbstständiger Arbeit (Gewinne eines Unternehmens, Einkünfte aus freiberuflicher Tätigkeit, Vermietung als unternehmerische Tätigkeit); aus Vermögen (Zinsen, Dividenden, Mieteinnahmen, Pachten); Transfereinkommen (Leistungen des Staates ohne konkrete Gegenleistung wie Kindergeld oder Sozialhilfe, oder aufgrund früherer Beiträge wie Renten). Viele Haushalte haben mehrere Quellen. Mit dem Äquivalenzeinkommen macht man Haushalte unterschiedlicher Größe vergleichbar: Das Haushaltseinkommen wird durch die Summe der Gewichte geteilt; die erste erwachsene Person zählt 1, weitere Personen ab 14 Jahren je 0,5 und Kinder unter 14 je 0,3 (Bedarfsskala der OECD).
+
+## Gehört nicht dazu
+
+- Politikzyklus im Detail
+- Wahlen, Parteien und das politische System der Bundesrepublik im Einzelnen
+- Sozialversicherung und Rentenrecht
+- Migration und Integration im Detail
+
+Alle Seiten des Kapitels: [Scope des Kapitels](../../scope/)

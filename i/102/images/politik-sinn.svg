@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 266" font-family="sans-serif" font-size="11" role="img">
+<rect width="360" height="266" fill="#ffffff"/>
+<text x="95" y="22" text-anchor="middle" font-size="13" fill="#2b6cb0" font-weight="bold">engerer Sinn</text>
+<text x="95" y="38" text-anchor="middle" font-size="10" fill="#4a5568">verbindlich für alle</text>
+<text x="265" y="22" text-anchor="middle" font-size="13" fill="#dd6b20" font-weight="bold">weiterer Sinn</text>
+<text x="265" y="38" text-anchor="middle" font-size="10" fill="#4a5568">gilt nur für die Gruppe</text>
+<rect x="15.0" y="52" width="160" height="30" rx="6" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="95" y="71" text-anchor="middle" font-size="11" fill="#1a202c">international</text>
+<rect x="26.0" y="88" width="138" height="30" rx="6" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="95" y="107" text-anchor="middle" font-size="11" fill="#1a202c">Europäische Union</text>
+<rect x="37.0" y="124" width="116" height="30" rx="6" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="95" y="143" text-anchor="middle" font-size="11" fill="#1a202c">Bund</text>
+<rect x="48.0" y="160" width="94" height="30" rx="6" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="95" y="179" text-anchor="middle" font-size="11" fill="#1a202c">Land</text>
+<rect x="59.0" y="196" width="72" height="30" rx="6" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="95" y="215" text-anchor="middle" font-size="11" fill="#1a202c">Gemeinde</text>
+<rect x="200" y="52" width="130" height="30" rx="15" fill="#feebc8" stroke="#dd6b20"/>
+<text x="265" y="71" text-anchor="middle" font-size="11" fill="#1a202c">Familie</text>
+<rect x="200" y="88" width="130" height="30" rx="15" fill="#feebc8" stroke="#dd6b20"/>
+<text x="265" y="107" text-anchor="middle" font-size="11" fill="#1a202c">Freundeskreis</text>
+<rect x="200" y="124" width="130" height="30" rx="15" fill="#feebc8" stroke="#dd6b20"/>
+<text x="265" y="143" text-anchor="middle" font-size="11" fill="#1a202c">Schule</text>
+<rect x="200" y="160" width="130" height="30" rx="15" fill="#feebc8" stroke="#dd6b20"/>
+<text x="265" y="179" text-anchor="middle" font-size="11" fill="#1a202c">Verein</text>
+<rect x="200" y="196" width="130" height="30" rx="15" fill="#feebc8" stroke="#dd6b20"/>
+<text x="265" y="215" text-anchor="middle" font-size="11" fill="#1a202c">Betrieb</text>
+<line x1="180" y1="48" x2="180" y2="232" stroke="#cbd5e0" stroke-dasharray="4 3"/>
+<text x="180" y="256" text-anchor="middle" font-size="10" fill="#4a5568">Kernelemente überall: Konflikt, Konsens, Interesse, Macht</text>
+</svg>

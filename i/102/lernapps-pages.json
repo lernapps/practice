@@ -1,0 +1,114 @@
+{
+  "format": 1,
+  "strand": "none",
+  "pages": [
+    {
+      "path": "politik/politisch-oder-nicht/",
+      "title": "Politisch oder nicht?"
+    },
+    {
+      "path": "politik/politikbegriffe/",
+      "title": "Politikbegriffe"
+    },
+    {
+      "path": "politik/dimensionen/",
+      "title": "polity, policy, politics"
+    },
+    {
+      "path": "grundorientierungen/links-und-rechts/",
+      "title": "Links und rechts"
+    },
+    {
+      "path": "grundorientierungen/vier-grundorientierungen/",
+      "title": "Vier Grundorientierungen"
+    },
+    {
+      "path": "grundorientierungen/links-rechts-schema/",
+      "title": "Das Links-Rechts-Schema"
+    },
+    {
+      "path": "staat-gesellschaft/staat-und-gesellschaft/",
+      "title": "Staat und Gesellschaft"
+    },
+    {
+      "path": "staat-gesellschaft/trennung-und-verbindung/",
+      "title": "Getrennt und verbunden"
+    },
+    {
+      "path": "demographie/altersstruktur/",
+      "title": "Altersstruktur"
+    },
+    {
+      "path": "demographie/lebendiges-diagramm/",
+      "title": "Ein lebendiges Diagramm"
+    },
+    {
+      "path": "demographie/fachkraeftemangel/",
+      "title": "Wandel und Arbeitsmarkt"
+    },
+    {
+      "path": "ungleichheit/was-ist-soziale-ungleichheit/",
+      "title": "Was ist soziale Ungleichheit?"
+    },
+    {
+      "path": "ungleichheit/dimensionen-der-ungleichheit/",
+      "title": "Vier Dimensionen"
+    },
+    {
+      "path": "ungleichheit/einkommen/",
+      "title": "Einkommen"
+    },
+    {
+      "path": "ungleichheit/dezile-und-gini/",
+      "title": "Dezile und Gini"
+    },
+    {
+      "path": "ungleichheit/armut-messen/",
+      "title": "Armut messen"
+    },
+    {
+      "path": "ungleichheit/statistiken-analysieren/",
+      "title": "Statistiken analysieren"
+    },
+    {
+      "path": "ungleichheit/bildung-und-herkunft/",
+      "title": "Bildung und Herkunft"
+    },
+    {
+      "path": "modelle/modelle-im-ueberblick/",
+      "title": "Modelle im Überblick"
+    },
+    {
+      "path": "modelle/klassentheorie-marx/",
+      "title": "Klassentheorie nach Marx"
+    },
+    {
+      "path": "modelle/klassengesellschaft-heute/",
+      "title": "Klassengesellschaft heute?"
+    },
+    {
+      "path": "modelle/schichtmodelle/",
+      "title": "Schichtmodelle"
+    },
+    {
+      "path": "modelle/soziale-milieus/",
+      "title": "Soziale Milieus"
+    },
+    {
+      "path": "modelle/individualisierung-und-singularitaet/",
+      "title": "Beck und Reckwitz"
+    },
+    {
+      "path": "modelle/gespaltene-gesellschaft/",
+      "title": "Gespaltene Gesellschaft?"
+    },
+    {
+      "path": "kursarbeit/operatoren/",
+      "title": "Operatoren"
+    },
+    {
+      "path": "kursarbeit/kursarbeit-ueben/",
+      "title": "Kursarbeit üben"
+    }
+  ]
+}

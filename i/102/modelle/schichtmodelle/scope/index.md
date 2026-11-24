@@ -1,0 +1,12 @@
+# Schichtmodelle
+
+Eine soziale Schicht ist eine Gruppe von Menschen mit gemeinsamen sozialen Merkmalen, die sich in ihrem Status als eigenständige Gruppe empfinden; klassische Faktoren sind Bildungsstand, Einkommen und Beruf, moderne Schichtbegriffe beziehen Prestige und Lebensführung ein. Zwei Thesen stehen sich gegenüber: Wir leben in einer sich angleichenden Mittelstandsgesellschaft – oder die Gesellschaft ist gespalten, mit kaum überwindbaren Grenzen und begrenztem Aufstieg. In den 1960er Jahren entwarfen Ralf Dahrendorf und Karl Martin Bolte zwei berühmte Modelle der westdeutschen Gesellschaft. Boltes Modell ähnelte einer Zwiebel mit breiter Mitte: Oberschicht ca. 2 %, obere Mitte ca. 5 %, mittlere Mitte ca. 14 %, untere Mitte ca. 29 %, unterste Mitte/oberstes Unten ca. 29 % (zusammen ca. 58 %), Unten ca. 17 %, sozial Verachtete ca. 4 %. Dahrendorf beschrieb ein Haus (1965): Eliten unter 1 %, Dienstklasse 12 % (Verwaltungsangestellte), Mittelstand 20 % (Selbstständige), Arbeiterelite 5 % (Meister), falscher Mittelstand 12 % (einfache Dienstleistungsberufe), Arbeiterschicht 45 % (Facharbeiter und ungelernte Arbeiter), Unterschicht 5 % (Dauererwerbslose, soziale Randgruppen); Schichten existieren nebeneinander, gewisse Mobilität ist möglich. Rainer Geißler zeichnete 2014 ein neues Haus: In den beiden oberen Etagen machen die Dienstklassen etwa fünf Sechstel aus, der alte Mittelstand ist auf ein Sechstel geschrumpft; in den unteren Etagen gibt es mehr Dienstleister als Arbeiter; Migranten sind unten deutlich stärker vertreten als oben (Unterschichtung); die Grenzen sind durchlässiger geworden (Entschichtung). Geißler 2014 in Prozent: Eliten unter 1, oberer Mittelstand 3, obere Dienstklasse 13, mittlere Dienstklasse 19, mittlerer Mittelstand 3, Arbeiterelite 1, Landwirte 0,6, gelernte Dienstleister 10, Facharbeiter 11, unterer Mittelstand 4, un- und angelernte Dienstleister 11, un- und angelernte Arbeiter 8, Unterschicht 6; dazu Ausländer zusammen etwa 10, vor allem in den unteren Gruppen. Weil die Modelle verschieden gebaut sind, lassen sich ihre Zahlen nicht genau vergleichen. Schichtmodelle können informieren, aber auch eine politische Sicht ausdrücken.
+
+## Gehört nicht dazu
+
+- Politikzyklus im Detail
+- Wahlen, Parteien und das politische System der Bundesrepublik im Einzelnen
+- Sozialversicherung und Rentenrecht
+- Migration und Integration im Detail
+
+Alle Seiten des Kapitels: [Scope des Kapitels](../../scope/)

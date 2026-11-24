@@ -1,0 +1,12 @@
+# Staat und Gesellschaft
+
+Die Seite klärt die Begriffe Gesellschaft und Staat. Dem Wortursprung nach ist Gesellschaft die Vereinigung mehrerer Gefährten. Seit Platon (428–348 v. Chr.) und Aristoteles (384–322 v. Chr.) meint Gesellschaft eine größere Gruppe von Menschen, etwa in der polis, dem griechischen Stadtstaat, die in einem Zusammenhang von Interessen und Fähigkeiten auf einem Gebiet leben und sich als Einheit begreifen. Mit Aufklärung und bürgerlichen Revolutionen entstand die bürgerliche Gesellschaft der Neuzeit als Marktgesellschaft, nationale Einheit und Rechtsgesellschaft. Hegel (1770–1831) nannte Familie, bürgerliche Gesellschaft und Staat als Basisinstitutionen. Kennzeichnend ist die Trennung: Der Staat ist für die innere, rechtliche, soziale und äußere Sicherheit zuständig; die Gesellschaft ist der Handlungsraum der freien Bürgerinnen und Bürger, die sich in Vereinen, Genossenschaften, Familie und durch Verträge zusammenschließen. Das Grundgesetz sagt in Art. 20 Abs. 2 Satz 1: „Alle Staatsgewalt geht vom Volke aus.“ Fachwörter: heterogen (unterschiedlich, etwa nach sozialer Stellung, Geschlecht, Herkunft, Fähigkeiten) und assoziieren (sich zusammenschließen).
+
+## Gehört nicht dazu
+
+- Politikzyklus im Detail
+- Wahlen, Parteien und das politische System der Bundesrepublik im Einzelnen
+- Sozialversicherung und Rentenrecht
+- Migration und Integration im Detail
+
+Alle Seiten des Kapitels: [Scope des Kapitels](../../scope/)

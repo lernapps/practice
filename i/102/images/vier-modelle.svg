@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 375" font-family="sans-serif" font-size="11" role="img">
+<rect width="360" height="375" fill="#ffffff"/>
+<polygon points="90,20 30,170 150,170" fill="#c6f6d5" stroke="#2f855a"/>
+<line x1="70" y1="70" x2="110" y2="70" stroke="#2f855a"/><line x1="50" y1="120" x2="130" y2="120" stroke="#2f855a"/>
+<text x="90" y="58" text-anchor="middle" font-size="10" fill="#1a202c">Klerus</text>
+<text x="90" y="102" text-anchor="middle" font-size="10" fill="#1a202c">Adel</text>
+<text x="90" y="152" text-anchor="middle" font-size="10" fill="#1a202c">Bürger und Bauern</text>
+<rect x="215" y="25" width="110" height="45" fill="#fed7d7" stroke="#c53030"/>
+<text x="270" y="52" text-anchor="middle" font-size="10" fill="#1a202c">Besitzende</text>
+<rect x="215" y="78" width="110" height="92" fill="#feb2b2" stroke="#c53030"/>
+<text x="270" y="128" text-anchor="middle" font-size="10" fill="#1a202c">Besitzlose</text>
+<ellipse cx="90" cy="215" rx="45" ry="14" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="90" y="219" text-anchor="middle" font-size="10" fill="#1a202c">Oberschicht</text>
+<ellipse cx="90" cy="268" rx="62" ry="36" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="90" y="260" text-anchor="middle" font-size="10" fill="#1a202c">Mittelschicht</text>
+<text x="90" y="274" text-anchor="middle" font-size="9" fill="#1a202c">(Beamte, Angestellte,</text>
+<text x="90" y="286" text-anchor="middle" font-size="9" fill="#1a202c">Arbeiter)</text>
+<ellipse cx="90" cy="320" rx="48" ry="13" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="90" y="324" text-anchor="middle" font-size="10" fill="#1a202c">Unterschicht</text>
+<ellipse cx="90" cy="348" rx="55" ry="12" fill="#bee3f8" stroke="#2b6cb0"/>
+<text x="90" y="352" text-anchor="middle" font-size="10" fill="#1a202c">sozial Abgehängte</text>
+<ellipse cx="240" cy="225" rx="38" ry="24" fill="#fbd38d" fill-opacity="0.8" stroke="#c05621"/>
+<ellipse cx="298" cy="222" rx="34" ry="22" fill="#fbd38d" fill-opacity="0.8" stroke="#c05621"/>
+<ellipse cx="232" cy="268" rx="36" ry="24" fill="#fbd38d" fill-opacity="0.8" stroke="#c05621"/>
+<ellipse cx="290" cy="270" rx="40" ry="26" fill="#fbd38d" fill-opacity="0.8" stroke="#c05621"/>
+<ellipse cx="250" cy="315" rx="40" ry="22" fill="#fbd38d" fill-opacity="0.8" stroke="#c05621"/>
+<ellipse cx="305" cy="318" rx="30" ry="20" fill="#fbd38d" fill-opacity="0.8" stroke="#c05621"/>
+<text x="270" y="355" text-anchor="middle" font-size="9" fill="#1a202c">Gruppen nach Werten</text>
+<text x="270" y="367" text-anchor="middle" font-size="9" fill="#1a202c">und Lebensstil</text>
+<line x1="180" y1="10" x2="180" y2="370" stroke="#e2e8f0"/><line x1="10" y1="190" x2="350" y2="190" stroke="#e2e8f0"/>
+</svg>

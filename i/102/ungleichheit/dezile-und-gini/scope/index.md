@@ -1,0 +1,12 @@
+# Dezile und Gini
+
+Bei einer Einteilung in Dezile („Zehntelwerte“) werden zum Beispiel die Haushalte nach der Höhe ihres verfügbaren Einkommens in zehn gleich große Gruppen geteilt; im 1. Dezil sind die 10 % mit dem geringsten, im 10. Dezil die 10 % mit dem höchsten Einkommen. Von 2000 bis 2018 stiegen die verfügbaren Haushaltseinkommen der oberen Dezile deutlich, die der unteren kaum (Index 2000 = 100; DIW Wochenbericht 18/2021, SOEP). Ein Index setzt einen Ausgangswert gleich 100. Der Gini-Koeffizient misst die Ungleichheit einer Verteilung: 0 heißt, alle haben gleich viel; 1 heißt, eine Person besitzt alles. In Deutschland lag der Gini-Koeffizient der verfügbaren Äquivalenzeinkommen 2000 und 2001 bei 0,25, 2007 bei 0,304, 2012 bei 0,283, 2017 bei 0,291, 2019 bei 0,297 und 2020 bei 0,344; der Gini-Koeffizient der Vermögen 2002 bei 0,776, 2007 bei 0,799, 2012 und 2017 bei 0,779 und 2019 bei 0,826 (Eurostat EU-SILC, DIW). Vermögen sind also viel ungleicher verteilt als Einkommen, und die Ungleichheit der Einkommen ist seit 2000 gestiegen.
+
+## Gehört nicht dazu
+
+- Politikzyklus im Detail
+- Wahlen, Parteien und das politische System der Bundesrepublik im Einzelnen
+- Sozialversicherung und Rentenrecht
+- Migration und Integration im Detail
+
+Alle Seiten des Kapitels: [Scope des Kapitels](../../scope/)
