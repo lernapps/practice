@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="You do not have to install anything on your computer. A codespace is a ready-made workplace in the browser, and your AI assistant is already in it. You say what you want to practise for, and it makes the app.">
+  <title>Practise with Codespaces – App made to measure – lernapps.net</title>
+  <link rel="stylesheet" href="/practice/pr-preview/pr-106/lernapps-page.css">
+  <link rel="stylesheet" href="/practice/pr-preview/pr-106/style.css">
+<!-- lernapps-frame -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/practice/pr-preview/pr-106/lernapps-tokens.css">
+<link rel="stylesheet" href="/practice/pr-preview/pr-106/lernapps-frame.css">
+<link rel="alternate" hreflang="en" href="/practice/pr-preview/pr-106/en/codespaces/">
+<link rel="alternate" hreflang="de" href="/practice/pr-preview/pr-106/codespaces/">
+<script>(() => {
+  const key = "lernapps-lang", here = "en", pages = {"de":"/practice/pr-preview/pr-106/codespaces/"};
+  const known = ["de","en"];
+  const browser = (navigator.languages || [navigator.language]).map((l) => String(l).slice(0, 2).toLowerCase()).find((l) => known.includes(l));
+  let chosen = null;
+  try { chosen = localStorage.getItem(key); } catch {}
+  const wanted = known.includes(chosen) ? chosen : browser;
+  if (wanted && wanted !== here && pages[wanted] && !/bot|crawl|spider|slurp/i.test(navigator.userAgent)) {
+    location.replace(pages[wanted] + location.search + location.hash);
+    return;
+  }
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a[data-la-lang]");
+    if (!a) return;
+    try { a.dataset.laLang === browser ? localStorage.removeItem(key) : localStorage.setItem(key, a.dataset.laLang); } catch {}
+  });
+})();</script>
+</head>
+<body>
+<a class="la-skip" href="#main-content" lang="en">Skip to content</a>
+<p class="la-preview" lang="en">Preview of a change. The real page: <a href="https://lernapps.net/practice/en/codespaces/">lernapps.net/practice/en/codespaces/</a></p><header class="la-header" lang="en">
+  <div class="la-header__inner">
+    <a class="la-brand" href="/en/" aria-label="lernapps.net – home page"><img src="/brand/mark-plain.svg" alt=""><span>lernapps<span class="la-brand__tld">.net</span></span></a>
+    <nav class="la-nav la-nav--bar" aria-label="Main navigation"><ul><li><a href="/apps/en/">Catalog</a></li><li><a href="/practice/pr-preview/pr-106/en/" aria-current="page">Practise</a></li><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li><li class="la-lang"><a href="/practice/pr-preview/pr-106/codespaces/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav>
+    <details class="la-menu"><summary>Menu</summary><nav class="la-nav la-nav--menu" aria-label="Main navigation"><div class="la-menu__group"><p class="la-menu__title" id="la-menu-0">For learners</p><ul aria-labelledby="la-menu-0"><li><a href="/apps/en/">App catalog</a></li><li><a href="/practice/pr-preview/pr-106/en/" aria-current="page">Practise for a test</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-1">For makers</p><ul aria-labelledby="la-menu-1"><li><a href="/apps/en/build/">Build an app</a></li><li><a href="/tooling/en/">Tooling</a></li></ul></div><div class="la-menu__group"><p class="la-menu__title" id="la-menu-2">Understand and join in</p><ul aria-labelledby="la-menu-2"><li><a href="/en/tutor/">Tutor</a></li><li><a href="/en/features/">Features</a></li><li><a href="/docs/en/">Platform</a></li><li><a href="/en/join/">Get involved</a></li></ul></div><ul class="la-menu__lang"><li class="la-lang"><a href="/practice/pr-preview/pr-106/codespaces/" hreflang="de" lang="de" data-la-lang="de" aria-label="Sprache: Deutsch">Deutsch</a></li></ul></nav></details>
+  </div>
+</header>
+  <main id="main-content" tabindex="-1">
+<p class="zurueck"><a href="/practice/pr-preview/pr-106/en/">To the start page: App made to measure</a></p>
+<h1>Practise with Codespaces</h1>
+<p>You do not have to install anything on your computer. A codespace is a ready-made workplace in the browser, and your AI assistant is already in it. You say what you want to practise for, and it makes the app.</p>
+<p>The guide with pictures is with the apps, because it is almost the same for building and for practising. The steps marked “Practise” are yours:</p>
+<p><a href="https://lernapps.net/apps/en/build/codespaces/#schritte">To the guide: Build and practise with Codespaces</a></p>
+<h2 id="short">In short</h2>
+<ol>
+<li>Open the template <a href="https://github.com/lernapps/start">lernapps/start</a> and make a repository of your own from it. It is only your workplace and can go afterwards.</li>
+<li>Start a codespace in it and sign in to your assistant.</li>
+<li>Tell it what you want to practise for, and give it photos of the worksheets.</li>
+<li>It gives you the ZIP file with the folder <code>src</code>. Submit it and get the link to the app: <a href="/practice/pr-preview/pr-106/en/submit/">Submitting step by step</a>.</li>
+</ol>
+<p>You need a free GitHub account and a subscription or a key for Claude or ChatGPT. You pay for the AI yourself. <a href="/practice/pr-preview/pr-106/en/">Rather practise with an assistant on your own computer?</a></p>
+  </main>
+<footer class="la-footer" lang="en">
+  <div class="la-footer__inner">
+    <p>lernapps.net is free and has no ads. It lives on your thanks.</p>
+    <nav aria-label="Footer"><ul><li><a href="/en/privacy/">Privacy</a></li><li><a href="/en/imprint/">Imprint</a></li><li><a href="/docs/en/platform-design/">Platform design</a></li><li><a href="https://github.com/lernapps/practice">Source code</a></li></ul></nav>
+  </div>
+</footer>
+</body>
+</html>
