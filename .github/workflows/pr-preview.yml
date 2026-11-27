@@ -22,9 +22,9 @@ concurrency:
 
 jobs:
   changes:
-    uses: lernapps/tooling/.github/workflows/changes.yml@7898a4bad8dcfc9842c8e26c6eeed6a29fedd04a # main
+    uses: lernapps/tooling/.github/workflows/changes.yml@3f72669b1d265f8930a5911d3f7399799a2daf2e # main
     with:
-      tooling-ref: 7898a4bad8dcfc9842c8e26c6eeed6a29fedd04a # the classifier of the same commit
+      tooling-ref: 3f72669b1d265f8930a5911d3f7399799a2daf2e # the classifier of the same commit
     permissions:
       contents: read
 
@@ -36,7 +36,7 @@ jobs:
       github.event.pull_request.head.repo.full_name == github.repository &&
       (github.event.action == 'closed' || needs.changes.outputs.site == 'true')
     steps:
-      - uses: lernapps/tooling/actions/site-preview@7898a4bad8dcfc9842c8e26c6eeed6a29fedd04a # main
+      - uses: lernapps/tooling/actions/site-preview@3f72669b1d265f8930a5911d3f7399799a2daf2e # main
         with:
           site: /practice/
 
